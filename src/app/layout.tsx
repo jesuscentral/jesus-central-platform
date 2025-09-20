@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     siteName: "Jesus Central Church",
     images: [
       {
-        url: "/worship.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Worship bij Jesus Central Church",
+        alt: "Jesus Central Church",
       },
     ],
     locale: "nl_NL",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Jesus Central Church",
     description:
       "Een warme familiekerk in Gouda waar we Jezus centraal stellen, Hem aanbidden en elkaar ontmoeten.",
-    images: ["/worship.jpg"],
+    images: ["/og-image.jpg"],
   },
 };
 
