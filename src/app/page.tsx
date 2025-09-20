@@ -433,7 +433,7 @@ export default function LandingPage() {
                     Vertaling
                   </dt>
                   <dd className="text-base">
-                    Mogelijk naar Engels — meld je bij het welkomsteam.
+                    Engels, meld je hiervoor bij het welkomsteam.
                   </dd>
                 </div>
               </dl>
