@@ -61,14 +61,23 @@ export default function LandingPage() {
       style={{
         // Expose CSS variables so they are re-usable in inline Tailwind arbitrary values
         // (e.g., bg-[color:var(--bold)])
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--bold" as any]: palette.bold,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--bold-dark" as any]: palette.boldDark,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--black" as any]: palette.black,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--orange" as any]: palette.orange,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--cream" as any]: palette.cream,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--strategy-gold" as any]: palette.strategyGold,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--strategy-green" as any]: palette.strategyGreen,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--strategy-red" as any]: palette.strategyRed,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ["--strategy-charcoal" as any]: palette.strategyCharcoal,
       }}
     >
@@ -462,7 +471,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="overflow-hidden rounded-3xl ring-1 ring-white/10"
             >
-              <img
+              <Image
                 alt="Jeroen Dorstijn"
                 className="h-full w-full object-cover"
                 src="/jeroen.jpg"
