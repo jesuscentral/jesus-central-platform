@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Head from "next/head";
 
 const headingFont = localFont({
   src: "../../assets/fonts/TGSPerfectCondensed.otf",
@@ -15,10 +14,37 @@ const bodyFont = localFont({
   display: "swap",
 });
 
+const siteUrl = "https://jesuscentral.church";
+
 export const metadata: Metadata = {
   title: "Jesus Central Church",
   description:
     "Een warme familiekerk in Gouda waar we Jezus centraal stellen, Hem aanbidden en elkaar ontmoeten. We bidden dat dit een plek is waar je God ontmoet en mooie momenten beleeft in Zijn aanwezigheid.",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "Jesus Central Church",
+    description:
+      "Een warme familiekerk in Gouda waar we Jezus centraal stellen, Hem aanbidden en elkaar ontmoeten.",
+    url: siteUrl,
+    siteName: "Jesus Central Church",
+    images: [
+      {
+        url: "/worship.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Worship bij Jesus Central Church",
+      },
+    ],
+    locale: "nl_NL",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jesus Central Church",
+    description:
+      "Een warme familiekerk in Gouda waar we Jezus centraal stellen, Hem aanbidden en elkaar ontmoeten.",
+    images: ["/worship.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -28,17 +54,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta property="og:image" content="/worship.jpg" />
-        <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-      </Head>
       <body
         className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
       >
