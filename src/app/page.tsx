@@ -475,6 +475,8 @@ export default function LandingPage() {
                 alt="Jeroen Dorstijn"
                 className="h-full w-full object-cover"
                 src="/jeroen.jpg"
+                width={600}
+                height={400}
               />
             </motion.div>
           </div>
@@ -490,7 +492,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-4 text-sm">
             <a
               className="underline-offset-4 hover:underline"
-              href="https://godcentregouda.nl"
+              href="https://jesuscentral.church"
             >
               jesuscentral.church
             </a>
