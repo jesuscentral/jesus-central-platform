@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Jesus Central Church",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Jesus Central Church",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Jesus Central Church",
     description:
       "Een warme familiekerk in Gouda waar we Jezus centraal stellen, Hem aanbidden en elkaar ontmoeten.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
 };
 
