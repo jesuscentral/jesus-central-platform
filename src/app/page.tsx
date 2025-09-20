@@ -487,7 +487,7 @@ export default function LandingPage() {
       <footer className="border-t border-white/10 bg-black/40">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-10 sm:flex-row">
           <p className="text-sm text-white/70">
-            © {new Date().getFullYear()} Jesus Central Church — Gouda
+            © {new Date().getFullYear()} Stichting Gods Original Design Gouda
           </p>
           <div className="flex items-center gap-4 text-sm">
             <a
