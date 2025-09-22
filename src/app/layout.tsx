@@ -55,11 +55,15 @@ export default function RootLayout({
 }>) {
   return (
     <StoryblokProvider>
-      <html lang="en">
+      <html lang="nl">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
-          {children}
+          <div className="relative z-10 flex h-full flex-col">
+            <div className="min-h-screen bg-bold text-white">{children}</div>
+          </div>
         </body>
       </html>
     </StoryblokProvider>

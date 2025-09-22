@@ -47,7 +47,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-09-22T13:19:44.289Z",
-    "updated_at": "2025-09-22T15:41:53.541Z",
+    "updated_at": "2025-09-22T21:25:38.199Z",
     "id": 93624665256219,
     "schema": {
       "text": {
@@ -55,6 +55,15 @@
         "pos": 0,
         "required": true,
         "id": "xXHElM_cSXyGN64SwqiMEA"
+      },
+      "tab-cd9b8431-a695-4ee8-9932-3a3628e15abb": {
+        "display_name": "expert",
+        "keys": [
+          "tailwindClasses"
+        ],
+        "pos": 0,
+        "type": "tab",
+        "id": "zZuEMaaVTuiZMjo2KOFauw"
       },
       "link": {
         "type": "multilink",
@@ -122,11 +131,40 @@
         "id": "-dNc8LzjRCSL-inlJ1peKg",
         "default_value": "primary"
       },
+      "size": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "1b0b78f1-4524-4c8d-b894-28dfd2317a6b",
+            "name": "Small",
+            "value": "small"
+          },
+          {
+            "_uid": "e4d57ab9-1b6a-4cf3-92b3-f3a0f39393d4",
+            "value": "medium",
+            "name": "Medium"
+          },
+          {
+            "_uid": "94ad43c2-bcb4-4a80-a3b4-de22d3bbac8d",
+            "value": "large",
+            "name": "Large"
+          }
+        ],
+        "id": "Mi6iXnXLTfy43OnobIDozQ",
+        "default_value": "medium"
+      },
       "showArrowIcon": {
         "type": "boolean",
-        "pos": 4,
+        "pos": 5,
         "id": "WtcW8eLrTtCB0Kk4hpqaMw",
         "default_value": true
+      },
+      "tailwindClasses": {
+        "type": "text",
+        "pos": 7,
+        "id": "WEx29QHzRqq6IBRurscv3Q"
       }
     },
     "image": null,
@@ -137,6 +175,50 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "button",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "card",
+    "display_name": null,
+    "description": "A card block",
+    "created_at": "2025-09-22T22:43:13.733Z",
+    "updated_at": "2025-09-22T22:43:38.705Z",
+    "id": 93763148742054,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "xM_oLCAVSfe4DbfBO_Ying"
+      },
+      "content": {
+        "type": "text",
+        "pos": 1,
+        "id": "EwTGcKAwQjGNDOLrAGfhyA",
+        "required": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "card",
     "component_group_uuid": null,
     "color": null,
     "icon": null,
@@ -190,6 +272,126 @@
     "metadata": {}
   },
   {
+    "name": "footer",
+    "display_name": null,
+    "description": "Footer component mainly for global usage",
+    "created_at": "2025-09-22T21:37:57.228Z",
+    "updated_at": "2025-09-22T21:41:30.611Z",
+    "id": 93747106741510,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "QK7-WccQTraMtChVat5Q4Q",
+        "required": true
+      },
+      "information": {
+        "type": "bloks",
+        "pos": 1,
+        "id": "fuE-BfgAQtKJ4amsX4COHw",
+        "minimum": 0,
+        "maximum": 5,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "informationItem",
+          "button"
+        ]
+      },
+      "image": {
+        "type": "asset",
+        "pos": 2,
+        "filetypes": [
+          "images"
+        ],
+        "required": true,
+        "id": "-ZsC_9t4TN6c8S5vss0SCg"
+      },
+      "copyright": {
+        "type": "text",
+        "pos": 3,
+        "required": true,
+        "id": "gg_UtVNJTGuIvzcmUj6_oA"
+      },
+      "links": {
+        "type": "bloks",
+        "pos": 4,
+        "id": "9xbwBai3QQSp_k4EAZmMhA",
+        "minimum": 0,
+        "maximum": 3,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "link"
+        ]
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "footer",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93746594553358,
+        "name": "global"
+      }
+    ],
+    "internal_tag_ids": [
+      "93746594553358"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "global",
+    "display_name": null,
+    "description": "Content type for global components",
+    "created_at": "2025-09-22T21:35:53.165Z",
+    "updated_at": "2025-09-22T21:37:21.035Z",
+    "id": 93746598571268,
+    "schema": {
+      "item": {
+        "type": "bloks",
+        "pos": 0,
+        "minimum": 1,
+        "maximum": 1,
+        "required": true,
+        "restrict_type": "",
+        "restrict_components": false,
+        "id": "bsb0g9NSQfWl4KFRo6j1Vg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "global",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93746594553358,
+        "name": "global"
+      }
+    ],
+    "internal_tag_ids": [
+      "93746594553358"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "grid",
     "display_name": null,
     "description": "Grid block",
@@ -238,16 +440,144 @@
     "metadata": {}
   },
   {
+    "name": "informationItem",
+    "display_name": null,
+    "description": "Information item with title and paragraph",
+    "created_at": "2025-09-22T21:41:04.792Z",
+    "updated_at": "2025-09-22T21:41:15.878Z",
+    "id": 93747874995464,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "5i-UeUl5RwCrpkgZ07e0qA"
+      },
+      "text": {
+        "type": "text",
+        "pos": 1,
+        "id": "BvNNkb5nTAy0wuS3HLRb3A",
+        "required": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "informationItem",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "link",
+    "display_name": null,
+    "description": "A link component",
+    "created_at": "2025-09-22T21:40:00.855Z",
+    "updated_at": "2025-09-22T21:49:18.122Z",
+    "id": 93747613109511,
+    "schema": {
+      "text": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "n_gfcrIgRJusx9CsydQujw"
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 1,
+        "id": "O9lCBjQeSyGb6vjaCO4iZw",
+        "required": true,
+        "email_link_type": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "link",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "page",
     "display_name": null,
     "description": null,
     "created_at": "2025-09-22T12:34:21.403Z",
-    "updated_at": "2025-09-22T12:34:21.403Z",
+    "updated_at": "2025-09-22T22:08:33.813Z",
     "id": 93613512310794,
     "schema": {
+      "logo": {
+        "type": "asset",
+        "pos": 0,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "id": "YR6X9AGeTEC6KMyWRt-XBQ"
+      },
+      "cta": {
+        "type": "bloks",
+        "pos": 1,
+        "maximum": 2,
+        "minimum": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "button"
+        ],
+        "description": "Cta buttons in top right of screen (in navigation menu)",
+        "id": "mMob00ruQUm2sZRuLHERcw"
+      },
       "body": {
         "type": "bloks",
-        "id": "-kt0ARc6QkSlItaa1ne78Q"
+        "id": "-kt0ARc6QkSlItaa1ne78Q",
+        "pos": 2
+      },
+      "global_reference": {
+        "type": "options",
+        "pos": 3,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "folder_slug": "global",
+        "filter_content_type": [
+          "global"
+        ],
+        "min_options": "0",
+        "max_options": "1",
+        "id": "W4EFkwWEQcy79lbVllvIhQ",
+        "display_name": "Footer"
       }
     },
     "image": null,
@@ -271,7 +601,7 @@
     "display_name": null,
     "description": "A block for showing a scripture",
     "created_at": "2025-09-22T16:15:46.200Z",
-    "updated_at": "2025-09-22T16:18:09.909Z",
+    "updated_at": "2025-09-22T16:20:41.214Z",
     "id": 93667926841438,
     "schema": {
       "badge": {
@@ -298,7 +628,8 @@
         "source": "internal",
         "datasource_slug": "colors",
         "default_value": "bold-dark",
-        "id": "rANBcnoRRg2-KC6iFnIYng"
+        "id": "rANBcnoRRg2-KC6iFnIYng",
+        "required": true
       }
     },
     "image": null,

@@ -3,6 +3,7 @@ import React from "react";
 import { SbButton } from "@storyblok/types/287325821225947/storyblok-components";
 import { SbBlokData } from "@storyblok/js";
 import Link from "next/link";
+import { cn } from "@/utils/cn";
 
 interface ButtonProps {
   blok: SbButton;
@@ -10,7 +11,8 @@ interface ButtonProps {
 
 const composeClasses = (
   type: SbButton["type"],
-  variant: SbButton["variant"]
+  variant: SbButton["variant"],
+  size: SbButton["size"]
 ) => {
   const baseClasses =
     "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition";
@@ -18,6 +20,7 @@ const composeClasses = (
   // Default to brand-orange if no type specified
   const colorType = type || "brand-orange";
   const buttonVariant = variant || "primary";
+  const buttonSize = size || "medium";
 
   // Define color schemes for each type
   const colorSchemes = {
@@ -59,12 +62,18 @@ const composeClasses = (
     },
   };
 
-  // Get the appropriate color classes or fall back to brand-orange scheme
+  const sizeClasses =
+    buttonSize === "small"
+      ? "text-xs px-4 py-2"
+      : buttonSize === "medium"
+        ? "text-sm px-8 py-3"
+        : "text-base px-12 py-4";
+
   const variantClasses =
     colorSchemes[colorType]?.[buttonVariant] ||
     colorSchemes["brand-orange"].primary;
 
-  return `${baseClasses} ${variantClasses}`;
+  return `${baseClasses} ${variantClasses} ${sizeClasses}`;
 };
 
 export default function Button({ blok }: ButtonProps) {
@@ -72,7 +81,10 @@ export default function Button({ blok }: ButtonProps) {
     <Link
       {...storyblokEditable(blok as SbBlokData)}
       href={blok.link?.url || ""}
-      className={composeClasses(blok.type, blok.variant)}
+      className={cn(
+        composeClasses(blok.type, blok.variant, blok.size),
+        blok.tailwindClasses
+      )}
     >
       {blok.text}
       {blok.showArrowIcon && (
