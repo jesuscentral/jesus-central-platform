@@ -99,7 +99,7 @@ export default function RootLayout({
                 </Link>
               </div>
             </nav>
-            <div>{children}</div>
+            <div className="min-h-screen bg-bold text-white">{children}</div>
           </div>
         </body>
       </html>

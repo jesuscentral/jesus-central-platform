@@ -3,6 +3,10 @@ import Page from "@/features/storyblok/components/Page";
 import Teaser from "@/features/storyblok/components/Teaser";
 import Button from "@/features/storyblok/components/Button";
 import VideoHero from "@/features/storyblok/components/VideoHero";
+import Content from "@/features/storyblok/components/Content";
+import Grid from "@/features/storyblok/components/Grid";
+import Badge from "@/features/storyblok/components/Badge";
+import Scripture from "@/features/storyblok/components/Scripture";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN,
@@ -15,6 +19,10 @@ export const getStoryblokApi = storyblokInit({
     teaser: Teaser,
     button: Button,
     videoHero: VideoHero,
+    content: Content,
+    grid: Grid,
+    badge: Badge,
+    scripture: Scripture,
   },
 });
 
