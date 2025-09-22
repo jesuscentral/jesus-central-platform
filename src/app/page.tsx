@@ -16,28 +16,6 @@ import { motion } from "framer-motion";
  *  - Tailwind is assumed available in the host project. Fonts can be set globally in your app.
  */
 
-const palette = {
-  bold: "#161615", // bold brand tone from brand book
-  boldDark: "#0F0F0E",
-  black: "#0B0B0B",
-  white: "#FFFFFF",
-  orange: "#eb3700", // bold accent
-  cream: "#EFF3EB",
-  strategyGold: "#C89657",
-  strategyGreen: "#746e06",
-  strategyRed: "#eb3700",
-  strategyCharcoal: "#161615",
-};
-
-const fade = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
 export default function LandingPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -48,7 +26,7 @@ export default function LandingPage() {
     const play = async () => {
       try {
         await v.play();
-      } catch (_) {
+      } catch {
         /* ignore autoplay blocks */
       }
     };
@@ -56,31 +34,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div
-      className="min-h-screen bg-[color:var(--bold)] text-white"
-      style={{
-        // Expose CSS variables so they are re-usable in inline Tailwind arbitrary values
-        // (e.g., bg-[color:var(--bold)])
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--bold" as any]: palette.bold,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--bold-dark" as any]: palette.boldDark,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--black" as any]: palette.black,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--orange" as any]: palette.orange,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--cream" as any]: palette.cream,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--strategy-gold" as any]: palette.strategyGold,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--strategy-green" as any]: palette.strategyGreen,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--strategy-red" as any]: palette.strategyRed,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ["--strategy-charcoal" as any]: palette.strategyCharcoal,
-      }}
-    >
+    <div className="min-h-screen bg-bold text-white">
       {/* HERO / CINEMATIC INTRO */}
       <header className="relative h-[min(100vh,760px)] overflow-hidden">
         {/* Background video */}
@@ -95,7 +49,7 @@ export default function LandingPage() {
           src="/videoclip-short.mp4"
         />
         {/* Cinematic gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[color:var(--bold)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-bold" />
 
         <div className="relative z-10 flex h-full flex-col">
           <nav className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
@@ -118,7 +72,7 @@ export default function LandingPage() {
               </a>
               <a
                 href="https://godcentregouda.nl"
-                className="hidden group md:inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--black)] shadow-lg shadow-black/20 transition hover:brightness-95 sm:text-sm"
+                className="hidden group md:inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-brand-black shadow-lg shadow-black/20 transition hover:brightness-95 sm:text-sm"
               >
                 Ga naar website
                 <svg
@@ -165,7 +119,7 @@ export default function LandingPage() {
               >
                 <a
                   href="https://godcentregouda.nl"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--orange)] px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--black)] shadow-lg shadow-black/20 transition hover:brightness-110"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-black shadow-lg shadow-black/20 transition hover:brightness-110"
                 >
                   Ga naar website
                   <svg
@@ -194,7 +148,7 @@ export default function LandingPage() {
       {/* MISSIE & VISIE */}
       <section
         id="visie"
-        className="relative overflow-hidden bg-[color:var(--strategy-green)]"
+        className="relative overflow-hidden bg-strategy-green"
       >
         <div className="pointer-events-none absolute inset-0 opacity-25" />
         <div className="relative mx-auto max-w-7xl px-4 py-20">
@@ -215,7 +169,7 @@ export default function LandingPage() {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <span className="rounded-full bg-[color:var(--black)]/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[color:var(--white)]">
+              <span className="rounded-full bg-brand-black/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
                 Missie
               </span>
               <h2 className="mt-4 text-pretty text-3xl font-extrabold sm:text-4xl">
@@ -244,7 +198,7 @@ export default function LandingPage() {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <span className="rounded-full bg-[color:var(--black)]/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[color:var(--white)]">
+              <span className="rounded-full bg-brand-black/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
                 Visie
               </span>
               <h2 className="mt-4 text-pretty text-3xl font-extrabold sm:text-4xl">
@@ -262,7 +216,7 @@ export default function LandingPage() {
       </section>
 
       {/* SCHRIFTWOORD */}
-      <section className="bg-[color:var(--bold-dark)] py-20">
+      <section className="bg-bold-dark py-20">
         <div className="mx-auto max-w-5xl px-4 text-center text-white">
           <motion.div
             variants={{
@@ -299,7 +253,7 @@ export default function LandingPage() {
 
       {/* ONZE STRATEGIE */}
 
-      <section className="border-y border-white/5 bg-[color:var(--cream)] py-20 text-[color:var(--bold)]">
+      <section className="border-y border-white/5 bg-cream py-20 text-bold">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mt-12 grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
             <motion.article
@@ -317,12 +271,12 @@ export default function LandingPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="rounded-3xl bg-[color:var(--strategy-gold)] px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)]"
+              className="rounded-3xl bg-strategy-gold px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)]"
             >
               <h3 className="text-3xl font-extrabold uppercase tracking-wide">
                 Huis van herstel
               </h3>
-              <p className="mt-4 text-md leading-relaxed text-[color:var(--bold)]/85 font-bold">
+              <p className="mt-4 text-md leading-relaxed text-bold/85 font-bold">
                 We zijn een huis waar we mensen bij Jezus brengen waardoor ze
                 genezing, vergeving en innerlijk herstel ontvangen, zodat zij in
                 vrijheid en kracht kunnen leven.
@@ -345,12 +299,12 @@ export default function LandingPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="rounded-3xl bg-[color:var(--strategy-green)] px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)]"
+              className="rounded-3xl bg-strategy-green px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)]"
             >
               <h3 className="text-3xl font-extrabold uppercase tracking-wide">
                 Huis van training
               </h3>
-              <p className="mt-4 text-md leading-relaxed text-[color:var(--bold)]/85 font-bold">
+              <p className="mt-4 text-md leading-relaxed text-bold/85 font-bold">
                 In dit huis rusten we mensen toe om als discipelen van Jezus te
                 groeien in geloof, karakter en bediening.
               </p>
@@ -372,12 +326,12 @@ export default function LandingPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="rounded-3xl bg-[color:var(--strategy-red)] px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)]"
+              className="rounded-3xl bg-strategy-red px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)]"
             >
               <h3 className="text-3xl font-extrabold uppercase tracking-wide">
                 Huis van zending
               </h3>
-              <p className="mt-4 text-md leading-relaxed text-[color:var(--bold)]/85 font-bold">
+              <p className="mt-4 text-md leading-relaxed text-bold/85 font-bold">
                 Vanuit dit huis zenden wij toegewijde volgelingen uit om het
                 evangelie te brengen in onze stad, regio, land en wereldwijd.
               </p>
@@ -387,7 +341,7 @@ export default function LandingPage() {
       </section>
 
       {/* PRAKTISCHE INFO */}
-      <section className="bg-[color:var(--bold-dark)]">
+      <section className="bg-bold-dark">
         <div className="mx-auto max-w-7xl px-4 py-16">
           <div className="grid gap-12 md:grid-cols-2">
             <motion.div
@@ -439,7 +393,7 @@ export default function LandingPage() {
               </dl>
               <a
                 href="https://godcentregouda.nl"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[color:var(--black)] shadow-md ring-1 ring-black/10 transition hover:brightness-95"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-black shadow-md ring-1 ring-black/10 transition hover:brightness-95"
               >
                 Ga naar website
                 <svg
