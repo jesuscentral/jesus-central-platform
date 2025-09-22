@@ -62,7 +62,9 @@ export default function RootLayout({
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
           <div className="relative z-10 flex h-full flex-col">
-            <div className="min-h-screen bg-bold text-white">{children}</div>
+            <div className="min-h-screen bg-black/40 text-white">
+              {children}
+            </div>
           </div>
         </body>
       </html>
