@@ -1,6 +1,8 @@
 import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
 import Page from "@/features/storyblok/components/Page";
 import Teaser from "@/features/storyblok/components/Teaser";
+import Button from "@/features/storyblok/components/Button";
+import VideoHero from "@/features/storyblok/components/VideoHero";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN,
@@ -11,6 +13,8 @@ export const getStoryblokApi = storyblokInit({
   components: {
     page: Page,
     teaser: Teaser,
+    button: Button,
+    videoHero: VideoHero,
   },
 });
 

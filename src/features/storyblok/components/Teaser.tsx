@@ -1,18 +1,16 @@
-import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
+import { storyblokEditable } from "@storyblok/react/rsc";
 import React from "react";
-
-interface SbTeaserData extends SbBlokData {
-  headline: string;
-}
+import { SbTeaser } from "@storyblok/types/287325821225947/storyblok-components";
+import { SbBlokData } from "@storyblok/js";
 
 interface TeaserProps {
-  blok: SbTeaserData;
+  blok: SbTeaser;
 }
 
-const Teaser: React.FunctionComponent<TeaserProps> = ({ blok }) => {
+export default function Teaser({ blok }: TeaserProps) {
   return (
     <section
-      {...storyblokEditable(blok)}
+      {...storyblokEditable(blok as SbBlokData)}
       className="flex justify-center items-center min-h-screen"
     >
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -26,6 +24,4 @@ const Teaser: React.FunctionComponent<TeaserProps> = ({ blok }) => {
       </div>
     </section>
   );
-};
-
-export default Teaser;
+}

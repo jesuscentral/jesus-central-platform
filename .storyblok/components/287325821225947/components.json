@@ -1,5 +1,112 @@
 [
   {
+    "name": "button",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-09-22T13:19:44.289Z",
+    "updated_at": "2025-09-22T13:48:04.511Z",
+    "id": 93624665256219,
+    "schema": {
+      "text": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "xXHElM_cSXyGN64SwqiMEA"
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 1,
+        "id": "9RXfJu1sSHmz9yyDZ6GTNA"
+      },
+      "type": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "667b4940-799e-4254-9732-1c4cd5097685",
+            "name": "Brand Orange",
+            "value": "brand-orange"
+          },
+          {
+            "_uid": "5e080f50-e57c-43a4-afb0-f768c665960c",
+            "value": "cream",
+            "name": "Cream"
+          },
+          {
+            "_uid": "e58dff49-caf3-4dc2-9479-69ea183b8620",
+            "value": "strategy-gold",
+            "name": "Strategy Gold"
+          },
+          {
+            "_uid": "86c3c5bb-d10f-49ce-a288-2b89b386cdc2",
+            "value": "strategy-green",
+            "name": "Strategy Green"
+          },
+          {
+            "_uid": "e81280c5-0635-41d8-ba16-b98f64241fa7",
+            "value": "strategy-red",
+            "name": "Strategy Red"
+          },
+          {
+            "_uid": "3ca5a8d4-b788-4a23-b368-67d898a0e0a4",
+            "value": "strategy-charcoal",
+            "name": "Strategy Charcoal"
+          }
+        ],
+        "id": "Un53trbYSOKV_BOI4HPEBQ",
+        "default_value": "brand-orange"
+      },
+      "variant": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "2298f58f-2aa2-418d-950f-56fd9c105a22",
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "_uid": "ed7a7260-aa83-4ed3-80f2-2e00563abd81",
+            "value": "outline",
+            "name": "outline"
+          }
+        ],
+        "id": "-dNc8LzjRCSL-inlJ1peKg",
+        "default_value": "primary"
+      },
+      "showArrowIcon": {
+        "type": "boolean",
+        "pos": 4,
+        "id": "WtcW8eLrTtCB0Kk4hpqaMw",
+        "default_value": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "button",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "page",
     "display_name": null,
     "description": null,
@@ -54,6 +161,83 @@
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "videoHero",
+    "display_name": "Hero with video",
+    "description": "Hero with video background ",
+    "created_at": "2025-09-22T13:16:29.988Z",
+    "updated_at": "2025-09-22T13:50:29.554Z",
+    "id": 93623869403415,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "F4nWuJy7SGO7D2F5EOPSKw",
+        "required": true
+      },
+      "subtitle": {
+        "type": "text",
+        "pos": 1,
+        "id": "9iwHOhvJSn-uDx3HXfA7qg",
+        "required": true
+      },
+      "buttons": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "button"
+        ],
+        "id": "jwWGLWQ9T2umZ8P-LCLAHQ",
+        "maximum": 2,
+        "minimum": 0
+      },
+      "background_video": {
+        "type": "asset",
+        "pos": 3,
+        "filetypes": [
+          "videos"
+        ],
+        "allow_external_url": true,
+        "required": false,
+        "id": "ioqT9CUST82NAjsZRWAFDA"
+      },
+      "fallback_image": {
+        "type": "asset",
+        "pos": 4,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "tooltip": true,
+        "description": "Fallback image for when video cant be loaded",
+        "id": "bWguCvYHRkSHfIQzWHZUIQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Hero with video",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   }
