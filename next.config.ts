@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  "@tailwindcss/postcss": {},
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
   // Enable static exports for better caching
   output: "standalone",
 
