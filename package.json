@@ -6,13 +6,17 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "storyblok:generate-types": "storyblok ts generate --space 287325821225947",
+    "storyblok:pull": "storyblok components pull --space 287325821225947"
   },
   "dependencies": {
+    "@storyblok/react": "^5.4.12",
     "framer-motion": "^12.23.16",
     "next": "15.5.3",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "storyblok": "^4.0.0-beta.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

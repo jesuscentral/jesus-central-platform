@@ -1,13 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
-  // Enable static exports for better caching
   output: "standalone",
 
-  // Configure headers for video caching
   async headers() {
     return [
       {

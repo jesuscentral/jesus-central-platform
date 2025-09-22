@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import StoryblokProvider from "@/components/StoryblokProvider";
 
 const headingFont = localFont({
   src: "../../assets/fonts/TGSPerfectCondensed.otf",
@@ -53,12 +54,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
-      >
-        {children}
-      </body>
-    </html>
+    <StoryblokProvider>
+      <html lang="en">
+        <body
+          className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
+        >
+          {children}
+        </body>
+      </html>
+    </StoryblokProvider>
   );
 }
