@@ -51,8 +51,6 @@ export default function HeroSection() {
         style={{ display: videoError ? "none" : "block" }}
       >
         <source src="/videoclip-short.mp4" type="video/mp4" />
-        {/* Add WebM version for better compression if available */}
-        {/* <source src="/videoclip-short.webm" type="video/webm" /> */}
       </video>
 
       {/* Fallback image if video fails */}
