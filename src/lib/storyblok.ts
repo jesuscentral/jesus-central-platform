@@ -14,9 +14,9 @@ import InformationItem from "@/features/storyblok/components/informationItem";
 import Card from "@/features/storyblok/components/Card";
 
 export const getStoryblokApi = storyblokInit({
-  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN,
+  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
   use: [apiPlugin],
-  bridge: true,
+  bridge: process.env.STORYBLOK_IS_PREVIEW === "true" ? true : false,
   apiOptions: {
     region: "eu",
   },
@@ -40,7 +40,6 @@ export const getStoryblokApi = storyblokInit({
 export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
 
-  console.log("slug", slug);
   const finalSlug =
     slug === "/" || slug === "" || slug === undefined ? "home" : slug;
 
@@ -48,8 +47,12 @@ export const getStory = async (slug: string) => {
     const resolveRelations = ["global_footer"];
 
     const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
-      version: "draft",
+      version:
+        process.env.NEXT_PUBLIC_STORYBLOK_VERSION === "true"
+          ? "draft"
+          : "published",
       resolve_relations: resolveRelations,
+      resolve_links: "url",
     });
 
     if (!data?.story) {
