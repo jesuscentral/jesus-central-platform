@@ -70,8 +70,8 @@ export default function EventList({
                           <Image
                             src={event.content.thumbnail.filename!}
                             alt={event.content.thumbnail.alt!}
-                            width={100}
-                            height={100}
+                            width={380}
+                            height={250}
                             priority
                             className="h-full w-full object-cover"
                           />
