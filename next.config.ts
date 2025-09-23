@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -8,7 +18,6 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            // Cache video for 1 year (31536000 seconds)
             value: "public, max-age=31536000, immutable",
           },
           {

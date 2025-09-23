@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = await params;
+
   const story = await getStory(slug);
 
   if (!story) {

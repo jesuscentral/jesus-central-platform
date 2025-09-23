@@ -55,18 +55,21 @@ export default function VideoHero({ blok }: VideoHeroProps) {
         loop
         playsInline
         preload="metadata"
-        poster="/og-image.png"
+        poster={blok.fallback_image.filename!}
         onError={() => setVideoError(true)}
         style={{ display: videoError ? "none" : "block" }}
       >
-        <source src="/videoclip-short.mp4" type="video/mp4" />
+        <source
+          src={blok.background_video?.filename ?? "/videoclip-short.mp4"}
+          type="video/mp4"
+        />
       </video>
 
       {/* Fallback image if video fails */}
       {videoError && (
         <Image
-          src="/og-image.png"
-          alt="Jesus Central Church"
+          src={blok.fallback_image.filename!}
+          alt={blok.fallback_image.alt!}
           fill
           className="object-cover"
           priority

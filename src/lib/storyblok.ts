@@ -40,10 +40,14 @@ export const getStoryblokApi = storyblokInit({
 export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
 
+  console.log("slug", slug);
+  const finalSlug =
+    slug === "/" || slug === "" || slug === undefined ? "home" : slug;
+
   try {
     const resolveRelations = ["global_footer"];
 
-    const { data } = await storyblok.get(`cdn/stories/${slug}`, {
+    const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
       version: "draft",
       resolve_relations: resolveRelations,
     });
