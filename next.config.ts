@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/events",
+        destination: "/agenda",
+        permanent: true,
+      },
+      {
+        source: "/global",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   async headers() {

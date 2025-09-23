@@ -9,8 +9,10 @@ import Teaser from "@/features/storyblok/components/Teaser";
 import Button from "@/features/storyblok/components/Button";
 import VideoHero from "@/features/storyblok/components/VideoHero";
 import ImageHero from "@/features/storyblok/components/ImageHero";
+import Image from "@/features/storyblok/components/Image";
 import Content from "@/features/storyblok/components/Content";
 import Grid from "@/features/storyblok/components/Grid";
+import FullGrid from "@/features/storyblok/components/FullGrid";
 import Badge from "@/features/storyblok/components/Badge";
 import Scripture from "@/features/storyblok/components/Scripture";
 import Footer from "@/features/storyblok/components/Footer";
@@ -33,8 +35,10 @@ export const getStoryblokApi = storyblokInit({
     button: Button,
     videoHero: VideoHero,
     imageHero: ImageHero,
+    image: Image,
     content: Content,
     grid: Grid,
+    fullGrid: FullGrid,
     badge: Badge,
     scripture: Scripture,
     footer: Footer,

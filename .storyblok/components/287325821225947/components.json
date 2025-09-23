@@ -473,6 +473,54 @@
     "metadata": {}
   },
   {
+    "name": "fullGrid",
+    "display_name": "Full Size Grid",
+    "description": "Grid block",
+    "created_at": "2025-09-23T15:53:48.481Z",
+    "updated_at": "2025-09-23T15:54:06.714Z",
+    "id": 94016423862487,
+    "schema": {
+      "columns": {
+        "type": "bloks",
+        "pos": 0,
+        "id": "G8HPynj2TgKjwn-JdY6lXA"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "required": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "brand-orange",
+        "id": "8ib2j6EhRPuUp82-ZncJPQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Full Size Grid",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "global",
     "display_name": null,
     "description": "Content type for global components",
@@ -551,6 +599,88 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "grid",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "image",
+    "display_name": null,
+    "description": "Image block",
+    "created_at": "2025-09-23T15:47:29.464Z",
+    "updated_at": "2025-09-23T15:49:28.505Z",
+    "id": 94014871412948,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "required": true,
+        "id": "8XJjXl_cSMqPgBIPHNdyHw",
+        "allow_external_url": true
+      },
+      "fullHeight": {
+        "type": "boolean",
+        "pos": 1,
+        "default_value": true,
+        "id": "PwJhcbX-TFCa2H-kMBoxZA"
+      },
+      "objectFit": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "045f0bed-f929-47de-bb9e-ae767a90e63d",
+            "name": "cover",
+            "value": "cover"
+          },
+          {
+            "_uid": "ca8ff700-205f-4691-8e2b-ab67ccb8e809",
+            "value": "contain",
+            "name": "contain"
+          },
+          {
+            "_uid": "a34b5904-1253-452a-8ca0-c1ec0a97761d",
+            "value": "fill",
+            "name": "fill"
+          },
+          {
+            "_uid": "4765f5d5-4fae-4361-9101-c99dad66839a",
+            "value": "none",
+            "name": "none"
+          },
+          {
+            "_uid": "c2b9906f-8de7-43df-9a40-b9e3a3b93fef",
+            "value": "scale-down",
+            "name": "scale-down"
+          }
+        ],
+        "default_value": "cover",
+        "id": "XDUN3Oj4Sy688VvNssMrKw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "image",
     "component_group_uuid": null,
     "color": null,
     "icon": null,

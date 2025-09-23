@@ -9,7 +9,7 @@ import {
 import { SbGrid } from "@storyblok/types/287325821225947/storyblok-components";
 import { Variants, motion } from "framer-motion";
 
-export default function Grid({ blok }: { blok: SbGrid }) {
+export default function FullGrid({ blok }: { blok: SbGrid }) {
   const fadeInVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: {
@@ -49,10 +49,10 @@ export default function Grid({ blok }: { blok: SbGrid }) {
       {...storyblokEditable(blok as SbBlokData)}
     >
       <div className="pointer-events-none absolute inset-0 opacity-25" />
-      <div className="relative mx-auto max-w-7xl px-4 py-20">
+      <div className="relative">
         <div
           className={cn(
-            "grid grid-cols-1 gap-10",
+            "grid grid-cols-1",
             colCountClass,
             // If all items are cards or has full height images, use stretch alignment
             hasOnlyCards || hasFullHeightImage ? "items-stretch" : "items-start"
@@ -71,6 +71,7 @@ export default function Grid({ blok }: { blok: SbGrid }) {
                 viewport={{ once: true }}
                 key={nestedBlok._uid}
                 className={cn(
+                  "min-h-[200px]",
                   // If it's a card and all items are cards, make it fill the grid cell
                   isCard && hasOnlyCards ? "flex h-full" : "",
                   // If it's a full height image, make it fill the grid cell

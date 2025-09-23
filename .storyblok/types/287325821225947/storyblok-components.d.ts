@@ -66,6 +66,32 @@ export interface SbFooter {
   [k: string]: unknown;
 }
 
+export interface SbFullGrid {
+  columns?: (
+    | SbBadge
+    | SbButton
+    | SbCard
+    | SbContent
+    | SbEvent
+    | SbFooter
+    | SbFullGrid
+    | SbGlobal
+    | SbGrid
+    | SbImage
+    | SbImageHero
+    | SbInformationItem
+    | SbLink
+    | SbPage
+    | SbScripture
+    | SbTeaser
+    | SbVideoHero
+  )[];
+  backgroundColor: number | string;
+  component: "fullGrid";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbGlobal {
   item: (SbFooter | SbNavigation)[];
   component: "global";
@@ -81,8 +107,10 @@ export interface SbGrid {
     | SbContent
     | SbEvent
     | SbFooter
+    | SbFullGrid
     | SbGlobal
     | SbGrid
+    | SbImage
     | SbImageHero
     | SbInformationItem
     | SbLink
@@ -93,6 +121,15 @@ export interface SbGrid {
   )[];
   backgroundColor: number | string;
   component: "grid";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbImage {
+  image: StoryblokAsset;
+  fullHeight?: boolean;
+  objectFit?: "" | "cover" | "contain" | "fill" | "none" | "scale-down";
+  component: "image";
   _uid: string;
   [k: string]: unknown;
 }
@@ -133,8 +170,10 @@ export interface SbPage {
     | SbContent
     | SbEvent
     | SbFooter
+    | SbFullGrid
     | SbGlobal
     | SbGrid
+    | SbImage
     | SbImageHero
     | SbInformationItem
     | SbLink
