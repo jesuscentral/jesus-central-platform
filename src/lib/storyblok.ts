@@ -16,6 +16,7 @@ import Card from "@/features/storyblok/components/Card";
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN,
   use: [apiPlugin],
+  bridge: true,
   apiOptions: {
     region: "eu",
   },

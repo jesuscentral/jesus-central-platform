@@ -1,9 +1,12 @@
 "use client";
 
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import {
+  StoryblokServerComponent,
+  SbBlokData,
+  storyblokEditable,
+} from "@storyblok/react/rsc";
 import { SbFooter } from "@storyblok/types/287325821225947/storyblok-components";
 import { motion, Variants } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 
 interface FooterProps {
@@ -21,7 +24,10 @@ export default function Footer({ blok }: FooterProps) {
   };
   return (
     <>
-      <section className="bg-bold-dark">
+      <section
+        className="bg-bold-dark"
+        {...storyblokEditable(blok as SbBlokData)}
+      >
         <div className="mx-auto max-w-7xl px-4 py-16">
           <div className="grid gap-12 md:grid-cols-2">
             <motion.div

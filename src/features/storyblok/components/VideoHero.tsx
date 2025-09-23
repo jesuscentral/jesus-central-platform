@@ -44,7 +44,7 @@ export default function VideoHero({ blok }: VideoHeroProps) {
 
   return (
     <header
-      {...storyblokEditable(blok)}
+      {...storyblokEditable(blok as SbBlokData)}
       className="relative h-[min(100vh,760px)] overflow-hidden bg-black"
     >
       {/* Background video with optimizations */}

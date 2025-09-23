@@ -25,10 +25,6 @@ const nextConfig: NextConfig = {
             key: "X-DNS-Prefetch-Control",
             value: "on",
           },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
         ],
       },
     ];

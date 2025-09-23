@@ -1,5 +1,6 @@
 "use client";
 
+import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { cn } from "@/utils/cn";
 import { SbScripture } from "@storyblok/types/287325821225947/storyblok-components";
 import { motion, Variants } from "framer-motion";
@@ -37,7 +38,10 @@ export default function ScriptureSection({ blok }: { blok: SbScripture }) {
     return `bg-${blok.backgroundColor} text-black`;
   };
   return (
-    <section className={cn("py-20", getBackgroundAndTextColor())}>
+    <section
+      className={cn("py-20", getBackgroundAndTextColor())}
+      {...storyblokEditable(blok as SbBlokData)}
+    >
       <div className="mx-auto max-w-5xl px-4 text-center">
         <motion.div
           variants={fadeInVariants}

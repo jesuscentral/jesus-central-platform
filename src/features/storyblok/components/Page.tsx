@@ -2,7 +2,6 @@ import {
   SbBlokData,
   storyblokEditable,
   StoryblokServerComponent,
-  StoryblokServerStory,
 } from "@storyblok/react/rsc";
 import React from "react";
 import { SbPage } from "@storyblok/types/287325821225947/storyblok-components";
@@ -16,7 +15,10 @@ interface PageProps {
 const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
   return (
     <>
-      <nav className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <nav
+        {...storyblokEditable(blok as SbBlokData)}
+        className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+      >
         <div className="flex items-center gap-3">
           <Link href="/">
             <Image

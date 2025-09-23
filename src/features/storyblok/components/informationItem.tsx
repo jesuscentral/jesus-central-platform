@@ -1,3 +1,4 @@
+import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { SbInformationItem } from "@storyblok/types/287325821225947/storyblok-components";
 
 type InformationItemProps = {
@@ -6,7 +7,7 @@ type InformationItemProps = {
 
 export default function InformationItem({ blok }: InformationItemProps) {
   return (
-    <div>
+    <div {...storyblokEditable(blok as SbBlokData)}>
       <dt className="text-sm uppercase tracking-wider text-white/70">
         {blok.title}
       </dt>

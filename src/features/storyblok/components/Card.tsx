@@ -1,3 +1,4 @@
+import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { SbCard } from "@storyblok/types/287325821225947/storyblok-components";
 import { motion, Variants } from "framer-motion";
 
@@ -21,6 +22,7 @@ const cardVariants: Variants = {
 export default function Card({ blok }: CardProps) {
   return (
     <motion.article
+      {...storyblokEditable(blok as SbBlokData)}
       variants={cardVariants}
       custom={0}
       initial="hidden"
