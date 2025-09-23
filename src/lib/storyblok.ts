@@ -16,7 +16,8 @@ import Card from "@/features/storyblok/components/Card";
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
   use: [apiPlugin],
-  bridge: process.env.STORYBLOK_IS_PREVIEW === "true" ? true : false,
+  bridge:
+    process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW === "true" ? false : true,
   apiOptions: {
     region: "eu",
   },
@@ -42,13 +43,14 @@ export const getStory = async (slug: string) => {
 
   const finalSlug =
     slug === "/" || slug === "" || slug === undefined ? "home" : slug;
-
   try {
     const resolveRelations = ["global_footer"];
 
+    console.log(process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW);
+
     const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
       version:
-        process.env.NEXT_PUBLIC_STORYBLOK_VERSION === "true"
+        process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW === "true"
           ? "draft"
           : "published",
       resolve_relations: resolveRelations,
