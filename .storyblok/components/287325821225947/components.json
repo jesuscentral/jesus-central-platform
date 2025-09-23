@@ -195,7 +195,7 @@
     "display_name": null,
     "description": "A card block",
     "created_at": "2025-09-22T22:43:13.733Z",
-    "updated_at": "2025-09-22T22:47:07.047Z",
+    "updated_at": "2025-09-23T16:33:37.881Z",
     "id": 93763148742054,
     "schema": {
       "title": {
@@ -205,7 +205,7 @@
         "id": "xM_oLCAVSfe4DbfBO_Ying"
       },
       "content": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
         "id": "EwTGcKAwQjGNDOLrAGfhyA",
         "required": true
@@ -220,6 +220,24 @@
         "datasource_slug": "colors",
         "exclude_empty_option": true,
         "id": "WurIzRN1TES6MOi8Dduu6w"
+      },
+      "titleColor": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "default_value": "bold-dark",
+        "id": "tQHqFKrwRXO8AfQNlAJXGQ"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "id": "hxnV8iv3RfKFg1DUbQVThg",
+        "source": "internal",
+        "datasource_slug": "colors",
+        "default_value": "bold-dark"
       }
     },
     "image": null,

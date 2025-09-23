@@ -25,8 +25,10 @@ export interface SbButton {
 
 export interface SbCard {
   title: string;
-  content: string;
+  content: StoryblokRichtext;
   backgroundColor: number | string;
+  titleColor?: number | string;
+  textColor?: number | string;
   component: "card";
   _uid: string;
   [k: string]: unknown;
