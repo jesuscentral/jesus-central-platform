@@ -60,6 +60,36 @@ const composeClasses = (
       outline:
         "bg-transparent border-2 border-strategy-charcoal text-strategy-charcoal hover:bg-strategy-charcoal hover:text-cream",
     },
+    "bold-dark": {
+      primary:
+        "bg-bold-dark text-cream shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-bold-dark text-bold-dark hover:bg-bold-dark hover:text-cream",
+    },
+    freedom: {
+      primary:
+        "bg-freedom text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-freedom text-freedom hover:bg-freedom hover:text-brand-black",
+    },
+    herstel: {
+      primary:
+        "bg-herstel text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-herstel text-herstel hover:bg-herstel hover:text-brand-black",
+    },
+    toerusting: {
+      primary:
+        "bg-toerusting text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-toerusting text-toerusting hover:bg-toerusting hover:text-brand-black",
+    },
+    zending: {
+      primary:
+        "bg-zending text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-zending text-zending hover:bg-zending hover:text-brand-black",
+    },
   };
 
   const sizeClasses =

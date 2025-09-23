@@ -250,13 +250,31 @@
     "display_name": null,
     "description": "content block",
     "created_at": "2025-09-22T15:19:42.781Z",
-    "updated_at": "2025-09-22T15:44:30.370Z",
+    "updated_at": "2025-09-23T13:21:42.721Z",
     "id": 93654150276972,
     "schema": {
       "content": {
         "type": "richtext",
         "pos": 0,
         "id": "C2Edpwo_RIm3q2zbXz5A3A"
+      },
+      "color": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "default_value": "cream",
+        "id": "09FnVUH-TnCdHX1CNjF1uQ"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "default_value": "transparent",
+        "id": "WggUoX0qQ2mXnOLekCQ7uA"
       }
     },
     "image": null,
@@ -279,6 +297,100 @@
     "internal_tag_ids": [
       "93623865572832"
     ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "event",
+    "display_name": null,
+    "description": "A content type for events",
+    "created_at": "2025-09-23T12:46:18.536Z",
+    "updated_at": "2025-09-23T14:30:27.750Z",
+    "id": 93970344090578,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "8_BGOIzQTky-lIEqdc-AKA"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "t-K5_uglQdq09PogUIrVSw"
+      },
+      "date": {
+        "type": "datetime",
+        "pos": 2,
+        "required": true,
+        "id": "2_CFw5ChQHqfnzLO4E5JZQ"
+      },
+      "speaker": {
+        "type": "text",
+        "pos": 3,
+        "id": "t-qsu1g0R8Wiwu-PC4i5ng"
+      },
+      "location": {
+        "type": "text",
+        "pos": 4,
+        "id": "R7OaAqQbQRuzxoh71J9YMQ",
+        "default_value": "Jesus Central - Church Rijsselseweg 1, 2803PZ Gouda"
+      },
+      "thumbnail": {
+        "type": "asset",
+        "pos": 5,
+        "filetypes": [
+          "images"
+        ],
+        "required": false,
+        "id": "hElxfv6lSHqJjZ7-Pk-ddQ"
+      },
+      "type": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "4f7a999a-ce6a-48a1-b927-af11bbefcc7d",
+            "name": "Dienst",
+            "value": "service"
+          },
+          {
+            "_uid": "6b4773c8-9319-481e-a89e-a928a57f7563",
+            "value": "event",
+            "name": "Event"
+          }
+        ],
+        "default_value": "service",
+        "id": "YL1ajxoqSSy90taGmsMjgA"
+      },
+      "pillar": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "pijlers",
+        "exclude_empty_option": true,
+        "default_value": "zending",
+        "id": "sR8g9odoRvGSzAv7ASjhHQ",
+        "display_name": "Pillar",
+        "required": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "event",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
     "content_type_asset_preview": null,
     "metadata": {}
   },

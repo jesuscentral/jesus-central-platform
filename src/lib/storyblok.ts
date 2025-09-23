@@ -1,4 +1,9 @@
-import { apiPlugin, SbBlokData, storyblokInit } from "@storyblok/react/rsc";
+import {
+  apiPlugin,
+  ISbStoriesParams,
+  SbBlokData,
+  storyblokInit,
+} from "@storyblok/react/rsc";
 import Page from "@/features/storyblok/components/Page";
 import Teaser from "@/features/storyblok/components/Teaser";
 import Button from "@/features/storyblok/components/Button";
@@ -40,6 +45,14 @@ export const getStoryblokApi = storyblokInit({
   },
 });
 
+export const storyblokApiConfig: ISbStoriesParams = {
+  version:
+    process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW === "true"
+      ? "draft"
+      : "published",
+  resolve_links: "url",
+};
+
 export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
 
@@ -51,12 +64,8 @@ export const getStory = async (slug: string) => {
     console.log(process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW);
 
     const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
-      version:
-        process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW === "true"
-          ? "draft"
-          : "published",
+      ...storyblokApiConfig,
       resolve_relations: resolveRelations,
-      resolve_links: "url",
     });
 
     if (!data?.story) {
