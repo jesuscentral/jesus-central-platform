@@ -33,6 +33,11 @@ export default function Grid({ blok }: { blok: SbGrid }) {
         ? "md:grid-cols-2"
         : "md:grid-cols-3";
 
+  // Check if all columns contain Card components
+  const hasOnlyCards = blok.columns?.every(
+    (nestedBlok) => nestedBlok.component === "card"
+  );
+
   return (
     <section
       className={cn("relative overflow-hidden", getBackgroundClass())}
@@ -41,19 +46,34 @@ export default function Grid({ blok }: { blok: SbGrid }) {
       <div className="pointer-events-none absolute inset-0 opacity-25" />
       <div className="relative mx-auto max-w-7xl px-4 py-20">
         <div
-          className={cn("grid grid-cols-1 items-start gap-10", colCountClass)}
+          className={cn(
+            "grid grid-cols-1 gap-10",
+            colCountClass,
+            // If all items are cards, use stretch alignment for equal heights
+            hasOnlyCards ? "items-stretch" : "items-start"
+          )}
         >
-          {blok.columns?.map((nestedBlok) => (
-            <motion.div
-              variants={fadeInVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              key={nestedBlok._uid}
-            >
-              <StoryblokServerComponent blok={nestedBlok} />
-            </motion.div>
-          ))}
+          {blok.columns?.map((nestedBlok) => {
+            const isCard = nestedBlok.component === "card";
+
+            return (
+              <motion.div
+                variants={fadeInVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                key={nestedBlok._uid}
+                className={cn(
+                  // If it's a card and all items are cards, make it fill the grid cell
+                  isCard && hasOnlyCards ? "flex h-full" : ""
+                )}
+              >
+                <div className={cn(isCard && hasOnlyCards ? "flex-1" : "")}>
+                  <StoryblokServerComponent blok={nestedBlok} />
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
