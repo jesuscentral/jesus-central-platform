@@ -64,7 +64,7 @@ export default async function AgendaPage({
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </main>
-      <main className="min-h-screen bg-cream">
+      <main className="bg-cream">
         <FilterBar _tab={tab} />
         <EventList events={events} />
       </main>
