@@ -1,82 +1,33 @@
 "use client";
 
 import { storyblokEditable, SbBlokData } from "@storyblok/react";
-import { SbVideoHero } from "../../../../.storyblok/types/287325821225947/storyblok-components";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import { SbImageHero } from "@storyblok/types/287325821225947/storyblok-components";
 
-interface VideoHeroProps {
-  blok: SbVideoHero & SbBlokData;
+// Define the ImageHero type based on VideoHero structure
+interface ImageHeroProps {
+  blok: SbImageHero & SbBlokData;
 }
 
-export default function VideoHero({ blok }: VideoHeroProps) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [videoError, setVideoError] = useState(false);
-
-  useEffect(() => {
-    // Attempt to autoplay muted background video on supported browsers
-    const v = videoRef.current;
-    if (!v) return;
-
-    // Set up intersection observer for lazy loading
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            v.load();
-            v.play().catch(() => {
-              /* ignore autoplay blocks */
-            });
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-
-    observer.observe(v);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
+export default function ImageHero({ blok }: ImageHeroProps) {
   return (
     <header
       {...storyblokEditable(blok as SbBlokData)}
       className="relative h-[min(100vh,760px)] overflow-hidden"
     >
-      {/* Background video with optimizations */}
-      {blok.background_video && blok.background_video.filename && (
-        <video
-          ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={blok.fallback_image.filename!}
-          onError={() => setVideoError(true)}
-          style={{ display: videoError ? "none" : "block" }}
-        >
-          <source
-            src={blok.background_video?.filename ?? "/videoclip-short.mp4"}
-            type="video/mp4"
-          />
-        </video>
-      )}
-
-      {/* Fallback image if video fails */}
-      {videoError && (
+      {/* Background image */}
+      {blok.image && blok.image.filename && (
         <Image
-          src={blok.fallback_image.filename!}
-          alt={blok.fallback_image.alt!}
+          src={blok.image.filename}
+          alt={blok.image.alt || "Afbeelding Jesus Central"}
           fill
           className="object-cover"
           priority
         />
       )}
+
       {/* Cinematic gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-bold" />
 
@@ -103,7 +54,7 @@ export default function VideoHero({ blok }: VideoHeroProps) {
                 {blok.subtitle}
               </motion.p>
             )}
-            {blok.buttons && (
+            {blok.buttons && blok.buttons.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}

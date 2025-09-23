@@ -66,6 +66,7 @@ export interface SbGrid {
     | SbFooter
     | SbGlobal
     | SbGrid
+    | SbImageHero
     | SbInformationItem
     | SbLink
     | SbPage
@@ -75,6 +76,16 @@ export interface SbGrid {
   )[];
   backgroundColor: number | string;
   component: "grid";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbImageHero {
+  title: string;
+  subtitle: string;
+  buttons?: SbButton[];
+  image: StoryblokAsset;
+  component: "imageHero";
   _uid: string;
   [k: string]: unknown;
 }
@@ -106,6 +117,7 @@ export interface SbPage {
     | SbFooter
     | SbGlobal
     | SbGrid
+    | SbImageHero
     | SbInformationItem
     | SbLink
     | SbPage

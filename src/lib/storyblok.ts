@@ -3,6 +3,7 @@ import Page from "@/features/storyblok/components/Page";
 import Teaser from "@/features/storyblok/components/Teaser";
 import Button from "@/features/storyblok/components/Button";
 import VideoHero from "@/features/storyblok/components/VideoHero";
+import ImageHero from "@/features/storyblok/components/ImageHero";
 import Content from "@/features/storyblok/components/Content";
 import Grid from "@/features/storyblok/components/Grid";
 import Badge from "@/features/storyblok/components/Badge";
@@ -26,6 +27,7 @@ export const getStoryblokApi = storyblokInit({
     teaser: Teaser,
     button: Button,
     videoHero: VideoHero,
+    imageHero: ImageHero,
     content: Content,
     grid: Grid,
     badge: Badge,
