@@ -41,7 +41,7 @@ export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
 
   try {
-    const resolveRelations = ["global_reference"];
+    const resolveRelations = ["global_footer"];
 
     const { data } = await storyblok.get(`cdn/stories/${slug}`, {
       version: "draft",
@@ -62,9 +62,9 @@ export const getStory = async (slug: string) => {
   }
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const updateStory = (story: any, global_reference: SbBlokData[]) => {
-  if (story.content && "global_reference" in story.content) {
-    story.content.global_reference = global_reference;
+const updateStory = (story: any, global_footer: SbBlokData[]) => {
+  if (story.content && "global_footer" in story.content) {
+    story.content.global_footer = global_footer;
   }
 
   return story;

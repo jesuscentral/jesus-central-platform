@@ -26,6 +26,7 @@ export interface SbButton {
 export interface SbCard {
   title: string;
   content: string;
+  backgroundColor: number | string;
   component: "card";
   _uid: string;
   [k: string]: unknown;
@@ -50,21 +51,7 @@ export interface SbFooter {
 }
 
 export interface SbGlobal {
-  item: (
-    | SbBadge
-    | SbButton
-    | SbCard
-    | SbContent
-    | SbFooter
-    | SbGlobal
-    | SbGrid
-    | SbInformationItem
-    | SbLink
-    | SbPage
-    | SbScripture
-    | SbTeaser
-    | SbVideoHero
-  )[];
+  item: (SbFooter | SbNavigation)[];
   component: "global";
   _uid: string;
   [k: string]: unknown;
@@ -126,7 +113,7 @@ export interface SbPage {
     | SbTeaser
     | SbVideoHero
   )[];
-  global_reference?: (ISbStoryData<sbGlobal> | string)[];
+  global_footer?: (ISbStoryData<sbGlobal> | string)[];
   component: "page";
   _uid: string;
   [k: string]: unknown;

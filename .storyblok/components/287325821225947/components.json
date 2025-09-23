@@ -195,7 +195,7 @@
     "display_name": null,
     "description": "A card block",
     "created_at": "2025-09-22T22:43:13.733Z",
-    "updated_at": "2025-09-22T22:43:38.705Z",
+    "updated_at": "2025-09-22T22:47:07.047Z",
     "id": 93763148742054,
     "schema": {
       "title": {
@@ -209,6 +209,17 @@
         "pos": 1,
         "id": "EwTGcKAwQjGNDOLrAGfhyA",
         "required": true
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "required": true,
+        "default_value": "brand-orange",
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "id": "WurIzRN1TES6MOi8Dduu6w"
       }
     },
     "image": null,
@@ -354,7 +365,7 @@
     "display_name": null,
     "description": "Content type for global components",
     "created_at": "2025-09-22T21:35:53.165Z",
-    "updated_at": "2025-09-22T21:37:21.035Z",
+    "updated_at": "2025-09-23T10:34:46.063Z",
     "id": 93746598571268,
     "schema": {
       "item": {
@@ -364,8 +375,12 @@
         "maximum": 1,
         "required": true,
         "restrict_type": "",
-        "restrict_components": false,
-        "id": "bsb0g9NSQfWl4KFRo6j1Vg"
+        "restrict_components": true,
+        "id": "bsb0g9NSQfWl4KFRo6j1Vg",
+        "component_whitelist": [
+          "footer",
+          "navigation"
+        ]
       }
     },
     "image": null,
@@ -533,12 +548,12 @@
     "display_name": null,
     "description": null,
     "created_at": "2025-09-22T12:34:21.403Z",
-    "updated_at": "2025-09-22T22:08:33.813Z",
+    "updated_at": "2025-09-23T10:38:46.225Z",
     "id": 93613512310794,
     "schema": {
       "logo": {
         "type": "asset",
-        "pos": 0,
+        "pos": 1,
         "required": true,
         "filetypes": [
           "images"
@@ -547,7 +562,7 @@
       },
       "cta": {
         "type": "bloks",
-        "pos": 1,
+        "pos": 2,
         "maximum": 2,
         "minimum": 0,
         "restrict_type": "",
@@ -561,11 +576,11 @@
       "body": {
         "type": "bloks",
         "id": "-kt0ARc6QkSlItaa1ne78Q",
-        "pos": 2
+        "pos": 3
       },
-      "global_reference": {
+      "global_footer": {
         "type": "options",
-        "pos": 3,
+        "pos": 4,
         "is_reference_type": true,
         "source": "internal_stories",
         "entry_appearance": "card",

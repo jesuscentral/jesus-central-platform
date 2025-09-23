@@ -14,11 +14,8 @@ interface PageProps {
 
 const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
   return (
-    <>
-      <nav
-        {...storyblokEditable(blok as SbBlokData)}
-        className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
-      >
+    <div {...storyblokEditable(blok as SbBlokData)}>
+      <nav className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
         <div className="flex items-center gap-3">
           <Link href="/">
             <Image
@@ -27,7 +24,7 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
               width={200}
               height={60}
               priority
-              className="h-6 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
         </div>
@@ -43,13 +40,11 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </main>
-      {blok?.global_reference &&
-        (blok.global_reference as unknown as SbBlokData[]).map(
-          (global, index) => (
-            <StoryblokServerComponent blok={global.content} key={index} />
-          )
-        )}
-    </>
+      {blok?.global_footer &&
+        (blok.global_footer as unknown as SbBlokData[]).map((global, index) => (
+          <StoryblokServerComponent blok={global.content} key={index} />
+        ))}
+    </div>
   );
 };
 
