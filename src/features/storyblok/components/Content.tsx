@@ -24,7 +24,8 @@ export default function Content({ blok }: { blok: SbContent }) {
         transition={{ duration: 0.7 }}
         {...storyblokEditable(blok as SbBlokData)}
         className={cn(
-          "relative overflow-hidden  mx-auto container text-center"
+          "relative overflow-hidden mx-auto text-center container",
+          blok.containerized ? "px-12 md:px-16 xl:px-24" : ""
         )}
       >
         <RichTextRenderer document={blok.content!} />

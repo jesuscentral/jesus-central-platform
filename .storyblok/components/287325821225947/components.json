@@ -288,7 +288,7 @@
     "display_name": null,
     "description": "content block",
     "created_at": "2025-09-22T15:19:42.781Z",
-    "updated_at": "2025-09-23T13:21:42.721Z",
+    "updated_at": "2025-09-24T23:53:56.875Z",
     "id": 93654150276972,
     "schema": {
       "content": {
@@ -313,6 +313,11 @@
         "datasource_slug": "colors",
         "default_value": "transparent",
         "id": "WggUoX0qQ2mXnOLekCQ7uA"
+      },
+      "containerized": {
+        "type": "boolean",
+        "pos": 3,
+        "id": "cRcDC55ZQmK1K4UNngf7Pg"
       }
     },
     "image": null,
