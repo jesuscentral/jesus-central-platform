@@ -21,13 +21,13 @@ export default async function AgendaPage({
 
   const storyblok = getStoryblokApi();
 
-  const story = await getStory("events");
+  const story = await getStory("agenda");
 
   const blok = story.content as SbPage;
 
   const { data: eventsData } = await storyblok.get("cdn/stories", {
     ...storyblokApiConfig,
-    starts_with: "events/",
+    starts_with: "agenda/",
     filter_query: {
       date: {
         gt_date: new Date().toISOString(),

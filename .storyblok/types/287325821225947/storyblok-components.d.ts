@@ -71,7 +71,8 @@ export interface SbEvent {
   location?: string;
   thumbnail?: StoryblokAsset;
   type?: "" | "service" | "event";
-  pillar: number | string;
+  language: "" | "Nederlands" | "Engels";
+  translationAvailable?: boolean;
   component: "event";
   _uid: string;
   [k: string]: unknown;

@@ -553,7 +553,7 @@
     "display_name": null,
     "description": "A content type for events",
     "created_at": "2025-09-23T12:46:18.536Z",
-    "updated_at": "2025-09-23T14:30:27.750Z",
+    "updated_at": "2025-09-24T21:21:26.651Z",
     "id": 93970344090578,
     "schema": {
       "title": {
@@ -583,7 +583,7 @@
         "type": "text",
         "pos": 4,
         "id": "R7OaAqQbQRuzxoh71J9YMQ",
-        "default_value": "Jesus Central - Church Rijsselseweg 1, 2803PZ Gouda"
+        "default_value": "Rijsselseweg 1, 2803PZ Gouda"
       },
       "thumbnail": {
         "type": "asset",
@@ -613,17 +613,31 @@
         "default_value": "service",
         "id": "YL1ajxoqSSy90taGmsMjgA"
       },
-      "pillar": {
+      "language": {
         "type": "option",
-        "pos": 7,
+        "pos": 8,
         "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "pijlers",
-        "exclude_empty_option": true,
-        "default_value": "zending",
-        "id": "sR8g9odoRvGSzAv7ASjhHQ",
-        "display_name": "Pillar",
-        "required": true
+        "options": [
+          {
+            "_uid": "a6082379-3218-45ec-b6f4-c05d0a0717f2",
+            "name": "Nederlands",
+            "value": "Nederlands"
+          },
+          {
+            "_uid": "2b427d3d-e26d-4ee1-ad2e-121d95a5a828",
+            "value": "Engels",
+            "name": "Engels"
+          }
+        ],
+        "required": true,
+        "default_value": "Nederlands",
+        "id": "twcXDaHDSfi-git3KwX-kw"
+      },
+      "translationAvailable": {
+        "type": "boolean",
+        "pos": 9,
+        "default_value": false,
+        "id": "73xZC3WeToCxEiP2gm9QMQ"
       }
     },
     "image": null,
