@@ -23,6 +23,7 @@ import Card from "@/features/storyblok/components/Card";
 import ScrollingText from "@/features/storyblok/components/ScrollingText";
 import ImageCard from "@/features/storyblok/components/ImageCard";
 import StaticGrid from "@/features/storyblok/components/StaticGrid";
+import PersonCard from "@/features/storyblok/components/PersonCard";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -52,6 +53,7 @@ export const getStoryblokApi = storyblokInit({
     scrollingText: ScrollingText,
     imageCard: ImageCard,
     staticGrid: StaticGrid,
+    personCard: PersonCard,
   },
 });
 

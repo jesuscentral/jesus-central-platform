@@ -1018,6 +1018,80 @@
     "metadata": {}
   },
   {
+    "name": "personCard",
+    "display_name": null,
+    "description": "Card for showing a person with their role",
+    "created_at": "2025-09-24T15:08:11.075Z",
+    "updated_at": "2025-09-24T15:14:16.524Z",
+    "id": 94359105853647,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "allow_external_url": true,
+        "required": true,
+        "id": "rxJMYrF5TqGonFw89YsCeg"
+      },
+      "name": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "ag-YECJETrO1iUzGL6GfRA"
+      },
+      "role": {
+        "type": "text",
+        "pos": 2,
+        "id": "ozLJg-c1SLGxs0oAPN4iMw"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "bold-dark",
+        "id": "SW0vCxQNQIGOHQDhj4Ex_Q"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "id": "mKShBRWURDmZoB9oLZmrAg",
+        "tooltip": false,
+        "source": "internal",
+        "exclude_empty_option": true,
+        "datasource_slug": "colors",
+        "default_value": "cream"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "personCard",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "scripture",
     "display_name": null,
     "description": "A block for showing a scripture",

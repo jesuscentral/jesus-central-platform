@@ -1,10 +1,15 @@
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import {
+  SbBlokData,
+  storyblokEditable,
+  StoryblokServerComponent,
+} from "@storyblok/react/rsc";
 import { SbStaticGrid } from "@storyblok/types/287325821225947/storyblok-components";
 import { cn } from "@/utils/cn";
 
 export default function StaticGrid({ blok }: { blok: SbStaticGrid }) {
   return (
     <section
+      {...storyblokEditable(blok as SbBlokData)}
       className={cn("relative overflow-hidden", `bg-${blok.backgroundColor}`)}
     >
       <div className="pointer-events-none absolute inset-0 opacity-25" />

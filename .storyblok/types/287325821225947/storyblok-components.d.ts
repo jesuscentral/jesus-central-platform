@@ -85,6 +85,7 @@ export interface SbFullGrid {
     | SbInformationItem
     | SbLink
     | SbPage
+    | SbPersonCard
     | SbScripture
     | SbScrollingText
     | SbStaticGrid
@@ -121,6 +122,7 @@ export interface SbGrid {
     | SbInformationItem
     | SbLink
     | SbPage
+    | SbPersonCard
     | SbScripture
     | SbScrollingText
     | SbStaticGrid
@@ -198,6 +200,7 @@ export interface SbPage {
     | SbInformationItem
     | SbLink
     | SbPage
+    | SbPersonCard
     | SbScripture
     | SbScrollingText
     | SbStaticGrid
@@ -206,6 +209,17 @@ export interface SbPage {
   )[];
   global_footer?: (ISbStoryData<sbGlobal> | string)[];
   component: "page";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbPersonCard {
+  image: StoryblokAsset;
+  name: string;
+  role?: string;
+  backgroundColor?: number | string;
+  textColor?: number | string;
+  component: "personCard";
   _uid: string;
   [k: string]: unknown;
 }
@@ -247,6 +261,7 @@ export interface SbStaticGrid {
     | SbInformationItem
     | SbLink
     | SbPage
+    | SbPersonCard
     | SbScripture
     | SbScrollingText
     | SbStaticGrid

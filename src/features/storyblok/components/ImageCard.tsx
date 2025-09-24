@@ -2,7 +2,11 @@
 
 import { SbImageCard } from "@storyblok/types/287325821225947/storyblok-components";
 import { motion } from "framer-motion";
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import {
+  SbBlokData,
+  storyblokEditable,
+  StoryblokServerComponent,
+} from "@storyblok/react/rsc";
 import { cn } from "@/utils/cn";
 
 export default function ImageCard({ blok }: { blok: SbImageCard }) {
@@ -16,6 +20,7 @@ export default function ImageCard({ blok }: { blok: SbImageCard }) {
 
   return (
     <motion.div
+      {...storyblokEditable(blok as SbBlokData)}
       variants={fadeUp}
       className={cn(
         "rounded-2xl overflow-hidden border",

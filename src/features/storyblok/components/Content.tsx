@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 export default function Content({ blok }: { blok: SbContent }) {
   return (
     <div
+      {...storyblokEditable(blok as SbBlokData)}
       className={cn(
         "w-full",
         `text-${blok.color}`,
