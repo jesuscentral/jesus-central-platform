@@ -35,7 +35,8 @@ export default function Grid({ blok }: { blok: SbGrid }) {
 
   // Check if all columns contain Card components
   const hasOnlyCards = blok.columns?.every(
-    (nestedBlok) => nestedBlok.component === "card"
+    (nestedBlok) =>
+      nestedBlok.component === "card" || nestedBlok.component === "imageCard"
   );
 
   // Check if any column contains an Image component with fullHeight

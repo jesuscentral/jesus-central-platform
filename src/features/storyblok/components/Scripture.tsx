@@ -19,23 +19,7 @@ const fadeInVariants: Variants = {
 
 export default function ScriptureSection({ blok }: { blok: SbScripture }) {
   const getBackgroundAndTextColor = () => {
-    if (
-      ["bold-dark", "strategy-charcoal", "brand-black"].includes(
-        blok.backgroundColor as string
-      )
-    ) {
-      return `bg-${blok.backgroundColor} text-white`;
-    }
-
-    if (
-      ["strategy-gold", "strategy-green", "strategy-red", "cream"].includes(
-        blok.backgroundColor as string
-      )
-    ) {
-      return `bg-${blok.backgroundColor} text-brand-black`;
-    }
-
-    return `bg-${blok.backgroundColor} text-black`;
+    return cn("py-20", `bg-${blok.backgroundColor}`, `text-${blok.textColor}`);
   };
   return (
     <section

@@ -80,11 +80,14 @@ export interface SbFullGrid {
     | SbGlobal
     | SbGrid
     | SbImage
+    | SbImageCard
     | SbImageHero
     | SbInformationItem
     | SbLink
     | SbPage
     | SbScripture
+    | SbScrollingText
+    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
   )[];
@@ -113,11 +116,14 @@ export interface SbGrid {
     | SbGlobal
     | SbGrid
     | SbImage
+    | SbImageCard
     | SbImageHero
     | SbInformationItem
     | SbLink
     | SbPage
     | SbScripture
+    | SbScrollingText
+    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
   )[];
@@ -132,6 +138,17 @@ export interface SbImage {
   fullHeight?: boolean;
   objectFit?: "" | "cover" | "contain" | "fill" | "none" | "scale-down";
   component: "image";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbImageCard {
+  title: string;
+  description: string;
+  image?: StoryblokAsset;
+  actions?: (SbButton | SbLink)[];
+  textColor?: number | string;
+  component: "imageCard";
   _uid: string;
   [k: string]: unknown;
 }
@@ -176,11 +193,14 @@ export interface SbPage {
     | SbGlobal
     | SbGrid
     | SbImage
+    | SbImageCard
     | SbImageHero
     | SbInformationItem
     | SbLink
     | SbPage
     | SbScripture
+    | SbScrollingText
+    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
   )[];
@@ -195,7 +215,46 @@ export interface SbScripture {
   scripture: string;
   reference: string;
   backgroundColor: number | string;
+  textColor?: number | string;
   component: "scripture";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbScrollingText {
+  text?: string;
+  backgroundColor?: number | string;
+  textColor?: number | string;
+  component: "scrollingText";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbStaticGrid {
+  items: (
+    | SbBadge
+    | SbButton
+    | SbCard
+    | SbContent
+    | SbEvent
+    | SbFooter
+    | SbFullGrid
+    | SbGlobal
+    | SbGrid
+    | SbImage
+    | SbImageCard
+    | SbImageHero
+    | SbInformationItem
+    | SbLink
+    | SbPage
+    | SbScripture
+    | SbScrollingText
+    | SbStaticGrid
+    | SbTeaser
+    | SbVideoHero
+  )[];
+  backgroundColor?: number | string;
+  component: "staticGrid";
   _uid: string;
   [k: string]: unknown;
 }

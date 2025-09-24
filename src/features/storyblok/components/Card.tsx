@@ -41,7 +41,7 @@ export default function Card({ blok }: CardProps) {
         {blok.title}
       </h3>
 
-      <p
+      <div
         className={cn(
           "mt-4 text-md leading-relaxed text-bold/85 font-bold flex-1",
           `text-${blok.textColor}`
@@ -50,7 +50,7 @@ export default function Card({ blok }: CardProps) {
         <RichTextRenderer
           document={blok.content as unknown as StoryblokRichtext}
         />
-      </p>
+      </div>
     </motion.article>
   );
 }

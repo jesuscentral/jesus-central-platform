@@ -6,10 +6,10 @@ import {
   storyblokEditable,
   StoryblokServerComponent,
 } from "@storyblok/react/rsc";
-import { SbGrid } from "@storyblok/types/287325821225947/storyblok-components";
+import { SbFullGrid } from "@storyblok/types/287325821225947/storyblok-components";
 import { Variants, motion } from "framer-motion";
 
-export default function FullGrid({ blok }: { blok: SbGrid }) {
+export default function FullGrid({ blok }: { blok: SbFullGrid }) {
   const fadeInVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: {

@@ -715,6 +715,84 @@
     "metadata": {}
   },
   {
+    "name": "imageCard",
+    "display_name": null,
+    "description": "a card with an image",
+    "created_at": "2025-09-24T14:09:40.065Z",
+    "updated_at": "2025-09-24T14:29:04.734Z",
+    "id": 94344724752155,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "D6HylKRqSGCvEvRRp1LzYw",
+        "default_value": "title"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "id": "tN-VUxcSQ_C-NketkZbYuQ",
+        "required": true,
+        "default_value": "beschrijving"
+      },
+      "image": {
+        "type": "asset",
+        "pos": 2,
+        "filetypes": [
+          "images"
+        ],
+        "allow_external_url": true,
+        "id": "h3Jq0kUpTFCUoSrYCD_04A"
+      },
+      "actions": {
+        "type": "bloks",
+        "pos": 3,
+        "maximum": 2,
+        "minimum": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "button",
+          "link"
+        ],
+        "id": "-KVXyEuMQbO7kZfcNO2vBg"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "white",
+        "id": "X7vjgaGZQdu-aZp-hJhL_Q"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "imageCard",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "imageHero",
     "display_name": "Hero with image",
     "description": "Hero with image background ",
@@ -944,7 +1022,7 @@
     "display_name": null,
     "description": "A block for showing a scripture",
     "created_at": "2025-09-22T16:15:46.200Z",
-    "updated_at": "2025-09-22T16:20:41.214Z",
+    "updated_at": "2025-09-23T16:40:27.184Z",
     "id": 93667926841438,
     "schema": {
       "badge": {
@@ -973,6 +1051,16 @@
         "default_value": "bold-dark",
         "id": "rANBcnoRRg2-KC6iFnIYng",
         "required": true
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "white",
+        "id": "7ut1LboVS3qWECorTsPzBA"
       }
     },
     "image": null,
@@ -983,6 +1071,113 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "scripture",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "scrollingText",
+    "display_name": null,
+    "description": "A block with scrolling text",
+    "created_at": "2025-09-24T14:03:27.858Z",
+    "updated_at": "2025-09-24T14:04:14.951Z",
+    "id": 94343200192278,
+    "schema": {
+      "text": {
+        "type": "text",
+        "pos": 0,
+        "id": "Fjns9pfLRLmx7RNrMx51Lw"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "bold-dark",
+        "id": "o1tUH9BHRbOTTab9LPWKUA"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "white",
+        "id": "Kn4GY36eT_6VpV3_x53iOw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "scrollingText",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "staticGrid",
+    "display_name": null,
+    "description": "a static grid with always 2 columns and 1 col on mobile",
+    "created_at": "2025-09-24T14:24:43.898Z",
+    "updated_at": "2025-09-24T14:26:57.090Z",
+    "id": 94348426852207,
+    "schema": {
+      "items": {
+        "type": "bloks",
+        "pos": 0,
+        "maximum": 2,
+        "minimum": 0,
+        "required": true,
+        "id": "5EofYJktQXuv0a6vF86vTQ"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "bold-dark",
+        "id": "msyEEGiIS7a93NHHO90dWg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "staticGrid",
     "component_group_uuid": null,
     "color": null,
     "icon": null,

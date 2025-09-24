@@ -20,6 +20,9 @@ import Link from "@/features/storyblok/components/Link";
 import Global from "@/features/storyblok/components/Global";
 import InformationItem from "@/features/storyblok/components/informationItem";
 import Card from "@/features/storyblok/components/Card";
+import ScrollingText from "@/features/storyblok/components/ScrollingText";
+import ImageCard from "@/features/storyblok/components/ImageCard";
+import StaticGrid from "@/features/storyblok/components/StaticGrid";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -46,6 +49,9 @@ export const getStoryblokApi = storyblokInit({
     global: Global,
     informationItem: InformationItem,
     card: Card,
+    scrollingText: ScrollingText,
+    imageCard: ImageCard,
+    staticGrid: StaticGrid,
   },
 });
 
