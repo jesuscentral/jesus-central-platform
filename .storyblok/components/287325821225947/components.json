@@ -4,7 +4,7 @@
     "display_name": null,
     "description": "A badge ",
     "created_at": "2025-09-22T16:04:12.731Z",
-    "updated_at": "2025-09-22T16:08:21.132Z",
+    "updated_at": "2025-09-24T18:18:57.828Z",
     "id": 93665086392362,
     "schema": {
       "text": {
@@ -17,6 +17,26 @@
         "type": "multilink",
         "pos": 1,
         "id": "mmThVf64RSq-gvXj9efkBg"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "bold-dark",
+        "id": "C09nE4-DSaayKhR1DgDwMw"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "id": "kG2cokgARpC3vgR0mGVqsg",
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "cream"
       }
     },
     "image": null,
