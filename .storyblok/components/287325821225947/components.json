@@ -339,6 +339,226 @@
     "metadata": {}
   },
   {
+    "name": "donation",
+    "display_name": null,
+    "description": "A donation component so people can give",
+    "created_at": "2025-09-24T18:48:08.706Z",
+    "updated_at": "2025-09-24T19:11:34.660Z",
+    "id": 94413163346814,
+    "schema": {
+      "subtitle": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "default_value": "Geven als aanbidding",
+        "id": "_zV5_QoyTxGTJEauO--xig"
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "display_name": "Titel",
+        "required": true,
+        "default_value": "Bouw mee aan HERSTEL, TRAINING & ZENDING",
+        "id": "-0VBlpYGSNa4sczIfzNVrg"
+      },
+      "description": {
+        "type": "richtext",
+        "pos": 2,
+        "default_value": "Met jouw gift help je ons om een huis van herstel te zijn, discipelen toe te rusten en het evangelie te brengen in onze stad, regio en verder. Dankjewel dat je meebouwt.",
+        "id": "SW8j8vT_T3qxJkePEvX9DA"
+      },
+      "badges": {
+        "type": "bloks",
+        "pos": 3,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "badge"
+        ],
+        "maximum": 4,
+        "minimum": 0,
+        "id": "DzUjKQjzQdqsujZ34TUxtg"
+      },
+      "options": {
+        "type": "options",
+        "pos": 4,
+        "options": [
+          {
+            "_uid": "b6a536ff-e0b6-4d98-aa78-981603f45e22",
+            "value": "5",
+            "name": "5"
+          },
+          {
+            "_uid": "ee6a6325-bf05-4126-94c3-153a39680544",
+            "value": "10",
+            "name": "10"
+          },
+          {
+            "_uid": "63070e47-31f1-4eaa-abd4-96119268ba60",
+            "value": "25",
+            "name": "25"
+          },
+          {
+            "_uid": "2fa44708-a9ca-4cb4-a123-65f41d2a1bbc",
+            "value": "50",
+            "name": "50"
+          },
+          {
+            "_uid": "2cc4359e-6000-44d8-bd37-0d02544ee64e",
+            "value": "100",
+            "name": "100"
+          },
+          {
+            "_uid": "4caa7674-e72e-4e9c-bbb8-bef005423498",
+            "value": "150",
+            "name": "150"
+          },
+          {
+            "_uid": "e376ea0a-df57-42a0-b0ed-c86d8855b54f",
+            "value": "200",
+            "name": "200"
+          },
+          {
+            "_uid": "432002a6-3d8c-4c9b-8b70-e7e897115965",
+            "value": "250",
+            "name": "250"
+          },
+          {
+            "_uid": "80b2a5c6-cdbc-469a-b4b9-dd1cead1614c",
+            "value": "300",
+            "name": "300"
+          },
+          {
+            "_uid": "01561be6-5766-4711-b4ad-ac2833d401f1",
+            "value": "350",
+            "name": "350"
+          },
+          {
+            "_uid": "4ed1ce5e-4e0f-4e3a-abf7-29279add1348",
+            "value": "400",
+            "name": "400"
+          },
+          {
+            "_uid": "b34ce808-9909-400c-ab4d-19c65cab6eb0",
+            "value": "450",
+            "name": "450"
+          },
+          {
+            "_uid": "baf5c03f-87f8-48cc-9c3b-717664b216d0",
+            "value": "500",
+            "name": "500"
+          }
+        ],
+        "default_value": "[\"10\", \"25\", \"50\"]",
+        "required": true,
+        "id": "l4QYdSzdRcK5aC_wqLjYeg"
+      },
+      "preselected": {
+        "type": "number",
+        "pos": 5,
+        "id": "hwhPR1XoQ8qjiSJirubxeg",
+        "required": true,
+        "default_value": "25"
+      },
+      "defaultFrequency": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "9231e2e2-6b40-4c5a-b4e4-32fd11f8eeac",
+            "name": "Eenmalig",
+            "value": "once"
+          },
+          {
+            "_uid": "97449480-a840-40f0-bd41-8306c2923d46",
+            "value": "monthly",
+            "name": "Maandelijks"
+          }
+        ],
+        "default_value": "monthly",
+        "id": "QHNChv7dQnOCfRnYMaD3uQ"
+      },
+      "funds": {
+        "type": "table",
+        "pos": 7,
+        "id": "8KDyIRrYSnaxWMwOx-hSEQ"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 8,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "bold-dark",
+        "id": "oHplYQxwQRCYIMLqPTMvXw"
+      },
+      "cardBackgroundColor": {
+        "type": "option",
+        "pos": 9,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "bold-dark",
+        "id": "1hzZBKbPSJ2nTgzBovADKg"
+      },
+      "primaryColor": {
+        "type": "option",
+        "pos": 10,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "brand-orange",
+        "id": "TS7h-8GYS0202RoFw0zd7w"
+      },
+      "secondaryColor": {
+        "type": "option",
+        "pos": 11,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "strategy-gold",
+        "id": "cV9KdnoIR5Wbl-Bs6KCntw"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 12,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "cream",
+        "id": "-64ZYCG7RbuAKcJ5eNxgXg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "donation",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "event",
     "display_name": null,
     "description": "A content type for events",
