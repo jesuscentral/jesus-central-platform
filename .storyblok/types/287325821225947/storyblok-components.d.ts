@@ -176,6 +176,7 @@ export interface SbInformationItem {
 export interface SbLink {
   text: string;
   link: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  textColor?: number | string;
   component: "link";
   _uid: string;
   [k: string]: unknown;

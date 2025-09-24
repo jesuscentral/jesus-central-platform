@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 import { SbBlokData, storyblokEditable } from "@storyblok/react";
 import { SbPersonCard } from "@storyblok/types/287325821225947/storyblok-components";
