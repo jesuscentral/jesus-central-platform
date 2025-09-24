@@ -4,14 +4,18 @@ import { SbScrollingText } from "@storyblok/types/287325821225947/storyblok-comp
 import { motion } from "framer-motion";
 import { SbBlokData } from "@storyblok/react";
 import { storyblokEditable } from "@storyblok/react";
+import { cn } from "@/utils/cn";
 
 export default function ScrollingText({ blok }: { blok: SbScrollingText }) {
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className="relative py-12 bg-jcc-boldness"
+      className={cn(
+        "relative py-12",
+        `bg-${blok.backgroundColor}`,
+        `text-${blok.textColor}`
+      )}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.08),transparent_60%)]" />
       <div className="overflow-hidden">
         <motion.div
           initial={{ x: "0%" }}

@@ -1,3 +1,5 @@
+"use client";
+
 import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { SbCard } from "@storyblok/types/287325821225947/storyblok-components";
 import { motion, Variants } from "framer-motion";
