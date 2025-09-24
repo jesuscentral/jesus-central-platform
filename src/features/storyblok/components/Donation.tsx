@@ -70,7 +70,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
       {...storyblokEditable(blok as SbBlokData)}
       data-sb-object="donation"
       className={cn(
-        "relative isolate overflow-hidden border border-white/10 bg-bold-dark p-6 sm:p-10 shadow-2xl",
+        "relative isolate overflow-hidden border border-white/10 bg-bold-dark p-6 sm:p-10",
         `bg-${blok.backgroundColor}`,
         `text-${blok.textColor}`
       )}
