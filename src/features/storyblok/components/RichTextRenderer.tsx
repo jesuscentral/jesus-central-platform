@@ -60,7 +60,6 @@ const resolvers = {
       return <Link blok={props} />;
     },
     grid: (props: SbGrid) => {
-      console.log("Grid", props);
       return <Grid blok={props} />;
     },
     fullGrid: (props: SbFullGrid) => {

@@ -4,7 +4,6 @@ import { ISbStoryData } from "@storyblok/react/rsc";
 import { cn } from "@/utils/cn";
 
 function fmtDate(date: string) {
-  console.log(date);
   return new Intl.DateTimeFormat("nl-NL", {
     weekday: "long",
     day: "2-digit",

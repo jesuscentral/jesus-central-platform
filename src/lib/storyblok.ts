@@ -75,8 +75,6 @@ export const getStory = async (slug: string) => {
   try {
     const resolveRelations = ["global_footer"];
 
-    console.log(process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW);
-
     const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
       ...storyblokApiConfig,
       resolve_relations: resolveRelations,

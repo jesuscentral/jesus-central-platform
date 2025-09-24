@@ -55,7 +55,6 @@ export interface SbDonation {
   defaultFrequency?: "" | "once" | "monthly";
   funds?: StoryblokTable;
   backgroundColor?: number | string;
-  cardBackgroundColor?: number | string;
   primaryColor?: number | string;
   secondaryColor?: number | string;
   textColor?: number | string;

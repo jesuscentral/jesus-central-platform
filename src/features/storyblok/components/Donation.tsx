@@ -1,13 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  CreditCard,
-  ShieldCheck,
-  HeartHandshake,
-  Loader2,
-  ChevronDown,
-} from "lucide-react";
+import { HeartHandshake, Loader2, ChevronDown } from "lucide-react";
 import { SbDonation } from "@storyblok/types/287325821225947/storyblok-components";
 import { SbBlokData, storyblokEditable } from "@storyblok/react";
 import { RichTextRenderer } from "./RichTextRenderer";
@@ -60,7 +54,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
     <button
       type="button"
       onClick={() => setAmount(value)}
-      className={`rounded-xl border px-4 py-2 text-sm transition-all
+      className={`rounded-xl border px-4 py-2 text-sm transition-all cursor-pointer
         ${
           amount === value
             ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-${blok.textColor} shadow`
@@ -138,7 +132,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
                 key={key}
                 type="button"
                 onClick={() => setFrequency(key)}
-                className={`rounded-xl px-4 py-2 text-sm uppercase tracking-wide transition-all
+                className={`rounded-xl px-4 py-2 text-sm uppercase tracking-wide transition-all cursor-pointer
                   ${
                     frequency === key
                       ? `bg-${blok.primaryColor} text-bold-dark shadow`

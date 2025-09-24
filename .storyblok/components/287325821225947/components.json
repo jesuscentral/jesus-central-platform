@@ -343,7 +343,7 @@
     "display_name": null,
     "description": "A donation component so people can give",
     "created_at": "2025-09-24T18:48:08.706Z",
-    "updated_at": "2025-09-24T19:11:34.660Z",
+    "updated_at": "2025-09-24T20:57:29.156Z",
     "id": 94413163346814,
     "schema": {
       "subtitle": {
@@ -493,16 +493,6 @@
         "exclude_empty_option": true,
         "default_value": "bold-dark",
         "id": "oHplYQxwQRCYIMLqPTMvXw"
-      },
-      "cardBackgroundColor": {
-        "type": "option",
-        "pos": 9,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "colors",
-        "exclude_empty_option": true,
-        "default_value": "bold-dark",
-        "id": "1hzZBKbPSJ2nTgzBovADKg"
       },
       "primaryColor": {
         "type": "option",

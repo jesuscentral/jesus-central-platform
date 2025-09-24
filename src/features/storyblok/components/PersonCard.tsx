@@ -17,7 +17,6 @@ export default function PersonCard({ blok }: { blok: SbPersonCard }) {
   return (
     <motion.div
       {...storyblokEditable(blok as SbBlokData)}
-      key={blok._uid}
       variants={fadeUp}
       className={cn(
         "rounded-2xl overflow-hidden  p-4",
