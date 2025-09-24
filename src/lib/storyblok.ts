@@ -26,6 +26,9 @@ import StaticGrid from "@/features/storyblok/components/StaticGrid";
 import PersonCard from "@/features/storyblok/components/PersonCard";
 import Donation from "@/features/storyblok/components/Donation";
 import SermonHighlight from "@/features/storyblok/components/SermonHighlight";
+import Statement from "@/features/storyblok/components/Statement";
+import StatementScripture from "@/features/storyblok/components/StatementScripture";
+import ScriptureReferences from "@/features/storyblok/components/ScriptureReferences";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -58,6 +61,9 @@ export const getStoryblokApi = storyblokInit({
     personCard: PersonCard,
     donation: Donation,
     sermonHighlight: SermonHighlight,
+    statement: Statement,
+    statementScripture: StatementScripture,
+    scriptureReferences: ScriptureReferences,
   },
 });
 

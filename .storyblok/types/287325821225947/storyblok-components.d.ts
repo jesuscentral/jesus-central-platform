@@ -109,8 +109,11 @@ export interface SbFullGrid {
     | SbPage
     | SbPersonCard
     | SbScripture
+    | SbScriptureReferences
     | SbScrollingText
     | SbSermonHighlight
+    | SbStatement
+    | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
@@ -148,8 +151,11 @@ export interface SbGrid {
     | SbPage
     | SbPersonCard
     | SbScripture
+    | SbScriptureReferences
     | SbScrollingText
     | SbSermonHighlight
+    | SbStatement
+    | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
@@ -229,8 +235,11 @@ export interface SbPage {
     | SbPage
     | SbPersonCard
     | SbScripture
+    | SbScriptureReferences
     | SbScrollingText
     | SbSermonHighlight
+    | SbStatement
+    | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
@@ -263,6 +272,13 @@ export interface SbScripture {
   [k: string]: unknown;
 }
 
+export interface SbScriptureReferences {
+  scriptures: SbStatementScripture[];
+  component: "scriptureReferences";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbScrollingText {
   text?: string;
   backgroundColor?: number | string;
@@ -290,6 +306,25 @@ export interface SbSermonHighlight {
   [k: string]: unknown;
 }
 
+export interface SbStatement {
+  subtitle: string;
+  statement: string;
+  explanation: string;
+  scriptures?: SbScriptureReferences[];
+  backgroundColor?: number | string;
+  component: "statement";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbStatementScripture {
+  ref?: string;
+  content?: string;
+  component: "statementScripture";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbStaticGrid {
   items: (
     | SbBadge
@@ -310,8 +345,11 @@ export interface SbStaticGrid {
     | SbPage
     | SbPersonCard
     | SbScripture
+    | SbScriptureReferences
     | SbScrollingText
     | SbSermonHighlight
+    | SbStatement
+    | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero

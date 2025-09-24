@@ -30,6 +30,12 @@ export default function ScrollingText({ blok }: { blok: SbScrollingText }) {
           <span className="mx-8 text-xl md:text-2xl text-jcc-freedom/80 uppercase tracking-wider">
             {blok.text}
           </span>
+          <span className="mx-8 text-xl md:text-2xl text-jcc-freedom/80 uppercase tracking-wider">
+            {blok.text}
+          </span>
+          <span className="mx-8 text-xl md:text-2xl text-jcc-freedom/80 uppercase tracking-wider">
+            {blok.text}
+          </span>
         </motion.div>
       </div>
     </div>

@@ -1415,6 +1415,51 @@
     "metadata": {}
   },
   {
+    "name": "scriptureReferences",
+    "display_name": null,
+    "description": "A block with references to scripture, an interactive way to show multiple scriptures",
+    "created_at": "2025-09-24T23:40:06.690Z",
+    "updated_at": "2025-09-24T23:40:33.465Z",
+    "id": 94484917009884,
+    "schema": {
+      "scriptures": {
+        "type": "bloks",
+        "pos": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "statementScripture"
+        ],
+        "required": true,
+        "minimum": 0,
+        "maximum": 20,
+        "id": "tAAXGppXRoqbVVNl7k5Gaw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "scriptureReferences",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "scrollingText",
     "display_name": null,
     "description": "A block with scrolling text",
@@ -1586,6 +1631,121 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "sermonHighlight",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "statement",
+    "display_name": null,
+    "description": "A statement block for providing a statement with scriptures",
+    "created_at": "2025-09-24T23:06:20.342Z",
+    "updated_at": "2025-09-24T23:42:32.537Z",
+    "id": 94476617088388,
+    "schema": {
+      "subtitle": {
+        "type": "text",
+        "pos": 0,
+        "id": "8Ne5vNMhQAGHthYmjuGEeQ",
+        "required": true,
+        "default_value": "Wat wij geloven"
+      },
+      "statement": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "MFRLCUZWQ4y5aqcl2ampHA"
+      },
+      "explanation": {
+        "type": "text",
+        "pos": 2,
+        "id": "j3Od_UlYTSG19Nm4hGGuBw",
+        "required": true
+      },
+      "scriptures": {
+        "type": "bloks",
+        "pos": 3,
+        "maximum": 10,
+        "minimum": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "scriptureReferences"
+        ],
+        "id": "DVXij2foSemzI6zxIPSEHA"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "cream",
+        "id": "eoA7dMivT8-zssFdwVVXdg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "statement",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "statementScripture",
+    "display_name": null,
+    "description": "A scripture with reference and content",
+    "created_at": "2025-09-24T23:10:45.683Z",
+    "updated_at": "2025-09-24T23:11:32.844Z",
+    "id": 94477703925126,
+    "schema": {
+      "ref": {
+        "type": "text",
+        "pos": 0,
+        "id": "CEKKO-1ORBW0yUIJbDfNMw"
+      },
+      "content": {
+        "type": "text",
+        "pos": 1,
+        "id": "7NOEcwkRSV-YPtxjazJ_Jg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "statementScripture",
     "component_group_uuid": null,
     "color": null,
     "icon": null,
