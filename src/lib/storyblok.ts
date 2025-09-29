@@ -30,6 +30,7 @@ import Statement from "@/features/storyblok/components/Statement";
 import StatementScripture from "@/features/storyblok/components/StatementScripture";
 import ScriptureReferences from "@/features/storyblok/components/ScriptureReferences";
 import RichText from "@/features/storyblok/components/RichText";
+import { StoryblokMultilink } from "@storyblok/types/storyblok";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -79,7 +80,6 @@ export const storyblokApiConfig: ISbStoriesParams = {
 
 export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
-  const storyblokPrefix = process.env?.NEXT_PUBLIC_STORYBLOK_PREFIX ?? "main";
 
   const finalSlug =
     slug === "/" || slug === "" || slug === undefined ? "home" : slug;
@@ -87,7 +87,7 @@ export const getStory = async (slug: string) => {
     const resolveRelations = ["global_footer"];
 
     const { data } = await storyblok.get(
-      `cdn/stories/${storyblokPrefix}/${finalSlug}`,
+      `cdn/stories/${process.env.NEXT_PUBLIC_BASE_PATH}/${finalSlug}`,
       {
         ...storyblokApiConfig,
         resolve_relations: resolveRelations,
@@ -114,4 +114,28 @@ const updateStory = (story: any, global_footer: SbBlokData[]) => {
   }
 
   return story;
+};
+
+export const linkResolver = (link: StoryblokMultilink | undefined) => {
+  if (!link) return "";
+  if (!!process.env.NEXT_PUBLIC_BASE_PATH) {
+    let correctUrl = link?.story?.full_slug || link.cached_url || link.url;
+
+    // Remove base path if link is to the homepage
+    if (correctUrl === `${process.env.NEXT_PUBLIC_BASE_PATH}/`) {
+      correctUrl = correctUrl.replace(
+        `${process.env.NEXT_PUBLIC_BASE_PATH}`,
+        ""
+      );
+    } else {
+      correctUrl = correctUrl.replace(
+        `${process.env.NEXT_PUBLIC_BASE_PATH}/`,
+        ""
+      );
+    }
+
+    return correctUrl;
+  }
+
+  return link?.story?.full_slug || link.cached_url || link.url;
 };

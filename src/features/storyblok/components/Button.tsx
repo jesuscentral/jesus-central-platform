@@ -4,6 +4,7 @@ import { SbButton } from "@storyblok/types/287325821225947/storyblok-components"
 import { SbBlokData } from "@storyblok/js";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import { linkResolver } from "@/lib/storyblok";
 
 interface ButtonProps {
   blok: SbButton;
@@ -107,10 +108,11 @@ const composeClasses = (
 };
 
 export default function Button({ blok }: ButtonProps) {
+  console.log(blok.link);
   return (
     <Link
       {...storyblokEditable(blok as SbBlokData)}
-      href={blok.link?.url || ""}
+      href={linkResolver(blok.link)}
       className={cn(
         composeClasses(blok.type, blok.variant, blok.size),
         blok.tailwindClasses

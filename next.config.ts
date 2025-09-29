@@ -7,12 +7,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: `/${process.env.NEXT_PUBLIC_STORYBLOK_PREFIX}`,
+        source: `/${process.env.NEXT_PUBLIC_BASE_PATH}`,
         destination: "/",
         permanent: true,
       },
       {
-        source: `/${process.env.NEXT_PUBLIC_STORYBLOK_PREFIX}/:path*`,
+        source: `/${process.env.NEXT_PUBLIC_BASE_PATH}/:path*`,
         destination: "/:path*",
         permanent: true,
       },
