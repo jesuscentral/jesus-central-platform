@@ -1,0 +1,17 @@
+[
+  {
+    "name": "components",
+    "id": 95373044408158,
+    "object_type": "component"
+  },
+  {
+    "name": "global",
+    "id": 95373044465503,
+    "object_type": "component"
+  },
+  {
+    "name": "integration",
+    "id": 96125363539856,
+    "object_type": "component"
+  }
+]

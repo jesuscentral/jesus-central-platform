@@ -32,6 +32,7 @@ import StatementScripture from "@/features/storyblok/components/StatementScriptu
 import ScriptureReferences from "@/features/storyblok/components/ScriptureReferences";
 import RichText from "@/features/storyblok/components/RichText";
 import { StoryblokMultilink } from "@storyblok/types/storyblok";
+import SpotifyEmbed from "@/features/storyblok/components/SpotifyEmbed";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -68,6 +69,7 @@ export const getStoryblokApi = storyblokInit({
     statementScripture: StatementScripture,
     scriptureReferences: ScriptureReferences,
     richText: RichText,
+    spotifyEmbed: SpotifyEmbed,
   },
 });
 
