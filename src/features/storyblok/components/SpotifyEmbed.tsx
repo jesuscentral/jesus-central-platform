@@ -1,3 +1,4 @@
+import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
 import { SbSpotifyEmbed } from "@storyblok/types/287435740670216/storyblok-components";
 
 function toSpotifyEmbedUrl(url: string): string {
@@ -14,6 +15,8 @@ export default function SpotifyEmbed({ blok }: { blok: SbSpotifyEmbed }) {
 
   return (
     <iframe
+      {...storyblokEditable(blok as SbBlokData)}
+      className="w-full h-full"
       src={embedUrl}
       width="100%"
       height="352"
