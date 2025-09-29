@@ -1,7 +1,6 @@
 import {
   apiPlugin,
   ISbStoriesParams,
-  ISbStory,
   ISbStoryData,
   SbBlokData,
   storyblokInit,
