@@ -21,11 +21,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function UI() {
-  if (!process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW) {
+  if (process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW !== "true") {
     return notFound();
   }
 
   const story = await getStory("ui");
+
+  if (!story) {
+    return notFound();
+  }
 
   return <StoryblokStory story={story} />;
 }
