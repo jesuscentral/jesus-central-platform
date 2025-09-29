@@ -6,8 +6,20 @@ import Badge from "./Badge";
 import {
   SbBadge,
   SbButton,
+  SbCard,
+  SbImageCard,
+  SbFullGrid,
+  SbGrid,
+  SbLink,
+  SbStaticGrid,
 } from "@storyblok/types/287325821225947/storyblok-components";
 import Button from "./Button";
+import Link from "./Link";
+import Grid from "./Grid";
+import FullGrid from "./FullGrid";
+import StaticGrid from "./StaticGrid";
+import Card from "./Card";
+import ImageCard from "./ImageCard";
 
 interface RichTextRendererProps {
   document: StoryblokRichtext;
@@ -43,6 +55,24 @@ const resolvers = {
     },
     button: (props: SbButton) => {
       return <Button blok={props} />;
+    },
+    link: (props: SbLink) => {
+      return <Link blok={props} />;
+    },
+    grid: (props: SbGrid) => {
+      return <Grid blok={props} />;
+    },
+    fullGrid: (props: SbFullGrid) => {
+      return <FullGrid blok={props} />;
+    },
+    staticGrid: (props: SbStaticGrid) => {
+      return <StaticGrid blok={props} />;
+    },
+    card: (props: SbCard) => {
+      return <Card blok={props} />;
+    },
+    imageCard: (props: SbImageCard) => {
+      return <ImageCard blok={props} />;
     },
   },
 };

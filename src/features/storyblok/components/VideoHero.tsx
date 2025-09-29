@@ -48,22 +48,24 @@ export default function VideoHero({ blok }: VideoHeroProps) {
       className="relative h-[min(100vh,760px)] overflow-hidden"
     >
       {/* Background video with optimizations */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={blok.fallback_image.filename!}
-        onError={() => setVideoError(true)}
-        style={{ display: videoError ? "none" : "block" }}
-      >
-        <source
-          src={blok.background_video?.filename ?? "/videoclip-short.mp4"}
-          type="video/mp4"
-        />
-      </video>
+      {blok.background_video && blok.background_video.filename && (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={blok.fallback_image.filename!}
+          onError={() => setVideoError(true)}
+          style={{ display: videoError ? "none" : "block" }}
+        >
+          <source
+            src={blok.background_video?.filename ?? "/videoclip-short.mp4"}
+            type="video/mp4"
+          />
+        </video>
+      )}
 
       {/* Fallback image if video fails */}
       {videoError && (

@@ -6,7 +6,7 @@ import { RichTextRenderer } from "./RichTextRenderer";
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 
-export default function Content({ blok }: { blok: SbContent }) {
+export default function RichText({ blok }: { blok: SbContent }) {
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}

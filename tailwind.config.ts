@@ -5,15 +5,19 @@ const config = {
   theme: {
     extend: {
       colors: {
-        bold: "#161615",
-        "bold-dark": "#0F0F0E",
-        "brand-black": "#0B0B0B",
-        "brand-orange": "#eb3700",
-        cream: "#EFF3EB",
-        "strategy-gold": "#C89657",
-        "strategy-green": "#746e06",
-        "strategy-red": "#eb3700",
-        "strategy-charcoal": "#161615",
+        bold: "var(--boldness)",
+        "bold-dark": "var(--bold-dark)",
+        "brand-black": "var(--brand-black)",
+        "brand-orange": "var(--brand-orange)",
+        cream: "var(--cream)",
+        "strategy-gold": "var(--strategy-gold)",
+        "strategy-green": "var(--strategy-green)",
+        "strategy-red": "var(--strategy-red)",
+        "strategy-charcoal": "var(--strategy-charcoal)",
+        freedom: "var(--freedom)",
+        herstel: "var(--herstel)",
+        toerusting: "var(--toerusting)",
+        zending: "var(--zending)",
       },
       fontFamily: {
         heading: ["var(--font-heading)", "sans-serif"],

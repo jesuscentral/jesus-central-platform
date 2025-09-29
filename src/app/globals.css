@@ -4,6 +4,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --boldness: #161615;
+  --freedom: #edf2e9;
+  --herstel: #f3b963;
+  --toerusting: #746e06;
+  --zending: #eb3700;
+  --cream: #eff3eb;
+  --strategy-gold: #c89657;
+  --strategy-green: #746e06;
+  --strategy-red: #eb3700;
+  --strategy-charcoal: #161615;
+  --bold-dark: #0f0f0e;
+  --brand-black: #0b0b0b;
+  --brand-orange: #eb3700;
 }
 
 @theme inline {

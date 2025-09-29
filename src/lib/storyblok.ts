@@ -1,10 +1,18 @@
-import { apiPlugin, SbBlokData, storyblokInit } from "@storyblok/react/rsc";
+import {
+  apiPlugin,
+  ISbStoriesParams,
+  SbBlokData,
+  storyblokInit,
+} from "@storyblok/react/rsc";
 import Page from "@/features/storyblok/components/Page";
 import Teaser from "@/features/storyblok/components/Teaser";
 import Button from "@/features/storyblok/components/Button";
 import VideoHero from "@/features/storyblok/components/VideoHero";
+import ImageHero from "@/features/storyblok/components/ImageHero";
+import Image from "@/features/storyblok/components/Image";
 import Content from "@/features/storyblok/components/Content";
 import Grid from "@/features/storyblok/components/Grid";
+import FullGrid from "@/features/storyblok/components/FullGrid";
 import Badge from "@/features/storyblok/components/Badge";
 import Scripture from "@/features/storyblok/components/Scripture";
 import Footer from "@/features/storyblok/components/Footer";
@@ -12,6 +20,17 @@ import Link from "@/features/storyblok/components/Link";
 import Global from "@/features/storyblok/components/Global";
 import InformationItem from "@/features/storyblok/components/informationItem";
 import Card from "@/features/storyblok/components/Card";
+import ScrollingText from "@/features/storyblok/components/ScrollingText";
+import ImageCard from "@/features/storyblok/components/ImageCard";
+import StaticGrid from "@/features/storyblok/components/StaticGrid";
+import PersonCard from "@/features/storyblok/components/PersonCard";
+import Donation from "@/features/storyblok/components/Donation";
+import SermonHighlight from "@/features/storyblok/components/SermonHighlight";
+import Statement from "@/features/storyblok/components/Statement";
+import StatementScripture from "@/features/storyblok/components/StatementScripture";
+import ScriptureReferences from "@/features/storyblok/components/ScriptureReferences";
+import RichText from "@/features/storyblok/components/RichText";
+import { StoryblokMultilink } from "@storyblok/types/storyblok";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -26,8 +45,11 @@ export const getStoryblokApi = storyblokInit({
     teaser: Teaser,
     button: Button,
     videoHero: VideoHero,
+    imageHero: ImageHero,
+    image: Image,
     content: Content,
     grid: Grid,
+    fullGrid: FullGrid,
     badge: Badge,
     scripture: Scripture,
     footer: Footer,
@@ -35,8 +57,26 @@ export const getStoryblokApi = storyblokInit({
     global: Global,
     informationItem: InformationItem,
     card: Card,
+    scrollingText: ScrollingText,
+    imageCard: ImageCard,
+    staticGrid: StaticGrid,
+    personCard: PersonCard,
+    donation: Donation,
+    sermonHighlight: SermonHighlight,
+    statement: Statement,
+    statementScripture: StatementScripture,
+    scriptureReferences: ScriptureReferences,
+    richText: RichText,
   },
 });
+
+export const storyblokApiConfig: ISbStoriesParams = {
+  version:
+    process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW === "true"
+      ? "draft"
+      : "published",
+  resolve_links: "url",
+};
 
 export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
@@ -46,16 +86,13 @@ export const getStory = async (slug: string) => {
   try {
     const resolveRelations = ["global_footer"];
 
-    console.log(process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW);
-
-    const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
-      version:
-        process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW === "true"
-          ? "draft"
-          : "published",
-      resolve_relations: resolveRelations,
-      resolve_links: "url",
-    });
+    const { data } = await storyblok.get(
+      `cdn/stories/${process.env.NEXT_PUBLIC_BASE_PATH}/${finalSlug}`,
+      {
+        ...storyblokApiConfig,
+        resolve_relations: resolveRelations,
+      }
+    );
 
     if (!data?.story) {
       return null;
@@ -77,4 +114,28 @@ const updateStory = (story: any, global_footer: SbBlokData[]) => {
   }
 
   return story;
+};
+
+export const linkResolver = (link: StoryblokMultilink | undefined) => {
+  if (!link) return "";
+  if (!!process.env.NEXT_PUBLIC_BASE_PATH) {
+    let correctUrl = link?.story?.full_slug || link.cached_url || link.url;
+
+    // Remove base path if link is to the homepage
+    if (correctUrl === `${process.env.NEXT_PUBLIC_BASE_PATH}/`) {
+      correctUrl = correctUrl.replace(
+        `${process.env.NEXT_PUBLIC_BASE_PATH}`,
+        ""
+      );
+    } else {
+      correctUrl = correctUrl.replace(
+        `${process.env.NEXT_PUBLIC_BASE_PATH}/`,
+        ""
+      );
+    }
+
+    return correctUrl;
+  }
+
+  return link?.story?.full_slug || link.cached_url || link.url;
 };

@@ -4,6 +4,7 @@ import { SbButton } from "@storyblok/types/287325821225947/storyblok-components"
 import { SbBlokData } from "@storyblok/js";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import { linkResolver } from "@/lib/storyblok";
 
 interface ButtonProps {
   blok: SbButton;
@@ -60,6 +61,36 @@ const composeClasses = (
       outline:
         "bg-transparent border-2 border-strategy-charcoal text-strategy-charcoal hover:bg-strategy-charcoal hover:text-cream",
     },
+    "bold-dark": {
+      primary:
+        "bg-bold-dark text-cream shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-bold-dark text-bold-dark hover:bg-bold-dark hover:text-cream",
+    },
+    freedom: {
+      primary:
+        "bg-freedom text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-freedom text-freedom hover:bg-freedom hover:text-brand-black",
+    },
+    herstel: {
+      primary:
+        "bg-herstel text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-herstel text-herstel hover:bg-herstel hover:text-brand-black",
+    },
+    toerusting: {
+      primary:
+        "bg-toerusting text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-toerusting text-toerusting hover:bg-toerusting hover:text-brand-black",
+    },
+    zending: {
+      primary:
+        "bg-zending text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+      outline:
+        "bg-transparent border-2 border-zending text-zending hover:bg-zending hover:text-brand-black",
+    },
   };
 
   const sizeClasses =
@@ -77,10 +108,11 @@ const composeClasses = (
 };
 
 export default function Button({ blok }: ButtonProps) {
+  console.log(blok.link);
   return (
     <Link
       {...storyblokEditable(blok as SbBlokData)}
-      href={blok.link?.url || ""}
+      href={linkResolver(blok.link)}
       className={cn(
         composeClasses(blok.type, blok.variant, blok.size),
         blok.tailwindClasses
