@@ -12,8 +12,10 @@ import SermonList from "@/components/sermons/SermonList";
 import { getSermons } from "@/lib/actions/sermons";
 
 export default async function PrekenPage() {
-  const sermons = await getSermons();
-  const story = await getStory("preken");
+  const [sermons, story] = await Promise.all([
+    getSermons(),
+    getStory("preken"),
+  ]);
 
   if (!story) {
     notFound();
