@@ -108,7 +108,6 @@ const composeClasses = (
 };
 
 export default function Button({ blok }: ButtonProps) {
-  console.log(blok.link);
   return (
     <Link
       {...storyblokEditable(blok as SbBlokData)}

@@ -23,7 +23,6 @@ export type JccBeliefProps = {
 };
 
 export default function Statement({ blok }: { blok: SbStatement }) {
-  const items = Array.isArray(blok.scriptures) ? blok.scriptures : [];
   return (
     <motion.section
       {...storyblokEditable(blok as SbBlokData)}
