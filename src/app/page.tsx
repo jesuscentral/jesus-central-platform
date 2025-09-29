@@ -1,6 +1,6 @@
 import { getStory, getStoryblokSeoParameters } from "@/lib/storyblok";
 import { Metadata } from "next";
-import { StoryblokStory } from "@storyblok/react/rsc";
+import Index from "./[...slug]/page";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -19,8 +19,4 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return getStoryblokSeoParameters(story);
 }
 
-export default async function Home() {
-  const story = await getStory("home");
-
-  return <StoryblokStory story={story} />;
-}
+export default Index;
