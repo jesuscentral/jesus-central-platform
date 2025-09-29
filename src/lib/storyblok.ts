@@ -29,6 +29,7 @@ import SermonHighlight from "@/features/storyblok/components/SermonHighlight";
 import Statement from "@/features/storyblok/components/Statement";
 import StatementScripture from "@/features/storyblok/components/StatementScripture";
 import ScriptureReferences from "@/features/storyblok/components/ScriptureReferences";
+import RichText from "@/features/storyblok/components/RichText";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -64,6 +65,7 @@ export const getStoryblokApi = storyblokInit({
     statement: Statement,
     statementScripture: StatementScripture,
     scriptureReferences: ScriptureReferences,
+    richText: RichText,
   },
 });
 
@@ -77,16 +79,20 @@ export const storyblokApiConfig: ISbStoriesParams = {
 
 export const getStory = async (slug: string) => {
   const storyblok = getStoryblokApi();
+  const storyblokPrefix = process.env?.NEXT_PUBLIC_STORYBLOK_PREFIX ?? "main";
 
   const finalSlug =
     slug === "/" || slug === "" || slug === undefined ? "home" : slug;
   try {
     const resolveRelations = ["global_footer"];
 
-    const { data } = await storyblok.get(`cdn/stories/${finalSlug}`, {
-      ...storyblokApiConfig,
-      resolve_relations: resolveRelations,
-    });
+    const { data } = await storyblok.get(
+      `cdn/stories/${storyblokPrefix}/${finalSlug}`,
+      {
+        ...storyblokApiConfig,
+        resolve_relations: resolveRelations,
+      }
+    );
 
     if (!data?.story) {
       return null;

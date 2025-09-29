@@ -6,7 +6,6 @@ export default function ScriptureReferences({
 }: {
   blok: SbScriptureReferences;
 }) {
-  console.log(blok);
   return (
     <div className="md:col-span-7">
       <div className="rounded-3xl border border-white/10 bg-bold-dark p-5 sm:p-6">

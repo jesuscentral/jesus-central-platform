@@ -19,8 +19,8 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
         <div className="flex items-center gap-3">
           <Link href="/">
             <Image
-              src={blok.logo.filename!}
-              alt={blok.logo.alt!}
+              src={blok.logo?.filename ?? ""}
+              alt={blok.logo?.alt ?? ""}
               width={200}
               height={60}
               priority

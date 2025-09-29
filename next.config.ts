@@ -1,8 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  env: {
+    stroyblokPrefix: process.env.NEXT_PUBLIC_STORYBLOK_PREFIX,
+  },
   async redirects() {
     return [
+      {
+        source: `/${process.env.NEXT_PUBLIC_STORYBLOK_PREFIX}`,
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: `/${process.env.NEXT_PUBLIC_STORYBLOK_PREFIX}/:path*`,
+        destination: "/:path*",
+        permanent: true,
+      },
       {
         source: "/home",
         destination: "/",

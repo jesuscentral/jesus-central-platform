@@ -112,6 +112,7 @@ export interface SbFullGrid {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSermon
     | SbSermonHighlight
     | SbStatement
     | SbStatementScripture
@@ -154,6 +155,7 @@ export interface SbGrid {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSermon
     | SbSermonHighlight
     | SbStatement
     | SbStatementScripture
@@ -238,6 +240,7 @@ export interface SbPage {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSermon
     | SbSermonHighlight
     | SbStatement
     | SbStatementScripture
@@ -285,6 +288,21 @@ export interface SbScrollingText {
   backgroundColor?: number | string;
   textColor?: number | string;
   component: "scrollingText";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbSermon {
+  title: string;
+  speaker: string;
+  date: string;
+  duration?: string;
+  thumbnail: StoryblokAsset;
+  youtubeUrl: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
+  series?: string;
+  language?: "" | "Nederlands" | "Engels";
+  translationAvailable?: boolean;
+  component: "sermon";
   _uid: string;
   [k: string]: unknown;
 }
@@ -348,6 +366,7 @@ export interface SbStaticGrid {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSermon
     | SbSermonHighlight
     | SbStatement
     | SbStatementScripture

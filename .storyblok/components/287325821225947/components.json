@@ -1522,12 +1522,12 @@
     "metadata": {}
   },
   {
-    "name": "sermonHighlight",
+    "name": "sermon",
     "display_name": null,
     "description": "A section to highlight a sermon",
-    "created_at": "2025-09-24T21:42:39.612Z",
-    "updated_at": "2025-09-24T21:58:10.629Z",
-    "id": 94456052178208,
+    "created_at": "2025-09-25T10:11:15.881Z",
+    "updated_at": "2025-09-25T10:12:20.462Z",
+    "id": 94640029213921,
     "schema": {
       "title": {
         "type": "text",
@@ -1596,10 +1596,110 @@
         "type": "boolean",
         "pos": 8,
         "id": "6F2vo9iqRPixs7QeXllBfw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "sermon",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 93623865572832,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "93623865572832"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "sermonHighlight",
+    "display_name": null,
+    "description": "A section to highlight a sermon",
+    "created_at": "2025-09-24T21:42:39.612Z",
+    "updated_at": "2025-09-27T10:32:53.776Z",
+    "id": 94456052178208,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "JBUs2EK1Qjmn57FeVUZFmA"
+      },
+      "speaker": {
+        "type": "text",
+        "pos": 2,
+        "id": "rdCzE_NLSCiNppBbiB4VCA",
+        "required": true
+      },
+      "date": {
+        "type": "datetime",
+        "pos": 3,
+        "id": "qijDdcFVRR-WUzYq-AOKkg",
+        "required": true
+      },
+      "duration": {
+        "type": "text",
+        "pos": 4,
+        "id": "a1YEx7doTSalrXWjcHxjaA"
+      },
+      "thumbnail": {
+        "type": "asset",
+        "pos": 5,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "id": "2shMCoiMSoyk9TNhukJMKA"
+      },
+      "youtubeUrl": {
+        "type": "multilink",
+        "pos": 6,
+        "allow_target_blank": true,
+        "id": "o2qTQCTJRzWTqXdRhFcvxA",
+        "required": true
+      },
+      "series": {
+        "type": "text",
+        "pos": 7,
+        "id": "VnBjYDb1Sn2Ig1FxNrLyXQ"
+      },
+      "language": {
+        "type": "option",
+        "pos": 8,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "c8fafed7-064a-466e-86e2-aa16494ea9b1",
+            "name": "Nederlands",
+            "value": "Nederlands"
+          },
+          {
+            "_uid": "b5bf074d-9a5e-4f9c-b501-7880e0e3626b",
+            "value": "Engels",
+            "name": "Engels"
+          }
+        ],
+        "default_value": "Nederlands",
+        "id": "t4CPxIBaSHaep8KAFGFtXg"
+      },
+      "translationAvailable": {
+        "type": "boolean",
+        "pos": 9,
+        "id": "6F2vo9iqRPixs7QeXllBfw"
       },
       "backgroundColor": {
         "type": "option",
-        "pos": 9,
+        "pos": 10,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "colors",
@@ -1609,7 +1709,7 @@
       },
       "primaryColor": {
         "type": "option",
-        "pos": 10,
+        "pos": 11,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "colors",
@@ -1619,7 +1719,7 @@
       },
       "secondaryColor": {
         "type": "option",
-        "pos": 11,
+        "pos": 12,
         "use_uuid": true,
         "source": "internal",
         "exclude_empty_option": true,
