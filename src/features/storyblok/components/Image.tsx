@@ -22,7 +22,7 @@ export default function Image({ blok, className }: ImageProps) {
     <div
       {...storyblokEditable(blok as SbBlokData)}
       className={cn(
-        "relative w-full",
+        "relative w-full py-20",
         isFullHeight ? "h-full" : "aspect-[4/3]",
         className
       )}

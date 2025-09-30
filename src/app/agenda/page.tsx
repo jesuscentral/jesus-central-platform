@@ -25,9 +25,9 @@ export default async function AgendaPage({
 
   const blok = story.content as SbPage;
 
-  const { data: eventsData } = await storyblok.get("cdn/stories", {
+  const { data: eventsData } = await storyblok.get("cdn/stories/", {
     ...storyblokApiConfig,
-    starts_with: "agenda/",
+    starts_with: `${process.env.NEXT_PUBLIC_BASE_PATH}/agenda/`,
     filter_query: {
       date: {
         gt_date: new Date().toISOString(),

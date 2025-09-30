@@ -12,6 +12,7 @@ import {
   SbGrid,
   SbLink,
   SbStaticGrid,
+  SbImage,
 } from "@storyblok/types/287325821225947/storyblok-components";
 import Button from "./Button";
 import Link from "./Link";
@@ -20,6 +21,8 @@ import FullGrid from "./FullGrid";
 import StaticGrid from "./StaticGrid";
 import Card from "./Card";
 import ImageCard from "./ImageCard";
+import Image from "./Image";
+import { SbBlokData } from "@storyblok/react";
 
 interface RichTextRendererProps {
   document: StoryblokRichtext;
@@ -73,6 +76,10 @@ const resolvers = {
     },
     imageCard: (props: SbImageCard) => {
       return <ImageCard blok={props} />;
+    },
+    image: (props: SbImage) => {
+      // eslint-disable-next-line jsx-a11y/alt-text
+      return <Image blok={props as SbImage & SbBlokData} />;
     },
   },
 };
