@@ -7,7 +7,7 @@ import UIButton, {
   ButtonType,
   ButtonVariant,
   ButtonSize,
-} from "@/components/ui/Button";
+} from "@/components/ui/atoms/Button";
 
 interface ButtonProps {
   blok: SbButton;

@@ -1,4 +1,4 @@
-import { Heading } from "@/components/ui/Heading";
+import { Heading } from "@/components/ui/atoms/Heading";
 import { cn } from "@/utils/cn";
 import { StoryblokRichtext } from "@storyblok/types/storyblok";
 import { NODE_HEADING, render } from "storyblok-rich-text-react-renderer";
