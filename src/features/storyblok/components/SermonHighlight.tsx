@@ -5,6 +5,7 @@ import { Play, Youtube, CalendarDays, Mic2, Clock } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
+import Image from "next/image";
 
 function formatDate(d: string | Date) {
   const date = typeof d === "string" ? new Date(d) : d;
@@ -21,11 +22,12 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
     <section
       {...storyblokEditable(blok as SbBlokData)}
       className={cn(
-        `relative isolate overflow-hidden bg-cream px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16`,
+        // Mobile-first padding and spacing
+        "relative isolate overflow-hidden bg-cream px-4 py-6 sm:px-6 sm:py-8 md:px-12 md:py-16",
         `bg-${blok.backgroundColor}`
       )}
     >
-      <div className="grid items-stretch gap-8 md:grid-cols-12">
+      <div className="grid items-stretch gap-4 sm:gap-6 md:gap-8 md:grid-cols-12">
         <motion.a
           href={blok.youtubeUrl.url}
           target="_blank"
@@ -34,25 +36,34 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           whileHover={{ y: -4 }}
-          className="group relative col-span-12 overflow-hidden rounded-[2rem] border border-bold-dark/10 bg-bold-dark shadow-2xl md:col-span-7"
+          className="group relative col-span-12 overflow-hidden rounded-2xl sm:rounded-[2rem] border border-bold-dark/10 bg-bold-dark shadow-xl sm:shadow-2xl md:col-span-7"
         >
-          <motion.img
-            src={blok.thumbnail?.filename ?? ""}
-            alt=""
+          {/* Mobile-friendly aspect ratio */}
+          <motion.div
             initial={{ scale: 1.02 }}
             animate={{ scale: 1.02 }}
             whileHover={{ scale: 1.07 }}
             transition={{ duration: 0.8 }}
-            className="h-full w-full object-cover"
-            style={{ aspectRatio: "21/9" }}
-          />
+            className="relative aspect-video sm:aspect-[21/9] h-full w-full"
+          >
+            <Image
+              src={blok.thumbnail?.filename ?? ""}
+              alt={blok.thumbnail?.alt ?? ""}
+              fill
+              quality={90}
+              priority
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+          </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-          <div className="absolute inset-0 grid place-items-center p-6">
-            <div className="inline-flex items-center gap-4 rounded-full border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-md">
-              <div className="grid h-16 w-16 place-items-center rounded-full bg-brand-orange shadow-xl transition-transform group-hover:scale-110">
-                <Play className="h-7 w-7 text-white" />
+          <div className="absolute inset-0 grid place-items-center p-2 sm:p-3">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-white/10 px-2 py-1.5 sm:px-3 sm:py-2 backdrop-blur-md">
+              <div className="grid h-8 w-8 sm:h-10 sm:w-10 place-items-center rounded-full bg-brand-orange shadow-xl transition-transform group-hover:scale-110">
+                <Play className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
               </div>
-              <span className="text-base text-white/95">Bekijk de preek</span>
+              <span className="text-xs sm:text-sm text-white/95">
+                Bekijk de preek
+              </span>
             </div>
           </div>
         </motion.a>
@@ -62,7 +73,8 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05 }}
           className={cn(
-            "col-span-12 flex flex-col justify-center gap-5 rounded-[2rem] border border-bold-dark/10 bg-white/70 p-6 backdrop-blur-sm sm:p-8 md:col-span-5",
+            // Mobile-first padding and spacing
+            "col-span-12 flex flex-col justify-center gap-3 sm:gap-4 md:gap-5 rounded-2xl sm:rounded-[2rem] border border-bold-dark/10 bg-white/70 p-4 sm:p-6 md:p-8 backdrop-blur-sm md:col-span-5",
             `bg-${blok.primaryColor}`,
             `border-${blok.secondaryColor}/10`
           )}
@@ -70,7 +82,7 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
           <div className="inline-flex items-center gap-2">
             <span
               className={cn(
-                "rounded-md px-2.5 py-1 text-sm font-semibold uppercase tracking-wider",
+                "rounded-md px-2 py-0.5 sm:px-2.5 sm:py-1 text-xs sm:text-sm font-semibold uppercase tracking-wider",
                 `bg-${blok.secondaryColor}`,
                 `text-${blok.primaryColor}`
               )}
@@ -80,7 +92,8 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
           </div>
           <h2
             className={cn(
-              "text-5xl leading-[1.02] tracking-wide text-bold-dark sm:text-6xl md:text-7xl",
+              // Mobile-first text sizing
+              "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight tracking-wide text-bold-dark",
               `text-${blok.secondaryColor}`
             )}
           >
@@ -88,35 +101,56 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
           </h2>
           <div
             className={cn(
-              "flex flex-wrap items-center gap-3 text-base text-bold-dark/85",
+              // Mobile-optimized metadata layout
+              "flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 sm:gap-3 text-sm sm:text-base text-bold-dark/85",
               `text-${blok.secondaryColor}/85`
             )}
           >
             <div className="inline-flex items-center gap-1.5">
-              <Mic2 className={cn("h-5 w-5", `text-${blok.secondaryColor}`)} />
-              <span className={cn("truncate", `text-${blok.secondaryColor}`)}>
+              <Mic2
+                className={cn(
+                  "h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0",
+                  `text-${blok.secondaryColor}`
+                )}
+              />
+              <span className={cn("", `text-${blok.secondaryColor}`)}>
                 {blok.speaker}
               </span>
             </div>
-            <span className={cn(`text-${blok.secondaryColor}`)}>•</span>
+            <span
+              className={cn("hidden sm:inline", `text-${blok.secondaryColor}`)}
+            >
+              •
+            </span>
             <div className="inline-flex items-center gap-1.5">
               <CalendarDays
-                className={cn("h-5 w-5", `text-${blok.secondaryColor}`)}
+                className={cn(
+                  "h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0",
+                  `text-${blok.secondaryColor}`
+                )}
               />
-              <span className={cn("truncate", `text-${blok.secondaryColor}`)}>
+              <span className={cn("", `text-${blok.secondaryColor}`)}>
                 {formatDate(blok.date)}
               </span>
             </div>
             {blok.duration && (
               <>
-                <span className={cn(`text-${blok.secondaryColor}`)}>•</span>
+                <span
+                  className={cn(
+                    "hidden sm:inline",
+                    `text-${blok.secondaryColor}`
+                  )}
+                >
+                  •
+                </span>
                 <div className="inline-flex items-center gap-1.5">
                   <Clock
-                    className={cn("h-5 w-5", `text-${blok.secondaryColor}`)}
+                    className={cn(
+                      "h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0",
+                      `text-${blok.secondaryColor}`
+                    )}
                   />
-                  <span
-                    className={cn("truncate", `text-${blok.secondaryColor}`)}
-                  >
+                  <span className={cn("", `text-${blok.secondaryColor}`)}>
                     {blok.duration}
                   </span>
                 </div>
@@ -142,7 +176,7 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
             {blok.language && (
               <span
                 className={cn(
-                  "rounded-full border border-bold-dark/10 bg-white/80 px-2.5 py-1",
+                  "rounded-full border border-bold-dark/10 bg-white/80 px-2 py-0.5 sm:px-2.5 sm:py-1",
                   `border-${blok.secondaryColor}/10`,
                   `bg-${blok.secondaryColor} bg-opacity-80`
                 )}
@@ -153,7 +187,7 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
             {blok.translationAvailable && (
               <span
                 className={cn(
-                  "rounded-full border border-bold-dark/10 px-2.5 py-1",
+                  "rounded-full border border-bold-dark/10 px-2 py-0.5 sm:px-2.5 sm:py-1",
                   `border-${blok.secondaryColor}/10`,
                   `bg-${blok.secondaryColor}/5`,
                   `text-${blok.secondaryColor}/70`
@@ -170,9 +204,9 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
               href={blok.youtubeUrl.url}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-3 rounded-2xl bg-brand-orange px-6 py-4 text-lg font-semibold tracking-wide text-white shadow-xl transition-transform hover:scale-[1.015] hover:shadow-2xl"
+              className="group inline-flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-brand-orange px-4 py-3 sm:px-6 sm:py-4 text-sm sm:text-base md:text-lg font-semibold tracking-wide text-white shadow-lg sm:shadow-xl transition-transform hover:scale-[1.015] hover:shadow-2xl w-full sm:w-auto justify-center sm:justify-start"
             >
-              <Youtube className="h-6 w-6" />
+              <Youtube className="h-5 w-5 sm:h-6 sm:w-6" />
               <span>Watch on YouTube</span>
             </Link>
           </div>
