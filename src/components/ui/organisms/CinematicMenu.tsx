@@ -33,7 +33,7 @@ const menuSections: MenuSection[] = [
     title: "Overige",
     items: [
       { label: "Onze visie", href: "/onze-visie" },
-      { label: "Diensten", href: "/diensten" },
+      { label: "Dienen", href: "/dienen" },
       { label: "Contact", href: "/contact" },
     ],
   },
