@@ -16,24 +16,38 @@ interface PageProps {
 const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
   return (
     <div {...storyblokEditable(blok as SbBlokData)}>
-      <nav className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-        <div className="flex items-center gap-3">
-          <Link href="/">
+      <nav className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6">
+        <div className="flex items-center">
+          <Link href="/" className="block">
             <Image
               src={blok.logo?.filename ?? ""}
               alt={blok.logo?.alt ?? ""}
               width={200}
               height={60}
               priority
-              className="h-10 w-auto"
+              className="
+                h-10 w-auto
+                xs:h-12
+                sm:h-14
+                md:h-16
+                lg:h-[60px]
+                max-w-[160px] xs:max-w-[200px] sm:max-w-[250px] md:max-w-[280px] lg:max-w-[360px]
+                transition-all
+              "
+              sizes="(max-width: 640px) 160px, (max-width: 768px) 180px, (max-width: 1024px) 200px, 240px"
             />
           </Link>
         </div>
-        <div className="hidden md:flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end sm:gap-4">
+        {/* Desktop CTA + Menu */}
+        <div className="hidden md:flex items-center gap-4">
           {blok.cta &&
             blok.cta.map((cta) => (
               <StoryblokServerComponent key={cta._uid} blok={cta} />
             ))}
+          <CinematicMenu />
+        </div>
+        {/* Mobile Menu Button */}
+        <div className="flex md:hidden items-center">
           <CinematicMenu />
         </div>
       </nav>
