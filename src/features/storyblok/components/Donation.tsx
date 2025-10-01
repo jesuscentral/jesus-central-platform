@@ -7,8 +7,7 @@ import { createPayment } from "@/lib/mollie";
 import { SbDonation } from "@storyblok/types/287325821225947/storyblok-components";
 import { cn } from "@/utils/cn";
 import { RichTextRenderer } from "./RichTextRenderer";
-import Button from "@/components/ui/atoms/Button";
-
+import { useSearchParams } from "next/navigation";
 type Props = { blok: SbDonation };
 
 // ------ Helpers ------
@@ -19,11 +18,14 @@ const stepVariants = {
 };
 
 export default function DonationComponent({ blok }: Props) {
+  const searchParams = useSearchParams();
+  const description = searchParams.get("description");
+
   const [step, setStep] = React.useState<1 | 2>(1);
 
   // step 1
   const [amount, setAmount] = React.useState<number | "">(25);
-  const [note, setNote] = React.useState<string>("");
+  const [note, setNote] = React.useState<string>(description ?? "");
   const [recurring, setRecurring] = React.useState<"oneTime" | "monthly">(
     blok.defaultFrequency as "oneTime" | "monthly"
   );

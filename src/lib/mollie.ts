@@ -34,6 +34,38 @@ const countryToLocale: Record<string, Locale> = {
   ES: Locale.es_ES,
 };
 
+export const upsertCustomer = async (name: string, email: string) => {
+  let customer = null;
+  let paginatedCustomers = await getMollieCustomers("", 50);
+  while (customer === null && paginatedCustomers.length > 0) {
+    customer = paginatedCustomers.find((customer) => customer.email === email);
+    if (customer) {
+      return updateCustomer(customer.id, name, email);
+    }
+    paginatedCustomers = await getMollieCustomers(
+      paginatedCustomers[paginatedCustomers.length - 1].id,
+      50
+    );
+  }
+
+  return createCustomer(name, email);
+};
+
+export const updateCustomer = async (
+  customerId: string,
+  name: string,
+  email: string
+) => {
+  const customer = await mollieClient.customers.update(customerId, {
+    name,
+    email,
+    metadata: {
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+    },
+  });
+  return customer;
+};
+
 export const createCustomer = async (name: string, email: string) => {
   if (!name || !email) {
     throw Error("No Customer created");
@@ -41,6 +73,9 @@ export const createCustomer = async (name: string, email: string) => {
   const customer = await mollieClient.customers.create({
     name,
     email,
+    metadata: {
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+    },
   });
 
   return customer;
@@ -56,7 +91,8 @@ export const createPayment = async (
 ) => {
   const domain = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
-  const customer = await createCustomer(name, email);
+  const customer = await upsertCustomer(name, email);
+  console.log(customer);
 
   const payment = await mollieClient.customerPayments.create({
     customerId: customer.id,
@@ -68,7 +104,7 @@ export const createPayment = async (
     description: `Jesus Central Church: ${note}`,
     sequenceType: reccuring ? SequenceType.first : SequenceType.oneoff,
     redirectUrl: `${domain}/geven/bedankt`,
-    webhookUrl: `${domain}/api/webhooks/mollie`,
+    // webhookUrl: `${domain}/api/webhooks/mollie`,
     metadata: {
       source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
     },
@@ -109,8 +145,19 @@ export const createSubscription = async (
     description,
     startDate,
     mandateId,
-    metadata,
+    metadata: {
+      ...metadata,
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+    },
   });
 
   return subscription;
+};
+
+export const getMollieCustomers = async (
+  from: string = "",
+  limit: number = 50
+) => {
+  const customers = await mollieClient.customers.page({ from, limit });
+  return customers;
 };
