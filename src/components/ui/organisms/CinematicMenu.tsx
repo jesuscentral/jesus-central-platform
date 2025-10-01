@@ -129,7 +129,7 @@ export default function CinematicMenu() {
                           className="group inline-block text-3xl md:text-4xl lg:text-5xl font-bold text-freedom hover:text-brand-orange transition-all duration-300"
                           onClick={handleToggle}
                         >
-                          <span className="inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105 group-hover:[text-shadow:0_0_30px_rgba(235,55,0,0.5)]">
+                          <span className="inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105 group-hover:[text-shadow:0_0_30px_rgba(235,55,0,0.5)] font-heading uppercase">
                             {item.label}
                           </span>
                         </Link>
