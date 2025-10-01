@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/youtube",
+        destination: "https://www.youtube.com/@jesuscentral.churchgouda",
+        permanent: false,
+      },
     ];
   },
   async headers() {

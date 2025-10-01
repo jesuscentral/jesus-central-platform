@@ -53,7 +53,6 @@ export default function DonationComponent({ blok }: Props) {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log(name, email);
     if (!isValidStep2()) return;
 
     try {

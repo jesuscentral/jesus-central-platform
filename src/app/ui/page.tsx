@@ -2,6 +2,7 @@ import { getStory, getStoryblokSeoParameters } from "@/lib/storyblok";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function UI() {
+  await connection();
   if (process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW !== "true") {
     return notFound();
   }
