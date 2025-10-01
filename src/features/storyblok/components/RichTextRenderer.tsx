@@ -1,7 +1,13 @@
 import { Heading } from "@/components/ui/atoms/Heading";
 import { cn } from "@/utils/cn";
 import { StoryblokRichtext } from "@storyblok/types/storyblok";
-import { NODE_HEADING, render } from "storyblok-rich-text-react-renderer";
+import {
+  NODE_HEADING,
+  NODE_LI,
+  NODE_OL,
+  NODE_UL,
+  render,
+} from "storyblok-rich-text-react-renderer";
 import Badge from "./Badge";
 import {
   SbBadge,
@@ -23,6 +29,7 @@ import Card from "./Card";
 import ImageCard from "./ImageCard";
 import Image from "./Image";
 import { SbBlokData } from "@storyblok/react";
+import { Circle } from "lucide-react";
 
 interface RichTextRendererProps {
   document: StoryblokRichtext;
@@ -32,6 +39,15 @@ interface RichTextRendererProps {
 const resolvers = {
   markResolvers: {},
   nodeResolvers: {
+    [NODE_UL]: (children: React.ReactNode) => (
+      <ul className="list-disc pl-6 my-4">{children}</ul> // no list-inside
+    ),
+    [NODE_OL]: (children: React.ReactNode) => (
+      <ol className="list-decimal pl-6 my-4">{children}</ol> // 1. 2. 3. ...
+    ),
+    [NODE_LI]: (children: React.ReactNode) => (
+      <li className="mb-1">{children}</li>
+    ),
     [NODE_HEADING]: (
       children: React.ReactNode,
       { level = 2 }: { level: 1 | 2 | 3 | 4 | 5 | 6 }

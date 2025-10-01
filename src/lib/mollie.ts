@@ -91,7 +91,6 @@ export const createPayment = async (
   const domain = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
   const customer = await upsertCustomer(name, email);
-  console.log(customer);
 
   const payment = await mollieClient.customerPayments.create({
     customerId: customer.id,

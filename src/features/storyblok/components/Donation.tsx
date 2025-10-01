@@ -8,6 +8,7 @@ import { SbDonation } from "@storyblok/types/287325821225947/storyblok-component
 import { cn } from "@/utils/cn";
 import { RichTextRenderer } from "./RichTextRenderer";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 type Props = { blok: SbDonation };
 
 // ------ Helpers ------
@@ -102,8 +103,21 @@ export default function DonationComponent({ blok }: Props) {
         className={`mx-auto w-full max-w-xl rounded-3xl border border-black/5 bg-[var(--freedom)] p-5 shadow-xl ring-1 ring-black/5 sm:p-6 bg-${blok.backgroundColor}`}
       >
         {/* Header */}
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between space-x-8">
           <div>
+            <div className="hidden select-none sm:block">
+              <div className="h-2 w-20 rounded-full bg-black/10">
+                <div
+                  className={`h-2 rounded-full bg-[var(--zending)] transition-all bg-${blok.primaryColor}`}
+                  style={{ width: step === 1 ? "50%" : "100%" }}
+                />
+              </div>
+              <p
+                className={`mt-1 text-[10px] text-neutral-500 uppercase text-${blok.textColor}`}
+              >
+                Stap {step}/2
+              </p>
+            </div>
             <h2
               className={`text-2xl font-bold tracking-tight text-[var(--boldness)] text-${blok.textColor}`}
             >
@@ -121,19 +135,14 @@ export default function DonationComponent({ blok }: Props) {
             </p>
           </div>
 
-          {/* Simple progress */}
           <div className="hidden select-none sm:block">
-            <div className="h-2 w-20 rounded-full bg-black/10">
-              <div
-                className={`h-2 rounded-full bg-[var(--zending)] transition-all bg-${blok.primaryColor}`}
-                style={{ width: step === 1 ? "50%" : "100%" }}
-              />
-            </div>
-            <p
-              className={`mt-1 text-[10px] text-neutral-500 uppercase text-${blok.textColor}`}
-            >
-              Stap {step}/2
-            </p>
+            <Image
+              src="/anbi.jpg"
+              alt="Anbi"
+              width={150}
+              height={150}
+              className="m-2 rounded-md"
+            />
           </div>
         </div>
 
