@@ -46,6 +46,7 @@ const menuSections: MenuSection[] = [
   {
     title: "Kerk",
     items: [
+      { label: "Home", href: "/" },
       { label: "Over ons", href: "/over-ons" },
       { label: "Agenda", href: "/agenda" },
       { label: "Leiderschap", href: "/leiderschap" },
@@ -62,6 +63,7 @@ const menuSections: MenuSection[] = [
     title: "Overige",
     items: [
       { label: "Onze visie", href: "/onze-visie" },
+      { label: "Wat wij geloven", href: "/wat-wij-geloven" },
       { label: "Nieuw begin", href: "/nieuw-begin" },
       { label: "Contact", href: "/contact" },
     ],
