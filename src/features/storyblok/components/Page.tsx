@@ -7,6 +7,7 @@ import React from "react";
 import { SbPage } from "@storyblok/types/287325821225947/storyblok-components";
 import Image from "next/image";
 import Link from "next/link";
+import CinematicMenu from "@/components/ui/organisms/CinematicMenu";
 
 interface PageProps {
   blok: SbPage;
@@ -33,6 +34,7 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
             blok.cta.map((cta) => (
               <StoryblokServerComponent key={cta._uid} blok={cta} />
             ))}
+          <CinematicMenu />
         </div>
       </nav>
       <main {...storyblokEditable(blok as SbBlokData)}>
