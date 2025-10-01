@@ -1,6 +1,7 @@
 "use server";
 
 import createMollieClient, { Locale, SequenceType } from "@mollie/api-client";
+import { source } from "framer-motion/client";
 
 const apiKey = process.env.MOLLIE_API_KEY;
 // const domain = process.env.DOMAIN || "http://localhost:3000";
@@ -9,6 +10,13 @@ const apiKey = process.env.MOLLIE_API_KEY;
 if (!apiKey) {
   throw new Error("MOLLIE_API_KEY is not defined");
 }
+
+const formatAmount = (amount: string) => {
+  const num = Number(amount);
+  if (isNaN(num)) throw new Error("Invalid amount");
+  // toFixed(2) gives exactly 2 decimals as a string
+  return num.toFixed(2);
+};
 
 // Set up Mollie API client
 const mollieClient = createMollieClient({ apiKey: apiKey });
@@ -26,29 +34,44 @@ const countryToLocale: Record<string, Locale> = {
   ES: Locale.es_ES,
 };
 
+export const createCustomer = async (name: string, email: string) => {
+  if (!name || !email) {
+    throw Error("No Customer created");
+  }
+  const customer = await mollieClient.customers.create({
+    name,
+    email,
+  });
+
+  return customer;
+};
+
 export const createPayment = async (
+  amount: string,
   reccuring: boolean = false,
   note: string,
+  name: string,
+  email: string,
   country: string = "NL"
 ) => {
   const domain = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
-  const payment = await mollieClient.payments.create({
-    billingAddress: {
-      familyName: "Hoogendoorn",
-      givenName: "Mees",
-      streetAndNumber: "Rijsselseweg 1",
-      postalCode: "2803PZ",
-      city: "Gouda",
-      country: "NL",
-    },
+
+  const customer = await createCustomer(name, email);
+
+  const payment = await mollieClient.customerPayments.create({
+    customerId: customer.id,
     amount: {
-      value: "10.00",
+      value: formatAmount(amount),
       currency: "EUR",
     },
     locale: countryToLocale[country],
-    description: `GIFT: ${note}`,
-    sequenceType: reccuring ? SequenceType.recurring : SequenceType.oneoff,
+    description: `Jesus Central Church: ${note}`,
+    sequenceType: reccuring ? SequenceType.first : SequenceType.oneoff,
     redirectUrl: `${domain}/geven/bedankt`,
+    webhookUrl: `${domain}/api/webhooks/mollie`,
+    metadata: {
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+    },
   });
 
   const redirectUrl = payment.getCheckoutUrl();
@@ -58,4 +81,36 @@ export const createPayment = async (
   }
 
   return redirectUrl;
+};
+
+export const getPayment = async (paymentId: string) => {
+  const payment = await mollieClient.payments.get(paymentId);
+  return payment;
+};
+
+export const pageMandates = async (customerId: string) => {
+  const mandates = await mollieClient.customerMandates.page({ customerId });
+  return mandates;
+};
+
+export const createSubscription = async (
+  customerId: string,
+  amount: { currency: string; value: string },
+  interval: string,
+  description: string,
+  startDate: string,
+  mandateId: string,
+  metadata: Record<string, string>
+) => {
+  const subscription = await mollieClient.customerSubscriptions.create({
+    customerId,
+    amount,
+    interval,
+    description,
+    startDate,
+    mandateId,
+    metadata,
+  });
+
+  return subscription;
 };

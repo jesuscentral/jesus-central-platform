@@ -1,268 +1,326 @@
 "use client";
-import { useState } from "react";
+
+import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HeartHandshake, Loader2 } from "lucide-react";
-import { SbDonation } from "@storyblok/types/287325821225947/storyblok-components";
-import { SbBlokData, storyblokEditable } from "@storyblok/react";
-import { RichTextRenderer } from "./RichTextRenderer";
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
-import { cn } from "@/utils/cn";
+import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { createPayment } from "@/lib/mollie";
+import { SbDonation } from "@storyblok/types/287325821225947/storyblok-components";
+import { cn } from "@/utils/cn";
+import { RichTextRenderer } from "./RichTextRenderer";
 
-export default function JccGive({ blok }: { blok: SbDonation }) {
-  const preselectedAmount = parseInt(blok.preselected || "25");
-  const presets = blok.options.map((o) => parseInt(o));
+type Props = { blok: SbDonation };
 
-  const [amount, setAmount] = useState<number>(preselectedAmount);
-  const [frequency, setFrequency] = useState<"once" | "monthly">(
-    blok.defaultFrequency || "once"
+// ------ Helpers ------
+const stepVariants = {
+  initial: { opacity: 0, x: 24 },
+  animate: { opacity: 1, x: 0, transition: { duration: 0.25 } },
+  exit: { opacity: 0, x: -24, transition: { duration: 0.2 } },
+};
+
+export default function DonationComponent({ blok }: Props) {
+  const [step, setStep] = React.useState<1 | 2>(1);
+
+  // step 1
+  const [amount, setAmount] = React.useState<number | "">(25);
+  const [note, setNote] = React.useState<string>("");
+  const [recurring, setRecurring] = React.useState<"oneTime" | "monthly">(
+    blok.defaultFrequency as "oneTime" | "monthly"
   );
-  const [note, setNote] = useState<string>("");
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // step 2 (billingAddress)
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const amounts = blok.options?.length
+    ? blok.options?.map(Number)
+    : [10, 25, 50, 100];
+
+  function isValidStep1() {
+    return typeof amount === "number" && amount > 0;
+  }
+
+  function isValidStep2() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return name.trim() && email.trim() && emailRegex.test(email);
+  }
+
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitting(true);
-    setError(null);
+    console.log(name, email);
+    if (!isValidStep2()) return;
+
     try {
-      const payload: GivePayload = { amount, frequency, note };
-      await alert(JSON.stringify(payload));
-      const redirectUrl = await createPayment(frequency === "monthly", note);
+      setLoading(true);
+      setError(null);
 
-      window.location.href = redirectUrl ?? "";
+      const redirectUrl: string = await createPayment(
+        amount.toString(),
+        recurring === "monthly",
+        note,
+        name,
+        email,
+        "NL"
+      );
 
-      setSuccess(true);
+      // If your createPayment returns a url, redirect to it
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      } else {
+        // fallback: maybe your API already redirects server-side
+        setLoading(false);
+      }
     } catch (err: unknown) {
+      setLoading(false);
       setError(
         err instanceof Error
           ? err.message
-          : "Er ging iets mis. Probeer het opnieuw."
+          : "Er ging iets mis bij het starten van de betaling."
       );
-    } finally {
-      setSubmitting(false);
     }
-  };
+  }
 
-  const AmountButton = ({ value }: { value: number }) => (
-    <button
-      type="button"
-      onClick={() => setAmount(value)}
-      className={`rounded-xl border px-4 py-2 text-sm transition-all cursor-pointer
-        ${
-          amount === value
-            ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-${blok.textColor} shadow`
-            : "border-white/10 bg-white/5 text-bold-dark hover:border-white/20"
-        }`}
-    >
-      € {value}
-    </button>
-  );
+  const field = `block w-full rounded-xl border border-neutral-200 bg-white/90 px-4 py-3 text-[15px] leading-tight placeholder-neutral-400 focus:outline-none focus:ring-2  border-${blok.primaryColor} text-${blok.textColor} focus:ring-${blok.primaryColor} focus:border-${blok.primaryColor} `;
 
+  const pillBase =
+    "inline-flex items-center justify-center rounded-full border text-sm px-3 py-2 transition active:scale-[.98]";
+
+  const label = "text-xs font-medium uppercase tracking-wide text-neutral-500";
   return (
     <section
       {...storyblokEditable(blok as SbBlokData)}
-      data-sb-object="donation"
-      className={cn(
-        "relative isolate overflow-hidden border border-white/10 bg-bold-dark p-6 sm:p-10",
-        `bg-${blok.backgroundColor}`,
-        `text-${blok.textColor}`
-      )}
+      className="relative isolate"
+      id="donation-form"
+      aria-label="Donatieformulier"
     >
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Left: Copy & Impact */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col gap-6"
-        >
-          <div className="inline-flex items-center gap-3">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-cream text-brand-black">
-              <HeartHandshake className="h-5 w-5" />
-            </span>
+      <div
+        className={`mx-auto w-full max-w-xl rounded-3xl border border-black/5 bg-[var(--freedom)] p-5 shadow-xl ring-1 ring-black/5 sm:p-6 bg-${blok.backgroundColor}`}
+      >
+        {/* Header */}
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <h2
+              className={`text-2xl font-bold tracking-tight text-[var(--boldness)] text-${blok.textColor}`}
+            >
+              {blok.title ?? "Help ons om levens te bereiken"}
+            </h2>
             <p
-              className={cn(
-                "tracking-wide text-cream/80",
-                `text-${blok.textColor}`
-              )}
+              className={`mt-1 text-sm text-neutral-600 text-${blok.textColor}`}
             >
-              {blok.subtitle}
-            </p>
-          </div>
-          <h2
-            className={cn(
-              "text-4xl leading-[1.05] tracking-wide text-cream sm:text-5xl",
-              `text-${blok.textColor}`
-            )}
-          >
-            {blok.title}
-          </h2>
-          <RichTextRenderer
-            document={blok.description!}
-            className={cn(`text-${blok.textColor}`)}
-          />
-
-          {/* Trust badges */}
-          <div className="mt-2 flex flex-wrap items-center gap-4">
-            {blok.badges?.map((b) => (
-              <StoryblokServerComponent key={b._uid} blok={b as SbBlokData} />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Right: Form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative rounded-2xl border border-white/10 bg-strategy-gold p-5 backdrop-blur-sm sm:p-6"
-        >
-          {/* Frequency toggle */}
-          <div className="grid grid-cols-2 gap-2">
-            {(["once", "monthly"] as const).map((key) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setFrequency(key)}
-                className={`rounded-xl px-4 py-2 text-sm uppercase tracking-wide transition-all cursor-pointer
-                  ${
-                    frequency === key
-                      ? `bg-${blok.primaryColor} text-bold-dark shadow`
-                      : "bg-transparent text-cream hover:bg-white/10"
-                  }`}
-              >
-                {key === "once" ? "Eenmalig" : "Maandelijks"}
-              </button>
-            ))}
-          </div>
-
-          {/* Amount presets */}
-          <div className="mt-5 flex flex-wrap gap-2">
-            {presets.map((p) => (
-              <AmountButton key={p} value={p} />
-            ))}
-          </div>
-
-          {/* Custom amount */}
-          <label className="mt-5 block text-xs uppercase tracking-wider text-cream/60">
-            Bedrag
-          </label>
-          <div className="mt-2 flex items-center rounded-xl border border-white/10 bg-bold-dark/70 px-3 py-2 text-cream focus-within:border-herstel">
-            <span className="pr-2 text-cream/60">€</span>
-            <input
-              type="number"
-              min={1}
-              step={1}
-              value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full bg-transparent outline-none placeholder:text-cream/40"
-              placeholder="Bijv. 25"
-              required
-            />
-          </div>
-
-          {/* Note */}
-          <label className="mt-5 block text-xs uppercase tracking-wider text-cream/60">
-            Opmerking (optioneel)
-          </label>
-          <textarea
-            rows={3}
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-bold-dark/70 p-3 text-cream placeholder:text-cream/40 focus:border-herstel focus:outline-none"
-            placeholder="Bijv. dankoffer, belofte, specifieke actie..."
-          />
-
-          {/* Submit */}
-          <div className="mt-6">
-            <button
-              type="submit"
-              disabled={submitting}
-              className={cn(
-                "group inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 font-semibold tracking-wide text-white shadow-lg transition-transform hover:scale-[1.01] hover:shadow-xl disabled:opacity-60",
-                `bg-${blok.secondaryColor}`,
-                `text-${blok.textColor}`
+              {blok.description && (
+                <RichTextRenderer
+                  document={blok.description}
+                  className={cn(`text-${blok.textColor}`)}
+                />
               )}
-            >
-              {submitting ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> Verwerken...
-                </>
-              ) : (
-                <>
-                  Doneren € {amount}
-                  <span
-                    aria-hidden
-                    className="transition-transform group-hover:translate-x-0.5"
-                  >
-                    →
-                  </span>
-                </>
-              )}
-            </button>
-            <p className="mt-2 text-center text-xs text-cream/60">
-              Je gift ondersteunt onze missie. Dankjewel!
             </p>
           </div>
 
-          {/* Error / Success */}
-          <AnimatePresence>
-            {error && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200"
-              >
-                {error}
-              </motion.p>
-            )}
-          </AnimatePresence>
+          {/* Simple progress */}
+          <div className="hidden select-none sm:block">
+            <div className="h-2 w-20 rounded-full bg-black/10">
+              <div
+                className={`h-2 rounded-full bg-[var(--zending)] transition-all bg-${blok.primaryColor}`}
+                style={{ width: step === 1 ? "50%" : "100%" }}
+              />
+            </div>
+            <p
+              className={`mt-1 text-[10px] text-neutral-500 uppercase text-${blok.textColor}`}
+            >
+              Stap {step}/2
+            </p>
+          </div>
+        </div>
 
-          <AnimatePresence>
-            {success && (
+        {/* Card body */}
+        <form onSubmit={onSubmit} className="space-y-5">
+          <AnimatePresence mode="wait">
+            {step === 1 ? (
               <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className="mt-4 space-y-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-100"
+                key="step1"
+                variants={stepVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="space-y-5"
               >
-                <p className="text-sm font-medium">Bedankt voor je gift! 💛</p>
-                <p className="text-xs text-emerald-200/90">
-                  We hebben je donatie ontvangen. Je ontvangt per e-mail een
-                  bevestiging.
+                {/* Amount buttons */}
+                <div>
+                  <p className={label}>Kies bedrag</p>
+                  <div className="mt-2 grid grid-cols-4 gap-2">
+                    {amounts.map((v) => (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => setAmount(v)}
+                        className={`${pillBase} ${
+                          amount === v
+                            ? `bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor}`
+                            : "border-black/10 bg-white text-black hover:border-black/20"
+                        }`}
+                        aria-pressed={amount === v}
+                      >
+                        € {v}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Custom amount */}
+                  <div
+                    className={`mt-3 flex items-center gap-2 text-${blok.textColor}`}
+                  >
+                    <span className="text-sm">of</span>
+                    <label className="sr-only" htmlFor="custom-amount">
+                      Ander bedrag
+                    </label>
+                    <input
+                      id="custom-amount"
+                      inputMode="decimal"
+                      pattern="[0-9]*"
+                      className={`${field} max-w-[180px]`}
+                      placeholder="Ander bedrag"
+                      value={amount === "" ? "" : amount}
+                      onChange={(e) => {
+                        const v = e.target.value.replace(/[^\d]/g, "");
+                        setAmount(v ? Number(v) : "");
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Description presets */}
+                <div>
+                  <p className={label}>Bestemming (vul omschrijving in)</p>
+                  <label className="sr-only" htmlFor="note">
+                    Omschrijving
+                  </label>
+                  <input
+                    id="note"
+                    className={`${field} mt-3`}
+                    placeholder="Omschrijving"
+                    value={note}
+                    onChange={(e) => {
+                      setNote(e.target.value);
+                    }}
+                  />
+                </div>
+
+                {/* Recurring toggle */}
+                <div>
+                  <p className={label}>Frequentie</p>
+                  <div className="mt-2 grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setRecurring("oneTime")}
+                      className={`${pillBase} ${
+                        recurring === "oneTime"
+                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-white`
+                          : "border-black/10 bg-white text-black hover:border-black/20"
+                      }`}
+                    >
+                      Eenmalig
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setRecurring("monthly")}
+                      className={`${pillBase} ${
+                        recurring === "monthly"
+                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-white`
+                          : "border-black/10 bg-white text-black hover:border-black/20"
+                      }`}
+                    >
+                      Maandelijks
+                    </button>
+                  </div>
+                </div>
+
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    disabled={!isValidStep1()}
+                    className={`w-full rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
+                  >
+                    Volgende stap
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="step2"
+                variants={stepVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="space-y-4"
+              >
+                <div className="space-y-3">
+                  <div>
+                    <label className={label} htmlFor="name">
+                      Naam
+                    </label>
+                    <input
+                      id="name"
+                      className={field}
+                      autoComplete="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className={label} htmlFor="email">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      className={field}
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {error && (
+                  <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+                    {error}
+                  </p>
+                )}
+
+                <div className="flex gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className={`w-1/3 rounded-2xl border border-black/10 bg-white px-4 py-3 text-base font-medium text-black hover:bg-neutral-50 bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor}`}
+                  >
+                    Terug
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={!isValidStep2() || loading}
+                    className={`w-2/3 rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
+                  >
+                    {loading
+                      ? "Bezig…"
+                      : `Geef ${recurring === "monthly" ? "maandelijks" : "éénmalig"} € ${amount || 0}`}
+                  </button>
+                </div>
+
+                {/* Legal hint */}
+                <p
+                  className={`pt-1 text-[11px] text-neutral-500 text-${blok.textColor}`}
+                >
+                  Door te geven ga je akkoord met verwerking van je gegevens
+                  t.b.v. de betaling via Mollie.
                 </p>
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.form>
-      </div>
-
-      {/* Bottom mini impact bar */}
-      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {[
-          { k: "Herstel", d: "Pastoraat, CARE & noodhulp" },
-          { k: "Training", d: "Bijbelschool & discipelschap" },
-          { k: "Zending", d: "Outreach, kerken & missies" },
-        ].map((item) => (
-          <div
-            key={item.k}
-            className="rounded-xl border border-strategy-gold/10 bg-strategy-gold/70 p-3"
-          >
-            <p className="text-bold-dark">{item.k}</p>
-            <p className="text-xs text-bold-dark/70">{item.d}</p>
-          </div>
-        ))}
+        </form>
       </div>
     </section>
   );
 }
-
-export type GivePayload = {
-  amount: number; // in EUR
-  frequency: "once" | "monthly";
-  note?: string;
-};

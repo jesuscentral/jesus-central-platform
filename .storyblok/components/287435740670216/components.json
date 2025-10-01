@@ -274,7 +274,7 @@
     "display_name": null,
     "description": "A donation component so people can give",
     "created_at": "2025-09-27T11:53:54.822Z",
-    "updated_at": "2025-09-30T14:33:09.824Z",
+    "updated_at": "2025-10-01T12:49:19.944Z",
     "id": 95373045038940,
     "schema": {
       "subtitle": {
@@ -399,7 +399,7 @@
           {
             "_uid": "9231e2e2-6b40-4c5a-b4e4-32fd11f8eeac",
             "name": "Eenmalig",
-            "value": "once"
+            "value": "oneTime"
           },
           {
             "_uid": "97449480-a840-40f0-bd41-8306c2923d46",
@@ -408,7 +408,8 @@
           }
         ],
         "default_value": "monthly",
-        "id": "QHNChv7dQnOCfRnYMaD3uQ"
+        "id": "QHNChv7dQnOCfRnYMaD3uQ",
+        "required": true
       },
       "backgroundColor": {
         "type": "option",
@@ -417,7 +418,7 @@
         "source": "internal",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "default_value": "bold-dark",
+        "default_value": "cream",
         "id": "oHplYQxwQRCYIMLqPTMvXw"
       },
       "primaryColor": {
@@ -430,15 +431,13 @@
         "default_value": "brand-orange",
         "id": "TS7h-8GYS0202RoFw0zd7w"
       },
-      "secondaryColor": {
-        "type": "option",
-        "pos": 11,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "colors",
-        "exclude_empty_option": true,
-        "default_value": "strategy-gold",
-        "id": "cV9KdnoIR5Wbl-Bs6KCntw"
+      "image": {
+        "type": "asset",
+        "pos": 10,
+        "filetypes": [
+          "images"
+        ],
+        "id": "SFfYpNZjQoiYknWYAnp4xQ"
       },
       "textColor": {
         "type": "option",

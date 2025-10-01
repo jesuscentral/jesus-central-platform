@@ -43,10 +43,10 @@ export interface SbDonation {
   badges?: SbBadge[];
   options: ("" | "5" | "10" | "25" | "50" | "100" | "150" | "200" | "250" | "300" | "350" | "400" | "450" | "500")[];
   preselected: string;
-  defaultFrequency?: "" | "once" | "monthly";
+  defaultFrequency: "" | "oneTime" | "monthly";
   backgroundColor?: number | string;
   primaryColor?: number | string;
-  secondaryColor?: number | string;
+  image?: StoryblokAsset;
   textColor?: number | string;
   component: "donation";
   _uid: string;
