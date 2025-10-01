@@ -1,5 +1,6 @@
 "use client";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 interface MenuItem {
@@ -120,15 +121,18 @@ export default function CinematicMenu() {
                   <ul className="space-y-4">
                     {section.items.map((item, itemIndex) => (
                       <li key={itemIndex}>
-                        <a
+                        <Link
                           href={item.href}
+                          target={
+                            item.href.includes("http") ? "_blank" : "_self"
+                          }
                           className="group inline-block text-3xl md:text-4xl lg:text-5xl font-bold text-freedom hover:text-brand-orange transition-all duration-300"
                           onClick={handleToggle}
                         >
                           <span className="inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105 group-hover:[text-shadow:0_0_30px_rgba(235,55,0,0.5)]">
                             {item.label}
                           </span>
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
