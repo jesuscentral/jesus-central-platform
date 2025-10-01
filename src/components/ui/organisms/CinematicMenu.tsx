@@ -2,6 +2,7 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Button, { ButtonType } from "../atoms/Button";
 
 interface MenuItem {
   label: string;
@@ -22,19 +23,19 @@ interface ColorScheme {
 
 const colorSchemes: ColorScheme[] = [
   {
-    name: "orange",
+    name: "brand-orange",
     accentColor: "#eb3700",
     accentRgba: "rgba(235, 55, 0, 0.1)",
     hoverShadow: "rgba(235, 55, 0, 0.5)",
   },
   {
-    name: "gold",
+    name: "strategy-gold",
     accentColor: "#f3b963",
     accentRgba: "rgba(243, 185, 99, 0.1)",
     hoverShadow: "rgba(243, 185, 99, 0.5)",
   },
   {
-    name: "green",
+    name: "strategy-green",
     accentColor: "#746e06",
     accentRgba: "rgba(116, 110, 6, 0.1)",
     hoverShadow: "rgba(116, 110, 6, 0.5)",
@@ -105,6 +106,22 @@ export default function CinematicMenu() {
 
   return (
     <>
+      {isOpen && (
+        <Button
+          href="/geven"
+          variant="primary"
+          size="large"
+          type={currentScheme.name as ButtonType}
+          showArrowIcon={true}
+          className={`group relative z-50 backdrop-blur-md transform transition-all duration-700 ${
+            isOpen
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-95 pointer-events-none"
+          }`}
+        >
+          Geven
+        </Button>
+      )}
       <button
         onClick={handleToggle}
         aria-label={isOpen ? "Close menu" : "Open menu"}
