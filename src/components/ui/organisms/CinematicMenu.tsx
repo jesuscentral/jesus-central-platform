@@ -13,6 +13,34 @@ interface MenuSection {
   items: MenuItem[];
 }
 
+interface ColorScheme {
+  name: string;
+  accentColor: string;
+  accentRgba: string;
+  hoverShadow: string;
+}
+
+const colorSchemes: ColorScheme[] = [
+  {
+    name: "orange",
+    accentColor: "#eb3700",
+    accentRgba: "rgba(235, 55, 0, 0.1)",
+    hoverShadow: "rgba(235, 55, 0, 0.5)",
+  },
+  {
+    name: "gold",
+    accentColor: "#f3b963",
+    accentRgba: "rgba(243, 185, 99, 0.1)",
+    hoverShadow: "rgba(243, 185, 99, 0.5)",
+  },
+  {
+    name: "green",
+    accentColor: "#746e06",
+    accentRgba: "rgba(116, 110, 6, 0.1)",
+    hoverShadow: "rgba(116, 110, 6, 0.5)",
+  },
+];
+
 const menuSections: MenuSection[] = [
   {
     title: "Kerk",
@@ -49,8 +77,17 @@ const socialLinks = [
 
 export default function CinematicMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentScheme, setCurrentScheme] = useState<ColorScheme>(
+    colorSchemes[0]
+  );
 
   const handleToggle = () => {
+    if (!isOpen) {
+      // Pick a random color scheme when opening the menu
+      const randomScheme =
+        colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
+      setCurrentScheme(randomScheme);
+    }
     setIsOpen(!isOpen);
   };
 
@@ -71,7 +108,15 @@ export default function CinematicMenu() {
       <button
         onClick={handleToggle}
         aria-label={isOpen ? "Close menu" : "Open menu"}
-        className="group relative z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500 hover:bg-freedom/20 hover:scale-110 hover:rotate-180 hover:border-brand-orange hover:shadow-[0_0_30px_rgba(235,55,0,0.5)] cursor-pointer"
+        className="group relative z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500 hover:bg-freedom/20 hover:scale-110 hover:rotate-180 cursor-pointer"
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = currentScheme.accentColor;
+          e.currentTarget.style.boxShadow = `0 0 30px ${currentScheme.hoverShadow}`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = "";
+          e.currentTarget.style.boxShadow = "";
+        }}
       >
         <div className="relative w-5 h-5 sm:w-6 sm:h-6">
           <Menu
@@ -98,7 +143,12 @@ export default function CinematicMenu() {
             : "opacity-0 scale-95 pointer-events-none"
         }`}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(235,55,0,0.1),transparent_50%)]" />
+        <div
+          className="absolute inset-0 transition-all duration-700"
+          style={{
+            background: `radial-gradient(circle at 50% 50%, ${currentScheme.accentRgba}, transparent 50%)`,
+          }}
+        />
 
         <div className="relative h-full w-full overflow-y-auto">
           <div className="container mx-auto px-6 pt-32 md:pt-40 pb-20">
@@ -115,7 +165,10 @@ export default function CinematicMenu() {
                     transitionDelay: `${sectionIndex * 100 + 200}ms`,
                   }}
                 >
-                  <h3 className="text-sm font-semibold text-brand-orange mb-6 uppercase tracking-wider">
+                  <h3
+                    className="text-sm font-semibold mb-6 uppercase tracking-wider"
+                    style={{ color: currentScheme.accentColor }}
+                  >
                     {section.title}
                   </h3>
                   <ul className="space-y-4">
@@ -126,10 +179,26 @@ export default function CinematicMenu() {
                           target={
                             item.href.includes("http") ? "_blank" : "_self"
                           }
-                          className="group inline-block text-3xl md:text-4xl lg:text-5xl font-bold text-freedom hover:text-brand-orange transition-all duration-300"
+                          className="group inline-block text-3xl md:text-4xl lg:text-5xl font-bold text-freedom transition-all duration-300"
                           onClick={handleToggle}
+                          onMouseEnter={(e) => {
+                            const span = e.currentTarget.querySelector("span");
+                            if (span) {
+                              (span as HTMLElement).style.color =
+                                currentScheme.accentColor;
+                              (span as HTMLElement).style.textShadow =
+                                `0 0 30px ${currentScheme.hoverShadow}`;
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            const span = e.currentTarget.querySelector("span");
+                            if (span) {
+                              (span as HTMLElement).style.color = "";
+                              (span as HTMLElement).style.textShadow = "";
+                            }
+                          }}
                         >
-                          <span className="inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105 group-hover:[text-shadow:0_0_30px_rgba(235,55,0,0.5)] font-heading uppercase">
+                          <span className="inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105 font-heading uppercase">
                             {item.label}
                           </span>
                         </Link>
@@ -156,8 +225,15 @@ export default function CinematicMenu() {
                       <a
                         key={index}
                         href={link.href}
-                        className="text-freedom hover:text-brand-orange transition-colors duration-300 text-lg font-medium"
+                        className="text-freedom transition-colors duration-300 text-lg font-medium"
                         onClick={handleToggle}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color =
+                            currentScheme.accentColor;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = "";
+                        }}
                       >
                         {link.label}
                       </a>
