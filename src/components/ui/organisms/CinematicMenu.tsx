@@ -106,22 +106,6 @@ export default function CinematicMenu() {
 
   return (
     <>
-      {isOpen && (
-        <Button
-          href="/geven"
-          variant="primary"
-          size="large"
-          type={currentScheme.name as ButtonType}
-          showArrowIcon={true}
-          className={`group relative z-50 backdrop-blur-md transform transition-all duration-700 ${
-            isOpen
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-95 pointer-events-none"
-          }`}
-        >
-          Geven
-        </Button>
-      )}
       <button
         onClick={handleToggle}
         aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -179,7 +163,7 @@ export default function CinematicMenu() {
                     transform: isOpen
                       ? "translateY(0) rotateX(0)"
                       : "translateY(60px) rotateX(-20deg)",
-                    transitionDelay: `${sectionIndex * 100 + 200}ms`,
+                    transitionDelay: `${sectionIndex * 200 + 200}ms`,
                   }}
                 >
                   <h3
@@ -224,6 +208,45 @@ export default function CinematicMenu() {
                   </ul>
                 </div>
               ))}
+              <div
+                className="flex flex-row flex-wrap md:flex-nowrap  gap-4  transform transition-all duration-700 ease-out"
+                style={{
+                  opacity: isOpen ? 1 : 0,
+                  transform: isOpen
+                    ? "translateY(0) rotateX(0)"
+                    : "translateY(60px) rotateX(-20deg)",
+                  transitionDelay: `200ms`,
+                }}
+              >
+                <Button
+                  href="/geven"
+                  variant="outline"
+                  size="large"
+                  type={currentScheme.name as ButtonType}
+                  showArrowIcon={true}
+                  className={`group relative z-50 backdrop-blur-md transform transition-all duration-700 float-right ${
+                    isOpen
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
+                  Geven
+                </Button>
+                <Button
+                  href="/dienen"
+                  variant="outline"
+                  size="large"
+                  type={currentScheme.name as ButtonType}
+                  showArrowIcon={true}
+                  className={`group relative z-50 backdrop-blur-md transform transition-all duration-700 float-right ${
+                    isOpen
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                >
+                  Dienen
+                </Button>
+              </div>
             </div>
 
             <div
