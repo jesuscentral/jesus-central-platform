@@ -1,7 +1,6 @@
 "use server";
 
 import createMollieClient, { Locale, SequenceType } from "@mollie/api-client";
-import { source } from "framer-motion/client";
 
 const apiKey = process.env.MOLLIE_API_KEY;
 // const domain = process.env.DOMAIN || "http://localhost:3000";
