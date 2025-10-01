@@ -222,9 +222,10 @@ export default function CinematicMenu() {
                   <p className="text-freedom/70 mb-4">Vind ons op</p>
                   <div className="flex gap-6">
                     {socialLinks.map((link, index) => (
-                      <a
+                      <Link
                         key={index}
                         href={link.href}
+                        target={link.href.includes("http") ? "_blank" : "_self"}
                         className="text-freedom transition-colors duration-300 text-lg font-medium"
                         onClick={handleToggle}
                         onMouseEnter={(e) => {
@@ -236,7 +237,7 @@ export default function CinematicMenu() {
                         }}
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
