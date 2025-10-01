@@ -15,6 +15,7 @@ import Content from "@/features/storyblok/components/Content";
 import Grid from "@/features/storyblok/components/Grid";
 import FullGrid from "@/features/storyblok/components/FullGrid";
 import Badge from "@/features/storyblok/components/Badge";
+import BlokHero from "@/features/storyblok/components/BlokHero";
 import Scripture from "@/features/storyblok/components/Scripture";
 import Footer from "@/features/storyblok/components/Footer";
 import Link from "@/features/storyblok/components/Link";
@@ -48,6 +49,7 @@ export const getStoryblokApi = storyblokInit({
     button: Button,
     videoHero: VideoHero,
     imageHero: ImageHero,
+    blokHero: BlokHero,
     image: Image,
     content: Content,
     grid: Grid,

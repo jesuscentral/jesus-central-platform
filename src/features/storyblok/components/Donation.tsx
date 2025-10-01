@@ -157,8 +157,8 @@ export default function DonationComponent({ blok }: Props) {
                         onClick={() => setAmount(v)}
                         className={`${pillBase} ${
                           amount === v
-                            ? `bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor}`
-                            : "border-black/10 bg-white text-black hover:border-black/20"
+                            ? `bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor} cursor-default`
+                            : "border-black/10 bg-white text-black hover:border-black/20 hover:cursor-pointer"
                         }`}
                         aria-pressed={amount === v}
                       >
@@ -216,8 +216,8 @@ export default function DonationComponent({ blok }: Props) {
                       onClick={() => setRecurring("oneTime")}
                       className={`${pillBase} ${
                         recurring === "oneTime"
-                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-white`
-                          : "border-black/10 bg-white text-black hover:border-black/20"
+                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-white cursor-default`
+                          : "border-black/10 bg-white text-black hover:border-black/20 hover:cursor-pointer"
                       }`}
                     >
                       Eenmalig
@@ -227,8 +227,8 @@ export default function DonationComponent({ blok }: Props) {
                       onClick={() => setRecurring("monthly")}
                       className={`${pillBase} ${
                         recurring === "monthly"
-                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-white`
-                          : "border-black/10 bg-white text-black hover:border-black/20"
+                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-white cursor-default`
+                          : "border-black/10 bg-white text-black hover:border-black/20 hover:cursor-pointer"
                       }`}
                     >
                       Maandelijks
@@ -241,7 +241,7 @@ export default function DonationComponent({ blok }: Props) {
                     type="button"
                     onClick={() => setStep(2)}
                     disabled={!isValidStep1()}
-                    className={`w-full rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
+                    className={`w-full rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer disabled:bg-${blok.primaryColor}/50`}
                   >
                     Volgende stap
                   </button>
@@ -294,14 +294,14 @@ export default function DonationComponent({ blok }: Props) {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className={`w-1/3 rounded-2xl border border-black/10 bg-white px-4 py-3 text-base font-medium text-black hover:bg-neutral-50 bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor}`}
+                    className={`cursor-pointer w-1/3 rounded-2xl border border-black/10 bg-white px-4 py-3 text-base font-medium text-black hover:bg-neutral-50 bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor}`}
                   >
                     Terug
                   </button>
                   <button
                     type="submit"
                     disabled={!isValidStep2() || loading}
-                    className={`w-2/3 rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
+                    className={`cursor-pointer w-2/3 rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
                   >
                     {loading
                       ? "Bezig…"

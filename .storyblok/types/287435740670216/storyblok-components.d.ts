@@ -12,6 +12,48 @@ export interface SbBadge {
   [k: string]: unknown;
 }
 
+export interface SbBlokHero {
+  title: string;
+  subtitle: string;
+  buttons?: SbButton[];
+  block?: (
+    | SbBadge
+    | SbBlokHero
+    | SbButton
+    | SbCard
+    | SbDonation
+    | SbEvent
+    | SbFeature
+    | SbFooter
+    | SbFullGrid
+    | SbGlobal
+    | SbGrid
+    | SbImage
+    | SbImageCard
+    | SbImageHero
+    | SbInformationItem
+    | SbLink
+    | SbPage
+    | SbPersonCard
+    | SbRichText
+    | SbScripture
+    | SbScriptureReferences
+    | SbScrollingText
+    | SbSermon
+    | SbSermonHighlight
+    | SbSpotifyEmbed
+    | SbStatement
+    | SbStatementScripture
+    | SbStaticGrid
+    | SbTeaser
+    | SbVideoHero
+  )[];
+  image: StoryblokAsset;
+  component: "blokHero";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbButton {
   text: string;
   link?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
@@ -40,13 +82,11 @@ export interface SbDonation {
   subtitle: string;
   title: string;
   description?: StoryblokRichtext;
-  badges?: SbBadge[];
   options: ("" | "5" | "10" | "25" | "50" | "100" | "150" | "200" | "250" | "300" | "350" | "400" | "450" | "500")[];
   preselected: string;
   defaultFrequency: "" | "oneTime" | "monthly";
   backgroundColor?: number | string;
   primaryColor?: number | string;
-  image?: StoryblokAsset;
   textColor?: number | string;
   component: "donation";
   _uid: string;
@@ -89,6 +129,7 @@ export interface SbFooter {
 export interface SbFullGrid {
   columns?: (
     | SbBadge
+    | SbBlokHero
     | SbButton
     | SbCard
     | SbDonation
@@ -134,6 +175,7 @@ export interface SbGlobal {
 export interface SbGrid {
   columns?: (
     | SbBadge
+    | SbBlokHero
     | SbButton
     | SbCard
     | SbDonation
@@ -222,6 +264,7 @@ export interface SbPage {
   cta?: SbButton[];
   body?: (
     | SbBadge
+    | SbBlokHero
     | SbButton
     | SbCard
     | SbDonation
@@ -369,6 +412,7 @@ export interface SbStatementScripture {
 export interface SbStaticGrid {
   items: (
     | SbBadge
+    | SbBlokHero
     | SbButton
     | SbCard
     | SbDonation
