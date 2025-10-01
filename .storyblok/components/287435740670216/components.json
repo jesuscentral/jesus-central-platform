@@ -832,7 +832,7 @@
     "display_name": null,
     "description": "Grid block",
     "created_at": "2025-09-27T11:50:34.261Z",
-    "updated_at": "2025-09-27T11:53:55.137Z",
+    "updated_at": "2025-10-01T20:49:45.054Z",
     "id": 95372223541073,
     "schema": {
       "columns": {
@@ -848,7 +848,7 @@
         "source": "internal",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "default_value": "brand-orange",
+        "default_value": "cream",
         "id": "8ib2j6EhRPuUp82-ZncJPQ"
       }
     },
@@ -1573,6 +1573,56 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "scrollingText",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "section",
+    "display_name": null,
+    "description": "A section block that can contain another blok",
+    "created_at": "2025-10-01T21:00:41.141Z",
+    "updated_at": "2025-10-01T21:01:14.218Z",
+    "id": 96922997321290,
+    "schema": {
+      "block": {
+        "type": "bloks",
+        "pos": 0,
+        "maximum": 1,
+        "minimum": 0,
+        "id": "p04J-zJbSsm033llYHh-RA",
+        "required": true
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "cream",
+        "id": "EYMpYUidS7az3GWjiXx5Mw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "section",
     "component_group_uuid": null,
     "color": null,
     "icon": null,

@@ -39,6 +39,7 @@ export interface SbBlokHero {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSection
     | SbSermon
     | SbSermonHighlight
     | SbSpotifyEmbed
@@ -150,6 +151,7 @@ export interface SbFullGrid {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSection
     | SbSermon
     | SbSermonHighlight
     | SbSpotifyEmbed
@@ -196,6 +198,7 @@ export interface SbGrid {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSection
     | SbSermon
     | SbSermonHighlight
     | SbSpotifyEmbed
@@ -285,6 +288,7 @@ export interface SbPage {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSection
     | SbSermon
     | SbSermonHighlight
     | SbSpotifyEmbed
@@ -346,6 +350,46 @@ export interface SbScrollingText {
   backgroundColor?: number | string;
   textColor?: number | string;
   component: "scrollingText";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbSection {
+  block: (
+    | SbBadge
+    | SbBlokHero
+    | SbButton
+    | SbCard
+    | SbDonation
+    | SbEvent
+    | SbFeature
+    | SbFooter
+    | SbFullGrid
+    | SbGlobal
+    | SbGrid
+    | SbImage
+    | SbImageCard
+    | SbImageHero
+    | SbInformationItem
+    | SbLink
+    | SbPage
+    | SbPersonCard
+    | SbRichText
+    | SbScripture
+    | SbScriptureReferences
+    | SbScrollingText
+    | SbSection
+    | SbSermon
+    | SbSermonHighlight
+    | SbSpotifyEmbed
+    | SbStatement
+    | SbStatementScripture
+    | SbStaticGrid
+    | SbTeaser
+    | SbVideoHero
+  )[];
+  backgroundColor?: number | string;
+  component: "section";
   _uid: string;
   [k: string]: unknown;
 }
@@ -433,6 +477,7 @@ export interface SbStaticGrid {
     | SbScripture
     | SbScriptureReferences
     | SbScrollingText
+    | SbSection
     | SbSermon
     | SbSermonHighlight
     | SbSpotifyEmbed
