@@ -11,11 +11,13 @@ import { notFound } from "next/navigation";
 import SermonList from "@/components/sermons/SermonList";
 import { getSermons } from "@/lib/actions/sermons";
 import CinematicMenu from "@/components/ui/organisms/CinematicMenu";
+import { connection } from "next/server";
 
 export default async function PrekenPage() {
   const [sermons, story] = await Promise.all([
     getSermons(),
     getStory("preken"),
+    connection(),
   ]);
 
   if (!story) {

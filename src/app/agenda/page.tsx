@@ -10,6 +10,7 @@ import {
 } from "@storyblok/react/rsc";
 import EventList from "@/features/events/event-list";
 import CinematicMenu from "@/components/ui/organisms/CinematicMenu";
+import { connection } from "next/server";
 
 export default async function AgendaPage({
   searchParams,
@@ -18,6 +19,7 @@ export default async function AgendaPage({
     tab: "alles" | "diensten" | "events";
   };
 }) {
+  await connection();
   const { tab } = await searchParams;
 
   const storyblok = getStoryblokApi();
