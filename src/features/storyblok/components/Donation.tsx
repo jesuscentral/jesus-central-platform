@@ -7,6 +7,7 @@ import { createPayment } from "@/lib/mollie";
 import { SbDonation } from "@storyblok/types/287325821225947/storyblok-components";
 import { cn } from "@/utils/cn";
 import { RichTextRenderer } from "./RichTextRenderer";
+import Button from "@/components/ui/atoms/Button";
 
 type Props = { blok: SbDonation };
 
@@ -290,18 +291,18 @@ export default function DonationComponent({ blok }: Props) {
                   </p>
                 )}
 
-                <div className="flex gap-2 pt-1">
+                <div className="flex gap-2 pt-1 flex-wrap md:flex-nowrap">
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className={`cursor-pointer w-1/3 rounded-2xl border border-black/10 bg-white px-4 py-3 text-base font-medium text-black hover:bg-neutral-50 bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor}`}
+                    className={`cursor-pointer w-1/3 rounded-2xl border border-black/10 bg-white px-4 py-3 text-base font-medium text-black hover:bg-neutral-50 bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor} w-full`}
                   >
                     Terug
                   </button>
                   <button
                     type="submit"
                     disabled={!isValidStep2() || loading}
-                    className={`cursor-pointer w-2/3 rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
+                    className={`cursor-pointer w-2/3 rounded-2xl bg-${blok.primaryColor} px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 w-full`}
                   >
                     {loading
                       ? "Bezig…"

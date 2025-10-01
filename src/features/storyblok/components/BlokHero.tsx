@@ -41,13 +41,14 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
       </div>
-      <div className="relative z-10 grid gap-8 p-6 md:grid-cols-2 md:gap-12 md:p-12 lg:gap-16">
-        <div className="flex flex-col justify-center">
+      <div className="relative z-10 grid min-h-[60vh] gap-6 px-4 pb-8 pt-20 sm:px-6 sm:pt-24 md:min-h-[70vh] md:grid-cols-2 md:gap-12 md:px-12 md:pb-12 md:pt-16 lg:gap-16">
+        {/* Left Column - Text Content */}
+        <div className="flex flex-col justify-center space-y-4 md:space-y-6">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="font-heading text-5xl tracking-tight text-jcc-freedom md:text-7xl"
+            className="font-heading text-4xl tracking-tight text-jcc-freedom sm:text-5xl md:text-6xl lg:text-7xl"
             style={{ letterSpacing: "0.02em" }}
           >
             {blok.title}
@@ -62,7 +63,7 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
                 y: 0,
                 transition: { delay: 0.15, duration: 0.6 },
               }}
-              className="mt-4 max-w-2xl font-body text-lg text-jcc-freedom/90 md:text-xl"
+              className="max-w-2xl font-body text-base text-jcc-freedom/90 sm:text-lg md:text-xl"
             >
               {blok.subtitle}
             </motion.p>
@@ -77,9 +78,9 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
                 y: 0,
                 transition: { delay: 0.3, duration: 0.6 },
               }}
-              className="mt-8 flex flex-wrap gap-3"
+              className="flex flex-wrap gap-3 pt-2"
             >
-              <div className="flex w-full flex-col items-stretch gap-4 pt-2 sm:w-auto sm:flex-row">
+              <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:gap-4">
                 {blok.buttons.map((button) => (
                   <StoryblokServerComponent blok={button} key={button._uid} />
                 ))}
@@ -88,6 +89,7 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
           )}
         </div>
 
+        {/* Right Column - Custom Blok Content */}
         {blok.block && blok.block.length > 0 && (
           <motion.div
             variants={fadeInRight}
@@ -97,7 +99,7 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
               x: 0,
               transition: { delay: 0.2, duration: 0.6 },
             }}
-            className="flex items-center justify-center py-16"
+            className="flex items-center justify-center py-8 md:py-12"
           >
             {blok.block.map((nestedBlok) => (
               <StoryblokServerComponent

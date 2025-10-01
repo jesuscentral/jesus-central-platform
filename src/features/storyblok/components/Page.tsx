@@ -28,7 +28,7 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
             />
           </Link>
         </div>
-        <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end sm:gap-4">
+        <div className="hidden md:flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end sm:gap-4">
           {blok.cta &&
             blok.cta.map((cta) => (
               <StoryblokServerComponent key={cta._uid} blok={cta} />
