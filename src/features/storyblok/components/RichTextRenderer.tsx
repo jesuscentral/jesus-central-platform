@@ -3,10 +3,12 @@ import { cn } from "@/utils/cn";
 import { StoryblokRichtext } from "@storyblok/types/storyblok";
 import {
   NODE_HEADING,
+  NODE_PARAGRAPH,
   NODE_LI,
   NODE_OL,
   NODE_UL,
   render,
+  MARK_STYLED,
 } from "storyblok-rich-text-react-renderer";
 import Badge from "./Badge";
 import {
@@ -29,7 +31,6 @@ import Card from "./Card";
 import ImageCard from "./ImageCard";
 import Image from "./Image";
 import { SbBlokData } from "@storyblok/react";
-import { Circle } from "lucide-react";
 
 interface RichTextRendererProps {
   document: StoryblokRichtext;
@@ -37,7 +38,6 @@ interface RichTextRendererProps {
 }
 
 const resolvers = {
-  markResolvers: {},
   nodeResolvers: {
     [NODE_UL]: (children: React.ReactNode) => (
       <ul className="list-disc pl-6 my-4">{children}</ul> // no list-inside
@@ -107,9 +107,9 @@ export const RichTextRenderer = ({
   if (!document) return null;
 
   return (
-    <div className={cn("rich-text prose max-w-none space-y-4", className)}>
+    <span className={cn("rich-text prose max-w-none space-y-4", className)}>
       {/* @ts-expect-error - Resolvers is not typed correctly */}
       {render(document, resolvers)}
-    </div>
+    </span>
   );
 };
