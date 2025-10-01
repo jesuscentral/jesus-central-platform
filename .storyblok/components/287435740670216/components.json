@@ -274,7 +274,7 @@
     "display_name": null,
     "description": "A donation component so people can give",
     "created_at": "2025-09-27T11:53:54.822Z",
-    "updated_at": "2025-09-27T11:53:54.822Z",
+    "updated_at": "2025-09-30T14:33:09.824Z",
     "id": 95373045038940,
     "schema": {
       "subtitle": {
@@ -409,11 +409,6 @@
         ],
         "default_value": "monthly",
         "id": "QHNChv7dQnOCfRnYMaD3uQ"
-      },
-      "funds": {
-        "type": "table",
-        "pos": 7,
-        "id": "8KDyIRrYSnaxWMwOx-hSEQ"
       },
       "backgroundColor": {
         "type": "option",

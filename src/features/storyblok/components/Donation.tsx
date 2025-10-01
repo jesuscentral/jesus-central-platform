@@ -1,21 +1,15 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HeartHandshake, Loader2, ChevronDown } from "lucide-react";
+import { HeartHandshake, Loader2 } from "lucide-react";
 import { SbDonation } from "@storyblok/types/287325821225947/storyblok-components";
 import { SbBlokData, storyblokEditable } from "@storyblok/react";
 import { RichTextRenderer } from "./RichTextRenderer";
 import { StoryblokServerComponent } from "@storyblok/react/rsc";
 import { cn } from "@/utils/cn";
+import { createPayment } from "@/lib/mollie";
 
 export default function JccGive({ blok }: { blok: SbDonation }) {
-  const funds =
-    blok.funds?.tbody.map((f) => ({
-      value: f.body[0].value,
-      label: f.body[1].value,
-    })) || [];
-
-  //   const funds = [{ value: "general", label: "Algemeen fonds" }];
   const preselectedAmount = parseInt(blok.preselected || "25");
   const presets = blok.options.map((o) => parseInt(o));
 
@@ -23,10 +17,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
   const [frequency, setFrequency] = useState<"once" | "monthly">(
     blok.defaultFrequency || "once"
   );
-  const [fund, setFund] = useState<string>(funds[0]?.value || "general");
   const [note, setNote] = useState<string>("");
-  const [method, setMethod] = useState<"ideal">("ideal");
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,8 +27,12 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
     setSubmitting(true);
     setError(null);
     try {
-      const payload: GivePayload = { amount, frequency, fund, note, method };
+      const payload: GivePayload = { amount, frequency, note };
       await alert(JSON.stringify(payload));
+      const redirectUrl = await createPayment(frequency === "monthly", note);
+
+      window.location.href = redirectUrl ?? "";
+
       setSuccess(true);
     } catch (err: unknown) {
       setError(
@@ -58,7 +53,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
         ${
           amount === value
             ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-${blok.textColor} shadow`
-            : "border-white/10 bg-white/5 text-white hover:border-white/20"
+            : "border-white/10 bg-white/5 text-bold-dark hover:border-white/20"
         }`}
     >
       € {value}
@@ -123,7 +118,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative rounded-2xl border border-white/10 bg-bold-dark p-5 backdrop-blur-sm sm:p-6"
+          className="relative rounded-2xl border border-white/10 bg-strategy-gold p-5 backdrop-blur-sm sm:p-6"
         >
           {/* Frequency toggle */}
           <div className="grid grid-cols-2 gap-2">
@@ -155,7 +150,7 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
           <label className="mt-5 block text-xs uppercase tracking-wider text-cream/60">
             Bedrag
           </label>
-          <div className="mt-2 flex items-center rounded-xl border border-white/10 bg-bold-dark px-3 py-2 text-cream focus-within:border-herstel">
+          <div className="mt-2 flex items-center rounded-xl border border-white/10 bg-bold-dark/70 px-3 py-2 text-cream focus-within:border-herstel">
             <span className="pr-2 text-cream/60">€</span>
             <input
               type="number"
@@ -169,52 +164,6 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
             />
           </div>
 
-          {/* Fund select */}
-          <label className="mt-5 block text-xs uppercase tracking-wider text-cream/60">
-            Bestemming
-          </label>
-          <div className="relative mt-2">
-            <button
-              type="button"
-              onClick={() => setIsOpen((s) => !s)}
-              className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-bold-dark px-3 py-3 text-left text-cream transition-colors hover:border-white/20"
-            >
-              <span className="truncate">
-                {funds.find((f) => f.value === fund)?.label ?? "Kies fonds"}
-              </span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.ul
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  className="absolute z-10 mt-2 w-full overflow-hidden rounded-xl border border-white/10 bg-bold-dark shadow-xl"
-                >
-                  {funds.map((opt) => (
-                    <li key={opt.value}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setFund(opt.value);
-                          setIsOpen(false);
-                        }}
-                        className={`block w-full px-4 py-2 text-left text-sm text-cream hover:bg-white/10 ${
-                          fund === opt.value ? "bg-white/10" : ""
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </div>
-
           {/* Note */}
           <label className="mt-5 block text-xs uppercase tracking-wider text-cream/60">
             Opmerking (optioneel)
@@ -223,30 +172,9 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
             rows={3}
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-bold-dark p-3 text-cream placeholder:text-cream/40 focus:border-herstel focus:outline-none"
+            className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-bold-dark/70 p-3 text-cream placeholder:text-cream/40 focus:border-herstel focus:outline-none"
             placeholder="Bijv. dankoffer, belofte, specifieke actie..."
           />
-
-          {/* Payment method */}
-          <label className="mt-5 block text-xs uppercase tracking-wider text-cream/60">
-            Betaalmethode
-          </label>
-          <div className="mt-2 grid grid-cols-3 gap-2">
-            {([{ key: "ideal", label: "iDEAL" }] as const).map((m) => (
-              <button
-                key={m.key}
-                type="button"
-                onClick={() => setMethod(m.key)}
-                className={`rounded-xl border px-3 py-2 text-sm transition-all ${
-                  method === m.key
-                    ? `border-${blok.primaryColor} bg-${blok.primaryColor} text-bold-dark shadow`
-                    : "border-white/10 bg-bold-dark text-cream hover:border-white/20"
-                }`}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
 
           {/* Submit */}
           <div className="mt-6">
@@ -322,10 +250,10 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
         ].map((item) => (
           <div
             key={item.k}
-            className="rounded-xl border border-white/10 bg-white/5 p-3"
+            className="rounded-xl border border-strategy-gold/10 bg-strategy-gold/70 p-3"
           >
-            <p className="text-cream">{item.k}</p>
-            <p className="text-xs text-cream/70">{item.d}</p>
+            <p className="text-bold-dark">{item.k}</p>
+            <p className="text-xs text-bold-dark/70">{item.d}</p>
           </div>
         ))}
       </div>
@@ -336,7 +264,5 @@ export default function JccGive({ blok }: { blok: SbDonation }) {
 export type GivePayload = {
   amount: number; // in EUR
   frequency: "once" | "monthly";
-  fund: string;
   note?: string;
-  method: "ideal" | "bancontact" | "card";
 };

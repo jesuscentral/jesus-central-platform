@@ -13,6 +13,7 @@
     "storyblok:regenerate": "npm run storyblok:pull && npm run storyblok:generate-types"
   },
   "dependencies": {
+    "@mollie/api-client": "^4.3.3",
     "@storyblok/react": "^5.4.12",
     "clsx": "^2.1.1",
     "fast-xml-parser": "^5.2.5",

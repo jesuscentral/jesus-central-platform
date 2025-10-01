@@ -86,6 +86,7 @@ export const getStory = async (slug: string) => {
 
   const finalSlug =
     slug === "/" || slug === "" || slug === undefined ? "home" : slug;
+
   try {
     const resolveRelations = ["global_footer"];
 
