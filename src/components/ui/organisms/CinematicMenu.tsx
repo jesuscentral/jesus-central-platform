@@ -85,8 +85,7 @@ export default function CinematicMenu() {
   );
 
   const handleToggle = () => {
-    if (!isOpen) {
-      // Pick a random color scheme when opening the menu
+    if (isOpen) {
       const randomScheme =
         colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
       setCurrentScheme(randomScheme);
@@ -109,9 +108,10 @@ export default function CinematicMenu() {
   return (
     <>
       <button
+        key={currentScheme.name}
         onClick={handleToggle}
         aria-label={isOpen ? "Close menu" : "Open menu"}
-        className="group relative z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500 hover:bg-freedom/20 hover:scale-110 hover:rotate-180 cursor-pointer"
+        className="group relative z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500  hover:scale-110 cursor-pointer"
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = currentScheme.accentColor;
           e.currentTarget.style.boxShadow = `0 0 30px ${currentScheme.hoverShadow}`;
