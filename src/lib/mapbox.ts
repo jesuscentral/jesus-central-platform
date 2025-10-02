@@ -1,7 +1,7 @@
 import mapboxgl from "mapbox-gl";
 
 export const createMarkerElement = (
-  feature: GeoJSON.Feature,
+  feature: { properties: { name: string } } & GeoJSON.Feature,
   map: mapboxgl.Map
 ) => {
   const el = document.createElement("div");
@@ -23,7 +23,7 @@ export const createMarkerElement = (
     className: "custom-popup",
   }).setHTML(`
           <div style="padding: 8px; font-family: var(--font-body), sans-serif;">
-            <h3 style="margin: 0 0 4px 0; font-family: var(--font-heading), sans-serif; font-size: 16px; font-weight: 700; color: #161615;">Jesus Central Church</h3>
+            <h3 style="margin: 0 0 4px 0; font-family: var(--font-heading), sans-serif; font-size: 16px; font-weight: 700; color: #161615;">${feature.properties.name || "Jesus Central Church"}</h3>
           </div>
         `);
 

@@ -10,11 +10,15 @@ export default function Map({ blok }: { blok: SbMap }) {
     : undefined;
 
   return (
-    <MapboxMap
+    <div
       {...storyblokEditable(blok as SbBlokData)}
-      center={[Number(blok.longitude), Number(blok.latitude)]}
-      zoom={Number(blok.zoom)}
-      geojson={geojson}
-    />
+      className="h-full w-full rounded-lg overflow-hidden"
+    >
+      <MapboxMap
+        center={[Number(blok.longitude), Number(blok.latitude)]}
+        zoom={Number(blok.zoom)}
+        geojson={geojson}
+      />
+    </div>
   );
 }

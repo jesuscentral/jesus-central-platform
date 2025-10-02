@@ -262,7 +262,7 @@ export default function CinematicMenu() {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                 <div>
                   <p className="text-freedom/70 mb-4">Vind ons op</p>
-                  <div className="flex gap-6">
+                  <div className="flex flex-wrap md:flex-nowrap gap-6">
                     {socialLinks.map((link, index) => (
                       <Link
                         key={index}

@@ -9,7 +9,7 @@ interface MapboxMapProps {
   center?: [number, number];
   zoom?: number;
   style?: string;
-  geojson?: GeoJSON.FeatureCollection;
+  geojson?: GeoJSON.GeoJSON;
 }
 
 export default function MapboxMap({
@@ -22,6 +22,8 @@ export default function MapboxMap({
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [mapLoaded, setMapLoaded] = useState(false);
+
+  console.log(geojson);
 
   useEffect(() => {
     // Guard: Prevent multiple initializations
@@ -90,7 +92,8 @@ export default function MapboxMap({
           source: "geojson",
         });
 
-        for (const feature of geojson.features) {
+        // @ts-expect-error typing issue in mapbox-gl
+        for (const feature of geojson?.features || []) {
           createMarkerElement(feature, map);
         }
       }
