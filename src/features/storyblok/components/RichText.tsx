@@ -13,8 +13,7 @@ export default function RichText({ blok }: { blok: SbContent }) {
       className={cn(
         "w-full",
         `text-${blok.color}`,
-        `bg-${blok.backgroundColor}`,
-        `py-20`
+        `bg-${blok.backgroundColor}`
       )}
     >
       <motion.section

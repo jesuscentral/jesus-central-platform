@@ -33,6 +33,7 @@ export interface SbBlokHero {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbMap
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -145,6 +146,7 @@ export interface SbFullGrid {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbMap
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -192,6 +194,7 @@ export interface SbGrid {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbMap
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -261,6 +264,16 @@ export interface SbLink {
   [k: string]: unknown;
 }
 
+export interface SbMap {
+  latitude: string;
+  longitude: string;
+  zoom: string;
+  geojson?: string;
+  component: "map";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbPage {
   seo?: unknown;
   logo: StoryblokAsset;
@@ -282,6 +295,7 @@ export interface SbPage {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbMap
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -372,6 +386,7 @@ export interface SbSection {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbMap
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -471,6 +486,7 @@ export interface SbStaticGrid {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbMap
     | SbPage
     | SbPersonCard
     | SbRichText

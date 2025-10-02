@@ -739,7 +739,7 @@
     "display_name": "Full Size Grid",
     "description": "Grid block",
     "created_at": "2025-09-27T11:53:54.921Z",
-    "updated_at": "2025-09-27T11:53:54.921Z",
+    "updated_at": "2025-10-02T07:51:51.929Z",
     "id": 95373045444446,
     "schema": {
       "columns": {
@@ -755,7 +755,7 @@
         "source": "internal",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "default_value": "brand-orange",
+        "default_value": "cream",
         "id": "8ib2j6EhRPuUp82-ZncJPQ"
       }
     },
@@ -1185,6 +1185,71 @@
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "map",
+    "display_name": null,
+    "description": "A Map for showing one or multiple locations",
+    "created_at": "2025-10-02T09:28:36.377Z",
+    "updated_at": "2025-10-02T09:33:23.082Z",
+    "id": 97106806289104,
+    "schema": {
+      "latitude": {
+        "type": "number",
+        "pos": 0,
+        "decimals": 8,
+        "required": true,
+        "id": "WQ1uPcgVSi2_peDigetNYQ",
+        "default_value": "52.02057661"
+      },
+      "longitude": {
+        "type": "number",
+        "pos": 1,
+        "decimals": 8,
+        "required": true,
+        "id": "7OAuJlxTQsytySf4tRzNmg",
+        "default_value": "4.68635902"
+      },
+      "zoom": {
+        "type": "number",
+        "pos": 2,
+        "max_value": 25,
+        "min_value": 0,
+        "decimals": 0,
+        "required": true,
+        "display_name": "Zoom",
+        "id": "B285u31qQ0KTvpIXgplZug",
+        "default_value": "18"
+      },
+      "geojson": {
+        "type": "textarea",
+        "pos": 3,
+        "id": "M8BH1kZOQCG7a3sRSiTnjw",
+        "default_value": "{\n  type: \"FeatureCollection\",\n  features: [\n    {\n      type: \"Feature\",\n      geometry: { type: \"Point\", coordinates: [4.68635902, 52.02057661] },\n    },\n  ],\n}"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "map",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },

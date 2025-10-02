@@ -47,7 +47,7 @@ const menuSections: MenuSection[] = [
     title: "Kerk",
     items: [
       { label: "Home", href: "/" },
-      { label: "Over ons", href: "/over-ons" },
+      { label: "Wie zijn we?", href: "/wie-zijn-we" },
       { label: "Agenda", href: "/agenda" },
       { label: "Leiderschap", href: "/leiderschap" },
     ],

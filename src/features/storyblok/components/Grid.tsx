@@ -72,20 +72,14 @@ export default function Grid({ blok }: { blok: SbGrid }) {
                 viewport={{ once: true }}
                 key={nestedBlok._uid}
                 className={cn(
+                  "h-full",
                   // If it's a card and all items are cards, make it fill the grid cell
                   isCard && hasOnlyCards ? "flex h-full" : "",
                   // If it's a full height image, make it fill the grid cell
                   isFullHeightImage ? "h-full" : ""
                 )}
               >
-                <div
-                  className={cn(
-                    isCard && hasOnlyCards ? "flex-1" : "",
-                    isFullHeightImage ? "h-full" : ""
-                  )}
-                >
-                  <StoryblokServerComponent blok={nestedBlok} />
-                </div>
+                <StoryblokServerComponent blok={nestedBlok} />
               </motion.div>
             );
           })}

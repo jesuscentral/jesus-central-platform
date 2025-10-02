@@ -35,6 +35,7 @@ import RichText from "@/features/storyblok/components/RichText";
 import { StoryblokMultilink } from "@storyblok/types/storyblok";
 import SpotifyEmbed from "@/features/storyblok/components/SpotifyEmbed";
 import Section from "@/features/storyblok/components/Section";
+import Map from "@/features/storyblok/components/Map";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_TOKEN,
@@ -74,6 +75,7 @@ export const getStoryblokApi = storyblokInit({
     richText: RichText,
     spotifyEmbed: SpotifyEmbed,
     section: Section,
+    map: Map,
   },
 });
 
