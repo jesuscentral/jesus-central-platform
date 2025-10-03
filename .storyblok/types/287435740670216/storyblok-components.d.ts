@@ -34,6 +34,8 @@ export interface SbBlokHero {
     | SbInformationItem
     | SbLink
     | SbMap
+    | SbMenuItem
+    | SbMenuSection
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -43,12 +45,14 @@ export interface SbBlokHero {
     | SbSection
     | SbSermon
     | SbSermonHighlight
+    | SbSocialLink
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
+    | SbWebsiteConfig
   )[];
   image: StoryblokAsset;
   component: "blokHero";
@@ -147,6 +151,8 @@ export interface SbFullGrid {
     | SbInformationItem
     | SbLink
     | SbMap
+    | SbMenuItem
+    | SbMenuSection
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -156,12 +162,14 @@ export interface SbFullGrid {
     | SbSection
     | SbSermon
     | SbSermonHighlight
+    | SbSocialLink
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
+    | SbWebsiteConfig
   )[];
   backgroundColor: number | string;
   component: "fullGrid";
@@ -195,6 +203,8 @@ export interface SbGrid {
     | SbInformationItem
     | SbLink
     | SbMap
+    | SbMenuItem
+    | SbMenuSection
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -204,12 +214,14 @@ export interface SbGrid {
     | SbSection
     | SbSermon
     | SbSermonHighlight
+    | SbSocialLink
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
+    | SbWebsiteConfig
   )[];
   backgroundColor: number | string;
   component: "grid";
@@ -274,10 +286,25 @@ export interface SbMap {
   [k: string]: unknown;
 }
 
+export interface SbMenuItem {
+  label: string;
+  link: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
+  open_in_new_tab?: boolean;
+  component: "menuItem";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbMenuSection {
+  title: string;
+  items: SbMenuItem[];
+  component: "menuSection";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbPage {
   seo?: unknown;
-  logo: StoryblokAsset;
-  cta?: SbButton[];
   body?: (
     | SbBadge
     | SbBlokHero
@@ -296,6 +323,8 @@ export interface SbPage {
     | SbInformationItem
     | SbLink
     | SbMap
+    | SbMenuItem
+    | SbMenuSection
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -305,12 +334,14 @@ export interface SbPage {
     | SbSection
     | SbSermon
     | SbSermonHighlight
+    | SbSocialLink
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
+    | SbWebsiteConfig
   )[];
   global_footer?: (ISbStoryData<sbGlobal> | string)[];
   index?: boolean;
@@ -387,6 +418,8 @@ export interface SbSection {
     | SbInformationItem
     | SbLink
     | SbMap
+    | SbMenuItem
+    | SbMenuSection
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -396,12 +429,14 @@ export interface SbSection {
     | SbSection
     | SbSermon
     | SbSermonHighlight
+    | SbSocialLink
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
+    | SbWebsiteConfig
   )[];
   backgroundColor?: number | string;
   component: "section";
@@ -438,6 +473,14 @@ export interface SbSermonHighlight {
   primaryColor?: number | string;
   secondaryColor?: number | string;
   component: "sermonHighlight";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbSocialLink {
+  label: string;
+  url: string;
+  component: "socialLink";
   _uid: string;
   [k: string]: unknown;
 }
@@ -487,6 +530,8 @@ export interface SbStaticGrid {
     | SbInformationItem
     | SbLink
     | SbMap
+    | SbMenuItem
+    | SbMenuSection
     | SbPage
     | SbPersonCard
     | SbRichText
@@ -496,12 +541,14 @@ export interface SbStaticGrid {
     | SbSection
     | SbSermon
     | SbSermonHighlight
+    | SbSocialLink
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
     | SbVideoHero
+    | SbWebsiteConfig
   )[];
   backgroundColor?: number | string;
   component: "staticGrid";
@@ -523,6 +570,19 @@ export interface SbVideoHero {
   background_video?: StoryblokAsset;
   fallback_image: StoryblokAsset;
   component: "videoHero";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbWebsiteConfig {
+  site_name: string;
+  logo: StoryblokAsset;
+  logo_alt: string;
+  home_url?: string;
+  header_cta_buttons?: SbButton[];
+  menu_data: SbMenuSection[];
+  social_links?: SbSocialLink[];
+  component: "websiteConfig";
   _uid: string;
   [k: string]: unknown;
 }

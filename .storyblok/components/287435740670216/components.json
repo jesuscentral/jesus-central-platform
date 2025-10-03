@@ -347,7 +347,7 @@
     "display_name": null,
     "description": "A donation component so people can give",
     "created_at": "2025-09-27T11:53:54.822Z",
-    "updated_at": "2025-10-01T19:35:16.252Z",
+    "updated_at": "2025-10-02T15:46:38.759Z",
     "id": 95373045038940,
     "schema": {
       "subtitle": {
@@ -499,7 +499,7 @@
         "source": "internal",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "default_value": "cream",
+        "default_value": "bold-dark",
         "id": "-64ZYCG7RbuAKcJ5eNxgXg"
       }
     },
@@ -1193,7 +1193,7 @@
     "display_name": null,
     "description": "A Map for showing one or multiple locations",
     "created_at": "2025-10-02T09:28:36.377Z",
-    "updated_at": "2025-10-02T09:33:23.082Z",
+    "updated_at": "2025-10-02T15:17:38.256Z",
     "id": 97106806289104,
     "schema": {
       "latitude": {
@@ -1227,7 +1227,7 @@
         "type": "textarea",
         "pos": 3,
         "id": "M8BH1kZOQCG7a3sRSiTnjw",
-        "default_value": "{\n  type: \"FeatureCollection\",\n  features: [\n    {\n      type: \"Feature\",\n      geometry: { type: \"Point\", coordinates: [4.68635902, 52.02057661] },\n    },\n  ],\n}"
+        "default_value": "{\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          4.68635902,\n          52.02057661\n        ]\n      },\n       \"properties\": {\n          \"name\": \"Jesus Central Church Gouda\"\n        }\n    }\n  ]\n}"
       }
     },
     "image": null,
@@ -1254,11 +1254,105 @@
     "metadata": {}
   },
   {
+    "name": "menuItem",
+    "display_name": "Menu Item",
+    "description": null,
+    "created_at": "2025-10-03T23:20:01.824Z",
+    "updated_at": "2025-10-03T23:20:01.824Z",
+    "id": 97665031477597,
+    "schema": {
+      "label": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "required": true,
+        "description": "Menu item label (e.g., 'Home', 'About')",
+        "id": "0fAmZzTQRNOVFdwzyGIzdA"
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 1,
+        "translatable": false,
+        "required": true,
+        "description": "Link destination",
+        "id": "DNSd0SCYRFuIPVDMgC99qw"
+      },
+      "open_in_new_tab": {
+        "type": "boolean",
+        "pos": 2,
+        "default_value": false,
+        "description": "Open link in new tab",
+        "id": "p83WLxTUSquGwaEjk4pzHg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Menu Item",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "menuSection",
+    "display_name": "Menu Section",
+    "description": null,
+    "created_at": "2025-10-03T23:20:07.268Z",
+    "updated_at": "2025-10-03T23:20:07.268Z",
+    "id": 97665053776222,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "required": true,
+        "description": "Section title (e.g., 'Kerk', 'Content', 'Overige')",
+        "id": "XulKiRumTROTWsrhaLVG3g"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "menuItem"
+        ],
+        "required": true,
+        "minimum": 1,
+        "description": "Menu items in this section",
+        "id": "uVH5d3UsQAGd_zd4yeCKCw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Menu Section",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "page",
     "display_name": null,
     "description": null,
     "created_at": "2025-09-27T11:50:34.235Z",
-    "updated_at": "2025-09-29T14:07:42.834Z",
+    "updated_at": "2025-10-03T23:51:52.349Z",
     "id": 95372223434575,
     "schema": {
       "seo": {
@@ -1268,28 +1362,6 @@
         "options": [],
         "id": "AQBReYjYTfy8yLYZtkFn5A",
         "display_name": "Seo"
-      },
-      "logo": {
-        "type": "asset",
-        "pos": 1,
-        "required": true,
-        "filetypes": [
-          "images"
-        ],
-        "id": "YR6X9AGeTEC6KMyWRt-XBQ"
-      },
-      "cta": {
-        "type": "bloks",
-        "pos": 2,
-        "maximum": 2,
-        "minimum": 0,
-        "restrict_type": "",
-        "restrict_components": true,
-        "component_whitelist": [
-          "button"
-        ],
-        "description": "Cta buttons in top right of screen (in navigation menu)",
-        "id": "mMob00ruQUm2sZRuLHERcw"
       },
       "body": {
         "type": "bloks",
@@ -1934,6 +2006,47 @@
     "metadata": {}
   },
   {
+    "name": "socialLink",
+    "display_name": "Social Link",
+    "description": null,
+    "created_at": "2025-10-03T23:20:11.553Z",
+    "updated_at": "2025-10-03T23:20:11.553Z",
+    "id": 97665071327583,
+    "schema": {
+      "label": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "required": true,
+        "description": "Social media platform name (e.g., 'Instagram', 'Facebook')",
+        "id": "Mpa20ceaQiK10vqSqL0C6A"
+      },
+      "url": {
+        "type": "text",
+        "pos": 1,
+        "translatable": false,
+        "required": true,
+        "description": "Social media profile URL",
+        "id": "4FY51hpbQZipq9LKIDWKDA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Social Link",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "spotifyEmbed",
     "display_name": null,
     "description": "An embed blok using Spotify embed iframe",
@@ -2233,6 +2346,101 @@
     "internal_tag_ids": [
       "95373044408158"
     ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "websiteConfig",
+    "display_name": "Website Config",
+    "description": null,
+    "created_at": "2025-10-03T23:20:19.615Z",
+    "updated_at": "2025-10-03T23:20:19.615Z",
+    "id": 97665104349536,
+    "schema": {
+      "site_name": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "required": true,
+        "description": "Website name (e.g., 'Jesus Central', 'Jesus Central Worship')",
+        "id": "NpYznZ21T5OzAZ9xeYv8Zg"
+      },
+      "logo": {
+        "type": "asset",
+        "pos": 1,
+        "filetypes": [
+          "images"
+        ],
+        "translatable": false,
+        "required": true,
+        "description": "Website logo",
+        "id": "gPbIn7vcSs-MYnewxwyDqg"
+      },
+      "logo_alt": {
+        "type": "text",
+        "pos": 2,
+        "translatable": true,
+        "required": true,
+        "description": "Logo alt text for accessibility",
+        "id": "Y5DfYySQRZ6wxsNaxap_mQ"
+      },
+      "home_url": {
+        "type": "text",
+        "pos": 3,
+        "translatable": false,
+        "default_value": "/",
+        "description": "Home page URL (usually '/')",
+        "id": "2YKdogeSSDK8U_iGSMQBCw"
+      },
+      "header_cta_buttons": {
+        "type": "bloks",
+        "pos": 4,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "button"
+        ],
+        "description": "CTA buttons shown in header (desktop only)",
+        "id": "3NhD6FumQMywPVXNHaJmcQ"
+      },
+      "menu_data": {
+        "type": "bloks",
+        "pos": 5,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "menuSection"
+        ],
+        "required": true,
+        "minimum": 1,
+        "description": "Menu sections for the cinematic menu",
+        "id": "kD_cFuD1SmCB_kc0He2OAw"
+      },
+      "social_links": {
+        "type": "bloks",
+        "pos": 6,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "socialLink"
+        ],
+        "description": "Social media links shown in menu footer",
+        "id": "eseuJ97KTLKI9_bhRzyaKw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Website Config",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
     "content_type_asset_preview": null,
     "metadata": {}
   }

@@ -23,8 +23,6 @@ export default function MapboxMap({
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  console.log(geojson);
-
   useEffect(() => {
     // Guard: Prevent multiple initializations
     if (mapRef.current) return;

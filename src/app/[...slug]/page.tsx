@@ -1,7 +1,9 @@
 import { getStory, getStoryblokSeoParameters } from "@/lib/storyblok";
+import { getWebsiteConfig } from "@/lib/getWebsiteConfig";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Navigation } from "@/features/storyblok/components";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -24,11 +26,19 @@ export default async function Page(props: Props) {
   const params = await props.params;
   const slug = params.slug ? params.slug.join("/") : "home";
 
-  const story = await getStory(slug);
+  const [story, websiteConfig] = await Promise.all([
+    getStory(slug),
+    getWebsiteConfig(),
+  ]);
 
   if (!story) {
     return notFound();
   }
 
-  return <StoryblokStory story={story} />;
+  return (
+    <>
+      <Navigation config={websiteConfig?.content} />
+      <StoryblokStory story={story} />
+    </>
+  );
 }

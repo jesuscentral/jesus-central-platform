@@ -1,8 +1,12 @@
 "use client";
+
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Button, { ButtonType } from "../atoms/Button";
+import { linkResolver } from "@/lib/storyblok";
+import { colors } from "@/lib/colors";
+import { StoryblokMultilink } from "@storyblok/types/storyblok";
 
 interface MenuItem {
   label: string;
@@ -14,6 +18,11 @@ interface MenuSection {
   items: MenuItem[];
 }
 
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
 interface ColorScheme {
   name: string;
   accentColor: string;
@@ -21,68 +30,69 @@ interface ColorScheme {
   hoverShadow: string;
 }
 
+interface CinematicMenuProps {
+  menu_data?: {
+    title: string;
+    items: {
+      label: string;
+      link: StoryblokMultilink;
+      open_in_new_tab?: boolean;
+    }[];
+  }[];
+  social_links?: {
+    label: string;
+    url: string;
+  }[];
+}
+
 const colorSchemes: ColorScheme[] = [
   {
-    name: "brand-orange",
+    name: colors.BRAND_ORANGE,
     accentColor: "#eb3700",
     accentRgba: "rgba(235, 55, 0, 0.1)",
     hoverShadow: "rgba(235, 55, 0, 0.5)",
   },
   {
-    name: "strategy-gold",
+    name: colors.STRATEGY_GOLD,
     accentColor: "#f3b963",
     accentRgba: "rgba(243, 185, 99, 0.1)",
     hoverShadow: "rgba(243, 185, 99, 0.5)",
   },
   {
-    name: "strategy-green",
+    name: colors.STRATEGY_GREEN,
     accentColor: "#746e06",
     accentRgba: "rgba(116, 110, 6, 0.1)",
     hoverShadow: "rgba(116, 110, 6, 0.5)",
   },
 ];
 
-const menuSections: MenuSection[] = [
-  {
-    title: "Kerk",
-    items: [
-      { label: "Home", href: "/" },
-      { label: "Wie zijn we?", href: "/wie-zijn-we" },
-      { label: "Agenda", href: "/agenda" },
-      { label: "Leiderschap", href: "/leiderschap" },
-    ],
-  },
-  {
-    title: "Content",
-    items: [
-      { label: "Preken", href: "/preken" },
-      { label: "Youtube", href: "/youtube" },
-    ],
-  },
-  {
-    title: "Overige",
-    items: [
-      { label: "Onze visie", href: "/onze-visie" },
-      { label: "Wat wij geloven", href: "/wat-wij-geloven" },
-      { label: "Nieuw begin", href: "/nieuw-begin" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-];
-
-const socialLinks = [
-  { label: "Instagram", href: "#instagram" },
-  { label: "Facebook", href: "#facebook" },
-  { label: "Tiktok", href: "#tiktok" },
-  { label: "LinkedIn", href: "#linkedin" },
-  { label: "Youtube", href: "#youtube" },
-];
-
-export default function CinematicMenu() {
+export default function CinematicMenu({
+  menu_data,
+  social_links,
+}: CinematicMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentScheme, setCurrentScheme] = useState<ColorScheme>(
     colorSchemes[0]
   );
+
+  // Transform Storyblok data to menu format
+  const menuSections: MenuSection[] = menu_data
+    ? menu_data.map((section) => ({
+        title: section.title || "",
+        items:
+          section.items?.map((item) => ({
+            label: item.label || "",
+            href: linkResolver(item.link as StoryblokMultilink) || "#",
+          })) || [],
+      }))
+    : [];
+
+  const socialLinks: SocialLink[] = social_links
+    ? social_links.map((link) => ({
+        label: link.label || "",
+        href: link.url || "#",
+      }))
+    : [];
 
   const handleToggle = () => {
     if (isOpen) {
