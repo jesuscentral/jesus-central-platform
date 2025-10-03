@@ -1,19 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import { colors } from "@/lib/colors";
 
-export type ButtonType =
-  | "brand-orange"
-  | "cream"
-  | "strategy-gold"
-  | "strategy-green"
-  | "strategy-red"
-  | "strategy-charcoal"
-  | "bold-dark"
-  | "freedom"
-  | "herstel"
-  | "toerusting"
-  | "zending";
+export type ButtonType = (typeof colors)[keyof typeof colors];
 
 export type ButtonVariant = "primary" | "outline";
 export type ButtonSize = "small" | "medium" | "large";
@@ -138,7 +128,7 @@ const ArrowIcon = () => (
 export default function Button({
   href,
   onClick,
-  type = "brand-orange",
+  type = colors.BRAND_ORANGE,
   variant = "primary",
   size = "medium",
   children,

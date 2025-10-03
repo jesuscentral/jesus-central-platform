@@ -28,6 +28,8 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: ElementType;
   ref?: Ref<HTMLHeadingElement>;
   weight?: "regular" | "medium" | "bold";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any; // For additional props like storyblokEditable
 }
 
 const Heading = ({
@@ -35,7 +37,7 @@ const Heading = ({
   variant,
   className,
   weight,
-  ...props
+  ...additionalProps
 }: HeadingProps) => {
   const headingVariants = ({
     variant,
@@ -64,7 +66,7 @@ const Heading = ({
     <Component
       data-variant={variant}
       className={cn(headingVariants({ variant, weight }), className)}
-      {...props}
+      {...additionalProps}
     />
   );
 };
