@@ -1,6 +1,6 @@
 "use client";
 
-import { RssVideo } from "@/lib/youtube";
+import { RssVideo } from "@/features/youtube";
 import SermonCard from "./SermonCard";
 import SermonModal from "./SermonModal";
 import { useState } from "react";

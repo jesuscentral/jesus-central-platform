@@ -79,6 +79,10 @@ src/
 │       └── organisms/       # Complex components (CinematicMenu, MapboxMap)
 ├── features/
 │   ├── events/              # Event filtering and display
+│   ├── mollie/              # Mollie payment integration
+│   │   └── index.ts         # Payment API, customer management, subscriptions
+│   ├── youtube/             # YouTube RSS integration
+│   │   └── index.ts         # RSS feed parsing, video data types
 │   └── storyblok/
 │       ├── components/      # Storyblok blok components (organized by category)
 │       │   ├── layout/      # Page, Section, Grid, FullGrid, StaticGrid, Global
@@ -94,8 +98,6 @@ src/
 │       └── hooks/           # Custom React hooks
 ├── lib/
 │   ├── storyblok.ts         # Storyblok API setup and component registration
-│   ├── youtube.ts           # YouTube RSS feed parsing
-│   ├── mollie.ts            # Mollie payment API integration
 │   ├── mapbox.ts            # Mapbox configuration
 │   ├── animations.ts        # Framer Motion variants
 │   └── actions/             # Server actions for data fetching
@@ -124,17 +126,21 @@ See `src/features/storyblok/components/Page.tsx` for the base template.
 
 ### Mollie Payments
 
+- **Location**: `src/features/mollie/index.ts`
 - Customer management: Upsert pattern (find or create customer)
 - Payment creation: One-off or recurring (first mandate) payments
-- Server Actions: All Mollie logic is in `src/lib/mollie.ts` marked with `"use server"`
-- Webhook endpoint: `/api/webhooks/mollie` (currently unused)
+- All functions marked with `"use server"`
+- Webhook endpoint: `/api/webhooks/mollie` for subscription setup
+- Used by: Donation component (`src/features/storyblok/components/interactive/Donation.tsx`)
 
 ### YouTube Integration
 
+- **Location**: `src/features/youtube/index.ts`
 - RSS feed parsing via `fast-xml-parser`
 - Caches for 1 hour via `next: { revalidate: 3600 }`
-- Server action in `src/lib/actions/sermons.ts`
+- Server action in `src/lib/actions/sermons.ts` wraps the fetch
 - Proxy API route at `/api/youtube/channel/rss` for client-side fetching if needed
+- Types exported: `RssVideo`
 
 ### Mapbox
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createSubscription, getPayment, pageMandates } from "@/lib/mollie";
+import { createSubscription, getPayment, pageMandates } from "@/features/mollie";
 
 function nextCycleDate(interval: "1 month" | "1 week" | "1 year" | string) {
   const d = new Date();

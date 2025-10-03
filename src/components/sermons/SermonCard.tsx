@@ -1,6 +1,6 @@
 "use client";
 
-import { RssVideo } from "@/lib/youtube";
+import { RssVideo } from "@/features/youtube";
 import { motion } from "framer-motion";
 import { Play, CalendarDays } from "lucide-react";
 import Image from "next/image";

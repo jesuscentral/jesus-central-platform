@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
-import { createPayment } from "@/lib/mollie";
+import { createPayment } from "@/features/mollie";
 import { SbDonation } from "@storyblok/types/287435740670216/storyblok-components";
 import { cn } from "@/utils/cn";
 import { RichTextRenderer } from "../content/RichTextRenderer";
