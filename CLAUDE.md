@@ -106,7 +106,6 @@ src/
 ### Page Component Pattern
 
 All page-level Storyblok components follow this pattern:
-
 - Navigation bar with logo and `CinematicMenu`
 - Main content area rendering `blok.body` components
 - Global footer from resolved relations (`global_footer`)

@@ -1,0 +1,1 @@
+export { useStoryblokLink } from "./useStoryblokLink";

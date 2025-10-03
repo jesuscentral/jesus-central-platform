@@ -1,45 +1,19 @@
-import { getStory, getStoryblokApi, storyblokApiConfig } from "@/lib/storyblok";
-import FilterBar from "@/features/events/filter-bar";
-import { SbPage } from "@storyblok/types/287435740670216/storyblok-components";
-import Link from "next/link";
-import Image from "next/image";
 import {
   SbBlokData,
   storyblokEditable,
   StoryblokServerComponent,
 } from "@storyblok/react/rsc";
-import EventList from "@/features/events/event-list";
+import React from "react";
+import { SbPage } from "@storyblok/types/287435740670216/storyblok-components";
+import Image from "next/image";
+import Link from "next/link";
 import CinematicMenu from "@/components/ui/organisms/CinematicMenu";
-import { connection } from "next/server";
 
-export default async function AgendaPage({
-  searchParams,
-}: {
-  searchParams: {
-    tab: "alles" | "diensten" | "events";
-  };
-}) {
-  await connection();
-  const { tab } = await searchParams;
+interface PageProps {
+  blok: SbPage;
+}
 
-  const storyblok = getStoryblokApi();
-
-  const story = await getStory("agenda");
-
-  const blok = story.content as SbPage;
-
-  const { data: eventsData } = await storyblok.get("cdn/stories/", {
-    ...storyblokApiConfig,
-    starts_with: `${process.env.NEXT_PUBLIC_BASE_PATH}/agenda/`,
-    filter_query: {
-      date: {
-        gt_date: new Date().toISOString(),
-      },
-    },
-  });
-
-  const { stories: events } = eventsData;
-
+const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
   return (
     <div {...storyblokEditable(blok as SbBlokData)}>
       <nav className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6">
@@ -82,14 +56,12 @@ export default async function AgendaPage({
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </main>
-      <main className="bg-cream">
-        <FilterBar _tab={tab} />
-        <EventList events={events} />
-      </main>
       {blok?.global_footer &&
         (blok.global_footer as unknown as SbBlokData[]).map((global, index) => (
           <StoryblokServerComponent blok={global.content} key={index} />
         ))}
     </div>
   );
-}
+};
+
+export default Page;
