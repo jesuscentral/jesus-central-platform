@@ -82,7 +82,14 @@ src/
 │   ├── mollie/              # Mollie payment integration
 │   │   └── index.ts         # Payment API, customer management, subscriptions
 │   ├── youtube/             # YouTube RSS integration
-│   │   └── index.ts         # RSS feed parsing, video data types
+│   │   ├── index.ts         # Public API exports
+│   │   ├── api.ts           # Core API functions (fetchChannelRssFeed)
+│   │   ├── types.ts         # Type definitions (RssVideo, etc.)
+│   │   ├── constants.ts     # Configuration constants
+│   │   ├── utils/           # Helper functions
+│   │   │   ├── parser.ts    # XML parsing logic
+│   │   │   └── formatters.ts # Data formatting utilities
+│   │   └── README.md        # Feature documentation
 │   └── storyblok/
 │       ├── components/      # Storyblok blok components (organized by category)
 │       │   ├── layout/      # Page, Section, Grid, FullGrid, StaticGrid, Global
@@ -135,12 +142,17 @@ See `src/features/storyblok/components/Page.tsx` for the base template.
 
 ### YouTube Integration
 
-- **Location**: `src/features/youtube/index.ts`
-- RSS feed parsing via `fast-xml-parser`
-- Caches for 1 hour via `next: { revalidate: 3600 }`
-- Server action in `src/lib/actions/sermons.ts` wraps the fetch
-- Proxy API route at `/api/youtube/channel/rss` for client-side fetching if needed
-- Types exported: `RssVideo`
+- **Location**: `src/features/youtube/`
+- **Structure**:
+  - `api.ts` - Main `fetchChannelRssFeed()` function
+  - `types.ts` - `RssVideo` and internal RSS feed types
+  - `constants.ts` - Configuration (URLs, cache time, thumbnail quality)
+  - `utils/parser.ts` - XML parsing with `fast-xml-parser`
+  - `utils/formatters.ts` - Data extraction and transformation
+- **Caching**: 1 hour revalidation (`CACHE_REVALIDATE_TIME`)
+- **Server Action**: `src/lib/actions/sermons.ts` wraps the fetch
+- **API Route**: `/api/youtube/channel/rss` (cached, force-static)
+- **Documentation**: See `src/features/youtube/README.md` for detailed usage
 
 ### Mapbox
 
