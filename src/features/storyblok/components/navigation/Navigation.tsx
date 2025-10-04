@@ -15,8 +15,6 @@ export default function Navigation({ config }: NavigationProps) {
     return null;
   }
 
-  console.log(config);
-
   const { logo, home_url, header_cta_buttons } = config;
 
   return (
