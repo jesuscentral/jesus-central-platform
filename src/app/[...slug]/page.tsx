@@ -11,9 +11,8 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
-  const slug = params.slug ? params.slug.join("/") : "home";
 
-  const story = await getStory(slug);
+  const story = await getStory(params.slug);
 
   if (!story) {
     return {};
@@ -24,10 +23,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params;
-  const slug = params.slug ? params.slug.join("/") : "home";
 
   const [story, websiteConfig] = await Promise.all([
-    getStory(slug),
+    getStory(params.slug),
     getWebsiteConfig(),
   ]);
 

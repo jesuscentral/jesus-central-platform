@@ -8,6 +8,8 @@ import {
 } from "@/features/storyblok/config";
 import { updateStory } from "@/features/storyblok/utils";
 
+const availableLanguages = ["en"];
+
 export const getStoryblokApi = storyblokInit({
   accessToken: storyblokConfig.accessToken,
   use: [apiPlugin],
@@ -20,11 +22,20 @@ export const getStoryblokApi = storyblokInit({
 
 export { storyblokApiConfig };
 
-export const getStory = async (slug: string) => {
+export const getStory = async (slug: string[]) => {
   const storyblok = getStoryblokApi();
 
+  const language = availableLanguages.includes(slug[0]) ? slug[0] : undefined;
+
+  if (language) {
+    slug.shift();
+  }
+  const joinedSlug = slug.join("/");
+
   const finalSlug =
-    slug === "/" || slug === "" || slug === undefined ? "home" : slug;
+    joinedSlug === "/" || joinedSlug === "" || joinedSlug === undefined
+      ? "home"
+      : joinedSlug;
 
   try {
     const { data } = await storyblok.get(
@@ -32,6 +43,7 @@ export const getStory = async (slug: string) => {
       {
         ...storyblokApiConfig,
         resolve_relations: [...resolveRelations],
+        language: language,
       }
     );
 

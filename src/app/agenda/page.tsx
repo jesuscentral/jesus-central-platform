@@ -25,7 +25,7 @@ export default async function AgendaPage({
   const storyblok = getStoryblokApi();
 
   const [story, websiteConfig] = await Promise.all([
-    getStory("agenda"),
+    getStory(["agenda"]),
     getWebsiteConfig(),
   ]);
 

@@ -4,15 +4,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug ? resolvedParams.slug : "ui";
-
-  const story = await getStory(slug);
+export async function generateMetadata(): Promise<Metadata> {
+  const story = await getStory(["ui"]);
 
   if (!story) {
     return {};
@@ -22,12 +15,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function UI() {
-  await connection();
   if (process.env.NEXT_PUBLIC_STORYBLOK_IS_PREVIEW !== "true") {
     return notFound();
   }
 
-  const story = await getStory("ui");
+  await connection();
+
+  const story = await getStory(["ui"]);
 
   if (!story) {
     return notFound();

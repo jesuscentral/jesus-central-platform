@@ -46,7 +46,7 @@ export default function EventCard({ event }: { event: ISbStoryData<SbEvent> }) {
       >
         <div className="relative aspect-[16/9] w-full overflow-hidden">
           <Image
-            src={event.content.thumbnail?.filename ?? ""}
+            src={event.content.thumbnail?.filename ?? "/og-image.png"}
             alt=""
             fill
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

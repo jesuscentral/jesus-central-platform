@@ -5,7 +5,7 @@ import { storyblokApiConfig } from "./storyblok";
  * Get website config based on the current slug path
  * Determines which website (jesuscentral or jesuscentralworship) based on the slug
  */
-export async function getWebsiteConfig() {
+export async function getWebsiteConfig(language?: string) {
   const storyblok = getStoryblokApi();
 
   const websiteFolder = process.env.NEXT_PUBLIC_BASE_PATH;
@@ -15,6 +15,7 @@ export async function getWebsiteConfig() {
       `cdn/stories/${websiteFolder}/website-config`,
       {
         ...storyblokApiConfig,
+        language: language,
       }
     );
 

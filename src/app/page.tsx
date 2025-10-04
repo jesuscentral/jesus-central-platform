@@ -5,13 +5,8 @@ import { StoryblokStory } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/features/storyblok/components";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug ? resolvedParams.slug : "home";
+export async function generateMetadata(): Promise<Metadata> {
+  const slug = ["home"];
 
   const story = await getStory(slug);
 
@@ -23,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Index() {
-  const slug = "home";
+  const slug = ["home"];
 
   const [story, websiteConfig] = await Promise.all([
     getStory(slug),

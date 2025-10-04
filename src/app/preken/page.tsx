@@ -16,7 +16,7 @@ export default async function PrekenPage() {
   const [sermons, websiteConfig, story] = await Promise.all([
     getSermons(),
     getWebsiteConfig(),
-    getStory("preken"),
+    getStory(["preken"]),
     connection(),
   ]);
 
