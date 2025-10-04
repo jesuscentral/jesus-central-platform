@@ -19,7 +19,7 @@ export default function Navigation({ config }: NavigationProps) {
     return null;
   }
 
-  const { logo, home_url, header_cta_buttons } = config;
+  const { logo, header_cta_buttons } = config;
 
   return (
     <nav
@@ -27,7 +27,7 @@ export default function Navigation({ config }: NavigationProps) {
       className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6"
     >
       <div className="flex items-center">
-        <Link href={home_url || "/"} className="block">
+        <Link href={"/"} className="block">
           <Image
             src={logo?.filename ?? ""}
             alt={logo?.alt || ""}
@@ -54,19 +54,23 @@ export default function Navigation({ config }: NavigationProps) {
           header_cta_buttons.map((cta) => (
             <StoryblokServerComponent key={cta._uid} blok={cta} />
           ))}
-        <CinematicMenu
-          menu_data={config.menu_data}
-          social_links={config.social_links}
-        />
+        {config.show_menu && (
+          <CinematicMenu
+            menu_data={config.menu_data}
+            social_links={config.social_links}
+          />
+        )}
       </div>
 
       {/* Mobile Menu Button */}
-      <div className="flex md:hidden items-center">
-        <CinematicMenu
-          menu_data={config.menu_data}
-          social_links={config.social_links}
-        />
-      </div>
+      {config.show_menu && (
+        <div className="flex md:hidden items-center">
+          <CinematicMenu
+            menu_data={config.menu_data}
+            social_links={config.social_links}
+          />
+        </div>
+      )}
     </nav>
   );
 }

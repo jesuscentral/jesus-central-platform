@@ -2166,7 +2166,7 @@
     "display_name": null,
     "description": "A statement block for providing a statement with scriptures",
     "created_at": "2025-09-27T11:53:55.864Z",
-    "updated_at": "2025-10-04T12:58:25.593Z",
+    "updated_at": "2025-10-04T13:01:44.576Z",
     "id": 95373049306984,
     "schema": {
       "subtitle": {
@@ -2438,7 +2438,7 @@
     "display_name": "Website Config",
     "description": null,
     "created_at": "2025-10-03T23:20:19.615Z",
-    "updated_at": "2025-10-03T23:20:19.615Z",
+    "updated_at": "2025-10-04T13:24:54.868Z",
     "id": 97665104349536,
     "schema": {
       "site_name": {
@@ -2468,17 +2468,15 @@
         "description": "Logo alt text for accessibility",
         "id": "Y5DfYySQRZ6wxsNaxap_mQ"
       },
-      "home_url": {
-        "type": "text",
-        "pos": 3,
-        "translatable": false,
-        "default_value": "/",
-        "description": "Home page URL (usually '/')",
-        "id": "2YKdogeSSDK8U_iGSMQBCw"
+      "show_menu": {
+        "type": "boolean",
+        "pos": 4,
+        "default_value": true,
+        "id": "VQnTI2xuTWm6XSgCoOM15A"
       },
       "header_cta_buttons": {
         "type": "bloks",
-        "pos": 4,
+        "pos": 5,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2489,7 +2487,7 @@
       },
       "menu_data": {
         "type": "bloks",
-        "pos": 5,
+        "pos": 6,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2502,7 +2500,7 @@
       },
       "social_links": {
         "type": "bloks",
-        "pos": 6,
+        "pos": 7,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [

@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { createSubscription, getPayment, pageMandates } from "@/features/mollie";
+import {
+  createSubscription,
+  getPayment,
+  pageMandates,
+} from "@/features/mollie";
 
 function nextCycleDate(interval: "1 month" | "1 week" | "1 year" | string) {
   const d = new Date();
@@ -15,32 +19,34 @@ export async function POST(request: Request) {
   try {
     const form = await request.formData();
     const paymentId = String(form.get("id") || "");
-    console.log(paymentId);
+    console.log("Payment ID", paymentId);
+
     if (!paymentId) return NextResponse.json({ ok: true });
 
     const payment = await getPayment(paymentId);
 
-    const isPaidOrAuth =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (payment as any).isPaid?.() || (payment as any).isAuthorized?.();
+    console.log("Payment", payment);
 
-    if (!isPaidOrAuth) return NextResponse.json({ ok: true });
+    const isPaid = payment.status === "paid";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const customerId = (payment as any).customerId as string;
+    if (!isPaid) return NextResponse.json({ ok: true });
+    console.log("Is paid", isPaid);
+
+    const customerId = payment.customerId;
     if (!customerId) return NextResponse.json({ ok: true });
+    console.log("Customer ID", customerId);
 
-    // Ensure there is a valid mandate on the customer
     const mandatesPage = await pageMandates(customerId);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const validMandate = (mandatesPage as any)._embedded?.mandates?.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (m: any) => m.status === "valid"
+    console.log("Mandates page", mandatesPage);
+
+    const validMandate = mandatesPage.find(
+      (mandate) => mandate.status === "valid"
     );
+    console.log("Valid mandate", validMandate);
     if (!validMandate) return NextResponse.json({ ok: true });
 
-    const interval = "1 month"; // adjust as needed
-    await createSubscription(
+    const interval = "1 month";
+    const subscription = await createSubscription(
       customerId,
       payment.amount,
       interval,
@@ -49,7 +55,7 @@ export async function POST(request: Request) {
       validMandate.id,
       payment.metadata as Record<string, string>
     );
-
+    console.log("Subscription created", subscription);
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Webhook error:", error);

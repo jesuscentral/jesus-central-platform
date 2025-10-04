@@ -591,7 +591,7 @@ export interface SbWebsiteConfig {
   site_name: string;
   logo: StoryblokAsset;
   logo_alt: string;
-  home_url?: string;
+  show_menu?: boolean;
   header_cta_buttons?: SbButton[];
   menu_data: SbMenuSection[];
   social_links?: SbSocialLink[];
