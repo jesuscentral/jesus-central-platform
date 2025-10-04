@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import CinematicMenu from "@/components/ui/organisms/CinematicMenu";
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import {
+  SbBlokData,
+  storyblokEditable,
+  StoryblokServerComponent,
+} from "@storyblok/react/rsc";
 import { SbWebsiteConfig } from "@storyblok/types/287435740670216/storyblok-components";
 
 interface NavigationProps {
@@ -18,7 +22,10 @@ export default function Navigation({ config }: NavigationProps) {
   const { logo, home_url, header_cta_buttons } = config;
 
   return (
-    <nav className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6">
+    <nav
+      {...storyblokEditable(config as SbBlokData)}
+      className="absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6"
+    >
       <div className="flex items-center">
         <Link href={home_url || "/"} className="block">
           <Image
