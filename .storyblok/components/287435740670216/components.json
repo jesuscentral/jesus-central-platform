@@ -133,14 +133,15 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-09-27T11:53:54.350Z",
-    "updated_at": "2025-09-27T11:53:54.350Z",
+    "updated_at": "2025-10-04T11:41:55.676Z",
     "id": 95373043105621,
     "schema": {
       "text": {
         "type": "text",
         "pos": 0,
         "required": true,
-        "id": "xXHElM_cSXyGN64SwqiMEA"
+        "id": "xXHElM_cSXyGN64SwqiMEA",
+        "translatable": true
       },
       "tab-cd9b8431-a695-4ee8-9932-3a3628e15abb": {
         "display_name": "expert",
@@ -274,20 +275,22 @@
     "display_name": null,
     "description": "A card block",
     "created_at": "2025-09-27T11:53:54.728Z",
-    "updated_at": "2025-09-27T11:53:54.728Z",
+    "updated_at": "2025-10-04T11:43:12.103Z",
     "id": 95373044653915,
     "schema": {
       "title": {
         "type": "text",
         "pos": 0,
         "required": true,
-        "id": "xM_oLCAVSfe4DbfBO_Ying"
+        "id": "xM_oLCAVSfe4DbfBO_Ying",
+        "translatable": true
       },
       "content": {
         "type": "richtext",
         "pos": 1,
         "id": "EwTGcKAwQjGNDOLrAGfhyA",
-        "required": true
+        "required": true,
+        "translatable": true
       },
       "backgroundColor": {
         "type": "option",
@@ -631,6 +634,48 @@
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "eventList",
+    "display_name": null,
+    "description": "A list of the events in Storyblok",
+    "created_at": "2025-10-04T12:23:40.375Z",
+    "updated_at": "2025-10-04T12:31:58.872Z",
+    "id": 97857619463066,
+    "schema": {
+      "backgroundColor": {
+        "type": "option",
+        "pos": 0,
+        "use_uuid": true,
+        "source": "internal",
+        "default_value": "cream",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "id": "HkEk7QALTPS5rQytVI8fBw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "eventList",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1040,20 +1085,22 @@
     "display_name": "Hero with image",
     "description": "Hero with image background ",
     "created_at": "2025-09-27T11:53:55.299Z",
-    "updated_at": "2025-09-27T11:53:55.299Z",
+    "updated_at": "2025-10-04T11:39:28.269Z",
     "id": 95373046992738,
     "schema": {
       "title": {
         "type": "text",
         "pos": 0,
         "id": "F4nWuJy7SGO7D2F5EOPSKw",
-        "required": true
+        "required": true,
+        "translatable": true
       },
       "subtitle": {
         "type": "text",
         "pos": 1,
         "id": "9iwHOhvJSn-uDx3HXfA7qg",
-        "required": true
+        "required": true,
+        "translatable": true
       },
       "buttons": {
         "type": "bloks",
@@ -1077,7 +1124,8 @@
         "tooltip": true,
         "description": "Fallback image for when video cant be loaded",
         "id": "bWguCvYHRkSHfIQzWHZUIQ",
-        "display_name": "Image"
+        "display_name": "Image",
+        "translatable": true
       }
     },
     "image": null,
@@ -1352,7 +1400,7 @@
     "display_name": null,
     "description": null,
     "created_at": "2025-09-27T11:50:34.235Z",
-    "updated_at": "2025-10-03T23:51:52.349Z",
+    "updated_at": "2025-10-04T11:46:42.775Z",
     "id": 95372223434575,
     "schema": {
       "seo": {
@@ -1361,7 +1409,8 @@
         "field_type": "seo-metatags",
         "options": [],
         "id": "AQBReYjYTfy8yLYZtkFn5A",
-        "display_name": "Seo"
+        "display_name": "Seo",
+        "translatable": true
       },
       "body": {
         "type": "bloks",
@@ -1504,13 +1553,14 @@
     "display_name": null,
     "description": "richText block",
     "created_at": "2025-09-29T12:59:39.024Z",
-    "updated_at": "2025-09-29T13:00:43.597Z",
+    "updated_at": "2025-10-04T11:42:14.339Z",
     "id": 96096989307996,
     "schema": {
       "content": {
         "type": "richtext",
         "pos": 0,
-        "id": "Wk-T9AjeRDWmOqGeBxpxjw"
+        "id": "Wk-T9AjeRDWmOqGeBxpxjw",
+        "translatable": true
       },
       "color": {
         "type": "option",
@@ -1566,25 +1616,28 @@
     "display_name": null,
     "description": "A block for showing a scripture",
     "created_at": "2025-09-27T11:53:55.611Z",
-    "updated_at": "2025-09-27T11:53:55.611Z",
+    "updated_at": "2025-10-04T11:42:34.570Z",
     "id": 95373048270692,
     "schema": {
       "badge": {
         "type": "text",
         "pos": 0,
-        "id": "pZ9eWykbSDaH8FHMvmhcxQ"
+        "id": "pZ9eWykbSDaH8FHMvmhcxQ",
+        "translatable": true
       },
       "scripture": {
         "type": "text",
         "pos": 1,
         "id": "NGElkmhfQrCnBUsV8dxqbQ",
-        "required": true
+        "required": true,
+        "translatable": true
       },
       "reference": {
         "type": "text",
         "pos": 2,
         "required": true,
-        "id": "-q8VB0xIQ4ay7YG5s0xC-w"
+        "id": "-q8VB0xIQ4ay7YG5s0xC-w",
+        "translatable": true
       },
       "backgroundColor": {
         "type": "option",
@@ -2277,20 +2330,22 @@
     "display_name": "Hero with video",
     "description": "Hero with video background ",
     "created_at": "2025-09-27T11:53:56.095Z",
-    "updated_at": "2025-09-27T11:53:56.095Z",
+    "updated_at": "2025-10-04T11:39:55.253Z",
     "id": 95373050257258,
     "schema": {
       "title": {
         "type": "text",
         "pos": 0,
         "id": "F4nWuJy7SGO7D2F5EOPSKw",
-        "required": true
+        "required": true,
+        "translatable": true
       },
       "subtitle": {
         "type": "text",
         "pos": 1,
         "id": "9iwHOhvJSn-uDx3HXfA7qg",
-        "required": true
+        "required": true,
+        "translatable": true
       },
       "buttons": {
         "type": "bloks",

@@ -7,8 +7,7 @@ import {
   resolveRelations,
 } from "@/features/storyblok/config";
 import { updateStory } from "@/features/storyblok/utils";
-
-const availableLanguages = ["en"];
+import { getLanguageConfig } from "./utils";
 
 export const getStoryblokApi = storyblokInit({
   accessToken: storyblokConfig.accessToken,
@@ -25,13 +24,9 @@ export { storyblokApiConfig };
 export const getStory = async (slug: string[]) => {
   const storyblok = getStoryblokApi();
 
-  const language = availableLanguages.includes(slug[0]) ? slug[0] : undefined;
+  const language = await getLanguageConfig();
 
-  if (language) {
-    slug.shift();
-  }
   const joinedSlug = slug.join("/");
-
   const finalSlug =
     joinedSlug === "/" || joinedSlug === "" || joinedSlug === undefined
       ? "home"

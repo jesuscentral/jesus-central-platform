@@ -17,22 +17,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: `/:language/${process.env.NEXT_PUBLIC_BASE_PATH}/:slug`,
-        destination: "/:language/:slug",
-        permanent: true,
-      },
-      {
         source: "/home",
         destination: "/",
         permanent: true,
       },
       {
         source: "/website-config",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/:language/website-config",
         destination: "/",
         permanent: true,
       },

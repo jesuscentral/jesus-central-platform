@@ -15,6 +15,7 @@ import * as Cards from "./cards";
 import * as Navigation from "./navigation";
 import * as Interactive from "./interactive";
 import * as Media from "./media";
+import * as Lists from "./lists";
 
 // Create component map for Storyblok initialization
 export const componentMap = {
@@ -61,4 +62,7 @@ export const componentMap = {
   // Media
   image: Media.Image,
   spotifyEmbed: Media.SpotifyEmbed,
+
+  // Lists
+  eventList: Lists.EventList,
 } as const;

@@ -36,12 +36,14 @@ npm run storyblok:regenerate     # Pull components and regenerate types (run thi
 
 ### Storyblok Component System
 
-The application uses a centralized component registration system in `src/lib/storyblok.ts`:
+The application uses a centralized component registration system in `src/features/storyblok/`:
 
-- **Component Registration**: All Storyblok components must be registered in the `components` object in `getStoryblokApi()`
+- **Component Registration**: All Storyblok components must be registered in the `componentMap` in `src/features/storyblok/components/index.ts`
+- **API Functions**: Core Storyblok functions (`getStory`, `getStoryblokApi`, etc.) are in `src/features/storyblok/api.ts`
 - **Type Generation**: TypeScript types are auto-generated in `.storyblok/types/` via `storyblok:generate-types`
-- **Component Location**: Storyblok components live in `src/features/storyblok/components/`
+- **Component Location**: Storyblok components live in `src/features/storyblok/components/` organized by category
 - **Editable Blocks**: Use `storyblokEditable()` wrapper for live editing support
+- **Imports**: Import from `@/features/storyblok/api` for API functions, or `@/features/storyblok` for the full feature
 
 ### Routing Architecture
 
@@ -57,7 +59,7 @@ The application uses a centralized component registration system in `src/lib/sto
 
 3. **Base Path Handling**:
    - All Storyblok stories are prefixed with `NEXT_PUBLIC_BASE_PATH` (e.g., "jesuscentral")
-   - `linkResolver()` in `storyblok.ts` handles stripping base paths from URLs
+   - `linkResolver()` in `src/features/storyblok/utils/linkResolver.ts` handles stripping base paths from URLs
    - Redirects in `next.config.ts` normalize URLs without base path
 
 ### Directory Structure

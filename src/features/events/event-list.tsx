@@ -42,7 +42,7 @@ export default function EventList({
           <p className="text-bold-dark/70">Geen resultaten voor je selectie.</p>
         </div>
       ) : (
-        <div className="mt-8 space-y-10">
+        <div className="py-8 space-y-10">
           {Object.entries(groupedEvents).map(([month, events]) => (
             <div key={month}>
               <h2 className="mb-4 text-2xl font-bold text-bold-dark">

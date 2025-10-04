@@ -1,4 +1,4 @@
-import { getStory, getStoryblokSeoParameters } from "@/lib/storyblok";
+import { getStory, getStoryblokSeoParameters } from "@/features/storyblok/api";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";

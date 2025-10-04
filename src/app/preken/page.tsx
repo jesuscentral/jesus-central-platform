@@ -1,4 +1,5 @@
-import { getStory } from "@/lib/storyblok";
+import { getStory } from "@/features/storyblok/api";
+import { getWebsiteConfig } from "@/features/storyblok/utils";
 import { SbPage } from "@storyblok/types/287435740670216/storyblok-components";
 import {
   SbBlokData,
@@ -9,7 +10,6 @@ import { notFound } from "next/navigation";
 import SermonList from "@/components/sermons/SermonList";
 import { getSermons } from "@/lib/actions/sermons";
 import { connection } from "next/server";
-import { getWebsiteConfig } from "@/lib/getWebsiteConfig";
 import { Navigation } from "@/features/storyblok/components";
 
 export default async function PrekenPage() {

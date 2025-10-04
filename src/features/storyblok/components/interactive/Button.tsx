@@ -2,7 +2,7 @@ import { storyblokEditable } from "@storyblok/react/rsc";
 import React from "react";
 import { SbButton } from "@storyblok/types/287435740670216/storyblok-components";
 import { SbBlokData } from "@storyblok/js";
-import { linkResolver } from "@/lib/storyblok";
+import { linkResolver } from "@/features/storyblok/api";
 import UIButton, {
   ButtonType,
   ButtonVariant,

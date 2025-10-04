@@ -9,6 +9,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "storyblok:login": "storyblok login",
     "storyblok:generate-types": "storyblok ts generate --space 287435740670216 --type-prefix sb",
     "storyblok:pull": "storyblok components pull --space 287435740670216",
     "storyblok:regenerate": "npm run storyblok:pull && npm run storyblok:generate-types"

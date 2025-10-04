@@ -23,6 +23,7 @@ export interface SbBlokHero {
     | SbCard
     | SbDonation
     | SbEvent
+    | SbEventList
     | SbFeature
     | SbFooter
     | SbFullGrid
@@ -114,6 +115,13 @@ export interface SbEvent {
   [k: string]: unknown;
 }
 
+export interface SbEventList {
+  backgroundColor?: number | string;
+  component: "eventList";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbFeature {
   name?: string;
   component: "feature";
@@ -140,6 +148,7 @@ export interface SbFullGrid {
     | SbCard
     | SbDonation
     | SbEvent
+    | SbEventList
     | SbFeature
     | SbFooter
     | SbFullGrid
@@ -192,6 +201,7 @@ export interface SbGrid {
     | SbCard
     | SbDonation
     | SbEvent
+    | SbEventList
     | SbFeature
     | SbFooter
     | SbFullGrid
@@ -312,6 +322,7 @@ export interface SbPage {
     | SbCard
     | SbDonation
     | SbEvent
+    | SbEventList
     | SbFeature
     | SbFooter
     | SbFullGrid
@@ -407,6 +418,7 @@ export interface SbSection {
     | SbCard
     | SbDonation
     | SbEvent
+    | SbEventList
     | SbFeature
     | SbFooter
     | SbFullGrid
@@ -519,6 +531,7 @@ export interface SbStaticGrid {
     | SbCard
     | SbDonation
     | SbEvent
+    | SbEventList
     | SbFeature
     | SbFooter
     | SbFullGrid

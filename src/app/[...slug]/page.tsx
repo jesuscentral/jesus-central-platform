@@ -1,5 +1,5 @@
-import { getStory, getStoryblokSeoParameters } from "@/lib/storyblok";
-import { getWebsiteConfig } from "@/lib/getWebsiteConfig";
+import { getStory, getStoryblokSeoParameters } from "@/features/storyblok/api";
+import { getWebsiteConfig } from "@/features/storyblok/utils";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
