@@ -22,12 +22,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/events",
-        destination: "/agenda",
-        permanent: true,
-      },
-      {
-        source: "/global",
+        source: "/website-config",
         destination: "/",
         permanent: true,
       },
