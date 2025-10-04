@@ -160,7 +160,7 @@ NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=  # Mapbox public token
 
 - `@/*` maps to `src/*`
 - `@storyblok/*` maps to `.storyblok/*` (generated types)
-- Storyblok types: Import from `@storyblok/types/287325821225947/storyblok-components`
+- Storyblok types: Import from `@storyblok/types/287435740670216/storyblok-components`
 
 ## Styling
 

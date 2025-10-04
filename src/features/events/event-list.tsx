@@ -1,4 +1,4 @@
-import { SbEvent } from "@storyblok/types/287325821225947/storyblok-components";
+import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
 import { ISbStoryData } from "@storyblok/react/rsc";
 import EventCard from "./event-card";
 

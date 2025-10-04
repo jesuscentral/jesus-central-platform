@@ -1,7 +1,5 @@
 import { getStory } from "@/lib/storyblok";
 import { SbPage } from "@storyblok/types/287435740670216/storyblok-components";
-import Link from "next/link";
-import Image from "next/image";
 import {
   SbBlokData,
   storyblokEditable,

@@ -1,6 +1,6 @@
 "use client";
 import { ISbStoryData } from "@storyblok/react";
-import { SbEvent } from "@storyblok/types/287325821225947/storyblok-components";
+import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
 import { motion } from "framer-motion";
 import {
   Mic2,
