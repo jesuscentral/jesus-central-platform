@@ -1,5 +1,43 @@
 [
   {
+    "name": "animatedMap",
+    "display_name": null,
+    "description": "An animated Map with known locations",
+    "created_at": "2025-10-05T16:48:56.582Z",
+    "updated_at": "2025-10-05T17:15:31.536Z",
+    "id": 98276706645036,
+    "schema": {
+      "animated": {
+        "type": "boolean",
+        "pos": 0,
+        "default_value": true,
+        "id": "icpOmUBcQl2LnZBamfgRPQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "animatedMap",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "badge",
     "display_name": null,
     "description": "A badge ",

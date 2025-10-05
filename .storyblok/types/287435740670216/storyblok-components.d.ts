@@ -2,6 +2,13 @@
 // DO NOT MODIFY THIS FILE BY HAND.
 import type { ISbStoryData } from '@storyblok/js';
 import type { StoryblokAsset, StoryblokMultilink, StoryblokRichtext } from '../storyblok.d.ts';
+export interface SbAnimatedMap {
+  animated?: boolean;
+  component: "animatedMap";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbBadge {
   text: string;
   link?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
@@ -17,6 +24,7 @@ export interface SbBlokHero {
   subtitle: string;
   buttons?: SbButton[];
   block?: (
+    | SbAnimatedMap
     | SbBadge
     | SbBlokHero
     | SbButton
@@ -142,6 +150,7 @@ export interface SbFooter {
 
 export interface SbFullGrid {
   columns?: (
+    | SbAnimatedMap
     | SbBadge
     | SbBlokHero
     | SbButton
@@ -195,6 +204,7 @@ export interface SbGlobal {
 
 export interface SbGrid {
   columns?: (
+    | SbAnimatedMap
     | SbBadge
     | SbBlokHero
     | SbButton
@@ -316,6 +326,7 @@ export interface SbMenuSection {
 export interface SbPage {
   seo?: unknown;
   body?: (
+    | SbAnimatedMap
     | SbBadge
     | SbBlokHero
     | SbButton
@@ -412,6 +423,7 @@ export interface SbScrollingText {
 
 export interface SbSection {
   block: (
+    | SbAnimatedMap
     | SbBadge
     | SbBlokHero
     | SbButton
@@ -525,6 +537,7 @@ export interface SbStatementScripture {
 
 export interface SbStaticGrid {
   items: (
+    | SbAnimatedMap
     | SbBadge
     | SbBlokHero
     | SbButton

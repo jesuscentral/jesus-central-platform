@@ -30,8 +30,8 @@ export default function Image({ blok, className }: ImageProps) {
       <NextImage
         src={blok.image.filename}
         alt={blok.image.alt!}
-        width={blok.image.width ?? 800}
-        height={blok.image.height ?? 400}
+        width={blok.image.width ?? 400}
+        height={blok.image.height ?? 200}
         className={cn(
           objectFit === "cover" && "object-cover",
           objectFit === "contain" && "object-contain",

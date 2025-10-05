@@ -58,6 +58,7 @@ export const componentMap = {
   badge: Interactive.Badge,
   donation: Interactive.Donation,
   map: Interactive.Map,
+  animatedMap: Interactive.AnimatedMap,
 
   // Media
   image: Media.Image,

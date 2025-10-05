@@ -31,8 +31,8 @@ export default function Navigation({ config }: NavigationProps) {
           <Image
             src={logo?.filename ?? ""}
             alt={logo?.alt || ""}
-            width={200}
-            height={60}
+            width={logo?.width ?? 200}
+            height={logo?.height ?? 60}
             priority
             className="
               h-10 w-auto
