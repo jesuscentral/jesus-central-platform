@@ -92,8 +92,15 @@ const resolvers = {
       return <ImageCard blok={props} />;
     },
     image: (props: SbImage) => {
-      // eslint-disable-next-line jsx-a11y/alt-text
-      return <Image blok={props as SbImage & SbBlokData} />;
+      return (
+        <div className="flex justify-center items-center w-full py-16 px-16">
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <Image
+            blok={props as SbImage & SbBlokData}
+            imageClassName="mx-auto"
+          />
+        </div>
+      );
     },
   },
 };

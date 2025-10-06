@@ -9,9 +9,17 @@ import FloatingImage from "@/components/ui/organisms/FloatingImage";
 interface ImageProps {
   blok: SbImage & SbBlokData;
   className?: string;
+  imageClassName?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
-export default function Image({ blok, className }: ImageProps) {
+export default function Image({
+  blok,
+  className,
+  imageClassName,
+  ...additionalProps
+}: ImageProps) {
   if (!blok.image?.filename) {
     return null;
   }
@@ -23,7 +31,7 @@ export default function Image({ blok, className }: ImageProps) {
         alt={blok.image.alt!}
         side={blok.side as "left" | "right"}
         delay={blok.delay ? parseFloat(blok.delay) : 0}
-        className={cn("relative w-full", className)}
+        className={cn("relative w-full", className, imageClassName)}
       />
     );
   }
@@ -39,6 +47,7 @@ export default function Image({ blok, className }: ImageProps) {
         isFullHeight ? "h-full" : "aspect-[4/3] py-20",
         className
       )}
+      {...additionalProps}
     >
       <NextImage
         src={blok.image.filename}
@@ -51,7 +60,8 @@ export default function Image({ blok, className }: ImageProps) {
           objectFit === "fill" && "object-fill",
           objectFit === "none" && "object-none",
           objectFit === "scale-down" && "object-scale-down",
-          "rounded-lg overflow-hidden shadow-lg"
+          "rounded-lg overflow-hidden shadow-lg",
+          imageClassName
         )}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />

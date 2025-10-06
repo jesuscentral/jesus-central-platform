@@ -276,7 +276,7 @@ export default function NieuwBeginPage() {
               variant="h1"
               className="text-cream mb-4 md:mb-6 text-5xl md:text-7xl lg:text-8xl"
             >
-              Nieuw
+              Een Nieuw
               <br />
               Begin
             </Heading>
