@@ -4,6 +4,7 @@ import { storyblokEditable, SbBlokData } from "@storyblok/react";
 import NextImage from "next/image";
 import { cn } from "@/utils/cn";
 import { SbImage } from "@storyblok/types/287435740670216/storyblok-components";
+import FloatingImage from "@/components/ui/organisms/FloatingImage";
 
 interface ImageProps {
   blok: SbImage & SbBlokData;
@@ -13,6 +14,18 @@ interface ImageProps {
 export default function Image({ blok, className }: ImageProps) {
   if (!blok.image?.filename) {
     return null;
+  }
+
+  if (blok.animated) {
+    return (
+      <FloatingImage
+        src={blok.image.filename}
+        alt={blok.image.alt!}
+        side={blok.side as "left" | "right"}
+        delay={blok.delay ? parseFloat(blok.delay) : 0}
+        className={cn("relative w-full", className)}
+      />
+    );
   }
 
   const objectFit = blok.objectFit || "cover";

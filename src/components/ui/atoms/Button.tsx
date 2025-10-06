@@ -10,7 +10,8 @@ export type ButtonSize = "small" | "medium" | "large";
 
 interface ButtonProps {
   href?: string;
-  onClick?: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onClick?: (e: any) => void;
   type?: ButtonType;
   variant?: ButtonVariant;
   size?: ButtonSize;
