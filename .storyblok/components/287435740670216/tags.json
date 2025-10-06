@@ -13,5 +13,10 @@
     "name": "integration",
     "id": 96125363539856,
     "object_type": "component"
+  },
+  {
+    "name": "form",
+    "id": 98611638731104,
+    "object_type": "component"
   }
 ]

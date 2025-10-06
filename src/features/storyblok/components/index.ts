@@ -59,6 +59,7 @@ export const componentMap = {
   donation: Interactive.Donation,
   map: Interactive.Map,
   animatedMap: Interactive.AnimatedMap,
+  filloutForm: Interactive.FilloutForm,
 
   // Media
   image: Media.Image,

@@ -33,6 +33,7 @@ export interface SbBlokHero {
     | SbEvent
     | SbEventList
     | SbFeature
+    | SbFilloutForm
     | SbFooter
     | SbFullGrid
     | SbGlobal
@@ -60,6 +61,7 @@ export interface SbBlokHero {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
+    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -137,6 +139,16 @@ export interface SbFeature {
   [k: string]: unknown;
 }
 
+export interface SbFilloutForm {
+  id: string;
+  type?: "standard" | "fullscreen";
+  buttonText?: string;
+  buttonColor?: number | string;
+  component: "filloutForm";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbFooter {
   title: string;
   information?: (SbInformationItem | SbButton)[];
@@ -159,6 +171,7 @@ export interface SbFullGrid {
     | SbEvent
     | SbEventList
     | SbFeature
+    | SbFilloutForm
     | SbFooter
     | SbFullGrid
     | SbGlobal
@@ -186,6 +199,7 @@ export interface SbFullGrid {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
+    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -213,6 +227,7 @@ export interface SbGrid {
     | SbEvent
     | SbEventList
     | SbFeature
+    | SbFilloutForm
     | SbFooter
     | SbFullGrid
     | SbGlobal
@@ -240,6 +255,7 @@ export interface SbGrid {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
+    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -338,6 +354,7 @@ export interface SbPage {
     | SbEvent
     | SbEventList
     | SbFeature
+    | SbFilloutForm
     | SbFooter
     | SbFullGrid
     | SbGlobal
@@ -365,6 +382,7 @@ export interface SbPage {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
+    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -435,6 +453,7 @@ export interface SbSection {
     | SbEvent
     | SbEventList
     | SbFeature
+    | SbFilloutForm
     | SbFooter
     | SbFullGrid
     | SbGlobal
@@ -462,6 +481,7 @@ export interface SbSection {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
+    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -549,6 +569,7 @@ export interface SbStaticGrid {
     | SbEvent
     | SbEventList
     | SbFeature
+    | SbFilloutForm
     | SbFooter
     | SbFullGrid
     | SbGlobal
@@ -576,6 +597,7 @@ export interface SbStaticGrid {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
+    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -588,6 +610,16 @@ export interface SbStaticGrid {
 export interface SbTeaser {
   headline?: string;
   component: "teaser";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbTypeform {
+  id?: string;
+  type?: "widget" | "slider" | "popup" | "sidetab" | "popover";
+  buttonText?: string;
+  buttonColor?: number | string;
+  component: "typeform";
   _uid: string;
   [k: string]: unknown;
 }
