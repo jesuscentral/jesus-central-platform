@@ -175,7 +175,10 @@ const FullSection = ({
               className="absolute inset-0 rounded-full border-2 border-cream/50"
             />
             <div className="relative bg-cream/10 backdrop-blur-sm rounded-full p-3 md:p-4 border border-cream/30 group-hover:bg-cream/20 transition-colors">
-              <ChevronDown className="w-6 h-6 md:w-8 md:h-8 text-cream" strokeWidth={2.5} />
+              <ChevronDown
+                className="w-6 h-6 md:w-8 md:h-8 text-cream"
+                strokeWidth={2.5}
+              />
             </div>
           </motion.div>
         </motion.button>
