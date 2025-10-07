@@ -23,7 +23,7 @@ export default function RichText({ blok }: { blok: SbRichTextBlok }) {
         transition={{ duration: 0.7 }}
         {...storyblokEditable(blok as SbBlokData)}
         className={cn(
-          "relative overflow-hidden mx-auto text-center container",
+          "relative overflow-hidden mx-auto container",
           blok.containerized ? "px-12 md:px-16 xl:px-24" : ""
         )}
       >

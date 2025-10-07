@@ -2,9 +2,11 @@ import { Heading } from "@/components/ui/atoms/Heading";
 import { cn } from "@/utils/cn";
 import { StoryblokRichtext } from "@storyblok/types/storyblok";
 import {
+  MARK_TEXT_STYLE,
   NODE_HEADING,
   NODE_LI,
   NODE_OL,
+  NODE_PARAGRAPH,
   NODE_UL,
   render,
 } from "storyblok-rich-text-react-renderer";
@@ -46,9 +48,18 @@ const resolvers = {
     [NODE_LI]: (children: React.ReactNode) => (
       <li className="mb-1">{children}</li>
     ),
+    [NODE_PARAGRAPH]: (
+      children: React.ReactNode,
+      { textAlign }: { textAlign: string }
+    ) => (
+      <p className={cn(`text-${textAlign || "left"}`, "w-full")}>{children}</p>
+    ),
     [NODE_HEADING]: (
       children: React.ReactNode,
-      { level = 2 }: { level: 1 | 2 | 3 | 4 | 5 | 6 }
+      {
+        level = 2,
+        textAlign,
+      }: { level: 1 | 2 | 3 | 4 | 5 | 6; textAlign: string }
     ) => {
       const levels: Record<
         number,
@@ -63,7 +74,23 @@ const resolvers = {
       };
 
       const variant = levels[level] ?? "h2";
-      return <Heading variant={variant}>{children}</Heading>;
+      return (
+        <Heading
+          variant={variant}
+          className={cn(`text-${textAlign}`, "w-full")}
+        >
+          {children}
+        </Heading>
+      );
+    },
+  },
+  markResolvers: {
+    [MARK_TEXT_STYLE]: (
+      children: React.ReactNode,
+      { textAlign }: { textAlign: string }
+    ) => {
+      console.log("textAlign", textAlign);
+      return <span className={cn(`text-${textAlign}`)}>{children}</span>;
     },
   },
   blokResolvers: {
