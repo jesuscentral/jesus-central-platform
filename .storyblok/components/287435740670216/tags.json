@@ -10,6 +10,16 @@
     "object_type": "component"
   },
   {
+    "name": "rapper",
+    "id": 99675452404240,
+    "object_type": "component"
+  },
+  {
+    "name": "wrapper",
+    "id": 99675468743185,
+    "object_type": "component"
+  },
+  {
     "name": "integration",
     "id": 96125363539856,
     "object_type": "component"

@@ -25,14 +25,14 @@ export default async function PrekenPage() {
     notFound();
   }
 
-  const blok = story.content as SbPage;
+  const blok = story.content;
 
   return (
     <div {...storyblokEditable(blok as SbBlokData)}>
       <Navigation config={websiteConfig?.content} />
 
       <main {...storyblokEditable(blok as SbBlokData)}>
-        {blok.body?.map((nestedBlok) => (
+        {blok.body?.map((nestedBlok: SbBlokData) => (
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </main>

@@ -8,7 +8,6 @@ import {
   storyblokEditable,
   StoryblokServerComponent,
 } from "@storyblok/react/rsc";
-import { cn } from "@/utils/cn";
 
 export type ScriptureRef = {
   ref: string;
@@ -28,6 +27,7 @@ export default function Statement({ blok }: { blok: SbStatement }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      {...storyblokEditable(blok as SbBlokData)}
       className="container px-4 mx-auto relative grid gap-6 md:grid-cols-12 md:items-end"
     >
       <div className="md:col-span-5">

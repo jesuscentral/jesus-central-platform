@@ -34,6 +34,8 @@ export default function Image({
           delay={blok.delay ? parseFloat(blok.delay) : 0}
           className={className}
           imageClassName={imageClassName}
+          priority={blok.priority}
+          loading={blok.loading as "lazy" | "eager" | undefined}
         />
       </div>
     );
@@ -57,6 +59,8 @@ export default function Image({
         alt={blok.image.alt || ""}
         fill
         objectFit={objectFit}
+        priority={blok.priority}
+        loading={blok.loading as "lazy" | "eager" | undefined}
         className={cn("rounded-lg overflow-hidden shadow-lg", imageClassName)}
       />
     </div>

@@ -1,5 +1,34 @@
 import { Variants } from "framer-motion";
 
+export const customContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+export const scaleRotateVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    rotate: -5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 20,
+    },
+  },
+};
+
 export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,

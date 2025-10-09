@@ -14,6 +14,8 @@ interface AnimatedImageProps {
   imageClassName?: string;
   quality?: number;
   sizes?: string;
+  priority?: boolean;
+  loading?: "lazy" | "eager" | undefined;
 }
 
 export default function AnimatedImage({
@@ -23,7 +25,9 @@ export default function AnimatedImage({
   delay = 0,
   className,
   imageClassName,
+  priority,
   quality,
+  loading,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
 }: AnimatedImageProps) {
   const ref = useRef(null);
@@ -98,7 +102,8 @@ export default function AnimatedImage({
           className={imageClassName}
           quality={quality}
           sizes={sizes}
-          loading="lazy"
+          priority={priority}
+          loading={loading}
         />
       </motion.div>
       <motion.div

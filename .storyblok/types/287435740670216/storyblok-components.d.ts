@@ -265,6 +265,8 @@ export interface SbImage {
   objectFit?: "" | "cover" | "contain" | "fill" | "none" | "scale-down";
   side?: "" | "left" | "right";
   delay?: string;
+  priority?: boolean;
+  loading?: "" | "lazy" | "eager";
   component: "image";
   _uid: string;
   [k: string]: unknown;
@@ -337,46 +339,7 @@ export interface SbMenuSection {
 
 export interface SbPage {
   seo?: unknown;
-  body?: (
-    | SbAnimatedMap
-    | SbBadge
-    | SbBlokHero
-    | SbButton
-    | SbCard
-    | SbDonation
-    | SbEvent
-    | SbEventList
-    | SbFeature
-    | SbFilloutForm
-    | SbFooter
-    | SbFullGrid
-    | SbGlobal
-    | SbGrid
-    | SbImage
-    | SbImageCard
-    | SbImageHero
-    | SbInformationItem
-    | SbLink
-    | SbMap
-    | SbMenuItem
-    | SbMenuSection
-    | SbPage
-    | SbPersonCard
-    | SbRichText
-    | SbScripture
-    | SbScriptureReferences
-    | SbScrollingText
-    | SbSection
-    | SbSermon
-    | SbSermonHighlight
-    | SbSocialLink
-    | SbSpotifyEmbed
-    | SbStatement
-    | SbStatementScripture
-    | SbTeaser
-    | SbVideoHero
-    | SbWebsiteConfig
-  )[];
+  body?: unknown[];
   global_footer?: (ISbStoryData<sbGlobal> | string)[];
   index?: boolean;
   follow?: boolean;
