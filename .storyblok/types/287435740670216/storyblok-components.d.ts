@@ -61,7 +61,6 @@ export interface SbBlokHero {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
-    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -141,7 +140,7 @@ export interface SbFeature {
 
 export interface SbFilloutForm {
   id: string;
-  type?: "standard" | "fullscreen";
+  type?: "standard" | "fullscreen" | "popup" | "slider";
   buttonText?: string;
   buttonColor?: number | string;
   component: "filloutForm";
@@ -199,7 +198,6 @@ export interface SbFullGrid {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
-    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -255,7 +253,6 @@ export interface SbGrid {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
-    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -267,7 +264,6 @@ export interface SbGrid {
 
 export interface SbImage {
   image: StoryblokAsset;
-  fullHeight?: boolean;
   animated?: boolean;
   objectFit?: "" | "cover" | "contain" | "fill" | "none" | "scale-down";
   side?: "" | "left" | "right";
@@ -291,7 +287,7 @@ export interface SbImageCard {
 export interface SbImageHero {
   title: string;
   subtitle: string;
-  buttons?: SbButton[];
+  buttons?: (SbButton | SbFilloutForm)[];
   image: StoryblokAsset;
   component: "imageHero";
   _uid: string;
@@ -382,7 +378,6 @@ export interface SbPage {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
-    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -481,7 +476,6 @@ export interface SbSection {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
-    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -597,7 +591,6 @@ export interface SbStaticGrid {
     | SbStatementScripture
     | SbStaticGrid
     | SbTeaser
-    | SbTypeform
     | SbVideoHero
     | SbWebsiteConfig
   )[];
@@ -610,16 +603,6 @@ export interface SbStaticGrid {
 export interface SbTeaser {
   headline?: string;
   component: "teaser";
-  _uid: string;
-  [k: string]: unknown;
-}
-
-export interface SbTypeform {
-  id?: string;
-  type?: "widget" | "slider" | "popup" | "sidetab" | "popover";
-  buttonText?: string;
-  buttonColor?: number | string;
-  component: "typeform";
   _uid: string;
   [k: string]: unknown;
 }

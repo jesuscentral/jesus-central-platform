@@ -761,7 +761,7 @@
     "display_name": "Fillout Form",
     "description": "Typeform",
     "created_at": "2025-10-06T18:40:25.798Z",
-    "updated_at": "2025-10-06T18:42:03.212Z",
+    "updated_at": "2025-10-06T18:50:44.174Z",
     "id": 98658000075185,
     "schema": {
       "id": {
@@ -784,6 +784,16 @@
             "_uid": "0dc37d31-8e8d-41db-ba61-fcfbf771b600",
             "value": "fullscreen",
             "name": "fullscreen"
+          },
+          {
+            "_uid": "4cadf958-d980-4a72-a3c9-b07b9a66535f",
+            "value": "popup",
+            "name": "popup"
+          },
+          {
+            "_uid": "31e56865-6d45-425d-97d3-2cbbb3332494",
+            "value": "slider",
+            "name": "slider"
           }
         ],
         "default_value": "standard",
@@ -1054,7 +1064,7 @@
     "display_name": null,
     "description": "Image block",
     "created_at": "2025-09-27T11:53:55.197Z",
-    "updated_at": "2025-10-06T12:39:46.225Z",
+    "updated_at": "2025-10-09T15:10:56.966Z",
     "id": 95373046574944,
     "schema": {
       "image": {
@@ -1066,12 +1076,6 @@
         "required": true,
         "id": "8XJjXl_cSMqPgBIPHNdyHw",
         "allow_external_url": true
-      },
-      "fullHeight": {
-        "type": "boolean",
-        "pos": 1,
-        "default_value": true,
-        "id": "PwJhcbX-TFCa2H-kMBoxZA"
       },
       "animated": {
         "type": "boolean",
@@ -1259,7 +1263,7 @@
     "display_name": "Hero with image",
     "description": "Hero with image background ",
     "created_at": "2025-09-27T11:53:55.299Z",
-    "updated_at": "2025-10-04T12:59:24.655Z",
+    "updated_at": "2025-10-06T19:14:58.644Z",
     "id": 95373046992738,
     "schema": {
       "title": {
@@ -1282,7 +1286,8 @@
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
-          "button"
+          "button",
+          "filloutForm"
         ],
         "id": "jwWGLWQ9T2umZ8P-LCLAHQ",
         "maximum": 2,
@@ -2511,99 +2516,6 @@
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "typeform",
-    "display_name": null,
-    "description": "Typeform",
-    "created_at": "2025-10-06T17:24:31.472Z",
-    "updated_at": "2025-10-06T17:52:30.764Z",
-    "id": 98639345555444,
-    "schema": {
-      "id": {
-        "type": "text",
-        "pos": 0,
-        "id": "1OEH3dVERoyJ3OS4bYOzRA"
-      },
-      "type": {
-        "type": "option",
-        "pos": 1,
-        "use_uuid": true,
-        "options": [
-          {
-            "_uid": "0d8557b2-04f2-4663-8e5f-3aafbafec9a6",
-            "value": "widget",
-            "name": "Widget"
-          },
-          {
-            "_uid": "ef34a0e4-a29d-4a3d-bbe4-dc2e76e872e2",
-            "name": "Slider",
-            "value": "slider"
-          },
-          {
-            "_uid": "2cf0fbc4-e878-438b-ab8c-a4d63ac8bfa9",
-            "value": "popup",
-            "name": "Popup"
-          },
-          {
-            "_uid": "33ab5a40-9066-407a-bf1b-7d36132d7af4",
-            "value": "sidetab",
-            "name": "Sidetab"
-          },
-          {
-            "_uid": "0dc37d31-8e8d-41db-ba61-fcfbf771b600",
-            "value": "popover",
-            "name": "Popover"
-          }
-        ],
-        "default_value": "widget",
-        "exclude_empty_option": true,
-        "id": "U5Ugn10cS52P35AfFYqdmA"
-      },
-      "buttonText": {
-        "type": "text",
-        "pos": 2,
-        "translatable": true,
-        "id": "dy7y52fQQg2mVcKYZBWu5g"
-      },
-      "buttonColor": {
-        "type": "option",
-        "pos": 3,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "colors",
-        "exclude_empty_option": true,
-        "default_value": "brand-orange",
-        "id": "vuOGl2XES5O0ZJq9oRrabQ"
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "typeform",
-    "component_group_uuid": null,
-    "color": null,
-    "icon": null,
-    "internal_tags_list": [
-      {
-        "id": 95373044408158,
-        "name": "components"
-      },
-      {
-        "id": 98611638731104,
-        "name": "form"
-      }
-    ],
-    "internal_tag_ids": [
-      "95373044408158",
-      "98611638731104"
-    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },

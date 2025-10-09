@@ -23,7 +23,7 @@ export default function AnimatedImage({
   delay = 0,
   className,
   imageClassName,
-  quality = 60,
+  quality,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
 }: AnimatedImageProps) {
   const ref = useRef(null);
