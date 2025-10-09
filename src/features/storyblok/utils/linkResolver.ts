@@ -1,9 +1,15 @@
 import { StoryblokMultilink } from "@storyblok/types/storyblok";
 
-export const linkResolver = (link: StoryblokMultilink | undefined): string => {
+export const linkResolver = (
+  link: StoryblokMultilink | string | undefined
+): string => {
   if (!link) return "";
 
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH!;
+
+  if (typeof link === "string") {
+    return link.replace(`${basePath}/`, "");
+  }
 
   if (!basePath) {
     return link?.story?.full_slug || link.cached_url || link.url || "";

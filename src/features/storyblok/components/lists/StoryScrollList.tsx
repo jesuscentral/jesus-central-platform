@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useMotionValue, animate } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
 import { useCallback } from "react";
+import Badge from "@/components/ui/atoms/Badge";
+import Button from "@/components/ui/atoms/Button";
+import { linkResolver } from "../../utils";
+import { ArrowRight } from "lucide-react";
 interface Props {
   events: SbEvent[];
   title?: string;
@@ -16,33 +21,65 @@ export default function StoryScrollList({ events }: Props) {
   const x = useMotionValue(0);
   const autoScrollTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // --- Events happening in the next 30 days ---
-  const thisMonthEvents = useMemo(() => {
-    const now = new Date();
-    const thirtyDaysFromNow = new Date();
-    thirtyDaysFromNow.setDate(now.getDate() + 30);
-    return events.filter((event: SbEvent) => {
-      const date = new Date(event.date);
-      console.log(date);
-      return date >= now && date <= thirtyDaysFromNow;
-    });
-  }, [events]);
+  // Responsive card dimensions - full-screen on mobile, cinematic on desktop
+  const getCardDimensions = useCallback(() => {
+    if (typeof window === "undefined")
+      return { width: 360, height: 640, gap: 20 };
 
-  // Card width + gap
-  const CARD_WIDTH = 240;
-  const GAP = 16;
-  const ITEM_SIZE = CARD_WIDTH + GAP;
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
-  // Calculate offset to center the active card
+    if (isMobile) {
+      // Full-screen cinematic on mobile - fill most of viewport
+      return {
+        width: Math.min(window.innerWidth * 0.85, 400),
+        height: Math.min(window.innerHeight * 0.75, 720),
+        gap: 16,
+      };
+    } else if (isTablet) {
+      // Larger cards on tablet
+      return { width: 340, height: 600, gap: 20 };
+    } else {
+      // Desktop - cinematic portrait
+      return { width: 380, height: 680, gap: 24 };
+    }
+  }, []);
+
+  const [dimensions, setDimensions] = useState(getCardDimensions());
+  const ITEM_SIZE = dimensions.width + dimensions.gap;
+
+  // Update dimensions on resize
+  useEffect(() => {
+    const handleResize = () => setDimensions(getCardDimensions());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [getCardDimensions]);
+
+  // Calculate offset to position the active card
   const getCenterOffset = useCallback(
     (index: number) => {
-      // Get window width to calculate center position
       if (typeof window === "undefined") return -(index * ITEM_SIZE);
+
       const windowWidth = window.innerWidth;
-      const centerOffset = windowWidth / 2 - CARD_WIDTH / 2;
-      return centerOffset - index * ITEM_SIZE;
+      const isDesktop = windowWidth >= 1024;
+
+      if (isDesktop) {
+        // On desktop: keep first card at left edge, center subsequent cards
+        if (index === 0) {
+          // First card starts at left edge (0 offset)
+          return 0;
+        } else {
+          // Center other cards when selected
+          const centerOffset = windowWidth / 2 - dimensions.width / 2;
+          return centerOffset - (index * ITEM_SIZE);
+        }
+      } else {
+        // On mobile/tablet, always center the card
+        const centerOffset = windowWidth / 2 - dimensions.width / 2;
+        return centerOffset - index * ITEM_SIZE;
+      }
     },
-    [ITEM_SIZE, CARD_WIDTH]
+    [ITEM_SIZE, dimensions.width]
   );
 
   // Initialize position on mount
@@ -53,12 +90,12 @@ export default function StoryScrollList({ events }: Props) {
 
   // Auto-scroll functionality
   useEffect(() => {
-    if (thisMonthEvents.length <= 1) return;
+    if (events.length <= 1) return;
 
     const startAutoScroll = () => {
       autoScrollTimer.current = setInterval(() => {
         setCurrentIndex((prev) => {
-          const next = (prev + 1) % thisMonthEvents.length;
+          const next = (prev + 1) % events.length;
           const targetX = getCenterOffset(next);
           animate(x, targetX, {
             type: "spring",
@@ -77,9 +114,9 @@ export default function StoryScrollList({ events }: Props) {
         clearInterval(autoScrollTimer.current);
       }
     };
-  }, [getCenterOffset, thisMonthEvents.length, x]);
+  }, [getCenterOffset, events.length, x]);
 
-  // Snap to nearest card on drag end
+  // Snap to nearest card on drag end with smooth cinematic animation
   const handleDragEnd = (
     _: unknown,
     info: { offset: { x: number }; velocity: { x: number } }
@@ -87,18 +124,20 @@ export default function StoryScrollList({ events }: Props) {
     const offset = info.offset.x;
     const velocity = info.velocity.x;
 
-    // Calculate which card to snap to
+    // Calculate which card to snap to - more sensitive for better mobile UX
     let newIndex = currentIndex;
-    if (Math.abs(velocity) > 500) {
+    if (Math.abs(velocity) > 300) {
+      // Lower threshold for velocity-based swipe
       newIndex =
         velocity > 0
           ? Math.max(0, currentIndex - 1)
-          : Math.min(thisMonthEvents.length - 1, currentIndex + 1);
-    } else if (Math.abs(offset) > CARD_WIDTH / 3) {
+          : Math.min(events.length - 1, currentIndex + 1);
+    } else if (Math.abs(offset) > dimensions.width / 4) {
+      // Quarter-width swipe triggers change
       newIndex =
         offset > 0
           ? Math.max(0, currentIndex - 1)
-          : Math.min(thisMonthEvents.length - 1, currentIndex + 1);
+          : Math.min(events.length - 1, currentIndex + 1);
     }
 
     setCurrentIndex(newIndex);
@@ -106,8 +145,9 @@ export default function StoryScrollList({ events }: Props) {
 
     animate(x, targetX, {
       type: "spring",
-      stiffness: 300,
-      damping: 30,
+      stiffness: 260,
+      damping: 28,
+      mass: 0.8,
     });
 
     // Reset auto-scroll timer
@@ -136,157 +176,289 @@ export default function StoryScrollList({ events }: Props) {
   };
 
   return (
-    <div className="mb-14 -mx-4 sm:-mx-6 lg:-mx-8 overflow-hidden">
-      <div className="relative h-[520px] w-full overflow-hidden">
+    <div className="-mx-4 sm:-mx-6 lg:mx-0">
+      <div className="relative w-full overflow-visible lg:container lg:mx-auto lg:px-4">
         <motion.div
           drag="x"
           dragConstraints={{
-            left: -(thisMonthEvents.length - 1) * ITEM_SIZE,
+            left: -(events.length - 1) * ITEM_SIZE,
             right: 0,
           }}
           onDragEnd={handleDragEnd}
           whileTap={{ cursor: "grabbing" }}
           style={{ x }}
-          className="flex gap-4 items-center h-full cursor-grab"
+          className={cn(
+            "flex items-center h-full cursor-grab touch-pan-y select-none",
+            `gap-[${dimensions.gap}px]`
+          )}
+          dragElastic={0.15}
+          dragTransition={{ bounceStiffness: 400, bounceDamping: 30 }}
         >
-          {thisMonthEvents.map((event, i) => {
+          {events.map((event, i) => {
             const isCentered = i === currentIndex;
+            const distance = Math.abs(i - currentIndex);
 
             return (
-              <motion.div
+              <div
                 key={event._uid || i}
-                onClick={() => handleCardClick(i)}
-                animate={{
-                  scale: isCentered ? 1 : 0.85,
-                  opacity: isCentered ? 1 : 0.5,
-                  rotateY: isCentered ? 0 : i < currentIndex ? -10 : 10,
-                  zIndex: isCentered ? 20 : 10,
-                }}
-                whileHover={{
-                  scale: isCentered ? 1.03 : 0.88,
-                  transition: { type: "spring", stiffness: 300, damping: 20 },
-                }}
-                whileTap={{
-                  scale: isCentered ? 0.98 : 0.83,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 25,
-                }}
-                className={cn(
-                  "relative flex-shrink-0 overflow-hidden rounded-3xl shadow-2xl cursor-pointer",
-                  "w-[240px] h-[420px]", // Portrait/shorts size
-                  isCentered && "shadow-[0_0_60px_rgba(235,55,0,0.4)]"
-                )}
+                className="relative flex-shrink-0"
                 style={{
-                  perspective: "1000px",
+                  width: `${dimensions.width}px`,
+                  height: `${dimensions.height}px`,
+                  zIndex: isCentered ? 50 : Math.max(10 - distance, 1),
                 }}
               >
-                {event.video?.filename ? (
-                  <video
-                    src={event.video.filename!}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className={cn(
-                      "object-cover absolute inset-0 w-full h-full transition-all duration-700",
-                      isCentered ? "brightness-90" : "brightness-50"
-                    )}
-                    poster={event.thumbnail?.filename || "/og-image.png"}
-                    style={{ zIndex: 0 }}
-                  />
-                ) : (
-                  <Image
-                    src={event.thumbnail?.filename || "/og-image.png"}
-                    alt={event.title}
-                    fill
-                    priority
-                    className={cn(
-                      "object-cover transition-all duration-700",
-                      isCentered ? "brightness-90" : "brightness-50"
-                    )}
-                  />
-                )}
-
-                {/* Gradient overlays */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
+                  onClick={() => handleCardClick(i)}
                   animate={{
-                    opacity: isCentered ? 1 : 0.8,
+                    scale: isCentered ? 1 : 0.78 - distance * 0.05,
+                    opacity: isCentered
+                      ? 1
+                      : Math.max(0.3, 1 - distance * 0.25),
+                    rotateY: isCentered ? 0 : i < currentIndex ? -12 : 12,
+                    z: isCentered ? 0 : -100 * distance,
+                    filter: isCentered
+                      ? "blur(0px)"
+                      : `blur(${distance * 2}px)`,
                   }}
-                />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-b from-[var(--strategy-red)]/20 via-transparent to-transparent"
-                  animate={{
-                    opacity: isCentered ? [0.3, 0.5, 0.3] : 0.05,
+                  whileHover={{
+                    scale: isCentered ? 1.02 : 0.8,
+                    transition: { type: "spring", stiffness: 400, damping: 25 },
+                  }}
+                  whileTap={{
+                    scale: isCentered ? 0.98 : 0.75,
                   }}
                   transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 30,
+                    mass: 0.8,
                   }}
-                />
-
-                {/* Top badge */}
-                <motion.div
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="absolute top-4 left-4 right-4 z-10"
-                >
-                  <div className="inline-block rounded-full bg-[var(--strategy-gold)]/90 backdrop-blur-sm px-3 py-1.5 text-xs font-bold uppercase text-[var(--boldness)] shadow-lg">
-                    {event.type || "Event"}
-                  </div>
-                </motion.div>
-
-                {/* Text overlay at bottom */}
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.1 + 0.2 }}
-                  className="absolute bottom-0 left-0 right-0 z-10 p-5"
-                >
-                  <h4 className="text-xl font-bold leading-tight text-white mb-2">
-                    {event.title}
-                  </h4>
-                  {event.speaker && (
-                    <p className="text-sm text-[var(--strategy-gold)] mb-2 italic">
-                      {event.speaker}
-                    </p>
+                  className={cn(
+                    "relative w-full h-full overflow-hidden cursor-pointer backdrop-blur-sm",
+                    "rounded-2xl md:rounded-3xl lg:rounded-[2rem]",
+                    "shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
                   )}
-                  <p className="text-xs text-white/80 mb-1">
-                    {new Date(event.date).toLocaleDateString("nl-NL", {
-                      weekday: "short",
-                      day: "numeric",
-                      month: "short",
-                    })}
-                  </p>
-                  <p className="text-xs text-[var(--strategy-gold)] font-semibold">
-                    {new Date(event.date).toLocaleTimeString("nl-NL", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                </motion.div>
+                  style={{
+                    perspective: "1200px",
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  {/* Video/Image Background */}
+                  {event.video?.filename ? (
+                    <motion.video
+                      src={event.video.filename!}
+                      autoPlay={isCentered}
+                      loop
+                      muted
+                      playsInline
+                      animate={{
+                        scale: isCentered ? 1.05 : 1,
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                      }}
+                      className={cn(
+                        "object-cover absolute inset-0 w-full h-full transition-all duration-1000",
+                        isCentered
+                          ? "brightness-100 saturate-110"
+                          : "brightness-40 saturate-50"
+                      )}
+                      poster={event.thumbnail?.filename || "/og-image.png"}
+                      style={{ zIndex: 0 }}
+                    />
+                  ) : (
+                    <motion.div
+                      className="absolute inset-0"
+                      animate={{
+                        scale: isCentered ? 1.05 : 1,
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <Image
+                        src={event.thumbnail?.filename || "/og-image.png"}
+                        alt={event.title}
+                        fill
+                        priority={i <= 2}
+                        className={cn(
+                          "object-cover transition-all duration-1000",
+                          isCentered
+                            ? "brightness-100 saturate-110"
+                            : "brightness-40 saturate-50"
+                        )}
+                      />
+                    </motion.div>
+                  )}
 
-                {/* Shine effect for centered card */}
-                {isCentered && (
+                  {/* Cinematic Gradient Overlays */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
                     animate={{
-                      x: ["-100%", "200%"],
+                      opacity: isCentered ? 0.95 : 0.6,
+                    }}
+                    transition={{ duration: 0.6 }}
+                    style={{ zIndex: 1 }}
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-b from-[var(--strategy-red)]/30 via-transparent to-transparent"
+                    animate={{
+                      opacity: isCentered ? [0.4, 0.7, 0.4] : 0.1,
                     }}
                     transition={{
-                      duration: 2,
+                      duration: 4,
                       repeat: Infinity,
-                      repeatDelay: 3,
                       ease: "easeInOut",
                     }}
+                    style={{ zIndex: 2 }}
                   />
-                )}
-              </motion.div>
+                  {/* Vignette effect for centered card */}
+                  {isCentered && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/70"
+                      style={{ zIndex: 3 }}
+                    />
+                  )}
+
+                  {/* Top badge with enhanced design */}
+                  <motion.div
+                    initial={{ y: -30, opacity: 0 }}
+                    animate={{
+                      y: isCentered ? 0 : -10,
+                      opacity: isCentered ? 1 : 0.6,
+                    }}
+                    transition={{
+                      delay: i * 0.08,
+                      type: "spring",
+                      stiffness: 300,
+                    }}
+                    className="absolute top-5 left-5 right-5 z-20"
+                  >
+                    <Badge
+                      text={event.type || "Event"}
+                      backgroundColor="freedom"
+                      textColor="boldness"
+                    >
+                      {event.type || "Event"}
+                    </Badge>
+                  </motion.div>
+
+                  {/* Enhanced text overlay at bottom */}
+                  <motion.div
+                    initial={{ y: 40, opacity: 0 }}
+                    animate={{
+                      y: isCentered ? 0 : 20,
+                      opacity: isCentered ? 1 : 0.5,
+                    }}
+                    transition={{ delay: i * 0.08 + 0.15, type: "spring" }}
+                    className="absolute bottom-0 left-0 right-0 z-20 p-6 md:p-8"
+                  >
+                    {/* Date and time with modern design */}
+                    <motion.div
+                      animate={{
+                        scale: isCentered ? 1 : 0.9,
+                      }}
+                      className="flex items-center gap-3 mb-3"
+                    >
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+                        <span className="text-xs md:text-sm text-white/90 font-medium">
+                          {new Date(event.date).toLocaleDateString("nl-NL", {
+                            weekday: "short",
+                            day: "numeric",
+                            month: "short",
+                          })}
+                        </span>
+                      </div>
+                      <div className="px-3 py-1.5 rounded-full bg-[var(--strategy-gold)]/20 backdrop-blur-md border border-[var(--strategy-gold)]/30">
+                        <span className="text-xs md:text-sm text-[var(--strategy-gold)] font-bold">
+                          {new Date(event.date).toLocaleTimeString("nl-NL", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </span>
+                      </div>
+                    </motion.div>
+
+                    {/* Title with stunning typography */}
+                    <motion.h4
+                      animate={{
+                        scale: isCentered ? 1 : 0.9,
+                      }}
+                      className={cn(
+                        "font-bold leading-tight text-white mb-3 drop-shadow-2xl",
+                        "text-2xl md:text-3xl lg:text-4xl"
+                      )}
+                    >
+                      {event.title}
+                    </motion.h4>
+
+                    {/* Speaker with elegant styling */}
+                    {event.speaker && (
+                      <motion.p
+                        animate={{
+                          opacity: isCentered ? 1 : 0.6,
+                        }}
+                        className="text-base md:text-lg text-[var(--strategy-gold)] italic font-medium mb-4 drop-shadow-lg"
+                      >
+                        {event.speaker}
+                      </motion.p>
+                    )}
+
+                    {/* "Meer info" button - only shown on centered card */}
+                    {isCentered && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{
+                          delay: 0.3,
+                          type: "spring",
+                          stiffness: 300,
+                        }}
+                      >
+                        <Button
+                          href={linkResolver(event.slug as string)}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>Meer info</span>
+                          <ArrowRight />
+                        </Button>
+                      </motion.div>
+                    )}
+                  </motion.div>
+
+                  {/* Enhanced shine effect for centered card */}
+                  {isCentered && (
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none"
+                      animate={{
+                        x: ["-100%", "200%"],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatDelay: 4,
+                        ease: "easeInOut",
+                      }}
+                      style={{ zIndex: 25 }}
+                    />
+                  )}
+                </motion.div>
+              </div>
             );
           })}
         </motion.div>

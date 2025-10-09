@@ -1,7 +1,10 @@
 "use server";
 
 import { getStoryblokApi, storyblokApiConfig } from "@/features/storyblok/api";
-import { SbEventList } from "@storyblok/types/287435740670216/storyblok-components";
+import {
+  SbEvent,
+  SbEventList,
+} from "@storyblok/types/287435740670216/storyblok-components";
 import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
 import { cn } from "@/utils/cn";
 import { getLanguageConfig } from "../../utils";
@@ -15,7 +18,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
 
   const { data: eventsData } = await storyblok.get("cdn/stories/", {
     ...storyblokApiConfig,
-    starts_with: `${process.env.NEXT_PUBLIC_BASE_PATH}/agenda/`,
+    starts_with: `${process.env.NEXT_PUBLIC_BASE_PATH}/activiteiten/`,
     language,
     filter_query: {
       date: {
@@ -26,6 +29,22 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
   });
 
   const { stories: events } = eventsData;
+
+  const eventsContent = events.map((event: SbBlokData) => {
+    const { full_slug, content } = event;
+    return {
+      ...(typeof content === "object" && content !== null ? content : {}),
+      slug: full_slug,
+    };
+  });
+
+  const eventsThisWeek = eventsContent.filter((event: SbEvent) => {
+    const date = new Date(event.date);
+    return (
+      date >= new Date() &&
+      date <= new Date(new Date().setDate(new Date().getDate() + 30))
+    );
+  });
 
   return (
     <>
@@ -39,13 +58,8 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
           )}
           {...storyblokEditable(blok as SbBlokData)}
         >
-          <div className="container px-4 mx-auto">
-            <Heading variant="h2" className={cn(`text-${blok.titleColor}`)}>
-              {blok.storyScrollTitle || "Aankomende evenementen"}
-            </Heading>
-          </div>
           <StoryScrollList
-            events={events.map((event: SbBlokData) => event.content)}
+            events={eventsThisWeek}
             title={blok.storyScrollTitle}
             titleColor={blok.textColor as string}
           />
@@ -64,9 +78,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
           <Heading variant="h2" className={cn(`text-${blok.textColor}`)}>
             {blok.title || "Aankomende evenementen"}
           </Heading>
-          <FilterableList
-            events={events.map((event: SbBlokData) => event.content)}
-          />
+          <FilterableList events={eventsContent} />
         </div>
       </section>
     </>

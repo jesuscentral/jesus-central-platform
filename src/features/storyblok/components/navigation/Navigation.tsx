@@ -21,7 +21,14 @@ export default function Navigation({ config }: NavigationProps) {
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
 
+  // Check initial scroll position on mount
   useEffect(() => {
+    // Check if already scrolled on initial load
+    const initialScrollY = window.scrollY;
+    if (initialScrollY > 50) {
+      setScrolled(true);
+    }
+
     const unsubscribe = scrollY.on("change", (latest) => {
       setScrolled(latest > 50);
     });
@@ -43,7 +50,7 @@ export default function Navigation({ config }: NavigationProps) {
       <motion.nav
         {...storyblokEditable(config as SbBlokData)}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-shadow duration-300"
+          "fixed inset-x-0 top-0 z-[9999] transition-shadow duration-300"
         )}
       >
         {/* Animated background that slides down */}
@@ -124,7 +131,7 @@ export default function Navigation({ config }: NavigationProps) {
 
       {/* Menu rendered outside nav to avoid z-index stacking context issues */}
       {config.show_menu && (
-        <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[100]">
+        <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[10000]">
           <CinematicMenu
             menu_data={config.menu_data}
             social_links={config.social_links}
