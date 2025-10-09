@@ -42,4 +42,14 @@ body {
     letter-spacing: -0.01em;
     @apply uppercase;
   }
+
+  /* Hide scrollbar for story-like scroller */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

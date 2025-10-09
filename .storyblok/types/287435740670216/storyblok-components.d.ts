@@ -124,7 +124,12 @@ export interface SbEvent {
 }
 
 export interface SbEventList {
+  title?: string;
   backgroundColor?: number | string;
+  textColor?: number | string;
+  showStoryScroll?: boolean;
+  storyScrollTitle?: string;
+  titleColor?: number | string;
   component: "eventList";
   _uid: string;
   [k: string]: unknown;

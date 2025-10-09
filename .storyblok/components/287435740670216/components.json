@@ -694,18 +694,65 @@
     "display_name": null,
     "description": "A list of the events in Storyblok",
     "created_at": "2025-10-04T12:23:40.375Z",
-    "updated_at": "2025-10-04T12:31:58.872Z",
+    "updated_at": "2025-10-09T19:35:38.036Z",
     "id": 97857619463066,
     "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "LTt-TQezTKm4m3S0iVhPcA"
+      },
       "backgroundColor": {
         "type": "option",
-        "pos": 0,
+        "pos": 1,
         "use_uuid": true,
         "source": "internal",
         "default_value": "cream",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
         "id": "HkEk7QALTPS5rQytVI8fBw"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "source": "internal",
+        "default_value": "boldness",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "id": "6vuSIZcyQ_eeBwurNIKf3A"
+      },
+      "showStoryScroll": {
+        "type": "boolean",
+        "pos": 3,
+        "id": "jan0x3aFS4qt9ELulsRfgg",
+        "default_value": true
+      },
+      "tab-188ee0b2-7a3d-4b2b-a99e-5bf79d4f3af2": {
+        "display_name": "Story Scroll",
+        "keys": [
+          "showStoryScroll",
+          "storyScrollTitle",
+          "titleColor"
+        ],
+        "pos": 4,
+        "type": "tab",
+        "id": "GI7gsno9Syupnlv3nU868g"
+      },
+      "storyScrollTitle": {
+        "type": "text",
+        "pos": 5,
+        "id": "dOqirBSxSiar9zI2HC0voQ"
+      },
+      "titleColor": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "default_value": "boldness",
+        "exclude_empty_option": true,
+        "id": "cTiAk33YSFOeuhcpdcYvuA"
       }
     },
     "image": null,
@@ -723,10 +770,15 @@
       {
         "id": 95373044408158,
         "name": "components"
+      },
+      {
+        "id": 99675468743185,
+        "name": "wrapper"
       }
     ],
     "internal_tag_ids": [
-      "95373044408158"
+      "95373044408158",
+      "99675468743185"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
