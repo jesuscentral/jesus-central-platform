@@ -61,9 +61,9 @@ export default function FilterableList({ events }: Props) {
               >
                 {/* Thumbnail */}
                 <div className="relative h-44 w-full overflow-hidden">
-                  {event.thumbnail?.filename?.includes(".mp4") ? (
+                  {event.video?.filename ? (
                     <video
-                      src={event.thumbnail?.filename}
+                      src={event.video.filename!}
                       loop
                       muted
                       playsInline
@@ -71,7 +71,7 @@ export default function FilterableList({ events }: Props) {
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                       style={{ background: "#000" }}
                       tabIndex={-1}
-                      poster={"/og-image.png"}
+                      poster={event.thumbnail?.filename || "/og-image.png"}
                       onMouseEnter={(e) => {
                         e.currentTarget.play();
                       }}

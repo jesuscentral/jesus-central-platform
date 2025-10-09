@@ -115,6 +115,7 @@ export interface SbEvent {
   speaker?: string;
   location?: string;
   thumbnail?: StoryblokAsset;
+  video?: StoryblokAsset;
   type?: "" | "service" | "event";
   language: "" | "Nederlands" | "Engels";
   translationAvailable?: boolean;
@@ -124,12 +125,11 @@ export interface SbEvent {
 }
 
 export interface SbEventList {
-  title?: string;
-  backgroundColor?: number | string;
-  textColor?: number | string;
+  title: string;
+  backgroundColor: number | string;
+  textColor: number | string;
   showStoryScroll?: boolean;
   storyScrollTitle?: string;
-  titleColor?: number | string;
   component: "eventList";
   _uid: string;
   [k: string]: unknown;

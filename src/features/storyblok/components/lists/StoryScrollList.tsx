@@ -183,9 +183,9 @@ export default function StoryScrollList({ events }: Props) {
                   perspective: "1000px",
                 }}
               >
-                {event.thumbnail?.filename?.includes(".mp4") ? (
+                {event.video?.filename ? (
                   <video
-                    src={event.thumbnail?.filename}
+                    src={event.video.filename!}
                     autoPlay
                     loop
                     muted
@@ -194,6 +194,7 @@ export default function StoryScrollList({ events }: Props) {
                       "object-cover absolute inset-0 w-full h-full transition-all duration-700",
                       isCentered ? "brightness-90" : "brightness-50"
                     )}
+                    poster={event.thumbnail?.filename || "/og-image.png"}
                     style={{ zIndex: 0 }}
                   />
                 ) : (

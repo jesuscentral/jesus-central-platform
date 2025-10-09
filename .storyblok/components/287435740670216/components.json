@@ -583,7 +583,7 @@
     "display_name": null,
     "description": "A content type for events",
     "created_at": "2025-09-27T11:53:54.872Z",
-    "updated_at": "2025-10-04T12:34:31.554Z",
+    "updated_at": "2025-10-09T21:57:40.967Z",
     "id": 95373045243741,
     "schema": {
       "title": {
@@ -627,9 +627,17 @@
         "required": false,
         "id": "hElxfv6lSHqJjZ7-Pk-ddQ"
       },
+      "video": {
+        "type": "asset",
+        "pos": 6,
+        "filetypes": [
+          "videos"
+        ],
+        "id": "9pYKmrKlTFu2-jx_dcSnSg"
+      },
       "type": {
         "type": "option",
-        "pos": 6,
+        "pos": 7,
         "use_uuid": true,
         "options": [
           {
@@ -694,13 +702,14 @@
     "display_name": null,
     "description": "A list of the events in Storyblok",
     "created_at": "2025-10-04T12:23:40.375Z",
-    "updated_at": "2025-10-09T19:35:38.036Z",
+    "updated_at": "2025-10-09T19:36:33.549Z",
     "id": 97857619463066,
     "schema": {
       "title": {
         "type": "text",
         "pos": 0,
-        "id": "LTt-TQezTKm4m3S0iVhPcA"
+        "id": "LTt-TQezTKm4m3S0iVhPcA",
+        "required": true
       },
       "backgroundColor": {
         "type": "option",
@@ -710,7 +719,8 @@
         "default_value": "cream",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "id": "HkEk7QALTPS5rQytVI8fBw"
+        "id": "HkEk7QALTPS5rQytVI8fBw",
+        "required": true
       },
       "textColor": {
         "type": "option",
@@ -720,7 +730,8 @@
         "default_value": "boldness",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "id": "6vuSIZcyQ_eeBwurNIKf3A"
+        "id": "6vuSIZcyQ_eeBwurNIKf3A",
+        "required": true
       },
       "showStoryScroll": {
         "type": "boolean",
@@ -732,8 +743,7 @@
         "display_name": "Story Scroll",
         "keys": [
           "showStoryScroll",
-          "storyScrollTitle",
-          "titleColor"
+          "storyScrollTitle"
         ],
         "pos": 4,
         "type": "tab",
@@ -741,18 +751,8 @@
       },
       "storyScrollTitle": {
         "type": "text",
-        "pos": 5,
-        "id": "dOqirBSxSiar9zI2HC0voQ"
-      },
-      "titleColor": {
-        "type": "option",
         "pos": 6,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "colors",
-        "default_value": "boldness",
-        "exclude_empty_option": true,
-        "id": "cTiAk33YSFOeuhcpdcYvuA"
+        "id": "ermm3vsvSHKLOIqrzFX-fA"
       }
     },
     "image": null,
