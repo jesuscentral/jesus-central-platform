@@ -1,34 +1,16 @@
 "use client";
 
 import { SbRichText as SbRichTextBlok } from "@storyblok/types/287435740670216/storyblok-components";
-import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { RichTextRenderer } from "./RichTextRenderer";
-import { cn } from "@/utils/cn";
-import { motion } from "framer-motion";
+import Section from "@/components/ui/atoms/Section";
 
 export default function RichText({ blok }: { blok: SbRichTextBlok }) {
   return (
-    <div
-      {...storyblokEditable(blok as SbBlokData)}
-      className={cn(
-        "w-full",
-        `text-${blok.color}`,
-        `bg-${blok.backgroundColor}`
-      )}
+    <Section
+      backgroundColor={blok.backgroundColor?.toString() || "cream"}
+      color={blok.color?.toString() || "bold-dark"}
     >
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        {...storyblokEditable(blok as SbBlokData)}
-        className={cn(
-          "relative overflow-hidden mx-auto container",
-          blok.containerized ? "px-12 md:px-16 xl:px-24" : ""
-        )}
-      >
-        <RichTextRenderer document={blok.content!} />
-      </motion.section>
-    </div>
+      <RichTextRenderer document={blok.content!} />
+    </Section>
   );
 }

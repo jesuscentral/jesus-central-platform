@@ -19,9 +19,8 @@ export default function ImageCard({ blok }: { blok: SbImageCard }) {
   };
 
   return (
-    <motion.div
+    <div
       {...storyblokEditable(blok as SbBlokData)}
-      variants={fadeUp}
       className={cn(
         "rounded-2xl overflow-hidden border",
         `border-${blok.textColor}/50`,
@@ -47,6 +46,6 @@ export default function ImageCard({ blok }: { blok: SbImageCard }) {
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

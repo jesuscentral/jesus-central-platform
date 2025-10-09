@@ -25,13 +25,8 @@ const cardVariants: Variants = {
 
 export default function Card({ blok }: CardProps) {
   return (
-    <motion.article
+    <article
       {...storyblokEditable(blok as SbBlokData)}
-      variants={cardVariants}
-      custom={0}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
       className={`flex flex-col h-full rounded-3xl px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)] bg-${blok.backgroundColor}`}
     >
       <h3
@@ -53,6 +48,6 @@ export default function Card({ blok }: CardProps) {
           document={blok.content as unknown as StoryblokRichtext}
         />
       </div>
-    </motion.article>
+    </article>
   );
 }

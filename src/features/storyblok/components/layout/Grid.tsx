@@ -9,7 +9,7 @@ import {
   StoryblokComponent,
 } from "@storyblok/react";
 import { SbGrid } from "@storyblok/types/287435740670216/storyblok-components";
-import { customContainerVariants, scaleRotateVariants } from "@/lib/animations";
+import { scaleRotateVariants } from "@/lib/animations";
 
 export default function Grid({ blok }: { blok: SbGrid }) {
   const ref = useRef(null);
@@ -39,7 +39,6 @@ export default function Grid({ blok }: { blok: SbGrid }) {
       {...storyblokEditable(blok as SbBlokData)}
     >
       <motion.div
-        variants={customContainerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         className={cn(

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { SbStatement } from "@storyblok/types/287435740670216/storyblok-components";
 import {
@@ -23,10 +22,7 @@ export type JccBeliefProps = {
 
 export default function Statement({ blok }: { blok: SbStatement }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       {...storyblokEditable(blok as SbBlokData)}
       className="container px-4 mx-auto relative grid gap-6 md:grid-cols-12 md:items-end"
     >
@@ -51,6 +47,6 @@ export default function Statement({ blok }: { blok: SbStatement }) {
       {blok.scriptures?.map((blok) => (
         <StoryblokServerComponent key={blok._uid} blok={blok} />
       ))}
-    </motion.div>
+    </div>
   );
 }
