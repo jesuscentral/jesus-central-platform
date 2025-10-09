@@ -30,15 +30,6 @@ function escapeICS(text: string): string {
     .replace(/\n/g, "\\n");
 }
 
-/**
- * Generate unique ID for calendar event
- */
-function generateEventUID(event: SbEvent): string {
-  const timestamp = new Date(event.date).getTime();
-  const slug = event.slug || event._uid || "";
-  return `${timestamp}-${slug}@jesuscentral.nl`;
-}
-
 interface ICSEventData {
   title: string;
   description?: string;
@@ -159,57 +150,6 @@ export function generateOutlookUrl(data: ICSEventData): string {
 }
 
 /**
- * Generate Office 365 Calendar URL
- */
-export function generateOffice365Url(data: ICSEventData): string {
-  const { title, description = "", location = "", startDate, endDate } = data;
-
-  const formatOffice365Date = (date: Date) => {
-    return date.toISOString();
-  };
-
-  const params = new URLSearchParams({
-    path: "/calendar/action/compose",
-    rru: "addevent",
-    subject: title,
-    body: description,
-    location: location,
-    startdt: formatOffice365Date(startDate),
-    enddt: formatOffice365Date(endDate),
-  });
-
-  return `https://outlook.office.com/calendar/0/deeplink/compose?${params.toString()}`;
-}
-
-/**
- * Generate Yahoo Calendar URL
- */
-export function generateYahooCalendarUrl(data: ICSEventData): string {
-  const { title, description = "", location = "", startDate, endDate } = data;
-
-  // Yahoo uses a custom format YYYYMMDDTHHMMSSZ
-  const formatYahooDate = (date: Date) => {
-    return formatICSDate(date);
-  };
-
-  // Calculate duration in hours and minutes
-  const duration = Math.floor((endDate.getTime() - startDate.getTime()) / 1000);
-  const hours = Math.floor(duration / 3600);
-  const minutes = Math.floor((duration % 3600) / 60);
-  const durationStr = `${String(hours).padStart(2, "0")}${String(minutes).padStart(2, "0")}`;
-
-  const params = new URLSearchParams({
-    v: "60",
-    title: title,
-    desc: description,
-    in_loc: location,
-    st: formatYahooDate(startDate),
-    dur: durationStr,
-  });
-
-  return `https://calendar.yahoo.com/?${params.toString()}`;
-}
-
 /**
  * Helper to convert SbEvent to ICSEventData
  */
@@ -246,8 +186,6 @@ export function generateAllCalendarLinks(event: SbEvent, baseUrl?: string) {
   return {
     google: generateGoogleCalendarUrl(icsData),
     outlook: generateOutlookUrl(icsData),
-    office365: generateOffice365Url(icsData),
-    yahoo: generateYahooCalendarUrl(icsData),
     ics: () => downloadICS(icsData),
   };
 }

@@ -57,7 +57,6 @@ export default function RootLayout({
     <StoryblokProvider>
       <html lang="nl">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
