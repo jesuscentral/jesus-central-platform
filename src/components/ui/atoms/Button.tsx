@@ -31,12 +31,6 @@ const composeClasses = (
   const baseClasses =
     "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition-all cursor-pointer";
 
-  if (Object.keys(colors).includes(type)) {
-    type = type as ButtonType;
-  } else {
-    type = "strategy-red";
-  }
-  // Define color schemes for each type
   const colorSchemes: Record<ButtonType, Record<ButtonVariant, string>> = {
     boldness: {
       primary:

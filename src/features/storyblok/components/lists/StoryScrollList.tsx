@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useMotionValue, animate } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
@@ -71,7 +70,7 @@ export default function StoryScrollList({ events }: Props) {
         } else {
           // Center other cards when selected
           const centerOffset = windowWidth / 2 - dimensions.width / 2;
-          return centerOffset - (index * ITEM_SIZE);
+          return centerOffset - index * ITEM_SIZE;
         }
       } else {
         // On mobile/tablet, always center the card
