@@ -29,13 +29,8 @@ export default function Navigation({ config }: NavigationProps) {
     return () => unsubscribe();
   }, [scrollY]);
 
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 50],
-    ["rgba(22, 22, 21, 0)", "rgba(22, 22, 21, 0.95)"]
-  );
-
-  const backdropBlur = useTransform(scrollY, [0, 50], [0, 12]);
+  const navOpacity = useTransform(scrollY, [0, 50], [0, 1]);
+  const navScale = useTransform(scrollY, [0, 50], [0.98, 1]);
 
   if (!config) {
     return null;
@@ -47,15 +42,51 @@ export default function Navigation({ config }: NavigationProps) {
     <>
       <motion.nav
         {...storyblokEditable(config as SbBlokData)}
-        style={{
-          backgroundColor,
-        }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-          scrolled && "shadow-lg backdrop-blur-md"
+          "fixed inset-x-0 top-0 z-50 transition-shadow duration-300"
         )}
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6">
+        {/* Animated background that slides down */}
+        <motion.div
+          className="absolute inset-0 overflow-hidden"
+          initial={false}
+          animate={{
+            y: scrolled ? 0 : -100,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          }}
+        >
+          {/* Main background with gradient */}
+          <motion.div
+            className="absolute inset-0 bg-boldness rounded-b-3xl"
+            style={{
+              opacity: navOpacity,
+              scale: navScale,
+              backdropFilter: scrolled ? `blur(12px)` : "blur(0px)",
+            }}
+          />
+
+          {/* Animated accent bar at bottom */}
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-strategy-red to-transparent"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: scrolled ? 1 : 0,
+              opacity: scrolled ? 1 : 0,
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.1,
+            }}
+          />
+        </motion.div>
+
+        {/* Content layer (above background) */}
+        <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6">
           <div className="flex items-center">
             <Link href={"/"} className="block">
               <Image
