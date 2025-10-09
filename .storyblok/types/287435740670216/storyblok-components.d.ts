@@ -410,7 +410,6 @@ export interface SbScripture {
   badge?: string;
   scripture: string;
   reference: string;
-  backgroundColor: number | string;
   textColor?: number | string;
   component: "scripture";
   _uid: string;
@@ -505,7 +504,6 @@ export interface SbSermonHighlight {
   series?: string;
   language?: "" | "Nederlands" | "Engels";
   translationAvailable?: boolean;
-  backgroundColor?: number | string;
   primaryColor?: number | string;
   secondaryColor?: number | string;
   component: "sermonHighlight";
@@ -533,7 +531,6 @@ export interface SbStatement {
   statement: string;
   explanation: string;
   scriptures?: SbScriptureReferences[];
-  backgroundColor?: number | string;
   component: "statement";
   _uid: string;
   [k: string]: unknown;

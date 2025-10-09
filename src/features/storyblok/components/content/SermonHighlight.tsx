@@ -6,7 +6,6 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
   return (
     <div {...storyblokEditable(blok as SbBlokData)}>
       <SermonHighlightUI
-        backgroundColor={blok.backgroundColor?.toString()}
         primaryColor={blok.primaryColor?.toString()}
         secondaryColor={blok.secondaryColor?.toString()}
         youtubeUrl={blok.youtubeUrl?.url || ""}
