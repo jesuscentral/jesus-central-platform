@@ -1,7 +1,6 @@
 "use client";
 
 import { SbImageCard } from "@storyblok/types/287435740670216/storyblok-components";
-import { motion } from "framer-motion";
 import {
   SbBlokData,
   storyblokEditable,
@@ -10,14 +9,6 @@ import {
 import { cn } from "@/utils/cn";
 
 export default function ImageCard({ blok }: { blok: SbImageCard }) {
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-    },
-  };
-
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}

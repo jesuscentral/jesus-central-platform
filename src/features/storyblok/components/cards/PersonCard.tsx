@@ -3,17 +3,9 @@
 import { cn } from "@/utils/cn";
 import { SbBlokData, storyblokEditable } from "@storyblok/react";
 import { SbPersonCard } from "@storyblok/types/287435740670216/storyblok-components";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function PersonCard({ blok }: { blok: SbPersonCard }) {
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-    },
-  };
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}

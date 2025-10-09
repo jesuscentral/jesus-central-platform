@@ -28,7 +28,7 @@ export default function Section({ blok }: { blok: SbSection }) {
         `bg-${blok.backgroundColor}`,
         `text-${blok.color}`,
         "py-12",
-        "space-y-24"
+        "space-y-6"
       )}
       {...storyblokEditable(blok as SbBlokData)}
     >

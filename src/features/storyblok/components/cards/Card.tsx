@@ -2,25 +2,11 @@
 
 import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
 import { SbCard } from "@storyblok/types/287435740670216/storyblok-components";
-import { motion, Variants } from "framer-motion";
 import { RichTextRenderer } from "../content/RichTextRenderer";
 import { StoryblokRichtext } from "@storyblok/types/storyblok";
 import { cn } from "@/utils/cn";
 type CardProps = {
   blok: SbCard;
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1.0],
-      delay,
-    },
-  }),
 };
 
 export default function Card({ blok }: CardProps) {

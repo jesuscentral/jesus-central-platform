@@ -120,7 +120,7 @@ export default function CinematicMenu({
         key={currentScheme.name}
         onClick={handleToggle}
         aria-label={isOpen ? "Close menu" : "Open menu"}
-        className="group relative z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500  hover:scale-110 cursor-pointer"
+        className="group relative z-[100] flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500  hover:scale-110 cursor-pointer"
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = currentScheme.accentColor;
           e.currentTarget.style.boxShadow = `0 0 30px ${currentScheme.hoverShadow}`;
@@ -149,7 +149,7 @@ export default function CinematicMenu({
       </button>
 
       <div
-        className={`fixed inset-0 z-40 bg-gradient-to-br from-boldness via-boldness to-boldness transition-all duration-700 ${
+        className={`fixed inset-0 z-[90] bg-gradient-to-br from-boldness via-boldness to-boldness transition-all duration-700 ${
           isOpen
             ? "opacity-100 scale-100"
             : "opacity-0 scale-95 pointer-events-none"
