@@ -1,27 +1,31 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useInView, useScroll, useTransform, motion } from "framer-motion";
 import { cn } from "@/utils/cn";
+import Image from "@/components/ui/atoms/Image";
 
-export default function FloatingImage({
-  src,
-  alt,
-  side = "right",
-  delay = 0,
-  className,
-  ...additionalProps
-}: {
+interface AnimatedImageProps {
   src: string;
   alt: string;
   side?: "left" | "right";
   delay?: number;
   className?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}) {
+  imageClassName?: string;
+  quality?: number;
+  sizes?: string;
+}
+
+export default function AnimatedImage({
+  src,
+  alt,
+  side = "right",
+  delay = 0,
+  className,
+  imageClassName,
+  quality = 60,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+}: AnimatedImageProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-20%" });
 
@@ -30,7 +34,6 @@ export default function FloatingImage({
     offset: ["start end", "end start"],
   });
 
-  // Stunning scroll-based animations
   const imageY = useTransform(scrollYProgress, [0, 0.5, 1], [80, 0, -80]);
   const imageRotate = useTransform(
     scrollYProgress,
@@ -57,7 +60,11 @@ export default function FloatingImage({
         scale: imageScale,
         opacity: imageOpacity,
       }}
-      initial={{ opacity: 0, scale: 0.8, rotateY: side === "left" ? -15 : 15 }}
+      initial={{
+        opacity: 0,
+        scale: 0.8,
+        rotateY: side === "left" ? -15 : 15,
+      }}
       animate={
         isInView
           ? { opacity: 1, scale: 1, rotateY: 0 }
@@ -77,7 +84,6 @@ export default function FloatingImage({
         "relative h-[300px] md:h-[400px] lg:h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl will-change-transform",
         className
       )}
-      {...additionalProps}
     >
       <motion.div
         className="absolute inset-0"
@@ -88,7 +94,10 @@ export default function FloatingImage({
           src={src}
           alt={alt}
           fill
-          className="w-full h-full object-cover"
+          objectFit="cover"
+          className={imageClassName}
+          quality={quality}
+          sizes={sizes}
           loading="lazy"
         />
       </motion.div>
@@ -97,7 +106,6 @@ export default function FloatingImage({
         whileHover={{ opacity: 0.5 }}
         transition={{ duration: 0.3 }}
       />
-      {/* Animated shine effect */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
         initial={{ x: "-100%" }}

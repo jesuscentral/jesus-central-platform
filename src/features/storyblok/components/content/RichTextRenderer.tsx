@@ -89,7 +89,6 @@ const resolvers = {
       children: React.ReactNode,
       { textAlign }: { textAlign: string }
     ) => {
-      console.log("textAlign", textAlign);
       return <span className={cn(`text-${textAlign}`)}>{children}</span>;
     },
   },

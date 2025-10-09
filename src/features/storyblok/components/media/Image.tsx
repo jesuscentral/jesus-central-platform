@@ -1,10 +1,10 @@
 "use client";
 
 import { storyblokEditable, SbBlokData } from "@storyblok/react";
-import NextImage from "next/image";
 import { cn } from "@/utils/cn";
 import { SbImage } from "@storyblok/types/287435740670216/storyblok-components";
-import FloatingImage from "@/components/ui/organisms/FloatingImage";
+import StaticImage from "@/components/ui/atoms/Image";
+import AnimatedImage from "@/components/ui/molecules/AnimatedImage";
 
 interface ImageProps {
   blok: SbImage & SbBlokData;
@@ -26,44 +26,38 @@ export default function Image({
 
   if (blok.animated) {
     return (
-      <FloatingImage
-        src={blok.image.filename}
-        alt={blok.image.alt!}
-        side={blok.side as "left" | "right"}
-        delay={blok.delay ? parseFloat(blok.delay) : 0}
-        className={cn("relative w-full", className, imageClassName)}
-      />
+      <div {...storyblokEditable(blok as SbBlokData)} {...additionalProps}>
+        <AnimatedImage
+          src={blok.image.filename}
+          alt={blok.image.alt || ""}
+          side={blok.side as "left" | "right"}
+          delay={blok.delay ? parseFloat(blok.delay) : 0}
+          className={className}
+          imageClassName={imageClassName}
+        />
+      </div>
     );
   }
 
-  const objectFit = blok.objectFit || "cover";
-  const isFullHeight = blok.fullHeight ?? false;
+  const objectFit = (blok.objectFit || "cover") as
+    | "cover"
+    | "contain"
+    | "fill"
+    | "none"
+    | "scale-down";
 
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className={cn(
-        "relative w-full",
-        isFullHeight ? "h-full" : "aspect-[4/3] py-20",
-        className
-      )}
+      className={cn("relative w-full aspect-[4/3]", className)}
       {...additionalProps}
     >
-      <NextImage
+      <StaticImage
         src={blok.image.filename}
-        alt={blok.image.alt!}
-        width={blok.image.width ?? 400}
-        height={blok.image.height ?? 200}
-        className={cn(
-          objectFit === "cover" && "object-cover",
-          objectFit === "contain" && "object-contain",
-          objectFit === "fill" && "object-fill",
-          objectFit === "none" && "object-none",
-          objectFit === "scale-down" && "object-scale-down",
-          "rounded-lg overflow-hidden shadow-lg",
-          imageClassName
-        )}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt={blok.image.alt || ""}
+        fill
+        objectFit={objectFit}
+        className={cn("rounded-lg overflow-hidden shadow-lg", imageClassName)}
       />
     </div>
   );

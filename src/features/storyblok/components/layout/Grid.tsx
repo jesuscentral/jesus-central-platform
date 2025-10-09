@@ -79,7 +79,10 @@ export default function Grid({ blok }: { blok: SbGrid }) {
                   isFullHeightImage ? "h-full" : ""
                 )}
               >
-                <StoryblokServerComponent blok={nestedBlok} />
+                <StoryblokServerComponent
+                  blok={nestedBlok}
+                  key={nestedBlok._uid}
+                />
               </motion.div>
             );
           })}

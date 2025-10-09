@@ -6,7 +6,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { Heading } from "@/components/ui/atoms/Heading";
 import Button from "@/components/ui/atoms/Button";
-import FloatingImage from "@/components/ui/organisms/FloatingImage";
+import AnimatedImage from "@/components/ui/molecules/AnimatedImage";
 
 // Full Screen Section Component with stunning scroll animations
 const FullSection = ({
@@ -387,7 +387,7 @@ export default function NieuwBeginPage() {
               </div>
             </TextReveal>
 
-            <FloatingImage
+            <AnimatedImage
               src="/og-image.png"
               alt="Baptism"
               side="right"
@@ -407,7 +407,7 @@ export default function NieuwBeginPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
-              <FloatingImage
+              <AnimatedImage
                 src="/og-image.png"
                 alt="Holy Spirit"
                 side="left"
@@ -480,7 +480,7 @@ export default function NieuwBeginPage() {
             viewport={{ once: false, margin: "-20%" }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <FloatingImage
+            <AnimatedImage
               src="/og-image.png"
               alt="Alpha Course"
               side="right"
@@ -561,7 +561,7 @@ export default function NieuwBeginPage() {
               </div>
             </TextReveal>
 
-            <FloatingImage
+            <AnimatedImage
               src="/og-image.png"
               alt="Training School"
               side="right"
@@ -581,7 +581,7 @@ export default function NieuwBeginPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
-              <FloatingImage
+              <AnimatedImage
                 src="/og-image.png"
                 alt="Lifegroups"
                 side="left"
