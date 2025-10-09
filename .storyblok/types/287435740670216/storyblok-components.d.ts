@@ -119,6 +119,8 @@ export interface SbEvent {
   type?: "" | "service" | "event";
   language: "" | "Nederlands" | "Engels";
   translationAvailable?: boolean;
+  preacherPicture?: StoryblokAsset;
+  youtubeLink?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
   component: "event";
   _uid: string;
   [k: string]: unknown;

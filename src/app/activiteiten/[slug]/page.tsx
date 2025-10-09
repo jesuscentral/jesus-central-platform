@@ -35,27 +35,5 @@ export default async function EventPage({
     minute: "2-digit",
   });
 
-  // Generate calendar links
-  const calendarTitle = encodeURIComponent(event.title);
-  const calendarDetails = encodeURIComponent(event.description || "");
-  const calendarLocation = encodeURIComponent(
-    event.location || "Jesus Central Church, Gouda"
-  );
-
-  const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&dates=${eventDate
-    .toISOString()
-    .replace(/-|:|\.\d+/g, "")}/${eventDate
-    .toISOString()
-    .replace(
-      /-|:|\.\d+/g,
-      ""
-    )}&details=${calendarDetails}&location=${calendarLocation}`;
-
-  return (
-    <EventDetailPage
-      event={event}
-      formattedDate={formattedDate}
-      googleCalendarUrl={googleCalendarUrl}
-    />
-  );
+  return <EventDetailPage event={event} formattedDate={formattedDate} />;
 }

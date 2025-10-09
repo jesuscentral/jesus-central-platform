@@ -583,7 +583,7 @@
     "display_name": null,
     "description": "A content type for events",
     "created_at": "2025-09-27T11:53:54.872Z",
-    "updated_at": "2025-10-09T21:57:40.967Z",
+    "updated_at": "2025-10-09T23:24:34.363Z",
     "id": 95373045243741,
     "schema": {
       "title": {
@@ -679,6 +679,20 @@
         "pos": 9,
         "default_value": false,
         "id": "73xZC3WeToCxEiP2gm9QMQ"
+      },
+      "preacherPicture": {
+        "type": "asset",
+        "pos": 10,
+        "filetypes": [
+          "images"
+        ],
+        "display_name": "Image of preacher",
+        "id": "tHfGc7SgSeK_lOgnNn3ylQ"
+      },
+      "youtubeLink": {
+        "type": "multilink",
+        "pos": 11,
+        "id": "UNzuZh1dRVaCc7PgQFjYWw"
       }
     },
     "image": null,
