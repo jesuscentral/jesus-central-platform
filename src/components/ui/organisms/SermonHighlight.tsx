@@ -7,7 +7,6 @@ import { cn } from "@/utils/cn";
 import Image from "next/image";
 
 interface SermonHighlightProps {
-  backgroundColor?: string;
   primaryColor?: string;
   secondaryColor?: string;
   youtubeUrl: string;
@@ -43,7 +42,6 @@ function formatDate(d: string | Date) {
 }
 
 export default function SermonHighlight({
-  backgroundColor = "cream",
   primaryColor = "white",
   secondaryColor = "bold-dark",
   youtubeUrl,
@@ -65,7 +63,12 @@ export default function SermonHighlight({
   className,
 }: SermonHighlightProps) {
   return (
-    <div className="grid items-stretch gap-4 sm:gap-6 md:gap-8 md:grid-cols-12">
+    <div
+      className={cn(
+        "grid items-stretch gap-4 sm:gap-6 md:gap-8 md:grid-cols-12",
+        className
+      )}
+    >
       <motion.a
         href={youtubeUrl}
         target="_blank"

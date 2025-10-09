@@ -3,7 +3,6 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import Button, { ButtonType } from "../atoms/Button";
 import { linkResolver } from "@/features/storyblok/api";
 import { colors } from "@/lib/colors";
 import { StoryblokMultilink } from "@storyblok/types/storyblok";

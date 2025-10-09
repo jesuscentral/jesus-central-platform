@@ -1,6 +1,5 @@
 import { getStory } from "@/features/storyblok/api";
 import { getWebsiteConfig } from "@/features/storyblok/utils";
-import { SbPage } from "@storyblok/types/287435740670216/storyblok-components";
 import {
   SbBlokData,
   storyblokEditable,
