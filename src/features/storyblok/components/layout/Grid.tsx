@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { cn } from "@/utils/cn";
 import {
@@ -7,24 +7,13 @@ import {
   StoryblokServerComponent,
 } from "@storyblok/react/rsc";
 import { SbGrid } from "@storyblok/types/287435740670216/storyblok-components";
-import { Variants, motion } from "framer-motion";
 
 export default function Grid({ blok }: { blok: SbGrid }) {
-  const fadeInVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-    },
-  };
-  // Background color handling - for Tailwind classes to work, they need to be complete strings
   const getBackgroundClass = () => {
     if (!blok.backgroundColor) return "";
-    // Map common color values to Tailwind classes
     return `bg-${blok.backgroundColor}`;
   };
 
-  // Maximum 3 columns, items will wrap to next row if more than 3
   const colCount = Math.min(blok.columns?.length ?? 2, 3);
   const colCountClass =
     colCount === 1
@@ -33,60 +22,25 @@ export default function Grid({ blok }: { blok: SbGrid }) {
         ? "md:grid-cols-2"
         : "md:grid-cols-3";
 
-  // Check if all columns contain Card components
-  const hasOnlyCards = blok.columns?.every(
-    (nestedBlok) =>
-      nestedBlok.component === "card" || nestedBlok.component === "imageCard"
-  );
-
-  // Check if any column contains an Image component with fullHeight
-  const hasFullHeightImage = blok.columns?.some(
-    (nestedBlok) => nestedBlok.component === "image" && nestedBlok.fullHeight
-  );
-
   return (
     <section
-      className={cn("relative overflow-hidden", getBackgroundClass())}
+      className={cn("relative overflow-hidden", getBackgroundClass(), "py-12")}
       {...storyblokEditable(blok as SbBlokData)}
     >
-      <div className="pointer-events-none absolute inset-0 opacity-25" />
-      <div className="relative mx-auto max-w-7xl px-4 py-20">
-        <div
-          className={cn(
-            "grid grid-cols-1 gap-10",
-            colCountClass,
-            // If all items are cards or has full height images, use stretch alignment
-            hasOnlyCards || hasFullHeightImage ? "items-stretch" : "items-start"
-          )}
-        >
-          {blok.columns?.map((nestedBlok) => {
-            const isCard = nestedBlok.component === "card";
-            const isFullHeightImage =
-              nestedBlok.component === "image" && nestedBlok.fullHeight;
-
-            return (
-              <motion.div
-                variants={fadeInVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                key={nestedBlok._uid}
-                className={cn(
-                  "h-full",
-                  // If it's a card and all items are cards, make it fill the grid cell
-                  isCard && hasOnlyCards ? "flex h-full" : "",
-                  // If it's a full height image, make it fill the grid cell
-                  isFullHeightImage ? "h-full" : ""
-                )}
-              >
-                <StoryblokServerComponent
-                  blok={nestedBlok}
-                  key={nestedBlok._uid}
-                />
-              </motion.div>
-            );
-          })}
-        </div>
+      <div
+        className={cn(
+          "container px-4",
+          "grid",
+          colCountClass,
+          `gap-6`,
+          "mx-auto"
+        )}
+      >
+        {blok.columns?.map((nestedBlok) => {
+          return (
+            <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
+          );
+        })}
       </div>
     </section>
   );

@@ -19,14 +19,12 @@ import {
   SbFullGrid,
   SbGrid,
   SbLink,
-  SbStaticGrid,
   SbImage,
 } from "@storyblok/types/287435740670216/storyblok-components";
 import Button from "../interactive/Button";
 import Link from "../navigation/Link";
 import Grid from "../layout/Grid";
 import FullGrid from "../layout/FullGrid";
-import StaticGrid from "../layout/StaticGrid";
 import Card from "../cards/Card";
 import ImageCard from "../cards/ImageCard";
 import Image from "../media/Image";
@@ -108,9 +106,6 @@ const resolvers = {
     fullGrid: (props: SbFullGrid) => {
       return <FullGrid blok={props} />;
     },
-    staticGrid: (props: SbStaticGrid) => {
-      return <StaticGrid blok={props} />;
-    },
     card: (props: SbCard) => {
       return <Card blok={props} />;
     },
@@ -119,7 +114,7 @@ const resolvers = {
     },
     image: (props: SbImage) => {
       return (
-        <div className="flex justify-center items-center w-full py-16 px-16">
+        <div className="flex justify-center items-center w-full py-12 px-16">
           {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <Image
             blok={props as SbImage & SbBlokData}

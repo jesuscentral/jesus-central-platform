@@ -23,7 +23,7 @@ export default function SermonList({ sermons }: { sermons: RssVideo[] }) {
         date={latestSermon.publishedAt}
         thumbnail={{ src: latestSermon.thumbnailUrl, alt: latestSermon.title }}
       />
-      <section className="py-16 px-4 container grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mx-auto">
+      <section className="2 px-4 container grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mx-auto">
         {sortedSermons.slice(1).map((item) => (
           <SermonCard key={item.videoId} video={item} onOpen={setOpen} />
         ))}

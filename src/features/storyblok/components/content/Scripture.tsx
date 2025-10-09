@@ -19,11 +19,11 @@ const fadeInVariants: Variants = {
 
 export default function ScriptureSection({ blok }: { blok: SbScripture }) {
   const getBackgroundAndTextColor = () => {
-    return cn("py-20", `bg-${blok.backgroundColor}`, `text-${blok.textColor}`);
+    return cn(`bg-${blok.backgroundColor}`, `text-${blok.textColor}`);
   };
   return (
     <section
-      className={cn("py-20", getBackgroundAndTextColor())}
+      className={cn("py-12", getBackgroundAndTextColor())}
       {...storyblokEditable(blok as SbBlokData)}
     >
       <div className="mx-auto max-w-5xl px-4 text-center">

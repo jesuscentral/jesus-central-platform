@@ -1,6 +1,5 @@
 export { default as RichText } from "./RichText";
 export { RichTextRenderer } from "./RichTextRenderer";
-export { default as Content } from "./Content";
 export { default as Scripture } from "./Scripture";
 export { default as Statement } from "./Statement";
 export { default as StatementScripture } from "./StatementScripture";

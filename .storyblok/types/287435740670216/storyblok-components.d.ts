@@ -59,7 +59,6 @@ export interface SbBlokHero {
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
-    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
     | SbWebsiteConfig
@@ -196,7 +195,6 @@ export interface SbFullGrid {
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
-    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
     | SbWebsiteConfig
@@ -251,7 +249,6 @@ export interface SbGrid {
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
-    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
     | SbWebsiteConfig
@@ -376,7 +373,6 @@ export interface SbPage {
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
-    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
     | SbWebsiteConfig
@@ -474,7 +470,6 @@ export interface SbSection {
     | SbSpotifyEmbed
     | SbStatement
     | SbStatementScripture
-    | SbStaticGrid
     | SbTeaser
     | SbVideoHero
     | SbWebsiteConfig
@@ -548,54 +543,6 @@ export interface SbStatementScripture {
   ref?: string;
   content?: string;
   component: "statementScripture";
-  _uid: string;
-  [k: string]: unknown;
-}
-
-export interface SbStaticGrid {
-  items: (
-    | SbAnimatedMap
-    | SbBadge
-    | SbBlokHero
-    | SbButton
-    | SbCard
-    | SbDonation
-    | SbEvent
-    | SbEventList
-    | SbFeature
-    | SbFilloutForm
-    | SbFooter
-    | SbFullGrid
-    | SbGlobal
-    | SbGrid
-    | SbImage
-    | SbImageCard
-    | SbImageHero
-    | SbInformationItem
-    | SbLink
-    | SbMap
-    | SbMenuItem
-    | SbMenuSection
-    | SbPage
-    | SbPersonCard
-    | SbRichText
-    | SbScripture
-    | SbScriptureReferences
-    | SbScrollingText
-    | SbSection
-    | SbSermon
-    | SbSermonHighlight
-    | SbSocialLink
-    | SbSpotifyEmbed
-    | SbStatement
-    | SbStatementScripture
-    | SbStaticGrid
-    | SbTeaser
-    | SbVideoHero
-    | SbWebsiteConfig
-  )[];
-  backgroundColor?: number | string;
-  component: "staticGrid";
   _uid: string;
   [k: string]: unknown;
 }

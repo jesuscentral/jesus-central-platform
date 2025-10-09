@@ -2440,56 +2440,6 @@
     "metadata": {}
   },
   {
-    "name": "staticGrid",
-    "display_name": null,
-    "description": "a static grid with always 2 columns and 1 col on mobile",
-    "created_at": "2025-09-27T11:53:55.912Z",
-    "updated_at": "2025-09-27T11:53:55.912Z",
-    "id": 95373049503593,
-    "schema": {
-      "items": {
-        "type": "bloks",
-        "pos": 0,
-        "maximum": 2,
-        "minimum": 0,
-        "required": true,
-        "id": "5EofYJktQXuv0a6vF86vTQ"
-      },
-      "backgroundColor": {
-        "type": "option",
-        "pos": 1,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "colors",
-        "exclude_empty_option": true,
-        "default_value": "bold-dark",
-        "id": "msyEEGiIS7a93NHHO90dWg"
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "staticGrid",
-    "component_group_uuid": null,
-    "color": null,
-    "icon": null,
-    "internal_tags_list": [
-      {
-        "id": 95373044408158,
-        "name": "components"
-      }
-    ],
-    "internal_tag_ids": [
-      "95373044408158"
-    ],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
     "name": "teaser",
     "display_name": null,
     "description": null,

@@ -23,22 +23,24 @@ export type JccBeliefProps = {
 };
 
 export default function Statement({ blok }: { blok: SbStatement }) {
+  const getBackgroundClass = () => {
+    if (!blok.backgroundColor) return "";
+    return `bg-${blok.backgroundColor}`;
+  };
+
   return (
     <motion.section
       {...storyblokEditable(blok as SbBlokData)}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className={cn(
-        `relative isolate overflow-hidden bg-cream p-6 sm:p-8 md:p-10`,
-        `bg-${blok.backgroundColor}`
-      )}
+      className={cn("relative overflow-hidden", getBackgroundClass(), "py-12")}
     >
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative grid gap-6 md:grid-cols-12 md:items-end"
+        className="container px-4 mx-auto relative grid gap-6 md:grid-cols-12 md:items-end"
       >
         <div className="md:col-span-5">
           <div className="inline-flex items-center gap-2 rounded-md bg-bold-dark px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-cream">

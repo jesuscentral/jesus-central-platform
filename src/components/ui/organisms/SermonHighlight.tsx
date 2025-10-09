@@ -68,7 +68,7 @@ export default function SermonHighlight({
     <section
       className={cn(
         // Mobile-first padding and spacing
-        "relative isolate overflow-hidden bg-cream px-4 py-6 sm:px-6 sm:py-8 md:px-12 md:py-16",
+        "relative isolate overflow-hidden bg-cream px-4 py-6 sm:px-6 sm:py-8 md:px-12 md:py-12",
         `bg-${backgroundColor}`,
         className
       )}

@@ -24,7 +24,6 @@ export const componentMap = {
   section: Layout.Section,
   grid: Layout.Grid,
   fullGrid: Layout.FullGrid,
-  staticGrid: Layout.StaticGrid,
   global: Layout.Global,
 
   // Heroes
@@ -34,7 +33,6 @@ export const componentMap = {
 
   // Content
   richText: Content.RichText,
-  content: Content.Content,
   scripture: Content.Scripture,
   statement: Content.Statement,
   statementScripture: Content.StatementScripture,

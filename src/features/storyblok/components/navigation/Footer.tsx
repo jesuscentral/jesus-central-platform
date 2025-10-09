@@ -28,7 +28,7 @@ export default function Footer({ blok }: FooterProps) {
         className="bg-bold-dark"
         {...storyblokEditable(blok as SbBlokData)}
       >
-        <div className="mx-auto max-w-7xl px-4 py-16">
+        <div className="mx-auto max-w-7xl px-4 py-12">
           <div className="grid gap-12 md:grid-cols-2">
             <motion.div
               variants={fadeInVariants}
