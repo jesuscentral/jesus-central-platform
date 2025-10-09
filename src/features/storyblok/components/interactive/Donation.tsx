@@ -99,7 +99,7 @@ export default function DonationComponent({ blok }: Props) {
       aria-label="Donatieformulier"
     >
       <div
-        className={`mx-auto w-full max-w-xl rounded-3xl border border-black/5 bg-[var(--freedom)] p-5 shadow-xl ring-1 ring-black/5 sm:p-6 bg-${blok.backgroundColor}`}
+        className={`mx-auto w-full max-w-xl rounded-3xl border border-black/5 bg-freedom p-5 shadow-xl ring-1 ring-black/5 sm:p-6 bg-${blok.backgroundColor}`}
       >
         {/* Header */}
         <div className="mb-4 flex items-center justify-between space-x-8">
@@ -107,7 +107,7 @@ export default function DonationComponent({ blok }: Props) {
             <div className="hidden select-none sm:block">
               <div className="h-2 w-20 rounded-full bg-black/10">
                 <div
-                  className={`h-2 rounded-full bg-[var(--zending)] transition-all bg-${blok.primaryColor}`}
+                  className={`h-2 rounded-full bg-strategy-red transition-all bg-${blok.primaryColor}`}
                   style={{ width: step === 1 ? "50%" : "100%" }}
                 />
               </div>
@@ -118,7 +118,7 @@ export default function DonationComponent({ blok }: Props) {
               </p>
             </div>
             <h2
-              className={`text-2xl font-bold tracking-tight text-[var(--boldness)] text-${blok.textColor}`}
+              className={`text-2xl font-bold tracking-tight text-boldness text-${blok.textColor}`}
             >
               {blok.title ?? "Help ons om levens te bereiken"}
             </h2>

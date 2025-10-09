@@ -7,8 +7,8 @@ import Section from "@/components/ui/atoms/Section";
 export default function RichText({ blok }: { blok: SbRichTextBlok }) {
   return (
     <Section
-      backgroundColor={blok.backgroundColor?.toString() || "cream"}
-      color={blok.color?.toString() || "bold-dark"}
+      backgroundColor={blok.backgroundColor?.toString() || "freedom"}
+      color={blok.color?.toString() || "boldness"}
     >
       <RichTextRenderer document={blok.content!} />
     </Section>

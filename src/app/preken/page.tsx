@@ -35,7 +35,7 @@ export default async function PrekenPage() {
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </main>
-      <Section backgroundColor="cream" color="bold-dark">
+      <Section backgroundColor="freedom" color="boldness">
         <SermonList sermons={sermons} />
       </Section>
       {blok?.global_footer &&

@@ -172,11 +172,11 @@ const FullSection = ({
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute inset-0 rounded-full border-2 border-cream/50"
+              className="absolute inset-0 rounded-full border-2 border-freedom/50"
             />
-            <div className="relative bg-cream/10 backdrop-blur-sm rounded-full p-3 md:p-4 border border-cream/30 group-hover:bg-cream/20 transition-colors">
+            <div className="relative bg-freedom/10 backdrop-blur-sm rounded-full p-3 md:p-4 border border-freedom/30 group-hover:bg-freedom/20 transition-colors">
               <ChevronDown
-                className="w-6 h-6 md:w-8 md:h-8 text-cream"
+                className="w-6 h-6 md:w-8 md:h-8 text-freedom"
                 strokeWidth={2.5}
               />
             </div>
@@ -229,7 +229,7 @@ export default function NieuwBeginPage() {
   };
 
   return (
-    <div className="bg-black text-cream overflow-x-hidden antialiased scroll-smooth">
+    <div className="bg-black text-freedom overflow-x-hidden antialiased scroll-smooth">
       {/* Hero Section */}
       <FullSection
         bgVideo="https://jesuscentral.nl/videoclip-short.mp4"
@@ -274,7 +274,7 @@ export default function NieuwBeginPage() {
           <TextReveal delay={0.4}>
             <Heading
               variant="h1"
-              className="text-cream mb-4 md:mb-6 text-5xl md:text-7xl lg:text-8xl"
+              className="text-freedom mb-4 md:mb-6 text-5xl md:text-7xl lg:text-8xl"
             >
               Een Nieuw
               <br />
@@ -283,7 +283,7 @@ export default function NieuwBeginPage() {
           </TextReveal>
 
           <TextReveal delay={0.6}>
-            <p className="text-lg md:text-2xl lg:text-3xl text-cream/90 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-2xl lg:text-3xl text-freedom/90 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
               Welkom in jouw nieuwe leven met Jezus
             </p>
           </TextReveal>
@@ -314,7 +314,7 @@ export default function NieuwBeginPage() {
           <TextReveal>
             <Heading
               variant="h1"
-              className="text-cream mb-6 md:mb-8 text-4xl md:text-6xl lg:text-7xl"
+              className="text-freedom mb-6 md:mb-8 text-4xl md:text-6xl lg:text-7xl"
             >
               Jouw Reis
               <br />
@@ -323,7 +323,7 @@ export default function NieuwBeginPage() {
           </TextReveal>
 
           <TextReveal delay={0.2}>
-            <p className="text-base md:text-xl lg:text-2xl text-cream/90 leading-relaxed font-body max-w-2xl mx-auto">
+            <p className="text-base md:text-xl lg:text-2xl text-freedom/90 leading-relaxed font-body max-w-2xl mx-auto">
               Het besluit om Jezus te volgen is het belangrijkste besluit van je
               leven. We zijn hier om je te helpen bij de volgende stappen in
               jouw geloofsreis.
@@ -351,13 +351,13 @@ export default function NieuwBeginPage() {
                 />
                 <Heading
                   variant="h2"
-                  className="text-cream text-3xl md:text-5xl lg:text-6xl"
+                  className="text-freedom text-3xl md:text-5xl lg:text-6xl"
                 >
                   Water
                   <br />
                   Doop
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-cream/90 font-body leading-relaxed">
+                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
                   De doop is een krachtig symbool van jouw nieuwe leven in
                   Christus. Het oude leven wordt begraven en je komt op uit het
                   water als een nieuw schepsel in Hem.
@@ -366,7 +366,7 @@ export default function NieuwBeginPage() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-cream/80 font-body italic text-sm md:text-base lg:text-lg border-l-2 border-brand-green pl-4 py-2"
+                  className="text-freedom/80 font-body italic text-sm md:text-base lg:text-lg border-l-2 border-brand-green pl-4 py-2"
                 >
                   &quot;Wie gelooft en gedoopt wordt, zal behouden worden.&quot;
                   <br />
@@ -425,13 +425,13 @@ export default function NieuwBeginPage() {
                 />
                 <Heading
                   variant="h2"
-                  className="text-cream text-3xl md:text-5xl lg:text-6xl"
+                  className="text-freedom text-3xl md:text-5xl lg:text-6xl"
                 >
                   Doop in de
                   <br />
                   Heilige Geest
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-cream/90 font-body leading-relaxed">
+                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
                   De doop in de Heilige Geest is Gods kracht die in je komt
                   wonen. Het geeft je de kracht om te leven zoals Jezus wil en
                   om Zijn liefde met anderen te delen.
@@ -440,7 +440,7 @@ export default function NieuwBeginPage() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-cream/80 font-body italic text-sm md:text-base lg:text-lg border-l-2 border-brand-green pl-4 py-2"
+                  className="text-freedom/80 font-body italic text-sm md:text-base lg:text-lg border-l-2 border-brand-green pl-4 py-2"
                 >
                   &quot;Jullie zullen kracht ontvangen wanneer de Heilige Geest
                   over jullie komt.&quot;
@@ -497,11 +497,11 @@ export default function NieuwBeginPage() {
             />
             <Heading
               variant="h2"
-              className="text-cream mb-6 text-4xl md:text-5xl lg:text-6xl"
+              className="text-freedom mb-6 text-4xl md:text-5xl lg:text-6xl"
             >
               Alpha
             </Heading>
-            <p className="text-base md:text-xl lg:text-2xl text-cream/90 mb-8 font-body leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base md:text-xl lg:text-2xl text-freedom/90 mb-8 font-body leading-relaxed max-w-2xl mx-auto">
               Ontdek de basisprincipes van het christelijk geloof in een
               ontspannen sfeer met eten, discussie en vriendschap.
             </p>
@@ -534,17 +534,17 @@ export default function NieuwBeginPage() {
                 />
                 <Heading
                   variant="h2"
-                  className="text-cream text-3xl md:text-5xl lg:text-6xl"
+                  className="text-freedom text-3xl md:text-5xl lg:text-6xl"
                 >
                   Jesus Central
                   <br />
                   Training School
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-cream/90 font-body leading-relaxed">
+                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
                   Verdiep je geloof en ontwikkel je gaven in onze training
                   school. Leer hoe je Gods stem kunt horen en Hem kunt dienen.
                 </p>
-                <p className="text-sm md:text-base text-cream/70 font-body">
+                <p className="text-sm md:text-base text-freedom/70 font-body">
                   Een intensieve tijd van groei, training en toerusting voor je
                   dienst aan God.
                 </p>
@@ -599,17 +599,17 @@ export default function NieuwBeginPage() {
                 />
                 <Heading
                   variant="h2"
-                  className="text-cream text-3xl md:text-5xl lg:text-6xl"
+                  className="text-freedom text-3xl md:text-5xl lg:text-6xl"
                 >
                   Life
                   <br />
                   Groups
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-cream/90 font-body leading-relaxed">
+                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
                   Word onderdeel van een kleinere gemeenschap waar je diepere
                   vriendschappen bouwt en samen groeit in geloof.
                 </p>
-                <p className="text-sm md:text-base text-cream/70 font-body">
+                <p className="text-sm md:text-base text-freedom/70 font-body">
                   Echte verbinding, authentieke gesprekken, en samen op weg naar
                   Jezus.
                 </p>
@@ -641,7 +641,7 @@ export default function NieuwBeginPage() {
             />
             <Heading
               variant="h1"
-              className="text-cream mb-6 md:mb-8 text-5xl md:text-7xl lg:text-8xl"
+              className="text-freedom mb-6 md:mb-8 text-5xl md:text-7xl lg:text-8xl"
             >
               Je Bent
               <br />
@@ -650,7 +650,7 @@ export default function NieuwBeginPage() {
           </TextReveal>
 
           <TextReveal delay={0.2}>
-            <p className="text-base md:text-2xl lg:text-3xl text-cream/90 mb-10 md:mb-12 font-body leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base md:text-2xl lg:text-3xl text-freedom/90 mb-10 md:mb-12 font-body leading-relaxed max-w-3xl mx-auto">
               We staan klaar om je te ondersteunen bij elke stap van je nieuwe
               reis. Je hoeft dit niet alleen te doen — we zijn hier voor jou.
             </p>
@@ -689,7 +689,7 @@ export default function NieuwBeginPage() {
 
           <TextReveal delay={0.6}>
             <motion.div
-              className="mt-12 md:mt-16 pt-12 md:pt-16 border-t border-cream/20"
+              className="mt-12 md:mt-16 pt-12 md:pt-16 border-t border-freedom/20"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}

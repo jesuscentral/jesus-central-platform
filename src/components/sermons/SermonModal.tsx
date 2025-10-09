@@ -23,7 +23,7 @@ export default function SermonModal({
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 20, opacity: 0 }}
-            className="w-full max-w-5xl overflow-hidden rounded-2xl bg-bold-dark shadow-2xl"
+            className="w-full max-w-5xl overflow-hidden rounded-2xl bg-boldness shadow-2xl"
           >
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
               <iframe

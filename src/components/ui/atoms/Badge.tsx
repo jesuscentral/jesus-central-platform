@@ -15,7 +15,7 @@ export default function Badge({
   link,
   text,
   textColor = colors.BOLD_DARK,
-  backgroundColor = colors.CREAM,
+  backgroundColor = colors.freedom,
   ...additionalProps
 }: BadgeProps) {
   if (link) {

@@ -24,80 +24,49 @@ interface ButtonProps {
 }
 
 const composeClasses = (
-  type: ButtonType = "brand-orange",
+  type: ButtonType = "strategy-red",
   variant: ButtonVariant = "primary",
   size: ButtonSize = "medium"
 ) => {
   const baseClasses =
     "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition-all cursor-pointer";
 
+  if (Object.keys(colors).includes(type)) {
+    type = type as ButtonType;
+  } else {
+    type = "strategy-red";
+  }
   // Define color schemes for each type
   const colorSchemes: Record<ButtonType, Record<ButtonVariant, string>> = {
-    "brand-orange": {
+    boldness: {
       primary:
-        "bg-brand-orange text-brand-black shadow-lg shadow-black/20 hover:brightness-110",
+        "bg-boldness text-freedom shadow-lg shadow-black/30 hover:brightness-125",
       outline:
-        "bg-transparent border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-brand-black",
-    },
-    cream: {
-      primary:
-        "bg-cream text-brand-black shadow-lg shadow-black/10 hover:brightness-95",
-      outline:
-        "bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-brand-black",
-    },
-    "strategy-gold": {
-      primary:
-        "bg-strategy-gold text-brand-black shadow-lg shadow-black/20 hover:brightness-110",
-      outline:
-        "bg-transparent border-2 border-strategy-gold text-strategy-gold hover:bg-strategy-gold hover:text-brand-black",
-    },
-    "strategy-green": {
-      primary:
-        "bg-strategy-green text-cream shadow-lg shadow-black/20 hover:brightness-110",
-      outline:
-        "bg-transparent border-2 border-strategy-green text-strategy-green hover:bg-strategy-green hover:text-cream",
-    },
-    "strategy-red": {
-      primary:
-        "bg-strategy-red text-brand-black shadow-lg shadow-black/20 hover:brightness-110",
-      outline:
-        "bg-transparent border-2 border-strategy-red text-strategy-red hover:bg-strategy-red hover:text-brand-black",
-    },
-    "strategy-charcoal": {
-      primary:
-        "bg-strategy-charcoal text-cream shadow-lg shadow-black/30 hover:brightness-125",
-      outline:
-        "bg-transparent border-2 border-strategy-charcoal text-strategy-charcoal hover:bg-strategy-charcoal hover:text-cream",
-    },
-    "bold-dark": {
-      primary:
-        "bg-bold-dark text-cream shadow-lg shadow-black/30 hover:brightness-125",
-      outline:
-        "bg-transparent border-2 border-bold-dark text-bold-dark hover:bg-bold-dark hover:text-cream",
+        "bg-transparent border-2 border-boldness text-boldness hover:bg-boldness hover:text-freedom",
     },
     freedom: {
       primary:
-        "bg-freedom text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+        "bg-freedom text-boldness shadow-lg shadow-black/10 hover:brightness-95",
       outline:
-        "bg-transparent border-2 border-freedom text-freedom hover:bg-freedom hover:text-brand-black",
+        "bg-transparent border-2 border-freedom text-freedom hover:bg-freedom hover:text-boldness",
     },
-    herstel: {
+    "strategy-red": {
       primary:
-        "bg-herstel text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+        "bg-strategy-red text-boldness shadow-lg shadow-black/20 hover:brightness-110",
       outline:
-        "bg-transparent border-2 border-herstel text-herstel hover:bg-herstel hover:text-brand-black",
+        "bg-transparent border-2 border-strategy-red text-strategy-red hover:bg-strategy-red hover:text-boldness",
     },
-    toerusting: {
+    "strategy-gold": {
       primary:
-        "bg-toerusting text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+        "bg-strategy-gold text-boldness shadow-lg shadow-black/20 hover:brightness-110",
       outline:
-        "bg-transparent border-2 border-toerusting text-toerusting hover:bg-toerusting hover:text-brand-black",
+        "bg-transparent border-2 border-strategy-gold text-strategy-gold hover:bg-strategy-gold hover:text-boldness",
     },
-    zending: {
+    "strategy-green": {
       primary:
-        "bg-zending text-brand-black shadow-lg shadow-black/30 hover:brightness-125",
+        "bg-strategy-green text-freedom shadow-lg shadow-black/20 hover:brightness-110",
       outline:
-        "bg-transparent border-2 border-zending text-zending hover:bg-zending hover:text-brand-black",
+        "bg-transparent border-2 border-strategy-green text-strategy-green hover:bg-strategy-green hover:text-freedom",
     },
   };
 
@@ -129,7 +98,7 @@ const ArrowIcon = () => (
 export default function Button({
   href,
   onClick,
-  type = colors.BRAND_ORANGE,
+  type = colors.STRATEGY_RED,
   variant = "primary",
   size = "medium",
   children,
@@ -138,6 +107,7 @@ export default function Button({
   disabled = false,
   ...additionalProps
 }: ButtonProps) {
+  console.log(type);
   const buttonClasses = cn(
     composeClasses(type, variant, size),
     disabled && "opacity-50 cursor-not-allowed",

@@ -5,19 +5,11 @@ const config = {
   theme: {
     extend: {
       colors: {
-        bold: "var(--boldness)",
-        "bold-dark": "var(--bold-dark)",
-        "brand-black": "var(--brand-black)",
-        "brand-orange": "var(--brand-orange)",
-        cream: "var(--cream)",
+        boldness: "var(--boldness)",
+        freedom: "var(--freedom)",
         "strategy-gold": "var(--strategy-gold)",
         "strategy-green": "var(--strategy-green)",
         "strategy-red": "var(--strategy-red)",
-        "strategy-charcoal": "var(--strategy-charcoal)",
-        freedom: "var(--freedom)",
-        herstel: "var(--herstel)",
-        toerusting: "var(--toerusting)",
-        zending: "var(--zending)",
       },
       fontFamily: {
         heading: ["var(--font-heading)", "sans-serif"],

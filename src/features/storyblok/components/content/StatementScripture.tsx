@@ -75,7 +75,7 @@ export default function StatementScripture({
           left: position.left,
           zIndex: 9999,
         }}
-        className="w-80 rounded-xl border border-white/10 bg-bold-dark p-4 text-sm text-cream shadow-2xl"
+        className="w-80 rounded-xl border border-white/10 bg-boldness p-4 text-sm text-freedom shadow-2xl"
         onMouseEnter={() => {
           if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
@@ -85,11 +85,11 @@ export default function StatementScripture({
           timeoutRef.current = setTimeout(() => setOpen(false), 100);
         }}
       >
-        <div className="mb-1 flex items-center gap-2 text-xs uppercase tracking-wide text-cream/60">
+        <div className="mb-1 flex items-center gap-2 text-xs uppercase tracking-wide text-freedom/60">
           <Info className="h-3.5 w-3.5" />
           {blok.ref}
         </div>
-        <p className="text-cream/90">{blok.content}</p>
+        <p className="text-freedom/90">{blok.content}</p>
       </motion.div>
     </AnimatePresence>
   );
@@ -110,7 +110,7 @@ export default function StatementScripture({
           timeoutRef.current = setTimeout(() => setOpen(false), 100);
         }}
       >
-        <span className="inline-flex cursor-default items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-cream hover:border-white/20">
+        <span className="inline-flex cursor-default items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-freedom hover:border-white/20">
           <BookOpenText className="h-4 w-4 text-strategy-gold" />
           {blok.ref}
         </span>

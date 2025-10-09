@@ -25,7 +25,7 @@ export default function Footer({ blok }: FooterProps) {
   return (
     <>
       <section
-        className="bg-bold-dark"
+        className="bg-boldness"
         {...storyblokEditable(blok as SbBlokData)}
       >
         <div className="mx-auto max-w-7xl px-4 py-12">

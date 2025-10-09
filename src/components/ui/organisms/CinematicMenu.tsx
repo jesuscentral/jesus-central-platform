@@ -46,7 +46,7 @@ interface CinematicMenuProps {
 
 const colorSchemes: ColorScheme[] = [
   {
-    name: colors.BRAND_ORANGE,
+    name: colors.STRATEGY_RED,
     accentColor: "#eb3700",
     accentRgba: "rgba(235, 55, 0, 0.1)",
     hoverShadow: "rgba(235, 55, 0, 0.5)",
@@ -149,7 +149,7 @@ export default function CinematicMenu({
       </button>
 
       <div
-        className={`fixed inset-0 z-40 bg-gradient-to-br from-brand-black via-bold-dark to-strategy-charcoal transition-all duration-700 ${
+        className={`fixed inset-0 z-40 bg-gradient-to-br from-boldness via-boldness to-boldness transition-all duration-700 ${
           isOpen
             ? "opacity-100 scale-100"
             : "opacity-0 scale-95 pointer-events-none"

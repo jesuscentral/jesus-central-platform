@@ -1,6 +1,8 @@
 import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
 import { ISbStoryData } from "@storyblok/react/rsc";
 import EventCard from "./event-card";
+import Button from "@/components/ui/atoms/Button";
+import { ArrowRight } from "lucide-react";
 
 export default function EventList({
   events,
@@ -36,27 +38,47 @@ export default function EventList({
     );
 
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-24">
-      {events.length === 0 ? (
-        <div className="mt-10 rounded-2xl border border-bold-dark/10 bg-white/70 p-10 text-center">
-          <p className="text-bold-dark/70">Geen resultaten voor je selectie.</p>
+    <>
+      <div className="relative h-96 bg-gradient-to-l from-strategy-green to-strategy-green/70 overflow-hidden rounded-2xl">
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+          <h2 className="text-5xl md:text-6xl font-bold text-boldness mb-4">
+            Word lid van onze <span className="text-freedom">FAMILIE</span>
+          </h2>
+          <p className="text-xl text-boldness/90 mb-8 max-w-2xl">
+            Bekijk alle diensten en events om te zien hoe je onze familie kunt
+            ontdekken en deel kunt nemen aan deze vrije kerk.
+          </p>
+          <Button href="/lid-worden" type="freedom">
+            Bekijk alle diensten en events
+            <ArrowRight />
+          </Button>
         </div>
-      ) : (
-        <div className="py-8 space-y-10">
-          {Object.entries(groupedEvents).map(([month, events]) => (
-            <div key={month}>
-              <h2 className="mb-4 text-2xl font-bold text-bold-dark">
-                {month}
-              </h2>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {events.map((event) => (
-                  <EventCard event={event} key={event.content._uid} />
-                ))}
+      </div>
+      <section className="mx-auto max-w-6xl px-4 pb-24">
+        {events.length === 0 ? (
+          <div className="mt-10 rounded-2xl border border-boldness/10 bg-white/70 p-10 text-center">
+            <p className="text-boldness/70">
+              Geen resultaten voor je selectie.
+            </p>
+          </div>
+        ) : (
+          <div className="py-8 space-y-10">
+            {Object.entries(groupedEvents).map(([month, events]) => (
+              <div key={month}>
+                <h2 className="mb-4 text-2xl font-bold text-boldness">
+                  {month}
+                </h2>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {events.map((event) => (
+                    <EventCard event={event} key={event.content._uid} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </section>
+            ))}
+          </div>
+        )}
+      </section>
+    </>
   );
 }
