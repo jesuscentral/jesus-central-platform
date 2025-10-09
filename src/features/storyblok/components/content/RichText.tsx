@@ -2,15 +2,13 @@
 
 import { SbRichText as SbRichTextBlok } from "@storyblok/types/287435740670216/storyblok-components";
 import { RichTextRenderer } from "./RichTextRenderer";
-import Section from "@/components/ui/atoms/Section";
+import { cn } from "@/utils/cn";
 
 export default function RichText({ blok }: { blok: SbRichTextBlok }) {
   return (
-    <Section
-      backgroundColor={blok.backgroundColor?.toString() || "freedom"}
-      color={blok.color?.toString() || "boldness"}
-    >
-      <RichTextRenderer document={blok.content!} />
-    </Section>
+    <RichTextRenderer
+      className={cn(`text-${blok.color}`)}
+      document={blok.content!}
+    />
   );
 }

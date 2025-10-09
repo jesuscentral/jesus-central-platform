@@ -37,7 +37,7 @@ export default function Section({ blok }: { blok: SbSection }) {
           key={nestedBlok._uid}
           variants={scaleRotateVariants}
           custom={index}
-          className="h-full"
+          className="h-full container px-4 mx-auto"
         >
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         </motion.div>

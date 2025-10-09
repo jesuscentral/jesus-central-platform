@@ -99,7 +99,7 @@ export default function AnimatedImage({
           alt={alt}
           fill
           objectFit="cover"
-          className={imageClassName}
+          className={cn(imageClassName)}
           quality={quality}
           sizes={sizes}
           priority={priority}
