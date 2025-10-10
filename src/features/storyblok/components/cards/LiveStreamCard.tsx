@@ -36,12 +36,13 @@ export default function LiveStreamCard({ blok }: LiveStreamCardProps) {
     const interval = setInterval(checkLiveStatus, 60000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [blok.show_when_offline]);
 
-  // Only render when live
+  // Only render when live OR when show_when_offline is true
   const isLive = liveStatus?.live ?? false;
+  const shouldShow = isLive || blok.show_when_offline;
 
-  if (!isLive) {
+  if (!shouldShow) {
     return null;
   }
 
@@ -146,8 +147,8 @@ export default function LiveStreamCard({ blok }: LiveStreamCardProps) {
               </p>
             )}
 
-            {/* Embedded YouTube Player */}
-            {videoId && (
+            {/* Embedded YouTube Player - only show when video URL exists */}
+            {videoId && isLive ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -191,6 +192,18 @@ export default function LiveStreamCard({ blok }: LiveStreamCardProps) {
                   </Button>
                 </div>
               </motion.div>
+            ) : (
+              !isLive &&
+              blok.show_when_offline && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-freedom/70 text-base sm:text-lg"
+                >
+                  <p>{"We zijn momenteel niet live. Check later terug!"}</p>
+                </motion.div>
+              )
             )}
 
             {/* Decorative accent line */}

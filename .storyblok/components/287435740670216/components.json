@@ -1671,7 +1671,7 @@
     "display_name": null,
     "description": "A Card showing when live on youtube",
     "created_at": "2025-10-10T15:23:10.476Z",
-    "updated_at": "2025-10-10T15:26:13.396Z",
+    "updated_at": "2025-10-10T15:36:55.973Z",
     "id": 100025100195743,
     "schema": {
       "title": {
@@ -1686,13 +1686,6 @@
         "pos": 1,
         "id": "cXf13dQfQfi1Bg0xS42K1g"
       },
-      "button_text": {
-        "type": "text",
-        "pos": 2,
-        "required": true,
-        "default_value": "Kijk mee",
-        "id": "SUxNn2R5SfCZDt6QluvJqA"
-      },
       "backgroundColor": {
         "type": "option",
         "pos": 3,
@@ -1705,13 +1698,8 @@
       },
       "show_when_offline": {
         "type": "boolean",
-        "pos": 4,
-        "id": "Dk0OWpm4RBaTwqGhL29YJQ"
-      },
-      "offline_message": {
-        "type": "text",
-        "pos": 5,
-        "id": "jOfnv2-bRXuD-_vGNxwzJw"
+        "pos": 3,
+        "id": "Ke7YT1BqSLi6sJ2hzVC4hQ"
       }
     },
     "image": null,

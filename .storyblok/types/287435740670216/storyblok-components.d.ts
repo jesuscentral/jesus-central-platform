@@ -347,10 +347,8 @@ export interface SbLink {
 export interface SbLivestreamCard {
   title: string;
   description?: string;
-  button_text: string;
   backgroundColor?: number | string;
   show_when_offline?: boolean;
-  offline_message?: string;
   component: "livestreamCard";
   _uid: string;
   [k: string]: unknown;
