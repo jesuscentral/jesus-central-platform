@@ -2,90 +2,32 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
-import { useCallback } from "react";
-import Badge from "@/components/ui/atoms/Badge";
-import Button from "@/components/ui/atoms/Button";
 import { linkResolver } from "../../utils";
-import { ArrowRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+  Clock,
+  MapPin,
+} from "lucide-react";
+import Link from "next/link";
+
 interface Props {
   events: SbEvent[];
   title?: string;
   titleColor?: string;
 }
-export default function StoryScrollList({ events }: Props) {
+
+export default function StoryScrollList({ events, title, titleColor }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const x = useMotionValue(0);
+  const [direction, setDirection] = useState(0);
   const autoScrollTimer = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Responsive card dimensions - full-screen on mobile, cinematic on desktop
-  const getCardDimensions = useCallback(() => {
-    if (typeof window === "undefined")
-      return { width: 360, height: 640, gap: 20 };
-
-    const isMobile = window.innerWidth < 768;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-
-    if (isMobile) {
-      // Full-screen cinematic on mobile - fill most of viewport
-      return {
-        width: Math.min(window.innerWidth * 0.85, 400),
-        height: Math.min(window.innerHeight * 0.75, 720),
-        gap: 16,
-      };
-    } else if (isTablet) {
-      // Larger cards on tablet
-      return { width: 340, height: 600, gap: 20 };
-    } else {
-      // Desktop - cinematic portrait
-      return { width: 380, height: 680, gap: 24 };
-    }
-  }, []);
-
-  const [dimensions, setDimensions] = useState(getCardDimensions());
-  const ITEM_SIZE = dimensions.width + dimensions.gap;
-
-  // Update dimensions on resize
-  useEffect(() => {
-    const handleResize = () => setDimensions(getCardDimensions());
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [getCardDimensions]);
-
-  // Calculate offset to position the active card
-  const getCenterOffset = useCallback(
-    (index: number) => {
-      if (typeof window === "undefined") return -(index * ITEM_SIZE);
-
-      const windowWidth = window.innerWidth;
-      const isDesktop = windowWidth >= 1024;
-
-      if (isDesktop) {
-        // On desktop: keep first card at left edge, center subsequent cards
-        if (index === 0) {
-          // First card starts at left edge (0 offset)
-          return 0;
-        } else {
-          // Center other cards when selected
-          const centerOffset = windowWidth / 2 - dimensions.width / 2;
-          return centerOffset - index * ITEM_SIZE;
-        }
-      } else {
-        // On mobile/tablet, always center the card
-        const centerOffset = windowWidth / 2 - dimensions.width / 2;
-        return centerOffset - index * ITEM_SIZE;
-      }
-    },
-    [ITEM_SIZE, dimensions.width]
-  );
-
-  // Initialize position on mount
-  useEffect(() => {
-    const initialX = getCenterOffset(0);
-    x.set(initialX);
-  }, [getCenterOffset, x]);
+  const currentEvent = events[currentIndex];
 
   // Auto-scroll functionality
   useEffect(() => {
@@ -93,17 +35,9 @@ export default function StoryScrollList({ events }: Props) {
 
     const startAutoScroll = () => {
       autoScrollTimer.current = setInterval(() => {
-        setCurrentIndex((prev) => {
-          const next = (prev + 1) % events.length;
-          const targetX = getCenterOffset(next);
-          animate(x, targetX, {
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-          });
-          return next;
-        });
-      }, 5000); // 5 seconds
+        setDirection(1);
+        setCurrentIndex((prev) => (prev + 1) % events.length);
+      }, 7000);
     };
 
     startAutoScroll();
@@ -113,355 +47,312 @@ export default function StoryScrollList({ events }: Props) {
         clearInterval(autoScrollTimer.current);
       }
     };
-  }, [getCenterOffset, events.length, x]);
+  }, [events.length]);
 
-  // Snap to nearest card on drag end with smooth cinematic animation
-  const handleDragEnd = (
-    _: unknown,
-    info: { offset: { x: number }; velocity: { x: number } }
-  ) => {
-    const offset = info.offset.x;
-    const velocity = info.velocity.x;
-
-    // Calculate which card to snap to - more sensitive for better mobile UX
-    let newIndex = currentIndex;
-    if (Math.abs(velocity) > 300) {
-      // Lower threshold for velocity-based swipe
-      newIndex =
-        velocity > 0
-          ? Math.max(0, currentIndex - 1)
-          : Math.min(events.length - 1, currentIndex + 1);
-    } else if (Math.abs(offset) > dimensions.width / 4) {
-      // Quarter-width swipe triggers change
-      newIndex =
-        offset > 0
-          ? Math.max(0, currentIndex - 1)
-          : Math.min(events.length - 1, currentIndex + 1);
-    }
-
+  const navigate = (newDirection: number) => {
+    setDirection(newDirection);
+    const newIndex =
+      newDirection > 0
+        ? (currentIndex + 1) % events.length
+        : (currentIndex - 1 + events.length) % events.length;
     setCurrentIndex(newIndex);
-    const targetX = getCenterOffset(newIndex);
 
-    animate(x, targetX, {
-      type: "spring",
-      stiffness: 260,
-      damping: 28,
-      mass: 0.8,
-    });
-
-    // Reset auto-scroll timer
+    // Reset auto-scroll
     if (autoScrollTimer.current) {
       clearInterval(autoScrollTimer.current);
     }
   };
 
-  // Handle card click - scroll to and highlight
-  const handleCardClick = (index: number) => {
-    if (index === currentIndex) return; // Already centered
-
-    setCurrentIndex(index);
-    const targetX = getCenterOffset(index);
-
-    animate(x, targetX, {
-      type: "spring",
-      stiffness: 300,
-      damping: 30,
-    });
-
-    // Reset auto-scroll timer
-    if (autoScrollTimer.current) {
-      clearInterval(autoScrollTimer.current);
-    }
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? "100%" : "-100%",
+      opacity: 0,
+      scale: 0.8,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? "-100%" : "100%",
+      opacity: 0,
+      scale: 0.8,
+    }),
   };
 
   return (
-    <div className="-mx-4 sm:-mx-6 lg:mx-0">
-      <div className="relative w-full overflow-visible lg:container lg:mx-auto lg:px-4">
+    <div className="relative w-full overflow-hidden bg-freedom py-12 md:py-20">
+      {/* Title Section */}
+      {title && (
         <motion.div
-          drag="x"
-          dragConstraints={{
-            left: -(events.length - 1) * ITEM_SIZE,
-            right: 0,
-          }}
-          onDragEnd={handleDragEnd}
-          whileTap={{ cursor: "grabbing" }}
-          style={{ x }}
-          className={cn(
-            "flex items-center h-full cursor-grab touch-pan-y select-none",
-            `gap-[${dimensions.gap}px]`
-          )}
-          dragElastic={0.15}
-          dragTransition={{ bounceStiffness: 400, bounceDamping: 30 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="container mx-auto px-4 md:px-6 mb-8 md:mb-12"
         >
-          {events.map((event, i) => {
-            const isCentered = i === currentIndex;
-            const distance = Math.abs(i - currentIndex);
+          <h2
+            className={cn(
+              "font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide",
+              titleColor ? `text-${titleColor}` : "text-freedom"
+            )}
+          >
+            {title}
+          </h2>
+        </motion.div>
+      )}
 
-            return (
-              <div
-                key={event._uid || i}
-                className="relative flex-shrink-0"
-                style={{
-                  width: `${dimensions.width}px`,
-                  height: `${dimensions.height}px`,
-                  zIndex: isCentered ? 50 : Math.max(10 - distance, 1),
-                }}
-              >
-                <motion.div
-                  onClick={() => handleCardClick(i)}
-                  animate={{
-                    scale: isCentered ? 1 : 0.78 - distance * 0.05,
-                    opacity: isCentered
-                      ? 1
-                      : Math.max(0.3, 1 - distance * 0.25),
-                    rotateY: isCentered ? 0 : i < currentIndex ? -12 : 12,
-                    z: isCentered ? 0 : -100 * distance,
-                    filter: isCentered
-                      ? "blur(0px)"
-                      : `blur(${distance * 2}px)`,
-                  }}
-                  whileHover={{
-                    scale: isCentered ? 1.02 : 0.8,
-                    transition: { type: "spring", stiffness: 400, damping: 25 },
-                  }}
-                  whileTap={{
-                    scale: isCentered ? 0.98 : 0.75,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 30,
-                    mass: 0.8,
-                  }}
-                  className={cn(
-                    "relative w-full h-full overflow-hidden cursor-pointer backdrop-blur-sm",
-                    "rounded-2xl md:rounded-3xl lg:rounded-[2rem]",
-                    "shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
-                  )}
-                  style={{
-                    perspective: "1200px",
-                    transformStyle: "preserve-3d",
-                  }}
-                >
-                  {/* Video/Image Background */}
-                  {event.video?.filename ? (
-                    <motion.video
-                      src={event.video.filename!}
-                      autoPlay={isCentered}
+      {/* Main Content */}
+      <div
+        ref={containerRef}
+        className="relative h-[600px] md:h-[700px] lg:h-[800px]"
+      >
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.3 },
+              scale: { duration: 0.4 },
+            }}
+            className="absolute inset-0"
+          >
+            {/* Card Container */}
+            <div className="relative h-full mx-auto max-w-5xl px-4 md:px-6">
+              <div className="relative h-full w-full overflow-hidden rounded-3xl border border-freedom/10">
+                {/* Background Media */}
+                <div className="absolute inset-0">
+                  {currentEvent.video?.filename ? (
+                    <video
+                      key={`video-${currentIndex}`}
+                      src={currentEvent.video.filename}
+                      autoPlay
                       loop
                       muted
                       playsInline
-                      animate={{
-                        scale: isCentered ? 1.05 : 1,
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                      }}
-                      className={cn(
-                        "object-cover absolute inset-0 w-full h-full transition-all duration-1000",
-                        isCentered
-                          ? "brightness-100 saturate-110"
-                          : "brightness-40 saturate-50"
-                      )}
-                      poster={"/og-image.png"}
-                      style={{ zIndex: 0 }}
+                      className="h-full w-full object-cover"
                     />
                   ) : (
-                    <motion.div
-                      className="absolute inset-0"
-                      animate={{
-                        scale: isCentered ? 1.05 : 1,
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                      }}
-                    >
-                      <Image
-                        src={event.thumbnail?.filename || "/og-image.png"}
-                        alt={event.title}
-                        fill
-                        priority={i <= 2}
-                        className={cn(
-                          "object-cover transition-all duration-1000",
-                          isCentered
-                            ? "brightness-100 saturate-110"
-                            : "brightness-40 saturate-50"
-                        )}
-                      />
-                    </motion.div>
-                  )}
-
-                  {/* Cinematic Gradient Overlays */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
-                    animate={{
-                      opacity: isCentered ? 0.95 : 0.6,
-                    }}
-                    transition={{ duration: 0.6 }}
-                    style={{ zIndex: 1 }}
-                  />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-b from-[var(--strategy-red)]/30 via-transparent to-transparent"
-                    animate={{
-                      opacity: isCentered ? [0.4, 0.7, 0.4] : 0.1,
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    style={{ zIndex: 2 }}
-                  />
-                  {/* Vignette effect for centered card */}
-                  {isCentered && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: [0.3, 0.6, 0.3] }}
-                      transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/70"
-                      style={{ zIndex: 3 }}
+                    <Image
+                      src={currentEvent.thumbnail?.filename || "/og-image.png"}
+                      alt={currentEvent.title}
+                      fill
+                      priority
+                      className="object-cover"
                     />
                   )}
+                </div>
 
-                  {/* Top badge with enhanced design */}
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-boldness via-boldness/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-boldness/40 via-transparent to-boldness/40" />
+
+                {/* Content Overlay */}
+                <div className="relative h-full flex flex-col justify-end p-6 md:p-10 lg:p-12">
+                  {/* Type Badge */}
                   <motion.div
-                    initial={{ y: -30, opacity: 0 }}
-                    animate={{
-                      y: isCentered ? 0 : -10,
-                      opacity: isCentered ? 1 : 0.6,
-                    }}
-                    transition={{
-                      delay: i * 0.08,
-                      type: "spring",
-                      stiffness: 300,
-                    }}
-                    className="absolute top-5 left-5 right-5 z-20"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="mb-6"
                   >
-                    <Badge
-                      text={event.type || "Event"}
-                      backgroundColor="freedom"
-                      textColor="boldness"
-                    >
-                      {event.type || "Event"}
-                    </Badge>
+                    <span className="inline-flex items-center gap-2 rounded-full border-2 border-strategy-gold bg-strategy-gold/20 px-4 py-2 backdrop-blur-md">
+                      <span className="h-2 w-2 rounded-full bg-strategy-gold animate-pulse" />
+                      <span className="font-heading text-sm uppercase tracking-wider text-strategy-gold md:text-base">
+                        {currentEvent.type || "Event"}
+                      </span>
+                    </span>
                   </motion.div>
 
-                  {/* Enhanced text overlay at bottom */}
-                  <motion.div
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{
-                      y: isCentered ? 0 : 20,
-                      opacity: isCentered ? 1 : 0.5,
-                    }}
-                    transition={{ delay: i * 0.08 + 0.15, type: "spring" }}
-                    className="absolute bottom-0 left-0 right-0 z-20 p-6 md:p-8"
+                  {/* Title */}
+                  <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="font-heading text-4xl uppercase tracking-wide text-freedom md:text-5xl lg:text-6xl mb-4"
                   >
-                    {/* Date and time with modern design */}
-                    <motion.div
-                      animate={{
-                        scale: isCentered ? 1 : 0.9,
-                      }}
-                      className="flex items-center gap-3 mb-3"
+                    {currentEvent.title}
+                  </motion.h3>
+
+                  {/* Speaker */}
+                  {currentEvent.speaker && (
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="font-body text-lg text-strategy-gold md:text-xl mb-6"
                     >
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
-                        <span className="text-xs md:text-sm text-white/90 font-medium">
-                          {new Date(event.date).toLocaleDateString("nl-NL", {
-                            weekday: "short",
+                      Door {currentEvent.speaker}
+                    </motion.p>
+                  )}
+
+                  {/* Event Details */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="flex flex-wrap gap-4 mb-8"
+                  >
+                    <div className="flex items-center gap-2 rounded-full border border-freedom/20 bg-freedom/10 px-4 py-2 backdrop-blur-sm">
+                      <Calendar className="h-4 w-4 text-freedom" />
+                      <span className="font-body text-sm text-freedom md:text-base">
+                        {new Date(currentEvent.date).toLocaleDateString(
+                          "nl-NL",
+                          {
+                            weekday: "long",
                             day: "numeric",
-                            month: "short",
-                          })}
-                        </span>
-                      </div>
-                      <div className="px-3 py-1.5 rounded-full bg-[var(--strategy-gold)]/20 backdrop-blur-md border border-[var(--strategy-gold)]/30">
-                        <span className="text-xs md:text-sm text-[var(--strategy-gold)] font-bold">
-                          {new Date(event.date).toLocaleTimeString("nl-NL", {
+                            month: "long",
+                          }
+                        )}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-full border border-freedom/20 bg-freedom/10 px-4 py-2 backdrop-blur-sm">
+                      <Clock className="h-4 w-4 text-freedom" />
+                      <span className="font-body text-sm text-freedom md:text-base">
+                        {new Date(currentEvent.date).toLocaleTimeString(
+                          "nl-NL",
+                          {
                             hour: "2-digit",
                             minute: "2-digit",
-                          })}
+                          }
+                        )}
+                      </span>
+                    </div>
+                    {currentEvent.location && (
+                      <div className="flex items-center gap-2 rounded-full border border-freedom/20 bg-freedom/10 px-4 py-2 backdrop-blur-sm">
+                        <MapPin className="h-4 w-4 text-freedom" />
+                        <span className="font-body text-sm text-freedom md:text-base">
+                          {currentEvent.location}
                         </span>
                       </div>
-                    </motion.div>
-
-                    {/* Title with stunning typography */}
-                    <motion.h4
-                      animate={{
-                        scale: isCentered ? 1 : 0.9,
-                      }}
-                      className={cn(
-                        "font-bold leading-tight text-white mb-3 drop-shadow-2xl",
-                        "text-2xl md:text-3xl lg:text-4xl"
-                      )}
-                    >
-                      {event.title}
-                    </motion.h4>
-
-                    {/* Speaker with elegant styling */}
-                    {event.speaker && (
-                      <motion.p
-                        animate={{
-                          opacity: isCentered ? 1 : 0.6,
-                        }}
-                        className="text-base md:text-lg text-[var(--strategy-gold)] italic font-medium mb-4 drop-shadow-lg"
-                      >
-                        {event.speaker}
-                      </motion.p>
-                    )}
-
-                    {/* "Meer info" button - only shown on centered card */}
-                    {isCentered && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{
-                          delay: 0.3,
-                          type: "spring",
-                          stiffness: 300,
-                        }}
-                      >
-                        <Button
-                          href={linkResolver(event.slug as string)}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <span>Meer info</span>
-                          <ArrowRight />
-                        </Button>
-                      </motion.div>
                     )}
                   </motion.div>
 
-                  {/* Enhanced shine effect for centered card */}
-                  {isCentered && (
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none"
-                      animate={{
-                        x: ["-100%", "200%"],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        repeatDelay: 4,
-                        ease: "easeInOut",
-                      }}
-                      style={{ zIndex: 25 }}
-                    />
-                  )}
-                </motion.div>
+                  {/* CTA Button */}
+                  <motion.a
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    href={linkResolver(currentEvent.slug as string)}
+                    className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-strategy-red px-8 py-4 font-heading text-sm uppercase tracking-wider text-freedom shadow-lg transition-all hover:scale-105 hover:bg-strategy-red/90 hover:shadow-xl md:text-base mb-12 md:mb-0"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span>Meer informatie</span>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </motion.a>
+                </div>
               </div>
-            );
-          })}
-        </motion.div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
+        {events.length > 1 && (
+          <>
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              onClick={() => navigate(-1)}
+              className="absolute left-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-boldness/30 bg-boldness/10 backdrop-blur-md transition-all hover:border-boldness/50 hover:bg-boldness/20 hover:scale-110 md:left-4 md:h-14 md:w-14 cursor-pointer"
+              aria-label="Vorige"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronLeft className="h-6 w-6 text-freedom md:h-7 md:w-7" />
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              onClick={() => navigate(1)}
+              className="absolute right-2 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-boldness/30 bg-boldness/10 backdrop-blur-md transition-all hover:border-boldness/50 hover:bg-boldness/20 hover:scale-110 md:right-4 md:h-14 md:w-14 cursor-pointer"
+              aria-label="Volgende"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronRight className="h-6 w-6 text-freedom md:h-7 md:w-7" />
+            </motion.button>
+          </>
+        )}
+
+        {/* Progress Indicators */}
+        {events.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 md:bottom-6"
+          >
+            {events.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                  if (autoScrollTimer.current)
+                    clearInterval(autoScrollTimer.current);
+                }}
+                className={cn(
+                  "h-2 rounded-full transition-all duration-300",
+                  index === currentIndex
+                    ? "w-8 bg-strategy-red"
+                    : "w-2 bg-freedom/30 hover:bg-freedom/50"
+                )}
+                aria-label={`Ga naar event ${index + 1}`}
+              />
+            ))}
+          </motion.div>
+        )}
       </div>
+
+      {/* Scroll Indicator - Shows there's more content below */}
+      <Link href="#events-filtered">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="flex flex-col items-center gap-3 pt-6 pb-8 md:pb-6"
+        >
+          <div className="flex flex-col items-center gap-2">
+            <p className="font-body text-sm text-boldness/70 md:text-base">
+              Bekijk alle evenementen
+            </p>
+            <motion.svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="text-boldness/50"
+              animate={{
+                y: [0, 8, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <path d="M12 5v14M19 12l-7 7-7-7" />
+            </motion.svg>
+          </div>
+        </motion.div>
+      </Link>
     </div>
   );
 }

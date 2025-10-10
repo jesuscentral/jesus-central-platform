@@ -89,7 +89,7 @@ export default function FilterableList({ events }: Props) {
                     ) : (
                       <Image
                         src={event.thumbnail?.filename || "/og-image.png"}
-                        alt={event.title}
+                        alt={event.title ?? "Event thumbnail"}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
