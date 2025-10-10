@@ -199,9 +199,9 @@ export default function StoryScrollList({
                   transition={{ delay: 0.5 }}
                   className="flex flex-wrap gap-4 md:gap-5 mb-10 md:mb-12"
                 >
-                  <div className="flex items-center gap-3 rounded-full border-2 border-freedom/40 bg-freedom/20 px-5 py-3 md:px-6 md:py-4 backdrop-blur-lg shadow-xl">
-                    <Calendar className="h-5 w-5 md:h-6 md:w-6 text-freedom" />
-                    <span className="font-body text-base text-freedom md:text-lg lg:text-xl font-medium">
+                  <div className="flex items-center gap-3 rounded-full border-2 border-strategy-green bg-strategy-green px-5 py-3 md:px-6 md:py-4 backdrop-blur-lg shadow-xl">
+                    <Calendar className="h-5 w-5 md:h-6 md:w-6 text-boldness" />
+                    <span className="font-body text-base text-boldness md:text-lg lg:text-xl font-medium">
                       {new Date(currentEvent.date).toLocaleDateString("nl-NL", {
                         weekday: "long",
                         day: "numeric",
@@ -209,9 +209,9 @@ export default function StoryScrollList({
                       })}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 rounded-full border-2 border-freedom/40 bg-freedom/20 px-5 py-3 md:px-6 md:py-4 backdrop-blur-lg shadow-xl">
-                    <Clock className="h-5 w-5 md:h-6 md:w-6 text-freedom" />
-                    <span className="font-body text-base text-freedom md:text-lg lg:text-xl font-medium">
+                  <div className="flex items-center gap-3 rounded-full border-2 border-strategy-green bg-strategy-green px-5 py-3 md:px-6 md:py-4 backdrop-blur-lg shadow-xl">
+                    <Clock className="h-5 w-5 md:h-6 md:w-6 text-boldness" />
+                    <span className="font-body text-base text-boldness md:text-lg lg:text-xl font-medium">
                       {new Date(currentEvent.date).toLocaleTimeString("nl-NL", {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -219,9 +219,9 @@ export default function StoryScrollList({
                     </span>
                   </div>
                   {currentEvent.location && (
-                    <div className="flex items-center gap-3 rounded-full border-2 border-freedom/40 bg-freedom/20 px-5 py-3 md:px-6 md:py-4 backdrop-blur-lg shadow-xl">
-                      <MapPin className="h-5 w-5 md:h-6 md:w-6 text-freedom" />
-                      <span className="font-body text-base text-freedom md:text-lg lg:text-xl font-medium">
+                    <div className="flex items-center gap-3 rounded-full border-2 border-strategy-green bg-strategy-green px-5 py-3 md:px-6 md:py-4 backdrop-blur-lg shadow-xl">
+                      <MapPin className="h-5 w-5 md:h-6 md:w-6 text-boldness" />
+                      <span className="font-body text-base text-boldness md:text-lg lg:text-xl font-medium">
                         {currentEvent.location}
                       </span>
                     </div>
@@ -234,7 +234,7 @@ export default function StoryScrollList({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                   href={linkResolver(currentEvent.slug as string)}
-                  className="inline-flex items-center justify-center gap-3 md:gap-4 self-start rounded-full bg-strategy-red px-10 py-5 md:px-12 md:py-6 font-heading text-lg uppercase tracking-widest text-freedom shadow-[0_20px_60px_rgba(220,38,38,0.6)] transition-all hover:scale-105 hover:bg-strategy-red/90 hover:shadow-[0_25px_80px_rgba(220,38,38,0.8)] md:text-xl"
+                  className="inline-flex items-center justify-center gap-3 md:gap-4 self-start rounded-full bg-strategy-red px-10 py-5 md:px-12 md:py-6 font-heading text-lg uppercase tracking-widest text-freedom  transition-all hover:scale-105 hover:bg-strategy-red/90  md:text-xl"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -312,7 +312,7 @@ export default function StoryScrollList({
                 className={cn(
                   "h-3 rounded-full transition-all duration-300 cursor-pointer",
                   index === currentIndex
-                    ? "w-12 bg-strategy-red shadow-[0_4px_20px_rgba(220,38,38,0.8)]"
+                    ? "w-12 bg-strategy-red "
                     : "w-3 bg-freedom/50 hover:bg-freedom/70 hover:w-6"
                 )}
                 aria-label={`Ga naar event ${index + 1}`}
