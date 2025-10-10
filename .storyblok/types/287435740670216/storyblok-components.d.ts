@@ -32,6 +32,8 @@ export interface SbBlokHero {
     | SbDonation
     | SbEvent
     | SbEventList
+    | SbFaq
+    | SbFaqItem
     | SbFeature
     | SbFilloutForm
     | SbFooter
@@ -72,7 +74,7 @@ export interface SbBlokHero {
 export interface SbButton {
   text: string;
   link?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
-  type?: "brand-orange" | "cream" | "strategy-gold" | "strategy-green" | "strategy-red" | "strategy-charcoal";
+  type: "brand-orange" | "cream" | "strategy-gold" | "strategy-green" | "strategy-red" | "strategy-charcoal";
   variant?: "" | "primary" | "outline";
   size?: "" | "small" | "medium" | "large";
   showArrowIcon?: boolean;
@@ -137,6 +139,24 @@ export interface SbEventList {
   [k: string]: unknown;
 }
 
+export interface SbFaq {
+  title?: string;
+  subtitle?: string;
+  items: SbFaqItem[];
+  backgroundColor?: number | string;
+  component: "faq";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbFaqItem {
+  question: string;
+  answer: StoryblokRichtext;
+  component: "faqItem";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbFeature {
   name?: string;
   component: "feature";
@@ -175,6 +195,8 @@ export interface SbFullGrid {
     | SbDonation
     | SbEvent
     | SbEventList
+    | SbFaq
+    | SbFaqItem
     | SbFeature
     | SbFilloutForm
     | SbFooter
@@ -229,6 +251,8 @@ export interface SbGrid {
     | SbDonation
     | SbEvent
     | SbEventList
+    | SbFaq
+    | SbFaqItem
     | SbFeature
     | SbFilloutForm
     | SbFooter
@@ -285,6 +309,7 @@ export interface SbImageCard {
   image?: StoryblokAsset;
   actions?: (SbButton | SbLink)[];
   textColor?: number | string;
+  backgroundColor: number | string;
   component: "imageCard";
   _uid: string;
   [k: string]: unknown;
@@ -410,6 +435,8 @@ export interface SbSection {
     | SbDonation
     | SbEvent
     | SbEventList
+    | SbFaq
+    | SbFaqItem
     | SbFeature
     | SbFilloutForm
     | SbFooter

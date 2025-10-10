@@ -41,6 +41,8 @@ export const componentMap = {
   teaser: Content.Teaser,
   informationItem: Content.InformationItem,
   sermonHighlight: Content.SermonHighlight,
+  faq: Content.Faq,
+  faqItem: Content.FaqItem,
 
   // Cards
   card: Cards.Card,

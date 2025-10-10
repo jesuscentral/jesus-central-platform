@@ -8,3 +8,5 @@ export { default as ScrollingText } from "./ScrollingText";
 export { default as Teaser } from "./Teaser";
 export { default as InformationItem } from "./InformationItem";
 export { default as SermonHighlight } from "./SermonHighlight";
+export { default as Faq } from "./Faq";
+export { default as FaqItem } from "./FaqItem";

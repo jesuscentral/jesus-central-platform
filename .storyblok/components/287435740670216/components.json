@@ -179,7 +179,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-09-27T11:53:54.350Z",
-    "updated_at": "2025-10-04T11:41:55.676Z",
+    "updated_at": "2025-10-10T09:34:43.842Z",
     "id": 95373043105621,
     "schema": {
       "text": {
@@ -243,7 +243,8 @@
         "default_value": "brand-orange",
         "source": "internal",
         "datasource_slug": "colors",
-        "exclude_empty_option": true
+        "exclude_empty_option": true,
+        "required": true
       },
       "variant": {
         "type": "option",
@@ -798,6 +799,129 @@
     "metadata": {}
   },
   {
+    "name": "faq",
+    "display_name": "FAQ",
+    "description": null,
+    "created_at": "2025-10-10T09:48:36.197Z",
+    "updated_at": "2025-10-10T09:49:13.988Z",
+    "id": 99942875954898,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "translatable": true,
+        "display_name": "Title",
+        "default_value": "Veelgestelde Vragen",
+        "id": "9VCjbH-pSiyOj0qRiUR8vQ"
+      },
+      "subtitle": {
+        "type": "textarea",
+        "pos": 1,
+        "translatable": true,
+        "display_name": "Subtitle",
+        "max_length": 300,
+        "id": "ekXv58b1Rye8hyUt602LGw"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 2,
+        "required": true,
+        "restrict_components": true,
+        "component_whitelist": [
+          "faqItem"
+        ],
+        "display_name": "FAQ Items",
+        "minimum": 1,
+        "id": "OuqhBGSWToKdI6CxBOnEEw"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "default_value": "cream",
+        "display_name": "Background Color",
+        "id": "I_tLJiD6RyWzSZuJfTKv5g"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "FAQ",
+    "component_group_uuid": null,
+    "color": "#FFA500",
+    "icon": "block-question-2",
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      },
+      {
+        "id": 99675468743185,
+        "name": "wrapper"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "faqItem",
+    "display_name": "FAQ Item",
+    "description": null,
+    "created_at": "2025-10-10T09:48:28.236Z",
+    "updated_at": "2025-10-10T09:49:19.161Z",
+    "id": 99942843342544,
+    "schema": {
+      "question": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "translatable": true,
+        "display_name": "Question",
+        "id": "lthI7BK5SJ-5bXfdFv3epQ"
+      },
+      "answer": {
+        "type": "richtext",
+        "pos": 1,
+        "required": true,
+        "translatable": true,
+        "display_name": "Answer",
+        "id": "XuRuVOOtQVSETWcQw1zPJQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "FAQ Item",
+    "component_group_uuid": null,
+    "color": "#FFA500",
+    "icon": "block-question-1",
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "feature",
     "display_name": null,
     "description": null,
@@ -1298,7 +1422,7 @@
     "display_name": null,
     "description": "a card with an image",
     "created_at": "2025-09-27T11:53:55.253Z",
-    "updated_at": "2025-10-04T12:56:53.811Z",
+    "updated_at": "2025-10-10T09:39:21.061Z",
     "id": 95373046804321,
     "schema": {
       "title": {
@@ -1348,6 +1472,17 @@
         "exclude_empty_option": true,
         "default_value": "white",
         "id": "X7vjgaGZQdu-aZp-hJhL_Q"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "required": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "freedom",
+        "id": "18cCQus8QzqPNLuiKMT5gQ"
       }
     },
     "image": null,
