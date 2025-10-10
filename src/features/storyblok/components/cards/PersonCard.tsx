@@ -30,8 +30,8 @@ export default function PersonCard({ blok }: { blok: SbPersonCard }) {
     return "text-boldness";
   };
 
-  const bgColorClass = getBackgroundColorClass(blok.backgroundColor);
-  const textColorClass = getTextColorClass(blok.backgroundColor);
+  const bgColorClass = getBackgroundColorClass(blok.backgroundColor as string);
+  const textColorClass = getTextColorClass(blok.backgroundColor as string);
 
   return (
     <motion.article
