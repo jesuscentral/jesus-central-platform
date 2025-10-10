@@ -31,7 +31,7 @@ export const getStoryblokSeoParameters = (story: ISbStoryData<any>) => {
           url:
             story.content?.seo?.og_image ??
             story.content?.seo?.twitter_image ??
-            "",
+            "/og-image.png",
           width: 1200,
           height: 630,
           alt: title,
@@ -47,7 +47,7 @@ export const getStoryblokSeoParameters = (story: ISbStoryData<any>) => {
           url:
             story.content?.seo?.twitter_image ??
             story.content?.seo?.og_image ??
-            "",
+            "/og-image.png",
           width: 1200,
           height: 630,
           alt: title,
