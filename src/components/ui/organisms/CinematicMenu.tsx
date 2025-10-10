@@ -22,13 +22,6 @@ interface SocialLink {
   href: string;
 }
 
-interface ColorScheme {
-  name: string;
-  accentColor: string;
-  accentRgba: string;
-  hoverShadow: string;
-}
-
 interface CinematicMenuProps {
   menu_data?: {
     title: string;
