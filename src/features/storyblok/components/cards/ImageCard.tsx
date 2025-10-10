@@ -39,7 +39,7 @@ export default function ImageCard({ blok }: { blok: SbImageCard }) {
     <article
       {...storyblokEditable(blok as SbBlokData)}
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-3xl border shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)] transition-all hover:shadow-[0_30px_80px_-32px_rgba(17,17,17,0.55)]",
+        "group flex h-full flex-col overflow-hidden rounded-3xl border transition-all",
         colorClasses.border,
         colorClasses.text,
         backgroundColorClass
