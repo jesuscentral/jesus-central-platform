@@ -48,9 +48,11 @@ const resolvers = {
     ),
     [NODE_PARAGRAPH]: (
       children: React.ReactNode,
-      { textAlign }: { textAlign: string }
+      params: { textAlign: string } | undefined
     ) => (
-      <p className={cn(`text-${textAlign || "left"}`, "w-full")}>{children}</p>
+      <p className={cn(`text-${params?.textAlign || "left"}`, "w-full")}>
+        {children}
+      </p>
     ),
     [NODE_HEADING]: (
       children: React.ReactNode,
@@ -75,7 +77,7 @@ const resolvers = {
       return (
         <Heading
           variant={variant}
-          className={cn(`text-${textAlign}`, "w-full")}
+          className={cn(`text-${textAlign || "left"}`, "w-full")}
         >
           {children}
         </Heading>
@@ -85,9 +87,13 @@ const resolvers = {
   markResolvers: {
     [MARK_TEXT_STYLE]: (
       children: React.ReactNode,
-      { textAlign }: { textAlign: string }
+      params: { textAlign: string } | undefined
     ) => {
-      return <span className={cn(`text-${textAlign}`)}>{children}</span>;
+      return (
+        <span className={cn(`text-${params?.textAlign || "left"}`)}>
+          {children}
+        </span>
+      );
     },
   },
   blokResolvers: {
