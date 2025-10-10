@@ -15,11 +15,6 @@ const points = [
     img: "/images/map/church.png",
   },
   {
-    name: "Brokken & Zo",
-    coord: [4.686478552173185, 52.02105860113011],
-    img: "/images/map/brokkenenzo.png",
-  },
-  {
     name: "Groenhovenbad",
     coord: [4.690384467183321, 52.02297983173702],
     img: "/images/map/groenhovenbad.png",
