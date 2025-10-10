@@ -13,7 +13,6 @@ export const GET = async () => {
     const html = await response.text();
 
     const isLive = /"isLiveNow":true/.test(html);
-    console.log(response.headers);
 
     let videoId = null;
     const match = html.match(/"videoId":"(.*?)"/);
