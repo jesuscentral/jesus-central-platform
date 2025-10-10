@@ -12,6 +12,7 @@ import {
 } from "@storyblok/react/rsc";
 import { SbWebsiteConfig } from "@storyblok/types/287435740670216/storyblok-components";
 import { cn } from "@/utils/cn";
+import Button from "@/components/ui/atoms/Button";
 
 interface NavigationProps {
   config: SbWebsiteConfig;
@@ -116,16 +117,35 @@ export default function Navigation({ config }: NavigationProps) {
             </Link>
           </div>
 
-          {/* Desktop CTA + Menu */}
-          <div className="hidden md:flex items-center gap-4">
-            {header_cta_buttons &&
-              header_cta_buttons.map((cta) => (
-                <StoryblokServerComponent key={cta._uid} blok={cta} />
-              ))}
-          </div>
+          {/* CTA Buttons - visible on all screens */}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            {/* Geven button - responsive sizing with space for hamburger menu */}
+            <Button
+              href="/geven"
+              type="strategy-red"
+              variant="primary"
+              size="small"
+              className="
+                text-[10px] px-4 py-2
+                xs:text-xs xs:px-5 xs:py-2.5
+                sm:text-sm sm:px-6 sm:py-3
+                md:text-sm md:px-8 md:py-3
+                whitespace-nowrap
+                shadow-md hover:shadow-lg
+                mr-12 sm:mr-14 md:mr-0
+              "
+            >
+              Geven
+            </Button>
 
-          {/* Mobile Menu Button placeholder */}
-          <div className="flex md:hidden items-center w-10 h-10"></div>
+            {/* Desktop additional CTA buttons */}
+            <div className="hidden md:flex items-center gap-4">
+              {header_cta_buttons &&
+                header_cta_buttons.map((cta) => (
+                  <StoryblokServerComponent key={cta._uid} blok={cta} />
+                ))}
+            </div>
+          </div>
         </div>
       </motion.nav>
 
