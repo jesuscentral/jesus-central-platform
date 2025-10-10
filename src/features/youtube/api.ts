@@ -46,10 +46,13 @@ export async function fetchChannelRssFeed(
   // Normalize entries to array
   const entries = normalizeEntries(data);
 
+  console.log(entries);
+
   // Transform entries to RssVideo objects
   const videos = entries
     .map((entry) => formatRssEntry(entry, feedChannelId))
-    .filter((video): video is RssVideo => video !== null);
+    .filter((video): video is RssVideo => video !== null)
+    .filter((video) => !video.url.includes("shorts"));
 
   return videos;
 }
