@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { customContainerVariants, fadeInUp } from "@/lib/animations";
 import { cn } from "@/utils/cn";
 import {
   SbBlokData,
@@ -9,16 +8,9 @@ import {
   StoryblokComponent,
 } from "@storyblok/react";
 import { SbGrid } from "@storyblok/types/287435740670216/storyblok-components";
-import { scaleRotateVariants } from "@/lib/animations";
+import { motion } from "framer-motion";
 
 export default function Grid({ blok }: { blok: SbGrid }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-10%",
-    amount: 0.2,
-  });
-
   const getBackgroundClass = () => {
     if (!blok.backgroundColor) return "";
     return `bg-${blok.backgroundColor}`;
@@ -32,15 +24,44 @@ export default function Grid({ blok }: { blok: SbGrid }) {
         ? "md:grid-cols-2"
         : "md:grid-cols-3";
 
+  // Container animation - stagger children
+  const containerVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  // Simple, reliable fade-up animation
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1.0],
+      },
+    },
+  };
+
   return (
     <section
-      ref={ref}
       className={cn("relative overflow-hidden", getBackgroundClass(), "py-12")}
       {...storyblokEditable(blok as SbBlokData)}
     >
       <motion.div
+        variants={customContainerVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        whileInView="visible"
+        viewport={{ once: true, margin: "0px", amount: 0.1 }}
         className={cn(
           "container px-4",
           "grid",
@@ -49,11 +70,10 @@ export default function Grid({ blok }: { blok: SbGrid }) {
           "mx-auto"
         )}
       >
-        {blok.columns?.map((nestedBlok, index) => (
+        {blok.columns?.map((nestedBlok) => (
           <motion.div
             key={nestedBlok._uid}
-            variants={scaleRotateVariants}
-            custom={index}
+            variants={fadeInUp}
             className="h-full"
           >
             <StoryblokComponent blok={nestedBlok} />

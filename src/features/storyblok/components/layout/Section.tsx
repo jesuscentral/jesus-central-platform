@@ -6,23 +6,17 @@ import {
 } from "@storyblok/react/rsc";
 import { SbSection } from "@storyblok/types/287435740670216/storyblok-components";
 import { SbBlokData } from "@storyblok/react";
-import { scaleRotateVariants } from "@/lib/animations";
-import { motion, useInView } from "framer-motion";
 import { cn } from "@/utils/cn";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { customContainerVariants, fadeInUp } from "@/lib/animations";
 
 export default function Section({ blok }: { blok: SbSection }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-10%",
-    amount: 0.2,
-  });
   return (
     <motion.section
-      ref={ref}
+      variants={customContainerVariants}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true, margin: "0px", amount: 0.1 }}
       className={cn(
         "relative overflow-hidden",
         `bg-${blok.backgroundColor}`,
@@ -32,14 +26,13 @@ export default function Section({ blok }: { blok: SbSection }) {
       )}
       {...storyblokEditable(blok as SbBlokData)}
     >
-      {blok.block?.map((nestedBlok, index) => (
+      {blok.block?.map((nestedBlok) => (
         <motion.div
           key={nestedBlok._uid}
-          variants={scaleRotateVariants}
-          custom={index}
+          variants={fadeInUp}
           className="h-full container px-4 mx-auto"
         >
-          <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
+          <StoryblokServerComponent blok={nestedBlok} />
         </motion.div>
       ))}
     </motion.section>
