@@ -57,12 +57,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
           )}
           {...storyblokEditable(blok as SbBlokData)}
         >
-          <StoryScrollList
-            events={eventsThisWeek}
-            title={blok.storyScrollTitle}
-            titleColor={blok.textColor as string}
-            backgroundColor={blok.backgroundColor as string}
-          />
+          <StoryScrollList events={eventsThisWeek} />
         </section>
       )}
       <section

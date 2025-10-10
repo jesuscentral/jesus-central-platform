@@ -17,17 +17,9 @@ import Link from "next/link";
 
 interface Props {
   events: SbEvent[];
-  title?: string;
-  titleColor?: string;
-  backgroundColor?: string;
 }
 
-export default function StoryScrollList({
-  events,
-  title,
-  titleColor,
-  backgroundColor,
-}: Props) {
+export default function StoryScrollList({ events }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const autoScrollTimer = useRef<NodeJS.Timeout | null>(null);
@@ -165,7 +157,9 @@ export default function StoryScrollList({
                   <span className="inline-flex items-center gap-3 rounded-full border-2 border-strategy-gold bg-strategy-gold/25 px-6 py-3 md:px-8 md:py-4 backdrop-blur-lg shadow-2xl">
                     <span className="h-3 w-3 md:h-4 md:w-4 rounded-full bg-strategy-gold animate-pulse shadow-lg shadow-strategy-gold/50" />
                     <span className="font-heading text-lg uppercase tracking-widest text-strategy-gold md:text-xl">
-                      {currentEvent.type || "Event"}
+                      {currentIndex === 0
+                        ? "Volgende activiteit"
+                        : currentEvent.type || "Event"}
                     </span>
                   </span>
                 </motion.div>
