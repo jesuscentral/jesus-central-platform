@@ -35,8 +35,6 @@ export default function PersonCard({ blok }: { blok: SbPersonCard }) {
       layout
       className={cn(
         "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-boldness/10 shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)] transition-shadow",
-        !isExpanded && "hover:shadow-[0_30px_80px_-32px_rgba(17,17,17,0.55)]",
-        isExpanded && "shadow-[0_35px_90px_-32px_rgba(17,17,17,0.65)]",
         bgColorClass
       )}
     >
