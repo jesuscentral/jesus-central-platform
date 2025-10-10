@@ -13,3 +13,13 @@ export const formatDate = (
     ...options,
   });
 };
+
+export function generateNextImageUrl(
+  url: string,
+  width: number,
+  q = 75
+): string {
+  const encodedUrl = encodeURIComponent(url);
+  const imageUrl = `/_next/image?url=${encodedUrl}&w=${width}&q=${q}`;
+  return imageUrl;
+}

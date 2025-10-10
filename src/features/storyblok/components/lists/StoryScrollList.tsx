@@ -10,6 +10,7 @@ import Badge from "@/components/ui/atoms/Badge";
 import Button from "@/components/ui/atoms/Button";
 import { linkResolver } from "../../utils";
 import { ArrowRight } from "lucide-react";
+import { generateNextImageUrl } from "@/lib/general";
 interface Props {
   events: SbEvent[];
   title?: string;
@@ -266,7 +267,11 @@ export default function StoryScrollList({ events }: Props) {
                           ? "brightness-100 saturate-110"
                           : "brightness-40 saturate-50"
                       )}
-                      poster={event.thumbnail?.filename || "/og-image.png"}
+                      poster={
+                        event.thumbnail?.filename
+                          ? generateNextImageUrl(event.thumbnail.filename, 1000)
+                          : "/og-image.png"
+                      }
                       style={{ zIndex: 0 }}
                     />
                   ) : (

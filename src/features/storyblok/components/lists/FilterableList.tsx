@@ -7,6 +7,7 @@ import { cn } from "@/utils/cn";
 import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
 import Link from "next/link";
 import { linkResolver } from "../../utils";
+import { generateNextImageUrl } from "@/lib/general";
 
 interface Props {
   events: SbEvent[];
@@ -77,7 +78,14 @@ export default function FilterableList({ events }: Props) {
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         style={{ background: "#000" }}
                         tabIndex={-1}
-                        poster={event.thumbnail?.filename || "/og-image.png"}
+                        poster={
+                          event.thumbnail?.filename
+                            ? generateNextImageUrl(
+                                event.thumbnail.filename,
+                                500
+                              )
+                            : "/og-image.png"
+                        }
                         onMouseEnter={(e) => {
                           e.currentTarget.play();
                         }}
