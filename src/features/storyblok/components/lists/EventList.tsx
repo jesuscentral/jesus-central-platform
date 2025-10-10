@@ -53,8 +53,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
           {...storyblokEditable(blok as SbBlokData)}
           className={cn(
             "relative overflow-hidden",
-            `bg-${blok.backgroundColor}`,
-            "py-12"
+            `bg-${blok.backgroundColor}`
           )}
           {...storyblokEditable(blok as SbBlokData)}
         >
@@ -62,6 +61,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
             events={eventsThisWeek}
             title={blok.storyScrollTitle}
             titleColor={blok.textColor as string}
+            backgroundColor={blok.backgroundColor as string}
           />
         </section>
       )}
