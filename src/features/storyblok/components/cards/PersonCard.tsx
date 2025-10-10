@@ -25,18 +25,8 @@ export default function PersonCard({ blok }: { blok: SbPersonCard }) {
     return colorMap[color || "freedom"] || "bg-freedom";
   };
 
-  // Determine text color based on background
-  const getTextColorClass = (bgColor?: string) => {
-    // Dark backgrounds need light text
-    if (bgColor === "boldness" || bgColor === "strategy-green") {
-      return "text-freedom";
-    }
-    // Light backgrounds need dark text
-    return "text-boldness";
-  };
-
   const bgColorClass = getBackgroundColorClass(blok.backgroundColor as string);
-  const textColorClass = getTextColorClass(blok.backgroundColor as string);
+  const textColorClass = `text-${blok.textColor as string}`;
   const hasAbout =
     blok.about && blok.about.content && blok.about.content.length > 0;
 
