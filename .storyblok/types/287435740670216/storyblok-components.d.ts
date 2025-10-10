@@ -386,6 +386,7 @@ export interface SbPersonCard {
   role?: string;
   backgroundColor?: number | string;
   textColor?: number | string;
+  about?: StoryblokRichtext;
   component: "personCard";
   _uid: string;
   [k: string]: unknown;

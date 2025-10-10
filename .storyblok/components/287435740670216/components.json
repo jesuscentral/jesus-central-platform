@@ -1922,7 +1922,7 @@
     "display_name": null,
     "description": "Card for showing a person with their role",
     "created_at": "2025-09-27T11:53:55.540Z",
-    "updated_at": "2025-10-04T12:57:23.020Z",
+    "updated_at": "2025-10-10T10:19:46.143Z",
     "id": 95373047979875,
     "schema": {
       "image": {
@@ -1968,6 +1968,11 @@
         "exclude_empty_option": true,
         "datasource_slug": "colors",
         "default_value": "cream"
+      },
+      "about": {
+        "type": "richtext",
+        "pos": 5,
+        "id": "dJgEFobSTha6zmlKcrwzRQ"
       }
     },
     "image": null,
