@@ -42,7 +42,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
     const date = new Date(event.date);
     return (
       date >= new Date() &&
-      date <= new Date(new Date().setDate(new Date().getDate() + 30))
+      date <= new Date(new Date().setDate(new Date().getDate() + 7))
     );
   });
 
