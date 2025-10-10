@@ -45,6 +45,7 @@ export interface SbBlokHero {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbLivestreamCard
     | SbMap
     | SbMenuItem
     | SbMenuSection
@@ -133,7 +134,6 @@ export interface SbEventList {
   backgroundColor: number | string;
   textColor: number | string;
   showStoryScroll?: boolean;
-  storyScrollTitle?: string;
   component: "eventList";
   _uid: string;
   [k: string]: unknown;
@@ -208,6 +208,7 @@ export interface SbFullGrid {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbLivestreamCard
     | SbMap
     | SbMenuItem
     | SbMenuSection
@@ -264,6 +265,7 @@ export interface SbGrid {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbLivestreamCard
     | SbMap
     | SbMenuItem
     | SbMenuSection
@@ -338,6 +340,18 @@ export interface SbLink {
   link: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   textColor?: number | string;
   component: "link";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbLivestreamCard {
+  title: string;
+  description?: string;
+  button_text: string;
+  backgroundColor?: number | string;
+  show_when_offline?: boolean;
+  offline_message?: string;
+  component: "livestreamCard";
   _uid: string;
   [k: string]: unknown;
 }
@@ -449,6 +463,7 @@ export interface SbSection {
     | SbImageHero
     | SbInformationItem
     | SbLink
+    | SbLivestreamCard
     | SbMap
     | SbMenuItem
     | SbMenuSection
@@ -564,7 +579,7 @@ export interface SbWebsiteConfig {
   logo_alt: string;
   show_menu?: boolean;
   header_cta_buttons?: SbButton[];
-  menu_data: SbMenuSection[];
+  menu_data?: SbMenuSection[];
   social_links?: SbSocialLink[];
   component: "websiteConfig";
   _uid: string;

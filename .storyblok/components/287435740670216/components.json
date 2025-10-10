@@ -717,7 +717,7 @@
     "display_name": null,
     "description": "A list of the events in Storyblok",
     "created_at": "2025-10-04T12:23:40.375Z",
-    "updated_at": "2025-10-09T19:36:33.549Z",
+    "updated_at": "2025-10-10T12:33:27.078Z",
     "id": 97857619463066,
     "schema": {
       "title": {
@@ -757,17 +757,11 @@
       "tab-188ee0b2-7a3d-4b2b-a99e-5bf79d4f3af2": {
         "display_name": "Story Scroll",
         "keys": [
-          "showStoryScroll",
-          "storyScrollTitle"
+          "showStoryScroll"
         ],
         "pos": 4,
         "type": "tab",
         "id": "GI7gsno9Syupnlv3nU868g"
-      },
-      "storyScrollTitle": {
-        "type": "text",
-        "pos": 6,
-        "id": "ermm3vsvSHKLOIqrzFX-fA"
       }
     },
     "image": null,
@@ -1669,6 +1663,82 @@
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "livestreamCard",
+    "display_name": null,
+    "description": "A Card showing when live on youtube",
+    "created_at": "2025-10-10T15:23:10.476Z",
+    "updated_at": "2025-10-10T15:26:13.396Z",
+    "id": 100025100195743,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "yMnqYOatTAWObnnhJnTliA",
+        "default_value": "We zijn nu Live"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "id": "cXf13dQfQfi1Bg0xS42K1g"
+      },
+      "button_text": {
+        "type": "text",
+        "pos": 2,
+        "required": true,
+        "default_value": "Kijk mee",
+        "id": "SUxNn2R5SfCZDt6QluvJqA"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "freedom",
+        "id": "BKfF1lgLTWuD4yyhJ726HQ"
+      },
+      "show_when_offline": {
+        "type": "boolean",
+        "pos": 4,
+        "id": "Dk0OWpm4RBaTwqGhL29YJQ"
+      },
+      "offline_message": {
+        "type": "text",
+        "pos": 5,
+        "id": "jOfnv2-bRXuD-_vGNxwzJw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "livestreamCard",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      },
+      {
+        "id": 99675468743185,
+        "name": "wrapper"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2796,7 +2866,7 @@
     "display_name": "Website Config",
     "description": null,
     "created_at": "2025-10-03T23:20:19.615Z",
-    "updated_at": "2025-10-04T13:24:54.868Z",
+    "updated_at": "2025-10-10T15:06:52.062Z",
     "id": 97665104349536,
     "schema": {
       "site_name": {
@@ -2851,8 +2921,8 @@
         "component_whitelist": [
           "menuSection"
         ],
-        "required": true,
-        "minimum": 1,
+        "required": false,
+        "minimum": 0,
         "description": "Menu sections for the cinematic menu",
         "id": "kD_cFuD1SmCB_kc0He2OAw"
       },
