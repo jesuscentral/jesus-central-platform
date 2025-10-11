@@ -2,16 +2,18 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import StoryblokProvider from "@/components/StoryblokProvider";
-import Footer from "@/components/ui/organisms/Footer";
+import { getWebsiteConfig } from "@/features/storyblok/utils";
+import Footer from "@/features/storyblok/components/navigation/Footer";
+import { Navigation } from "@/features/storyblok/components";
 
 const headingFont = localFont({
-  src: "../../assets/fonts/TGSPerfectCondensed.otf",
+  src: "../assets/fonts/TGSPerfectCondensed.otf",
   variable: "--font-heading",
   display: "swap",
 });
 
 const bodyFont = localFont({
-  src: "../../assets/fonts/FiraSans-Regular.ttf",
+  src: "./../assets/fonts/FiraSans-Regular.ttf",
   variable: "--font-body",
   display: "swap",
 });
@@ -49,11 +51,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteConfig = await getWebsiteConfig();
+
   return (
     <StoryblokProvider>
       <html lang="nl">
@@ -61,9 +65,12 @@ export default function RootLayout({
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
+          <Navigation config={websiteConfig?.content} />
+
           <div className="relative z-10 flex h-full flex-col">
             <div className="min-h-screen bg-black text-white">{children}</div>
           </div>
+          <Footer config={websiteConfig?.content} />
         </body>
       </html>
     </StoryblokProvider>

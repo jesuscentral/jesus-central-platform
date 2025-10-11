@@ -21,10 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Index() {
   const slug = ["home"];
 
-  const [story, websiteConfig] = await Promise.all([
-    getStory(slug),
-    getWebsiteConfig(),
-  ]);
+  const story = await getStory(slug);
 
   if (!story) {
     return notFound();
@@ -32,9 +29,7 @@ export default async function Index() {
 
   return (
     <>
-      <Navigation config={websiteConfig?.content} />
       <StoryblokStory story={story} />
-      <Footer config={websiteConfig?.content} />
     </>
   );
 }

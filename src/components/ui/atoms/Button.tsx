@@ -101,7 +101,6 @@ export default function Button({
   disabled = false,
   ...additionalProps
 }: ButtonProps) {
-  console.log(type);
   const buttonClasses = cn(
     composeClasses(type, variant, size),
     disabled && "opacity-50 cursor-not-allowed",

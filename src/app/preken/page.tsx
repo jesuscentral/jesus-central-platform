@@ -9,13 +9,11 @@ import { notFound } from "next/navigation";
 import SermonList from "@/components/sermons/SermonList";
 import { getSermons } from "@/lib/actions/sermons";
 import { connection } from "next/server";
-import { Navigation } from "@/features/storyblok/components";
 import Section from "@/components/ui/atoms/Section";
 
 export default async function PrekenPage() {
-  const [sermons, websiteConfig, story] = await Promise.all([
+  const [sermons, story] = await Promise.all([
     getSermons(),
-    getWebsiteConfig(),
     getStory(["preken"]),
     connection(),
   ]);
@@ -28,8 +26,6 @@ export default async function PrekenPage() {
 
   return (
     <div {...storyblokEditable(blok as SbBlokData)}>
-      <Navigation config={websiteConfig?.content} />
-
       <main {...storyblokEditable(blok as SbBlokData)}>
         {blok.body?.map((nestedBlok: SbBlokData) => (
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
@@ -38,10 +34,6 @@ export default async function PrekenPage() {
       <Section backgroundColor="freedom" color="boldness">
         <SermonList sermons={sermons} />
       </Section>
-      {blok?.global_footer &&
-        (blok.global_footer as unknown as SbBlokData[]).map((global, index) => (
-          <StoryblokServerComponent blok={global.content} key={index} />
-        ))}
     </div>
   );
 }

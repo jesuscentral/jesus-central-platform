@@ -23,10 +23,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const params = await props.params;
 
-  const [story, websiteConfig] = await Promise.all([
-    getStory(params.slug),
-    getWebsiteConfig(),
-  ]);
+  const story = await getStory(params.slug);
 
   if (!story) {
     return notFound();
@@ -34,9 +31,7 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <Navigation config={websiteConfig?.content} />
       <StoryblokStory story={story} />
-      <Footer config={websiteConfig?.content} />
     </>
   );
 }
