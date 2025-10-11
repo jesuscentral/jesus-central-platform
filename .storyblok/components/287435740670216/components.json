@@ -1894,7 +1894,7 @@
     "display_name": null,
     "description": null,
     "created_at": "2025-09-27T11:50:34.235Z",
-    "updated_at": "2025-10-09T15:40:45.068Z",
+    "updated_at": "2025-10-11T11:56:02.592Z",
     "id": 95372223434575,
     "schema": {
       "seo": {
@@ -1917,22 +1917,6 @@
         "component_tag_whitelist": [
           99675468743185
         ]
-      },
-      "global_footer": {
-        "type": "options",
-        "pos": 4,
-        "is_reference_type": true,
-        "source": "internal_stories",
-        "entry_appearance": "card",
-        "allow_advanced_search": true,
-        "folder_slug": "global",
-        "filter_content_type": [
-          "global"
-        ],
-        "min_options": "0",
-        "max_options": "1",
-        "id": "W4EFkwWEQcy79lbVllvIhQ",
-        "display_name": "Footer"
       },
       "tab-1a3fea7f-e8f9-4155-963d-e8eb5105b8b2": {
         "display_name": "seo",
@@ -2854,7 +2838,7 @@
     "display_name": "Website Config",
     "description": null,
     "created_at": "2025-10-03T23:20:19.615Z",
-    "updated_at": "2025-10-11T11:50:27.004Z",
+    "updated_at": "2025-10-11T13:59:48.277Z",
     "id": 97665104349536,
     "schema": {
       "footer_logo": {
@@ -2881,9 +2865,16 @@
         ],
         "id": "oySG07gWRYCWz0FPZ2gTgg"
       },
-      "site_name": {
+      "footer_tagline": {
         "type": "text",
         "pos": 3,
+        "id": "K9tH_Pl_T5WvXqV4rppGeg",
+        "default_value": "Een plek waar Jezus centraal staat",
+        "required": true
+      },
+      "site_name": {
+        "type": "text",
+        "pos": 4,
         "translatable": true,
         "required": true,
         "description": "Website name (e.g., 'Jesus Central', 'Jesus Central Worship')",
@@ -2891,7 +2882,7 @@
       },
       "logo": {
         "type": "asset",
-        "pos": 4,
+        "pos": 5,
         "filetypes": [
           "images"
         ],
@@ -2902,7 +2893,7 @@
       },
       "logo_alt": {
         "type": "text",
-        "pos": 5,
+        "pos": 6,
         "translatable": true,
         "required": true,
         "description": "Logo alt text for accessibility",
@@ -2910,13 +2901,13 @@
       },
       "show_menu": {
         "type": "boolean",
-        "pos": 6,
+        "pos": 7,
         "default_value": true,
         "id": "VQnTI2xuTWm6XSgCoOM15A"
       },
       "header_cta_buttons": {
         "type": "bloks",
-        "pos": 7,
+        "pos": 8,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2927,7 +2918,7 @@
       },
       "menu_data": {
         "type": "bloks",
-        "pos": 8,
+        "pos": 9,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2940,7 +2931,7 @@
       },
       "social_links": {
         "type": "bloks",
-        "pos": 9,
+        "pos": 10,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2955,9 +2946,11 @@
           "footerLogo",
           "footer_menu",
           "footer_logo",
-          "footer_description"
+          "footer_description",
+          "tagline",
+          "footer_tagline"
         ],
-        "pos": 10,
+        "pos": 11,
         "type": "tab",
         "id": "HOL9vOSbQl-28wwwHYXhqw"
       }
