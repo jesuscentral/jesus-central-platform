@@ -1,10 +1,7 @@
 import { getStory, getStoryblokSeoParameters } from "@/features/storyblok/api";
-import { getWebsiteConfig } from "@/features/storyblok/utils";
 import { Metadata } from "next";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
-import { Navigation } from "@/features/storyblok/components";
-import Footer from "@/features/storyblok/components/navigation/Footer";
 
 export async function generateMetadata(): Promise<Metadata> {
   const slug = ["home"];
