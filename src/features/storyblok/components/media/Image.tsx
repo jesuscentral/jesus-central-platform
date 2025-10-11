@@ -24,6 +24,8 @@ export default function Image({
     return null;
   }
 
+  const loadingStrategy = blok.loading === "" ? "lazy" : blok.loading;
+
   if (blok.animated) {
     return (
       <div {...storyblokEditable(blok as SbBlokData)} {...additionalProps}>
@@ -35,7 +37,7 @@ export default function Image({
           className={className}
           imageClassName={imageClassName}
           priority={blok.priority}
-          loading={blok.loading as "lazy" | "eager" | undefined}
+          loading={loadingStrategy as "lazy" | "eager" | undefined}
         />
       </div>
     );

@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/features/storyblok/components";
+import Footer from "@/features/storyblok/components/navigation/Footer";
 
 export async function generateMetadata(): Promise<Metadata> {
   const slug = ["home"];
@@ -33,6 +34,7 @@ export default async function Index() {
     <>
       <Navigation config={websiteConfig?.content} />
       <StoryblokStory story={story} />
+      <Footer config={websiteConfig?.content} />
     </>
   );
 }

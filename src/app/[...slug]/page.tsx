@@ -4,7 +4,7 @@ import { StoryblokStory } from "@storyblok/react/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/features/storyblok/components";
-
+import Footer from "@/features/storyblok/components/navigation/Footer";
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
@@ -13,7 +13,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
 
   const story = await getStory(params.slug);
-
   if (!story) {
     return {};
   }
@@ -37,6 +36,7 @@ export default async function Page(props: Props) {
     <>
       <Navigation config={websiteConfig?.content} />
       <StoryblokStory story={story} />
+      <Footer config={websiteConfig?.content} />
     </>
   );
 }

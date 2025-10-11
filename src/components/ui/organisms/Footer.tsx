@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
-import { SbWebsiteConfig } from "@storyblok/types/287435740670216/storyblok-components";
-import { linkResolver } from "../../utils";
 
 interface FooterLink {
   label: string;
@@ -23,7 +21,7 @@ interface SocialLink {
   icon: React.ReactNode;
 }
 
-export default function Footer({ config }: { config: SbWebsiteConfig }) {
+export default function Footer() {
   const footerSections: FooterSection[] = [
     {
       title: "Ontdek",
@@ -137,24 +135,24 @@ export default function Footer({ config }: { config: SbWebsiteConfig }) {
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-md mx-auto lg:mx-0">
               <Link href="/" className="block mb-4">
                 <Image
-                  src={config.footer_logo?.filename || "/logo.svg"}
-                  alt={config.footer_logo?.alt || "Jesus Central Church"}
+                  src="/logo.svg"
+                  alt="Jesus Central Church"
                   width={200}
                   height={60}
                   className="h-12 sm:h-14 md:h-16 w-auto"
                 />
               </Link>
               <p className="text-freedom/70 text-sm sm:text-base leading-relaxed">
-                {config.footer_description}
+                Een gemeenschap die gelooft in Gods originele design voor jouw leven.
               </p>
             </div>
           </motion.div>
 
           {/* Links Grid */}
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 mb-12 lg:mb-16">
-            {config.footer_menu?.map((section, sectionIndex) => (
+            {footerSections.map((section, sectionIndex) => (
               <motion.div
-                key={section._uid}
+                key={section.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -164,10 +162,10 @@ export default function Footer({ config }: { config: SbWebsiteConfig }) {
                   {section.title}
                 </h3>
                 <ul className="space-y-3">
-                  {section.items.map((link) => (
-                    <li key={link._uid}>
+                  {section.links.map((link) => (
+                    <li key={link.label}>
                       <Link
-                        href={linkResolver(link.link)}
+                        href={link.href}
                         className="text-sm text-freedom/70 hover:text-strategy-red transition-colors duration-300 inline-block group"
                       >
                         <span className="relative">
@@ -216,10 +214,7 @@ export default function Footer({ config }: { config: SbWebsiteConfig }) {
 
             {/* Copyright & Legal */}
             <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-freedom/50">
-              <p>
-                © {new Date().getFullYear()} Stichting Gods Original Design
-                Gouda
-              </p>
+              <p>© {new Date().getFullYear()} Stichting Gods Original Design Gouda</p>
               <span className="hidden sm:inline">•</span>
               <div className="flex items-center gap-4">
                 <Link

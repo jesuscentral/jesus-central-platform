@@ -572,6 +572,9 @@ export interface SbVideoHero {
 }
 
 export interface SbWebsiteConfig {
+  footer_logo?: StoryblokAsset;
+  footer_description: string;
+  footer_menu?: SbMenuSection[];
   site_name: string;
   logo: StoryblokAsset;
   logo_alt: string;

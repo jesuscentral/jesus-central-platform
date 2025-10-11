@@ -106,12 +106,12 @@ const FullSection = ({
               <source src={bgVideo} type="video/mp4" />
             </video>
           ) : bgImage ? (
-            <div
-              className="w-full h-full bg-cover bg-center"
-              style={{
-                backgroundImage: `url(${bgImage})`,
-                backgroundAttachment: "fixed",
-              }}
+            <Image
+              src={bgImage}
+              alt="Background Image"
+              fill
+              className="w-full h-full object-cover"
+              priority
             />
           ) : null}
           <div className={`absolute inset-0 ${overlayClasses[overlay]}`} />
@@ -306,7 +306,7 @@ export default function NieuwBeginPage() {
       {/* Journey Intro */}
       <FullSection
         id="journey"
-        bgImage="/og-image.png"
+        bgImage="/images/nieuw-begin/goede-vrijdag.jpg"
         overlay="dark"
         nextSectionId="baptism"
       >
@@ -335,7 +335,7 @@ export default function NieuwBeginPage() {
       {/* Baptism in Water */}
       <FullSection
         id="baptism"
-        bgImage="/og-image.png"
+        bgImage="/images/nieuw-begin/doop-achtergrond.jpg"
         overlay="gradient"
         nextSectionId="holy-spirit"
       >
@@ -388,7 +388,7 @@ export default function NieuwBeginPage() {
             </TextReveal>
 
             <AnimatedImage
-              src="/og-image.png"
+              src="/images/nieuw-begin/waterdoop.jpg"
               alt="Baptism"
               side="right"
               delay={0.2}
@@ -400,7 +400,7 @@ export default function NieuwBeginPage() {
       {/* Holy Spirit */}
       <FullSection
         id="holy-spirit"
-        bgImage="/og-image.png"
+        bgImage="/images/nieuw-begin/heilige-geest-achtergrond.jpg"
         overlay="gradient"
         nextSectionId="alpha"
       >
@@ -408,7 +408,7 @@ export default function NieuwBeginPage() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
               <AnimatedImage
-                src="/og-image.png"
+                src="/images/nieuw-begin/doop-in-geest.jpg"
                 alt="Holy Spirit"
                 side="left"
                 delay={0.1}
@@ -468,7 +468,7 @@ export default function NieuwBeginPage() {
       {/* Alpha Course */}
       <FullSection
         id="alpha"
-        bgImage="/og-image.png"
+        bgImage="/images/nieuw-begin/alpha.webp"
         overlay="gradient"
         nextSectionId="training"
       >
@@ -481,7 +481,7 @@ export default function NieuwBeginPage() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             <AnimatedImage
-              src="/og-image.png"
+              src="/images/nieuw-begin/alpha.gif"
               alt="Alpha Course"
               side="right"
               delay={0}
@@ -518,7 +518,7 @@ export default function NieuwBeginPage() {
       {/* Training School */}
       <FullSection
         id="training"
-        bgImage="/og-image.png"
+        bgImage="/images/nieuw-begin/jesus-central-training-school.jpg"
         overlay="gradient"
         nextSectionId="lifegroups"
       >
@@ -562,7 +562,7 @@ export default function NieuwBeginPage() {
             </TextReveal>
 
             <AnimatedImage
-              src="/og-image.png"
+              src="/images/nieuw-begin/bijbel.jpg"
               alt="Training School"
               side="right"
               delay={0.2}

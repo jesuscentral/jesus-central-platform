@@ -20,11 +20,6 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
           <StoryblokServerComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
       </main>
-
-      {blok?.global_footer &&
-        (blok.global_footer as unknown as SbBlokData[]).map((global, index) => (
-          <StoryblokServerComponent blok={global.content} key={index} />
-        ))}
     </div>
   );
 };
