@@ -201,7 +201,7 @@ export default function Footer({ config }: { config: SbWebsiteConfig }) {
 
             {/* Subtle tagline */}
             <p className="text-xs text-freedom/40 italic">
-              Ontdek Gods Original Design voor jouw leven
+              Een plek waar jij Jezus ontmoet
             </p>
           </motion.div>
         </div>
