@@ -23,6 +23,7 @@ export const GET = async () => {
     return new Response(
       JSON.stringify({
         live: isLive,
+        channelUrl: liveUrl,
         url:
           isLive && videoId
             ? `https://www.youtube.com/watch?v=${videoId}`
