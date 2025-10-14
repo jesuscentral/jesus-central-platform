@@ -4,9 +4,7 @@ import { componentMap } from "@/features/storyblok/components";
 import {
   storyblokConfig,
   storyblokApiConfig,
-  resolveRelations,
 } from "@/features/storyblok/config";
-import { updateStory } from "@/features/storyblok/utils";
 import { getLanguageConfig } from "./utils";
 
 export const getStoryblokApi = storyblokInit({
@@ -37,7 +35,6 @@ export const getStory = async (slug: string[]) => {
       `cdn/stories/${storyblokConfig.basePath}/${finalSlug}`,
       {
         ...storyblokApiConfig,
-        resolve_relations: [...resolveRelations],
         language: language,
       }
     );
@@ -46,10 +43,7 @@ export const getStory = async (slug: string[]) => {
       return null;
     }
 
-    const resolvedRelations = data?.rels;
-    const updatedStory = updateStory(data?.story, resolvedRelations);
-
-    return updatedStory;
+    return data?.story;
   } catch {
     return null;
   }

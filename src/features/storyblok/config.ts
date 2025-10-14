@@ -11,5 +11,3 @@ export const storyblokApiConfig = {
   version: storyblokConfig.isPreview ? "draft" : "published",
   resolve_links: "url",
 } as const;
-
-export const resolveRelations = ["global_footer"] as const;
