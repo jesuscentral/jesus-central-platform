@@ -34,7 +34,7 @@ export default function PersonCard({ blok }: { blok: SbPersonCard }) {
       {...storyblokEditable(blok as SbBlokData)}
       layout
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-boldness/10 shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)] transition-shadow",
+        "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-boldness/10 ",
         bgColorClass
       )}
     >

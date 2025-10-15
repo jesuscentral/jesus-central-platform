@@ -13,7 +13,7 @@ export default function Card({ blok }: CardProps) {
   return (
     <article
       {...storyblokEditable(blok as SbBlokData)}
-      className={`flex flex-col h-full rounded-3xl px-8 py-10 text-white shadow-[0_25px_70px_-32px_rgba(17,17,17,0.45)] bg-${blok.backgroundColor}`}
+      className={`flex flex-col h-full rounded-3xl px-8 py-10 text-white bg-${blok.backgroundColor}`}
     >
       <h3
         className={cn(

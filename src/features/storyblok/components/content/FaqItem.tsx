@@ -35,7 +35,7 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
           "w-full overflow-hidden rounded-2xl border transition-all duration-300 cursor-pointer",
           isOpen
             ? "border-strategy-red/20 bg-freedom"
-            : "border-boldness/10 bg-white/70 backdrop-blur-sm hover:border-boldness/20 hover:shadow-[0_15px_40px_-15px_rgba(17,17,17,0.2)]"
+            : "border-boldness/10 bg-white/70 backdrop-blur-sm hover:border-boldness/20"
         )}
       >
         {/* Question Header */}

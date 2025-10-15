@@ -48,7 +48,6 @@ export const componentMap = {
   card: Cards.Card,
   imageCard: Cards.ImageCard,
   personCard: Cards.PersonCard,
-  livestreamCard: Cards.LiveStreamCard,
 
   // Navigation
   footer: Navigation.Footer,

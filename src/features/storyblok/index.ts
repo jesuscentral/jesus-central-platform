@@ -8,7 +8,7 @@ export {
 } from "./api";
 
 // Configuration
-export { storyblokConfig, resolveRelations } from "./config";
+export { storyblokConfig } from "./config";
 
 // Utils
 export {
