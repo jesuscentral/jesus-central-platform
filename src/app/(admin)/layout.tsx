@@ -60,7 +60,9 @@ export default async function MijnJesusCentralLayout({
               showAgenda={showAgenda}
               showAnnouncements={showAnnouncements}
             />
-            <div className="min-h-screen py-6">{children}</div>
+            <div className="container mx-auto min-h-screen py-6 px-8">
+              {children}
+            </div>
           </div>
         </body>
       </html>
