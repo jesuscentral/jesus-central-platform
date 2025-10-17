@@ -8,6 +8,7 @@ import type {
 } from "../../types/events";
 import { AssetSelector } from "@/features/storyblok-management/components/asset-selector";
 import Button from "@/components/ui/atoms/Button";
+import { formatDateForInput } from "../../utils/formatters";
 
 /**
  * Form for creating new events in Storyblok
@@ -16,11 +17,11 @@ export function CreateEventForm() {
   const [formData, setFormData] = useState<CreateEventFormData>({
     title: "",
     description: "",
-    date: "",
+    date: formatDateForInput(new Date()),
     speaker: "",
     location: "Rijsselseweg 1, 2803PZ Gouda",
-    type: "",
-    language: "",
+    type: "event",
+    language: "Nederlands",
     translationAvailable: false,
     youtubeLink: "",
   });
@@ -279,19 +280,6 @@ export function CreateEventForm() {
         selectedAssetId={selectedAssets.thumbnailAssetId}
         onSelect={(assetId) =>
           setSelectedAssets((prev) => ({ ...prev, thumbnailAssetId: assetId }))
-        }
-        folderName="public_events"
-      />
-
-      {/* Preacher Picture - Asset Selector */}
-      <AssetSelector
-        label="Afbeelding van de spreeker"
-        selectedAssetId={selectedAssets.preacherPictureAssetId}
-        onSelect={(assetId) =>
-          setSelectedAssets((prev) => ({
-            ...prev,
-            preacherPictureAssetId: assetId,
-          }))
         }
         folderName="public_events"
       />
