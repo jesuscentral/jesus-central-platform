@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import { ArrowLeft, Calendar, Heart, Home } from "lucide-react";
+import { ArrowLeft, Calendar, Heart, Home, MessageCircle } from "lucide-react";
 
 const baseNavItems = [
   {
@@ -18,7 +18,13 @@ const baseNavItems = [
   },
 ];
 
-export function AdminNav({ showAgenda = false }: { showAgenda: boolean }) {
+export function AdminNav({
+  showAgenda = false,
+  showAnnouncements = false,
+}: {
+  showAgenda: boolean;
+  showAnnouncements: boolean;
+}) {
   const pathname = usePathname();
 
   const navItems = [
@@ -29,6 +35,15 @@ export function AdminNav({ showAgenda = false }: { showAgenda: boolean }) {
             href: "/mijn-jesus-central/agenda",
             label: "Agenda",
             icon: Calendar,
+          },
+        ]
+      : []),
+    ...(showAnnouncements
+      ? [
+          {
+            href: "/mijn-jesus-central/aanvraag",
+            label: "Mededelingen",
+            icon: MessageCircle,
           },
         ]
       : []),

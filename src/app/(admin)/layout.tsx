@@ -3,7 +3,7 @@ import "@/app/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { nlNL } from "@clerk/localizations";
 import { AdminNav } from "@/components/admin/AdminNav";
-import { currentUser } from "@clerk/nextjs/server";
+import { clerkClient, currentUser } from "@clerk/nextjs/server";
 
 const headingFont = localFont({
   src: "../../assets/fonts/TGSPerfectCondensed.otf",
@@ -24,7 +24,22 @@ export default async function MijnJesusCentralLayout({
 }>) {
   const clerkUser = await currentUser();
 
+  if (
+    clerkUser?.emailAddresses.some((email) =>
+      email.emailAddress.includes("jesuscentral.nl")
+    )
+  ) {
+    (await clerkClient()).users.updateUserMetadata(clerkUser.id, {
+      publicMetadata: {
+        canEditEvents: true,
+        canRequestAnnouncement: true,
+      },
+    });
+  }
+
   const showAgenda = clerkUser?.publicMetadata?.canEditEvents === true;
+  const showAnnouncements =
+    clerkUser?.publicMetadata?.canRequestAnnouncement === true;
   return (
     <ClerkProvider localization={nlNL}>
       <html lang="nl">
@@ -33,7 +48,10 @@ export default async function MijnJesusCentralLayout({
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
           <div className="bg-freedom text-boldness">
-            <AdminNav showAgenda={showAgenda} />
+            <AdminNav
+              showAgenda={showAgenda}
+              showAnnouncements={showAnnouncements}
+            />
             <div className="min-h-screen py-6">{children}</div>
           </div>
         </body>
