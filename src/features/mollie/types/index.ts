@@ -1,4 +1,7 @@
-import type { Amount } from "@mollie/api-client";
+export interface Amount {
+  currency: string;
+  value: string;
+}
 
 /**
  * Serialized Mollie types (plain objects for client components)
