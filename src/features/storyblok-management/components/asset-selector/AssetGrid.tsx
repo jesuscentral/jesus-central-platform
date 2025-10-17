@@ -8,7 +8,7 @@ interface AssetGridProps {
   assets: StoryblokAsset[];
   selectedAssetId?: number;
   focusedIndex: number;
-  gridRef: React.RefObject<HTMLDivElement>;
+  gridRef: React.RefObject<HTMLDivElement | null>;
   onAssetClick: (assetId: number, index: number) => void;
   onKeyDown: (e: React.KeyboardEvent, index: number, assetId: number) => void;
   searchQuery: string;

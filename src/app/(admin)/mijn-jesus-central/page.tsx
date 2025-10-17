@@ -34,7 +34,7 @@ export default function ProfilePage() {
             size="small"
             variant="outline"
             type="strategy-red"
-            href="/geven"
+            href="/mijn-jesus-central/geven"
           >
             <GiftIcon className="w-4 h-4" />
             Geven
