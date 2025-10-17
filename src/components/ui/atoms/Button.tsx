@@ -114,7 +114,7 @@ export default function Button({
     </>
   );
 
-  if (href) {
+  if (href && !disabled) {
     return (
       <Link href={href} className={buttonClasses} {...additionalProps}>
         {content}

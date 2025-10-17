@@ -163,6 +163,17 @@ See `src/features/storyblok/components/Page.tsx` for the base template.
 - Custom map styles defined in `src/lib/mapbox.ts`
 - Component: `src/components/ui/organisms/MapboxMap.tsx`
 
+### Clerk Authentication
+
+- **Package**: `@clerk/nextjs` (latest version)
+- **Middleware**: `src/middleware.ts` uses `clerkMiddleware()` from `@clerk/nextjs/server`
+- **Provider**: `<ClerkProvider>` wraps the entire app in `src/app/layout.tsx`
+- **Protected Routes**: Define routes to protect using `createRouteMatcher()` in middleware
+- **Components**: Available from `@clerk/nextjs` (e.g., `<SignInButton>`, `<SignUpButton>`, `<UserButton>`, `<SignedIn>`, `<SignedOut>`)
+- **Server Functions**: Use `auth()` from `@clerk/nextjs/server` for server-side authentication (async function)
+- **Configuration**: Set `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` in environment variables
+- **Documentation**: [Clerk Next.js Quickstart](https://clerk.com/docs/quickstarts/nextjs)
+
 ## Environment Variables
 
 Required variables (see `.env.example`):
@@ -174,6 +185,8 @@ NEXT_PUBLIC_BASE_PATH=            # Storyblok path prefix (e.g., "jesuscentral")
 NEXT_PUBLIC_BASE_URL=             # Site URL for SEO and redirects
 MOLLIE_API_KEY=                   # Mollie payment API key
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=  # Mapbox public token
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= # Clerk publishable key (public)
+CLERK_SECRET_KEY=                 # Clerk secret key (server-side only)
 ```
 
 ## TypeScript & Path Aliases
