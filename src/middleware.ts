@@ -1,3 +1,4 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import {
@@ -5,7 +6,19 @@ import {
   defaultLanguage,
 } from "@/features/storyblok/utils/languageConstants";
 
-export function middleware(request: NextRequest) {
+// Define protected routes (customize based on your needs)
+const isProtectedRoute = createRouteMatcher([
+  "/mijn-jesus-central(.*)",
+  // Add other routes you want to protect
+]);
+
+export default clerkMiddleware(async (auth, request: NextRequest) => {
+  // Protect routes if needed
+  if (isProtectedRoute(request)) {
+    await auth.protect();
+  }
+
+  // Language handling logic
   const { pathname } = request.nextUrl;
 
   // Check if the pathname starts with a language prefix
@@ -39,7 +52,8 @@ export function middleware(request: NextRequest) {
   }
 
   // For requests without language prefix, just set cookie from existing or default
-  const existingLanguage = request.cookies.get("language")?.value || defaultLanguage;
+  const existingLanguage =
+    request.cookies.get("language")?.value || defaultLanguage;
 
   const response = NextResponse.next();
   response.cookies.set("language", existingLanguage, {
@@ -49,18 +63,13 @@ export function middleware(request: NextRequest) {
   });
 
   return response;
-}
+});
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (images, etc.)
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|manifest.webmanifest).*)",
+    // Skip Next.js internals and all static files, unless found in search params
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // Always run for API routes
+    "/(api|trpc)(.*)",
   ],
 };
