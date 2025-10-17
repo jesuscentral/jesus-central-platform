@@ -54,7 +54,7 @@ export default function GevenPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl py-8">
+    <div className="mx-auto max-w-4xl">
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-heading text-4xl font-bold md:text-5xl mb-2">

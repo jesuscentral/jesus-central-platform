@@ -1,10 +1,9 @@
 import localFont from "next/font/local";
 import "@/app/globals.css";
-import { ClerkProvider, SignOutButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { nlNL } from "@clerk/localizations";
-import Button from "@/components/ui/atoms/Button";
-import Section from "@/components/ui/atoms/Section";
-import { LogOutIcon } from "lucide-react";
+import { AdminNav } from "@/components/admin/AdminNav";
+import { currentUser } from "@clerk/nextjs/server";
 
 const headingFont = localFont({
   src: "../../assets/fonts/TGSPerfectCondensed.otf",
@@ -23,6 +22,9 @@ export default async function MijnJesusCentralLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const clerkUser = await currentUser();
+
+  const showAgenda = clerkUser?.publicMetadata?.canEditEvents === true;
   return (
     <ClerkProvider localization={nlNL}>
       <html lang="nl">
@@ -31,7 +33,8 @@ export default async function MijnJesusCentralLayout({
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
           <div className="bg-freedom text-boldness">
-            <div className="min-h-screen">{children}</div>
+            <AdminNav showAgenda={showAgenda} />
+            <div className="min-h-screen py-6">{children}</div>
           </div>
         </body>
       </html>
