@@ -12,10 +12,14 @@ export const linkResolver = (
   }
 
   if (!basePath) {
-    return link?.story?.full_slug || link.cached_url || link.url || "";
+    return "/".concat(
+      link?.story?.full_slug || link.cached_url || link.url || ""
+    );
   }
 
-  let correctUrl = link?.story?.full_slug || link.cached_url || link.url || "";
+  let correctUrl = "/".concat(
+    link?.story?.full_slug || link.cached_url || link.url || ""
+  );
 
   // Remove base path if link is to the homepage
   if (correctUrl === `${basePath}/`) {
