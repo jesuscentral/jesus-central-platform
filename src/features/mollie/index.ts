@@ -81,6 +81,11 @@ export const createCustomer = async (name: string, email: string) => {
   return customer;
 };
 
+export const getCustomer = async (customerId: string) => {
+  const customer = await mollieClient.customers.get(customerId);
+  return customer;
+};
+
 export const createPayment = async (
   amount: string,
   reccuring: boolean = false,
@@ -90,15 +95,16 @@ export const createPayment = async (
   country: string = "NL"
 ) => {
   const domain = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
+  const clerkUser = await currentUser();
 
-  const customer = await upsertCustomer(name, email);
+  const customer = clerkUser?.publicMetadata?.mollieCustomerId
+    ? await getCustomer(clerkUser.publicMetadata.mollieCustomerId as string)
+    : await upsertCustomer(name, email);
 
-  const clerkuser = await currentUser();
-
-  if (clerkuser) {
+  if (clerkUser) {
     await (
       await clerkClient()
-    ).users.updateUserMetadata(clerkuser.id, {
+    ).users.updateUserMetadata(clerkUser.id, {
       publicMetadata: {
         mollieCustomerId: customer.id,
       },
@@ -118,6 +124,8 @@ export const createPayment = async (
     // webhookUrl: `${domain}/api/webhooks/mollie`,
     metadata: {
       source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+      email: email,
+      name: name,
     },
   });
 
