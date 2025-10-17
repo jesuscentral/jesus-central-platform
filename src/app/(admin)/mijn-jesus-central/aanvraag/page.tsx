@@ -1,6 +1,14 @@
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { FilloutForm } from "@/features/storyblok/components";
 
-export default function AanvraagPage() {
+export default async function AanvraagPage() {
+  const clerkUser = await currentUser();
+
+  if (clerkUser?.publicMetadata?.canRequestAnnouncement !== true) {
+    redirect("/mijn-jesus-central");
+  }
+
   return (
     <>
       <div className="mx-auto max-w-4xl">
