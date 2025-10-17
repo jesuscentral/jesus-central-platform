@@ -177,9 +177,7 @@ export default function Footer({ config }: { config: SbWebsiteConfig }) {
 
             {/* Copyright & Legal */}
             <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-freedom/50">
-              <p>
-                © {new Date().getFullYear()} Stichting Jesus Central Church
-              </p>
+              <p>© {new Date().getFullYear()} Jesus Central Church</p>
               <span className="hidden sm:inline">•</span>
               <div className="flex items-center gap-4">
                 <Link

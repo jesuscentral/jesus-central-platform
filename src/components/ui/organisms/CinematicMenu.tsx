@@ -223,9 +223,7 @@ export default function CinematicMenu({
                   </div>
                 </div>
                 <div className="text-freedom/70 text-sm">
-                  <p>
-                    © {new Date().getFullYear()} Stichting Jesus Central Church
-                  </p>
+                  <p>© {new Date().getFullYear()} Jesus Central Church</p>
                 </div>
               </div>
             </div>
