@@ -1,7 +1,10 @@
 import localFont from "next/font/local";
 import "@/app/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, SignOutButton } from "@clerk/nextjs";
 import { nlNL } from "@clerk/localizations";
+import Button from "@/components/ui/atoms/Button";
+import Section from "@/components/ui/atoms/Section";
+import { LogOutIcon } from "lucide-react";
 
 const headingFont = localFont({
   src: "../../assets/fonts/TGSPerfectCondensed.otf",
@@ -27,8 +30,8 @@ export default async function MijnJesusCentralLayout({
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
-          <div className="relative z-10 flex h-full flex-col">
-            <div className="min-h-screen bg-black text-white">{children}</div>
+          <div className="bg-freedom text-boldness">
+            <div className="min-h-screen">{children}</div>
           </div>
         </body>
       </html>

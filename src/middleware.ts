@@ -15,7 +15,12 @@ const isProtectedRoute = createRouteMatcher([
 export default clerkMiddleware(async (auth, request: NextRequest) => {
   // Protect routes if needed
   if (isProtectedRoute(request)) {
-    await auth.protect();
+    if (
+      !request.nextUrl.pathname.includes("/inloggen") ||
+      !request.nextUrl.pathname.includes("/registreren")
+    ) {
+      await auth.protect();
+    }
   }
 
   // Language handling logic

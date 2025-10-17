@@ -1,13 +1,14 @@
-import { SignOutButton, UserProfile } from "@clerk/nextjs";
-import { CalendarIcon, FileIcon, GiftIcon, LogOutIcon } from "lucide-react";
 import Button from "@/components/ui/atoms/Button";
+import { CreateEventForm } from "@/features/storyblok-management";
+import { SignOutButton } from "@clerk/nextjs";
+import { CalendarIcon, FileIcon, GiftIcon, LogOutIcon } from "lucide-react";
 
-export default function ProfilePage() {
+export default function NewEventPage() {
   return (
     <>
       <div className="mx-auto max-w-4xl">
         <h1 className="mb-8 font-heading text-4xl font-bold md:text-5xl">
-          Mijn Profiel
+          Activiteit aanmaken
         </h1>
 
         <div className="container mx-auto flex justify-end space-x-4">
@@ -48,7 +49,7 @@ export default function ProfilePage() {
         </div>
 
         <div className="rounded-lg  p-4  md:p-8">
-          <UserProfile />
+          <CreateEventForm />
         </div>
       </div>
     </>
