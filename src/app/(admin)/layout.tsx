@@ -4,6 +4,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { nlNL } from "@clerk/localizations";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
+import { notFound } from "next/navigation";
+import { getConfig } from "@/lib/actions/config";
 
 const headingFont = localFont({
   src: "../../assets/fonts/TGSPerfectCondensed.otf",
@@ -22,6 +24,12 @@ export default async function MijnJesusCentralLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const config = await getConfig();
+
+  if (!config || config?.auth === false) {
+    return notFound();
+  }
+
   const clerkUser = await currentUser();
 
   if (

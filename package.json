@@ -20,6 +20,7 @@
     "@fillout/react": "^3.0.0",
     "@mollie/api-client": "^4.3.3",
     "@storyblok/react": "^5.4.12",
+    "@vercel/edge-config": "^1.4.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "fast-xml-parser": "^5.2.5",
