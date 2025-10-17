@@ -7,9 +7,20 @@ A modern, multi-site church website platform built with Next.js 15 and Storyblok
 - **Storyblok CMS**: Headless CMS with visual editing and component-based content management
 - **Multi-site Support**: Manage multiple church sites from a single Storyblok space using base paths
 - **YouTube Integration**: Automatic sermon video feed from YouTube RSS
-- **Donation System**: Mollie payment integration for one-time and recurring donations
+- **Donation System**: Complete Mollie payment integration
+  - One-time and recurring donations
+  - Subscription management dashboard
+  - Payment history tracking
+  - Customer mandate handling
+- **Member Portal**: Authenticated user area with Clerk
+  - Event management for authorized users
+  - Monthly giving management
+  - ANBI information display
+  - Announcement requests
 - **Interactive Maps**: Mapbox integration for location display
 - **Event Management**: Filterable event listings with calendar integration
+- **Edge Config**: Feature flags and runtime configuration via Vercel Edge Config
+- **Asset Management**: Storyblok asset browser with folder filtering
 - **Responsive Design**: Mobile-first design with Tailwind CSS v4
 - **TypeScript**: Full type safety with auto-generated Storyblok types
 
@@ -51,16 +62,27 @@ A modern, multi-site church website platform built with Next.js 15 and Storyblok
    # Storyblok Configuration (Required)
    NEXT_PUBLIC_STORYBLOK_TOKEN=your_storyblok_token
    NEXT_PUBLIC_STORYBLOK_IS_PREVIEW=true
+   STORYBLOK_MANAGEMENT_TOKEN=your_management_token  # For asset management
 
    # Multi-site Configuration (Required)
    NEXT_PUBLIC_BASE_PATH=jesuscentral        # Folder name in Storyblok
    NEXT_PUBLIC_BASE_URL=https://jesuscentral.church
 
+   # YouTube Configuration (Required for sermons)
+   NEXT_PUBLIC_YOUTUBE_CHANNEL_ID=your_youtube_channel_id
+
    # Payment Integration (Optional - Required for donations)
    MOLLIE_API_KEY=your_mollie_api_key
 
+   # Authentication (Required for member portal)
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+
    # Maps Integration (Optional - Required for location maps)
    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token
+
+   # Edge Config (Optional - For feature flags and runtime config)
+   EDGE_CONFIG=your_edge_config_connection_string
    ```
 
 4. **Generate Storyblok types**
@@ -167,46 +189,87 @@ npm run storyblok:regenerate        # Pull + generate (run after Storyblok chang
 
 ```
 src/
-├── app/                           # Next.js App Router
-│   ├── [...slug]/                # Dynamic pages from Storyblok
-│   ├── agenda/                   # Events page
-│   ├── preken/                   # Sermons page (YouTube integration)
-│   └── api/                      # API routes (webhooks, proxies)
+├── app/
+│   ├── (admin)/                  # Member portal (protected routes)
+│   │   ├── mijn-jesus-central/  # Dashboard and user pages
+│   │   │   ├── agenda/          # Event management page
+│   │   │   ├── geven/           # Donation management page
+│   │   │   └── page.tsx         # Dashboard home
+│   │   └── components/          # Admin-specific components
+│   │       └── AdminNav.tsx     # Admin navigation menu
+│   ├── (website)/               # Public website routes
+│   │   ├── [...slug]/           # Dynamic pages from Storyblok
+│   │   ├── agenda/              # Public events page
+│   │   ├── preken/              # Sermons page (YouTube)
+│   │   └── activiteiten/        # Activity pages
+│   └── api/                     # API routes
+│       ├── revalidate/          # Cache revalidation webhook
+│       ├── webhooks/mollie/     # Mollie payment webhooks
+│       └── youtube/             # YouTube RSS proxy
 ├── components/
-│   ├── StoryblokProvider.tsx     # Storyblok bridge component
-│   ├── sermons/                  # Sermon display components
-│   └── ui/                       # Design system (Atomic Design)
-│       ├── atoms/                # Button, Badge, Heading, etc.
-│       ├── molecules/            # Composed components
-│       └── organisms/            # CinematicMenu, MapboxMap, etc.
+│   ├── admin/                   # Admin portal components
+│   │   └── AdminNav.tsx         # Navigation for member area
+│   ├── forms/                   # Form components
+│   │   └── EventForm.tsx        # Event creation/editing form
+│   ├── StoryblokProvider.tsx    # Storyblok bridge component
+│   ├── sermons/                 # Sermon display components
+│   └── ui/                      # Design system (Atomic Design)
+│       ├── atoms/               # Button, Badge, Heading, etc.
+│       ├── molecules/           # Composed components
+│       └── organisms/           # CinematicMenu, MapboxMap, etc.
 ├── features/
-│   ├── events/                   # Event filtering and display
-│   ├── mollie/                   # Payment integration
-│   ├── youtube/                  # YouTube RSS parsing
-│   │   ├── api.ts               # Core fetch functions
-│   │   ├── types.ts             # Type definitions
-│   │   ├── utils/               # Parser and formatters
-│   │   └── README.md            # Feature documentation
-│   └── storyblok/
-│       ├── components/           # Storyblok components (by category)
-│       │   ├── layout/          # Page, Section, Grid components
-│       │   ├── heroes/          # Hero sections
-│       │   ├── content/         # Text, images, rich content
-│       │   ├── cards/           # Card components
-│       │   ├── navigation/      # Footer, links
-│       │   ├── interactive/     # Buttons, donations, maps
-│       │   └── media/           # Images, embeds
-│       ├── api.ts               # Storyblok API functions
-│       ├── config.ts            # Configuration
-│       ├── types/               # Type exports
-│       └── utils/               # Helpers (linkResolver, SEO)
+│   ├── events/                  # Event management
+│   │   ├── utils.ts            # Date filtering, sorting
+│   │   └── types.ts            # Event type definitions
+│   ├── mollie/                  # Complete payment integration
+│   │   ├── api.ts              # Core Mollie API functions
+│   │   ├── actions/            # Server actions
+│   │   │   └── subscriptions.ts # Subscription management
+│   │   ├── components/         # UI components
+│   │   │   ├── PaymentHistory.tsx
+│   │   │   ├── SubscriptionCard.tsx
+│   │   │   └── NewSubscriptionForm.tsx
+│   │   ├── types/              # TypeScript definitions
+│   │   └── README.md           # Feature documentation
+│   ├── storyblok/
+│   │   ├── components/         # Storyblok components (by category)
+│   │   │   ├── layout/        # Page, Section, Grid components
+│   │   │   ├── heroes/        # Hero sections
+│   │   │   ├── content/       # Text, images, rich content
+│   │   │   ├── cards/         # Card components
+│   │   │   ├── navigation/    # Footer, links
+│   │   │   ├── interactive/   # Buttons, donations, maps
+│   │   │   └── media/         # Images, embeds
+│   │   ├── api.ts             # Storyblok API functions
+│   │   ├── management-api.ts  # Storyblok Management API
+│   │   ├── config.ts          # Configuration
+│   │   ├── types/             # Type exports
+│   │   └── utils/             # Helpers (linkResolver, SEO)
+│   ├── storyblok-management/   # Asset management
+│   │   ├── api/               # Management API functions
+│   │   │   ├── assets.ts     # Asset fetching
+│   │   │   └── stories.ts    # Story creation
+│   │   ├── components/        # UI components
+│   │   │   ├── asset-selector/ # Asset browser
+│   │   │   └── ui/           # Reusable UI primitives
+│   │   ├── hooks/            # Custom React hooks
+│   │   └── types/            # Type definitions
+│   └── youtube/               # YouTube RSS parsing
+│       ├── api.ts            # Core fetch functions
+│       ├── types.ts          # Type definitions
+│       ├── utils/            # Parser and formatters
+│       └── README.md         # Feature documentation
 ├── lib/
-│   ├── storyblok.ts             # Storyblok setup
-│   ├── mapbox.ts                # Mapbox configuration
-│   ├── animations.ts            # Framer Motion presets
-│   └── actions/                 # Server actions
+│   ├── storyblok.ts          # Storyblok setup
+│   ├── mapbox.ts             # Mapbox configuration
+│   ├── animations.ts         # Framer Motion presets
+│   └── actions/              # Server actions
+│       ├── config.ts         # Edge Config integration
+│       ├── events.ts         # Event CRUD operations
+│       └── sermons.ts        # YouTube video fetching
+├── middleware.ts             # Clerk authentication middleware
 └── utils/
-    └── cn.ts                    # Tailwind class utility
+    └── cn.ts                 # Tailwind class utility
 ```
 
 ## Key Integrations
@@ -236,22 +299,37 @@ const videos = await fetchChannelRssFeed(channelId);
 
 ### Mollie Payments
 
-Handles donations and recurring payments:
+Complete payment integration with subscription management:
 
 ```typescript
 // Location: src/features/mollie/
-import { createPayment } from "@/features/mollie";
+import { createPayment, getSubscriptions } from "@/features/mollie";
 
-const payment = await createPayment({
-  amount: "10.00",
-  description: "Donation",
-  // ...
-});
+// Create one-time payment
+const redirectUrl = await createPayment(
+  "10.00",
+  false, // not recurring
+  "Gift",
+  "John Doe",
+  "john@example.com"
+);
+
+// Get user's subscriptions
+const subscriptions = await getSubscriptions(customerId);
 ```
 
-- Customer management with upsert pattern
-- One-time and recurring payment support
-- Webhook at `/api/webhooks/mollie` for subscription updates
+**Features:**
+- Customer management with automatic upsert
+- One-time and recurring payments
+- Monthly subscription management dashboard
+- Payment history tracking
+- Subscription editing (amount, description)
+- Subscription cancellation
+- SEPA mandate handling
+- Webhook at `/api/webhooks/mollie` for updates
+- Full serialization for client components
+
+See [Mollie Feature Documentation](src/features/mollie/README.md) for detailed usage.
 
 ### Mapbox Maps
 
@@ -265,6 +343,114 @@ Interactive location maps:
   title="Jesus Central Church"
 />
 ```
+
+### Clerk Authentication
+
+User authentication and member portal:
+
+```typescript
+// Middleware: src/middleware.ts
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+
+// Server-side auth
+import { currentUser } from "@clerk/nextjs/server";
+const user = await currentUser();
+
+// Client-side components
+import { UserButton, SignInButton } from "@clerk/nextjs";
+```
+
+**Features:**
+- Dutch localization (`nlNL`)
+- Protected routes for member portal (`/mijn-jesus-central/*`)
+- User metadata for permissions
+  - `canEditEvents` - Event management access
+  - `canRequestAnnouncement` - Announcement requests
+  - `mollieCustomerId` - Linked payment customer
+- UserButton component in admin navigation
+- Automatic permission assignment for `@jesuscentral.nl` emails
+
+### Vercel Edge Config
+
+Runtime configuration and feature flags:
+
+```typescript
+// Location: src/lib/actions/config.ts
+import { getConfig } from "@/lib/actions/config";
+
+const config = await getConfig();
+if (config?.auth === false) {
+  // Authentication disabled
+}
+```
+
+**Configuration Options:**
+- `auth` (boolean) - Enable/disable authentication
+  - `true` - Member portal accessible
+  - `false` - Member portal returns 404
+- Easy runtime feature flag toggling without redeployment
+
+**Setup:**
+1. Create Edge Config in Vercel dashboard
+2. Add configuration JSON:
+   ```json
+   {
+     "auth": true
+   }
+   ```
+3. Copy connection string to `EDGE_CONFIG` env var
+4. Access config via `getConfig()` server action
+
+### Storyblok Asset Management
+
+Browse and select assets from Storyblok:
+
+```typescript
+// Location: src/features/storyblok-management/
+import { AssetSelector } from "@/features/storyblok-management";
+
+<AssetSelector
+  selectedAssetId={selectedId}
+  onSelect={(assetId) => setSelectedId(assetId)}
+  folderName="public_events" // Filter to specific folder
+/>
+```
+
+**Features:**
+- Asset folder filtering
+- Real-time search
+- Lazy loading images
+- Keyboard navigation
+- Modern UI with skeleton states
+- Used in event creation forms
+
+### Member Portal
+
+Authenticated user area at `/mijn-jesus-central`:
+
+**Pages:**
+- **Dashboard** (`/mijn-jesus-central`) - Welcome and overview
+- **Agenda** (`/mijn-jesus-central/agenda`) - Event management (authorized users)
+  - Create new events
+  - Browse and select images from Storyblok
+  - Publish events to website
+- **Geven** (`/mijn-jesus-central/geven`) - Donation management
+  - View payment history
+  - Manage monthly subscriptions
+  - Create/edit/cancel subscriptions
+  - ANBI information
+
+**Navigation:**
+- Top navigation bar with links to all sections
+- "Terug naar website" button to return to main site
+- Clerk UserButton for account management
+- Responsive design with mobile menu
+
+**Permissions:**
+- Users with `@jesuscentral.nl` email automatically get:
+  - `canEditEvents: true`
+  - `canRequestAnnouncement: true`
+- Other users can only access donation management
 
 ## Development Guide
 
@@ -344,12 +530,20 @@ Interactive location maps:
 
 Make sure these are set in your hosting platform:
 
-- [ ] `NEXT_PUBLIC_STORYBLOK_TOKEN`
-- [ ] `NEXT_PUBLIC_STORYBLOK_IS_PREVIEW` (set to `false` for production)
-- [ ] `NEXT_PUBLIC_BASE_PATH` (your site's folder name in Storyblok)
-- [ ] `NEXT_PUBLIC_BASE_URL` (your site's public URL)
-- [ ] `MOLLIE_API_KEY` (if using donations)
-- [ ] `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` (if using maps)
+**Required:**
+- [ ] `NEXT_PUBLIC_STORYBLOK_TOKEN` - Storyblok Content Delivery API token
+- [ ] `NEXT_PUBLIC_STORYBLOK_IS_PREVIEW` - Set to `false` for production
+- [ ] `NEXT_PUBLIC_BASE_PATH` - Your site's folder name in Storyblok
+- [ ] `NEXT_PUBLIC_BASE_URL` - Your site's public URL
+
+**Optional (Feature-dependent):**
+- [ ] `STORYBLOK_MANAGEMENT_TOKEN` - For asset management in event creation
+- [ ] `NEXT_PUBLIC_YOUTUBE_CHANNEL_ID` - For sermon videos
+- [ ] `MOLLIE_API_KEY` - For payment processing
+- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - For member portal (public)
+- [ ] `CLERK_SECRET_KEY` - For member portal (server-side)
+- [ ] `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` - For interactive maps
+- [ ] `EDGE_CONFIG` - For runtime configuration and feature flags
 
 ### Build Commands
 
@@ -365,6 +559,38 @@ For instant cache revalidation on content changes:
 1. Go to Storyblok Settings → Webhooks
 2. Create webhook: `https://your-domain.com/api/revalidate`
 3. Set story published/unpublished events
+
+### Vercel Edge Config Setup (Optional)
+
+For runtime configuration without redeployment:
+
+1. **Create Edge Config:**
+   - Go to Vercel Dashboard → Storage → Edge Config
+   - Click "Create Edge Config"
+   - Name it (e.g., `jcc-config`)
+
+2. **Add Configuration:**
+   - Click on your Edge Config
+   - Add items via the UI or JSON editor:
+     ```json
+     {
+       "auth": true
+     }
+     ```
+
+3. **Connect to Project:**
+   - Copy the connection string
+   - Add to environment variables: `EDGE_CONFIG=https://edge-config.vercel.com/...`
+   - Redeploy or the connection will be automatically available
+
+4. **Usage in Code:**
+   ```typescript
+   import { getConfig } from "@/lib/actions/config";
+   const config = await getConfig();
+   ```
+
+**Available Configuration:**
+- `auth` (boolean) - Enable/disable member portal authentication
 
 ## Troubleshooting
 
@@ -394,11 +620,32 @@ Verify:
 
 ## Documentation
 
+### External Documentation
 - [Storyblok Documentation](https://www.storyblok.com/docs)
 - [Next.js 15 Documentation](https://nextjs.org/docs)
-- [YouTube Feature Documentation](src/features/youtube/README.md)
-- [Storyblok Feature Documentation](src/features/storyblok/README.md)
+- [Clerk Authentication](https://clerk.com/docs)
+- [Mollie API](https://docs.mollie.com/)
+- [Vercel Edge Config](https://vercel.com/docs/storage/edge-config)
 
-## Technical Details
+### Feature Documentation
+- [YouTube Feature](src/features/youtube/README.md) - YouTube RSS integration
+- [Mollie Feature](src/features/mollie/README.md) - Payment and subscription management
+- [Storyblok Feature](src/features/storyblok/README.md) - CMS integration
 
+### Architecture Documentation
 For detailed architecture information and AI assistant instructions, see [CLAUDE.md](CLAUDE.md).
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router, Turbopack)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **CMS**: Storyblok (Headless CMS)
+- **Authentication**: Clerk
+- **Payments**: Mollie API
+- **Maps**: Mapbox GL JS
+- **Deployment**: Vercel
+- **Edge Config**: Vercel Edge Config
+- **Fonts**: TGS Perfect Condensed, Fira Sans
+- **Animations**: Framer Motion
+- **Date Formatting**: date-fns (Dutch locale)
