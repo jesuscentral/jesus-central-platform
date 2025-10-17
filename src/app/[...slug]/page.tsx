@@ -1,10 +1,7 @@
 import { getStory, getStoryblokSeoParameters } from "@/features/storyblok/api";
-import { getWebsiteConfig } from "@/features/storyblok/utils";
 import { StoryblokStory } from "@storyblok/react/rsc";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Navigation } from "@/features/storyblok/components";
-import Footer from "@/features/storyblok/components/navigation/Footer";
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
