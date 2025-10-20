@@ -1,53 +1,53 @@
-"use client";
+'use client'
 
-import { SbFaq } from "@storyblok/types/287435740670216/storyblok-components";
-import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
-import { motion } from "framer-motion";
-import { cn } from "@/utils/cn";
-import FaqItem from "./FaqItem";
-import Link from "next/link";
+import { SbFaq } from '@storyblok/types/287435740670216/storyblok-components'
+import { SbBlokData, storyblokEditable } from '@storyblok/react/rsc'
+import { motion } from 'framer-motion'
+import { cn } from '@/utils/cn'
+import FaqItem from './FaqItem'
+import Link from 'next/link'
 
 interface FaqProps {
-  blok: SbFaq;
+  blok: SbFaq
 }
 
 export default function Faq({ blok }: FaqProps) {
   // Map background colors to proper brand colors
   const getBackgroundColorClass = (color?: string | number) => {
     const colorMap: Record<string, string> = {
-      boldness: "bg-boldness",
-      freedom: "bg-freedom",
-      "strategy-red": "bg-strategy-red",
-      "strategy-gold": "bg-strategy-gold",
-      "strategy-green": "bg-strategy-green",
-    };
-    const colorStr = String(color || "freedom");
-    return colorMap[colorStr] || "bg-freedom";
-  };
+      boldness: 'bg-boldness',
+      freedom: 'bg-freedom',
+      'strategy-red': 'bg-strategy-red',
+      'strategy-gold': 'bg-strategy-gold',
+      'strategy-green': 'bg-strategy-green',
+    }
+    const colorStr = String(color || 'freedom')
+    return colorMap[colorStr] || 'bg-freedom'
+  }
 
   // Determine text color based on background
   const getTextColorClass = (bgColor?: string | number) => {
-    const colorStr = String(bgColor || "freedom");
+    const colorStr = String(bgColor || 'freedom')
     // Dark backgrounds need light text
-    if (colorStr === "boldness" || colorStr === "strategy-green") {
-      return "text-freedom";
+    if (colorStr === 'boldness' || colorStr === 'strategy-green') {
+      return 'text-freedom'
     }
     // Light backgrounds need dark text
-    return "text-boldness";
-  };
+    return 'text-boldness'
+  }
 
-  const bgColorClass = getBackgroundColorClass(blok.backgroundColor);
-  const textColorClass = getTextColorClass(blok.backgroundColor);
+  const bgColorClass = getBackgroundColorClass(blok.backgroundColor)
+  const textColorClass = getTextColorClass(blok.backgroundColor)
 
   return (
     <section
       {...storyblokEditable(blok as SbBlokData)}
-      className={cn("relative overflow-hidden py-16 md:py-24", bgColorClass)}
+      className={cn('relative overflow-hidden py-16 md:py-24', bgColorClass)}
     >
       {/* Decorative background elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-strategy-red/5 blur-3xl"
+          className="bg-strategy-red/5 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -55,11 +55,11 @@ export default function Faq({ blok }: FaqProps) {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-strategy-gold/5 blur-3xl"
+          className="bg-strategy-gold/5 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
@@ -67,7 +67,7 @@ export default function Faq({ blok }: FaqProps) {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 1,
           }}
         />
@@ -94,8 +94,8 @@ export default function Faq({ blok }: FaqProps) {
                   ease: [0.25, 0.1, 0.25, 1.0],
                 }}
                 className={cn(
-                  "font-heading text-4xl uppercase tracking-wide md:text-5xl lg:text-6xl",
-                  textColorClass
+                  'font-heading text-4xl tracking-wide uppercase md:text-5xl lg:text-6xl',
+                  textColorClass,
                 )}
               >
                 {blok.title}
@@ -113,8 +113,8 @@ export default function Faq({ blok }: FaqProps) {
                   ease: [0.25, 0.1, 0.25, 1.0],
                 }}
                 className={cn(
-                  "mx-auto mt-4 max-w-2xl font-body text-lg leading-relaxed md:mt-6 md:text-xl",
-                  textColorClass.replace("text-", "text-") + "/80"
+                  'font-body mx-auto mt-4 max-w-2xl text-lg leading-relaxed md:mt-6 md:text-xl',
+                  textColorClass.replace('text-', 'text-') + '/80',
                 )}
               >
                 {blok.subtitle}
@@ -126,8 +126,8 @@ export default function Faq({ blok }: FaqProps) {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              className="mx-auto mt-8 h-1 w-20 rounded-full bg-strategy-red"
+              transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+              className="bg-strategy-red mx-auto mt-8 h-1 w-20 rounded-full"
             />
           </motion.div>
         )}
@@ -150,10 +150,10 @@ export default function Faq({ blok }: FaqProps) {
           >
             <div
               className={cn(
-                "inline-flex items-center gap-2 rounded-full border px-6 py-3 backdrop-blur-sm",
-                textColorClass === "text-boldness"
-                  ? "border-boldness/10 bg-white/50"
-                  : "border-freedom/20 bg-white/10"
+                'inline-flex items-center gap-2 rounded-full border px-6 py-3 backdrop-blur-sm',
+                textColorClass === 'text-boldness'
+                  ? 'border-boldness/10 bg-white/50'
+                  : 'border-freedom/20 bg-white/10',
               )}
             >
               <svg
@@ -163,7 +163,7 @@ export default function Faq({ blok }: FaqProps) {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                className={cn("opacity-60", textColorClass)}
+                className={cn('opacity-60', textColorClass)}
               >
                 <circle cx="12" cy="12" r="10" />
                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
@@ -171,8 +171,8 @@ export default function Faq({ blok }: FaqProps) {
               </svg>
               <span
                 className={cn(
-                  "font-body text-sm uppercase tracking-wider",
-                  textColorClass.replace("text-", "text-") + "/70"
+                  'font-body text-sm tracking-wider uppercase',
+                  textColorClass.replace('text-', 'text-') + '/70',
                 )}
               >
                 Nog vragen? Neem contact op
@@ -182,5 +182,5 @@ export default function Faq({ blok }: FaqProps) {
         </Link>
       </div>
     </section>
-  );
+  )
 }

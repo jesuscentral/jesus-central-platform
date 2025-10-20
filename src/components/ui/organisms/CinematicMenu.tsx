@@ -1,128 +1,128 @@
-"use client";
+'use client'
 
-import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { linkResolver } from "@/features/storyblok/api";
-import { colors } from "@/lib/colors";
-import { StoryblokMultilink } from "@storyblok/types/storyblok";
+import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { linkResolver } from '@/features/storyblok/api'
+import { colors } from '@/lib/colors'
+import { StoryblokMultilink } from '@storyblok/types/storyblok'
 
 interface MenuItem {
-  label: string;
-  href: string;
+  label: string
+  href: string
 }
 
 interface MenuSection {
-  title: string;
-  items: MenuItem[];
+  title: string
+  items: MenuItem[]
 }
 
 interface SocialLink {
-  label: string;
-  href: string;
+  label: string
+  href: string
 }
 
 interface CinematicMenuProps {
   menu_data?: {
-    title: string;
+    title: string
     items: {
-      label: string;
-      link: StoryblokMultilink;
-      open_in_new_tab?: boolean;
-    }[];
-  }[];
+      label: string
+      link: StoryblokMultilink
+      open_in_new_tab?: boolean
+    }[]
+  }[]
   social_links?: {
-    label: string;
-    url: string;
-  }[];
+    label: string
+    url: string
+  }[]
 }
 
 export default function CinematicMenu({
   menu_data,
   social_links,
 }: CinematicMenuProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const colorScheme = {
     name: colors.STRATEGY_RED,
-    accentColor: "#eb3700",
-    accentRgba: "rgba(235, 55, 0, 0.1)",
-    hoverShadow: "rgba(235, 55, 0, 0.5)",
-  };
+    accentColor: '#eb3700',
+    accentRgba: 'rgba(235, 55, 0, 0.1)',
+    hoverShadow: 'rgba(235, 55, 0, 0.5)',
+  }
 
   // Transform Storyblok data to menu format
   const menuSections: MenuSection[] = menu_data
     ? menu_data.map((section) => ({
-        title: section.title || "",
+        title: section.title || '',
         items:
           section.items?.map((item) => ({
-            label: item.label || "",
-            href: linkResolver(item.link as StoryblokMultilink) || "#",
+            label: item.label || '',
+            href: linkResolver(item.link as StoryblokMultilink) || '#',
           })) || [],
       }))
-    : [];
+    : []
 
   const socialLinks: SocialLink[] = social_links
     ? social_links.map((link) => ({
-        label: link.label || "",
-        href: link.url || "#",
+        label: link.label || '',
+        href: link.url || '#',
       }))
-    : [];
+    : []
 
   const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset'
     }
 
     return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   return (
     <>
       <button
         key={colorScheme.name}
         onClick={handleToggle}
-        aria-label={isOpen ? "Close menu" : "Open menu"}
-        className="group relative z-[100] flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-freedom/10 backdrop-blur-md border border-freedom/20 transition-all duration-500  hover:scale-110 cursor-pointer"
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        className="group bg-freedom/10 border-freedom/20 relative z-[100] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border backdrop-blur-md transition-all duration-500 hover:scale-110 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16"
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = colorScheme.accentColor;
-          e.currentTarget.style.boxShadow = `0 0 30px ${colorScheme.hoverShadow}`;
+          e.currentTarget.style.borderColor = colorScheme.accentColor
+          e.currentTarget.style.boxShadow = `0 0 30px ${colorScheme.hoverShadow}`
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = "";
-          e.currentTarget.style.boxShadow = "";
+          e.currentTarget.style.borderColor = ''
+          e.currentTarget.style.boxShadow = ''
         }}
       >
-        <div className="relative w-5 h-5 sm:w-6 sm:h-6">
+        <div className="relative h-5 w-5 sm:h-6 sm:w-6">
           <Menu
-            className={`absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 text-freedom transition-all duration-300 ${
+            className={`text-freedom absolute inset-0 h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 ${
               isOpen
-                ? "opacity-0 rotate-90 scale-0"
-                : "opacity-100 rotate-0 scale-100"
+                ? 'scale-0 rotate-90 opacity-0'
+                : 'scale-100 rotate-0 opacity-100'
             }`}
           />
           <X
-            className={`absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 text-freedom transition-all duration-300 ${
+            className={`text-freedom absolute inset-0 h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 ${
               isOpen
-                ? "opacity-100 rotate-0 scale-100"
-                : "opacity-0 -rotate-90 scale-0"
+                ? 'scale-100 rotate-0 opacity-100'
+                : 'scale-0 -rotate-90 opacity-0'
             }`}
           />
         </div>
       </button>
 
       <div
-        className={`fixed inset-0 z-[90] bg-gradient-to-br from-boldness via-boldness to-boldness transition-all duration-700 ${
+        className={`from-boldness via-boldness to-boldness fixed inset-0 z-[90] bg-gradient-to-br transition-all duration-700 ${
           isOpen
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-95 pointer-events-none"
+            ? 'scale-100 opacity-100'
+            : 'pointer-events-none scale-95 opacity-0'
         }`}
       >
         <div
@@ -133,8 +133,8 @@ export default function CinematicMenu({
         />
 
         <div className="relative h-full w-full overflow-y-auto">
-          <div className="container mx-auto px-6 pt-32 md:pt-40 pb-20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-20">
+          <div className="container mx-auto px-6 pt-32 pb-20 md:pt-40">
+            <div className="mb-20 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-16">
               {menuSections.map((section, sectionIndex) => (
                 <div
                   key={sectionIndex}
@@ -142,13 +142,13 @@ export default function CinematicMenu({
                   style={{
                     opacity: isOpen ? 1 : 0,
                     transform: isOpen
-                      ? "translateY(0) rotateX(0)"
-                      : "translateY(60px) rotateX(-20deg)",
+                      ? 'translateY(0) rotateX(0)'
+                      : 'translateY(60px) rotateX(-20deg)',
                     transitionDelay: `${sectionIndex * 200 + 200}ms`,
                   }}
                 >
                   <h3
-                    className="text-sm font-semibold mb-6 uppercase tracking-wider"
+                    className="mb-6 text-sm font-semibold tracking-wider uppercase"
                     style={{ color: colorScheme.accentColor }}
                   >
                     {section.title}
@@ -159,28 +159,28 @@ export default function CinematicMenu({
                         <Link
                           href={item.href}
                           target={
-                            item.href.includes("http") ? "_blank" : "_self"
+                            item.href.includes('http') ? '_blank' : '_self'
                           }
-                          className="group inline-block text-3xl md:text-4xl lg:text-5xl font-bold text-freedom transition-all duration-300"
+                          className="group text-freedom inline-block text-3xl font-bold transition-all duration-300 md:text-4xl lg:text-5xl"
                           onClick={handleToggle}
                           onMouseEnter={(e) => {
-                            const span = e.currentTarget.querySelector("span");
+                            const span = e.currentTarget.querySelector('span')
                             if (span) {
-                              (span as HTMLElement).style.color =
-                                colorScheme.accentColor;
-                              (span as HTMLElement).style.textShadow =
-                                `0 0 30px ${colorScheme.hoverShadow}`;
+                              ;(span as HTMLElement).style.color =
+                                colorScheme.accentColor
+                              ;(span as HTMLElement).style.textShadow =
+                                `0 0 30px ${colorScheme.hoverShadow}`
                             }
                           }}
                           onMouseLeave={(e) => {
-                            const span = e.currentTarget.querySelector("span");
+                            const span = e.currentTarget.querySelector('span')
                             if (span) {
-                              (span as HTMLElement).style.color = "";
-                              (span as HTMLElement).style.textShadow = "";
+                              ;(span as HTMLElement).style.color = ''
+                              ;(span as HTMLElement).style.textShadow = ''
                             }
                           }}
                         >
-                          <span className="inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105 font-heading uppercase">
+                          <span className="font-heading inline-block uppercase transition-all duration-300 group-hover:translate-x-2 group-hover:scale-105">
                             {item.label}
                           </span>
                         </Link>
@@ -192,29 +192,29 @@ export default function CinematicMenu({
             </div>
 
             <div
-              className="menu-footer border-t border-freedom/10 pt-12 transform transition-all duration-700 ease-out"
+              className="menu-footer border-freedom/10 transform border-t pt-12 transition-all duration-700 ease-out"
               style={{
                 opacity: isOpen ? 1 : 0,
-                transform: isOpen ? "translateY(0)" : "translateY(30px)",
-                transitionDelay: "500ms",
+                transform: isOpen ? 'translateY(0)' : 'translateY(30px)',
+                transitionDelay: '500ms',
               }}
             >
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+              <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
                 <div>
                   <p className="text-freedom/70 mb-4">Vind ons op</p>
-                  <div className="flex flex-wrap md:flex-nowrap gap-6">
+                  <div className="flex flex-wrap gap-6 md:flex-nowrap">
                     {socialLinks.map((link, index) => (
                       <Link
                         key={index}
                         href={link.href}
-                        target={link.href.includes("http") ? "_blank" : "_self"}
-                        className="text-freedom transition-colors duration-300 text-lg font-medium"
+                        target={link.href.includes('http') ? '_blank' : '_self'}
+                        className="text-freedom text-lg font-medium transition-colors duration-300"
                         onClick={handleToggle}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.color = colorScheme.accentColor;
+                          e.currentTarget.style.color = colorScheme.accentColor
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.color = "";
+                          e.currentTarget.style.color = ''
                         }}
                       >
                         {link.label}
@@ -231,5 +231,5 @@ export default function CinematicMenu({
         </div>
       </div>
     </>
-  );
+  )
 }

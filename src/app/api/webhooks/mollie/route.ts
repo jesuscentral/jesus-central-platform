@@ -1,51 +1,46 @@
-import { NextResponse } from "next/server";
-import {
-  createSubscription,
-  getPayment,
-  pageMandates,
-} from "@/features/mollie";
+import { NextResponse } from 'next/server'
+import { createSubscription, getPayment, pageMandates } from '@/features/mollie'
 
-function nextCycleDate(interval: "1 month" | "1 week" | "1 year" | string) {
-  const d = new Date();
-  if (interval.includes("month")) d.setMonth(d.getMonth() + 1);
-  else if (interval.includes("week")) d.setDate(d.getDate() + 7);
-  else if (interval.includes("year")) d.setFullYear(d.getFullYear() + 1);
-  else if (interval.includes("day"))
-    d.setDate(d.getDate() + parseInt(interval));
-  return d.toISOString().slice(0, 10); // YYYY-MM-DD
+function nextCycleDate(interval: '1 month' | '1 week' | '1 year' | string) {
+  const d = new Date()
+  if (interval.includes('month')) d.setMonth(d.getMonth() + 1)
+  else if (interval.includes('week')) d.setDate(d.getDate() + 7)
+  else if (interval.includes('year')) d.setFullYear(d.getFullYear() + 1)
+  else if (interval.includes('day')) d.setDate(d.getDate() + parseInt(interval))
+  return d.toISOString().slice(0, 10) // YYYY-MM-DD
 }
 
 export async function POST(request: Request) {
   try {
-    const form = await request.formData();
-    const paymentId = String(form.get("id") || "");
-    console.log("Payment ID", paymentId);
+    const form = await request.formData()
+    const paymentId = String(form.get('id') || '')
+    console.log('Payment ID', paymentId)
 
-    if (!paymentId) return NextResponse.json({ ok: true });
+    if (!paymentId) return NextResponse.json({ ok: true })
 
-    const payment = await getPayment(paymentId);
+    const payment = await getPayment(paymentId)
 
-    console.log("Payment", payment);
+    console.log('Payment', payment)
 
-    const isPaid = payment.status === "paid";
+    const isPaid = payment.status === 'paid'
 
-    if (!isPaid) return NextResponse.json({ ok: true });
-    console.log("Is paid", isPaid);
+    if (!isPaid) return NextResponse.json({ ok: true })
+    console.log('Is paid', isPaid)
 
-    const customerId = payment.customerId;
-    if (!customerId) return NextResponse.json({ ok: true });
-    console.log("Customer ID", customerId);
+    const customerId = payment.customerId
+    if (!customerId) return NextResponse.json({ ok: true })
+    console.log('Customer ID', customerId)
 
-    const mandatesPage = await pageMandates(customerId);
-    console.log("Mandates page", mandatesPage);
+    const mandatesPage = await pageMandates(customerId)
+    console.log('Mandates page', mandatesPage)
 
     const validMandate = mandatesPage.find(
-      (mandate) => mandate.status === "valid"
-    );
-    console.log("Valid mandate", validMandate);
-    if (!validMandate) return NextResponse.json({ ok: true });
+      (mandate) => mandate.status === 'valid',
+    )
+    console.log('Valid mandate', validMandate)
+    if (!validMandate) return NextResponse.json({ ok: true })
 
-    const interval = "1 month";
+    const interval = '1 month'
     const subscription = await createSubscription(
       customerId,
       payment.amount,
@@ -53,12 +48,12 @@ export async function POST(request: Request) {
       payment.description,
       nextCycleDate(interval),
       validMandate.id,
-      payment.metadata as Record<string, string>
-    );
-    console.log("Subscription created", subscription);
-    return NextResponse.json({ ok: true });
+      payment.metadata as Record<string, string>,
+    )
+    console.log('Subscription created', subscription)
+    return NextResponse.json({ ok: true })
   } catch (error) {
-    console.error("Webhook error:", error);
-    return NextResponse.json({ ok: true });
+    console.error('Webhook error:', error)
+    return NextResponse.json({ ok: true })
   }
 }

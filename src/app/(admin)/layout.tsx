@@ -1,53 +1,53 @@
-import localFont from "next/font/local";
-import "@/app/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { nlNL } from "@clerk/localizations";
-import { AdminNav } from "@/components/admin/AdminNav";
-import { clerkClient, currentUser } from "@clerk/nextjs/server";
-import { notFound } from "next/navigation";
-import { getConfig } from "@/lib/actions/config";
+import localFont from 'next/font/local'
+import '@/app/globals.css'
+import { ClerkProvider } from '@clerk/nextjs'
+import { nlNL } from '@clerk/localizations'
+import { AdminNav } from '@/components/admin/AdminNav'
+import { clerkClient, currentUser } from '@clerk/nextjs/server'
+import { notFound } from 'next/navigation'
+import { getConfig } from '@/lib/actions/config'
 
 const headingFont = localFont({
-  src: "../../assets/fonts/TGSPerfectCondensed.otf",
-  variable: "--font-heading",
-  display: "swap",
-});
+  src: '../../assets/fonts/TGSPerfectCondensed.otf',
+  variable: '--font-heading',
+  display: 'swap',
+})
 
 const bodyFont = localFont({
-  src: "./../../assets/fonts/FiraSans-Regular.ttf",
-  variable: "--font-body",
-  display: "swap",
-});
+  src: './../../assets/fonts/FiraSans-Regular.ttf',
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export default async function MijnJesusCentralLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  const config = await getConfig();
+  const config = await getConfig()
 
   if (!config || config?.auth === false) {
-    return notFound();
+    return notFound()
   }
 
-  const clerkUser = await currentUser();
+  const clerkUser = await currentUser()
 
   if (
     clerkUser?.emailAddresses.some((email) =>
-      email.emailAddress.includes("jesuscentral.nl")
+      email.emailAddress.includes('jesuscentral.nl'),
     )
   ) {
-    (await clerkClient()).users.updateUserMetadata(clerkUser.id, {
+    ;(await clerkClient()).users.updateUserMetadata(clerkUser.id, {
       publicMetadata: {
         canEditEvents: true,
         canRequestAnnouncement: true,
       },
-    });
+    })
   }
 
-  const showAgenda = clerkUser?.publicMetadata?.canEditEvents === true;
+  const showAgenda = clerkUser?.publicMetadata?.canEditEvents === true
   const showAnnouncements =
-    clerkUser?.publicMetadata?.canRequestAnnouncement === true;
+    clerkUser?.publicMetadata?.canRequestAnnouncement === true
   return (
     <ClerkProvider localization={nlNL}>
       <html lang="nl">
@@ -60,12 +60,12 @@ export default async function MijnJesusCentralLayout({
               showAgenda={showAgenda}
               showAnnouncements={showAnnouncements}
             />
-            <div className="container mx-auto min-h-screen py-6 px-8">
+            <div className="container mx-auto min-h-screen px-8 py-6">
               {children}
             </div>
           </div>
         </body>
       </html>
     </ClerkProvider>
-  );
+  )
 }

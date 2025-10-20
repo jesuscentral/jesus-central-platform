@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
-import { cn } from "@/utils/cn";
-import { SbScripture } from "@storyblok/types/287435740670216/storyblok-components";
-import { motion, Variants } from "framer-motion";
+import { storyblokEditable, SbBlokData } from '@storyblok/react/rsc'
+import { cn } from '@/utils/cn'
+import { SbScripture } from '@storyblok/types/287435740670216/storyblok-components'
+import { motion, Variants } from 'framer-motion'
 
 const fadeInVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -15,16 +15,16 @@ const fadeInVariants: Variants = {
       ease: [0.25, 0.1, 0.25, 1],
     },
   },
-};
+}
 
 export default function ScriptureSection({ blok }: { blok: SbScripture }) {
   const getTextColor = () => {
-    return cn(`text-${blok.textColor}`);
-  };
+    return cn(`text-${blok.textColor}`)
+  }
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className={cn("mx-auto max-w-5xl px-4 text-center", getTextColor())}
+      className={cn('mx-auto max-w-5xl px-4 text-center', getTextColor())}
     >
       <motion.div
         variants={fadeInVariants}
@@ -34,17 +34,17 @@ export default function ScriptureSection({ blok }: { blok: SbScripture }) {
         className="space-y-8"
       >
         {blok.badge && (
-          <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em]">
+          <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-xs font-semibold tracking-[0.4em] uppercase">
             {blok.badge}
           </span>
         )}
-        <blockquote className="text-balance text-2xl font-semibold leading-relaxed sm:text-3xl">
+        <blockquote className="text-2xl leading-relaxed font-semibold text-balance sm:text-3xl">
           &quot;{blok.scripture}&quot;
         </blockquote>
-        <p className="text-sm font-medium uppercase tracking-[0.3em]">
+        <p className="text-sm font-medium tracking-[0.3em] uppercase">
           {blok.reference}
         </p>
       </motion.div>
     </div>
-  );
+  )
 }

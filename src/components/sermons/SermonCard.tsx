@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import { RssVideo } from "@/features/youtube";
-import { motion } from "framer-motion";
-import { Play, CalendarDays } from "lucide-react";
-import Image from "next/image";
+import { RssVideo } from '@/features/youtube'
+import { motion } from 'framer-motion'
+import { Play, CalendarDays } from 'lucide-react'
+import Image from 'next/image'
 
 function formatDate(value: string) {
-  const d = new Date(value);
-  return new Intl.DateTimeFormat("nl-NL", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(d);
+  const d = new Date(value)
+  return new Intl.DateTimeFormat('nl-NL', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }).format(d)
 }
 export default function SermonCard({
   video,
   onOpen,
 }: {
-  video: RssVideo;
-  onOpen: (videoId: string) => void;
+  video: RssVideo
+  onOpen: (videoId: string) => void
 }) {
   return (
     <motion.article
@@ -26,7 +26,7 @@ export default function SermonCard({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
-      className="group relative isolate overflow-hidden rounded-3xl border border-white/10 bg-boldness shadow-2xl"
+      className="group bg-boldness relative isolate overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden">
         <Image
@@ -35,25 +35,25 @@ export default function SermonCard({
           fill
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-boldness via-boldness/10 to-transparent" />
+        <div className="from-boldness via-boldness/10 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent" />
         <button
           onClick={() => onOpen(video.videoId)}
-          className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-strategy-red px-3 py-1.5 text-sm font-semibold text-white shadow cursor-pointer"
+          className="bg-strategy-red absolute bottom-3 left-3 inline-flex cursor-pointer items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold text-white shadow"
         >
           <Play className="h-4 w-4" />
           Afspelen
         </button>
       </div>
       <div className="p-5 sm:p-6">
-        <h3 className="line-clamp-2  text-2xl tracking-wide text-freedom sm:text-3xl">
+        <h3 className="text-freedom line-clamp-2 text-2xl tracking-wide sm:text-3xl">
           {video.title}
         </h3>
-        <div className="mt-2 flex items-center gap-2 text-xs text-freedom/70">
+        <div className="text-freedom/70 mt-2 flex items-center gap-2 text-xs">
           <CalendarDays className="h-3.5 w-3.5" />
           <span>{formatDate(video.publishedAt)}</span>
         </div>
       </div>
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-56 w-56 rounded-full bg-strategy-red/15 blur-3xl" />
+      <div className="bg-strategy-red/15 pointer-events-none absolute -right-24 -bottom-24 h-56 w-56 rounded-full blur-3xl" />
     </motion.article>
-  );
+  )
 }

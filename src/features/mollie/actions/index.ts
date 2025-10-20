@@ -10,4 +10,4 @@ export {
   cancelSubscription,
   updateSubscriptionAmount,
   createNewSubscription,
-} from "./subscriptions";
+} from './subscriptions'

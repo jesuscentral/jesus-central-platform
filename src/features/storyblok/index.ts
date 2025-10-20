@@ -5,10 +5,10 @@ export {
   storyblokApiConfig,
   getStoryblokSeoParameters,
   linkResolver,
-} from "./api";
+} from './api'
 
 // Configuration
-export { storyblokConfig } from "./config";
+export { storyblokConfig } from './config'
 
 // Utils
 export {
@@ -18,10 +18,10 @@ export {
   setLanguageConfig,
   availableLanguages,
   defaultLanguage,
-} from "./utils";
+} from './utils'
 
 // Types
-export type * from "./types";
+export type * from './types'
 
 // Component map
-export { componentMap } from "./components";
+export { componentMap } from './components'

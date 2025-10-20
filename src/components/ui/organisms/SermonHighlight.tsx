@@ -1,49 +1,49 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { Play, Youtube, CalendarDays, Mic2, Clock } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/utils/cn";
-import Image from "next/image";
+import { motion } from 'framer-motion'
+import { Play, Youtube, CalendarDays, Mic2, Clock } from 'lucide-react'
+import Link from 'next/link'
+import { cn } from '@/utils/cn'
+import Image from 'next/image'
 
 interface SermonHighlightProps {
-  primaryColor?: string;
-  secondaryColor?: string;
-  youtubeUrl: string;
+  primaryColor?: string
+  secondaryColor?: string
+  youtubeUrl: string
   thumbnail: {
-    src: string;
-    alt?: string;
-  };
-  title: string;
-  speaker?: string;
-  date: string | Date;
-  duration?: string;
-  series?: string;
-  language?: string;
-  translationAvailable?: boolean;
-  playButtonText?: string;
-  watchButtonText?: string;
-  badgeText?: string;
-  seriesLabel?: string;
-  languageLabel?: string;
-  translationAvailableText?: string;
-  translationNotAvailableText?: string;
-  className?: string;
+    src: string
+    alt?: string
+  }
+  title: string
+  speaker?: string
+  date: string | Date
+  duration?: string
+  series?: string
+  language?: string
+  translationAvailable?: boolean
+  playButtonText?: string
+  watchButtonText?: string
+  badgeText?: string
+  seriesLabel?: string
+  languageLabel?: string
+  translationAvailableText?: string
+  translationNotAvailableText?: string
+  className?: string
 }
 
 function formatDate(d: string | Date) {
-  const date = typeof d === "string" ? new Date(d) : d;
-  return new Intl.DateTimeFormat("nl-NL", {
-    weekday: "long",
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+  const date = typeof d === 'string' ? new Date(d) : d
+  return new Intl.DateTimeFormat('nl-NL', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }).format(date)
 }
 
 export default function SermonHighlight({
-  primaryColor = "white",
-  secondaryColor = "boldness",
+  primaryColor = 'white',
+  secondaryColor = 'boldness',
   youtubeUrl,
   thumbnail,
   title,
@@ -53,20 +53,20 @@ export default function SermonHighlight({
   series,
   language,
   translationAvailable,
-  playButtonText = "Bekijk de preek",
-  watchButtonText = "Watch on YouTube",
-  badgeText = "Laatste preek",
-  seriesLabel = "Serie:",
-  languageLabel = "Taal:",
-  translationAvailableText = "Vertaling beschikbaar",
-  translationNotAvailableText = "Geen vertaling",
+  playButtonText = 'Bekijk de preek',
+  watchButtonText = 'Watch on YouTube',
+  badgeText = 'Laatste preek',
+  seriesLabel = 'Serie:',
+  languageLabel = 'Taal:',
+  translationAvailableText = 'Vertaling beschikbaar',
+  translationNotAvailableText = 'Geen vertaling',
   className,
 }: SermonHighlightProps) {
   return (
     <div
       className={cn(
-        "grid items-stretch gap-4 sm:gap-6 md:gap-8 md:grid-cols-12",
-        className
+        'grid items-stretch gap-4 sm:gap-6 md:grid-cols-12 md:gap-8',
+        className,
       )}
     >
       <motion.a
@@ -77,7 +77,7 @@ export default function SermonHighlight({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         whileHover={{ y: -4 }}
-        className="group relative col-span-12 overflow-hidden rounded-2xl sm:rounded-[2rem] border border-boldness/10 bg-boldness shadow-xl sm:shadow-2xl md:col-span-7"
+        className="group border-boldness/10 bg-boldness relative col-span-12 overflow-hidden rounded-2xl border shadow-xl sm:rounded-[2rem] sm:shadow-2xl md:col-span-7"
       >
         {/* Mobile-friendly aspect ratio */}
         <motion.div
@@ -85,11 +85,11 @@ export default function SermonHighlight({
           animate={{ scale: 1.02 }}
           whileHover={{ scale: 1.07 }}
           transition={{ duration: 0.8 }}
-          className="relative aspect-video sm:aspect-[21/9] h-full w-full"
+          className="relative aspect-video h-full w-full sm:aspect-[21/9]"
         >
           <Image
             src={thumbnail.src}
-            alt={thumbnail.alt || ""}
+            alt={thumbnail.alt || ''}
             fill
             quality={90}
             priority
@@ -98,11 +98,11 @@ export default function SermonHighlight({
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute inset-0 grid place-items-center p-2 sm:p-3">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-white/10 px-2 py-1.5 sm:px-3 sm:py-2 backdrop-blur-md">
-            <div className="grid h-8 w-8 sm:h-10 sm:w-10 place-items-center rounded-full bg-strategy-red shadow-xl transition-transform group-hover:scale-110">
-              <Play className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2 py-1.5 backdrop-blur-md sm:gap-2 sm:px-3 sm:py-2">
+            <div className="bg-strategy-red grid h-8 w-8 place-items-center rounded-full shadow-xl transition-transform group-hover:scale-110 sm:h-10 sm:w-10">
+              <Play className="h-4 w-4 text-white sm:h-5 sm:w-5" />
             </div>
-            <span className="text-xs sm:text-sm text-white/95">
+            <span className="text-xs text-white/95 sm:text-sm">
               {playButtonText}
             </span>
           </div>
@@ -115,17 +115,17 @@ export default function SermonHighlight({
         transition={{ duration: 0.7, delay: 0.05 }}
         className={cn(
           // Mobile-first padding and spacing
-          "col-span-12 flex flex-col justify-center gap-3 sm:gap-4 md:gap-5 rounded-2xl sm:rounded-[2rem] border border-boldness/10 bg-white/70 p-4 sm:p-6 md:p-8 backdrop-blur-sm md:col-span-5",
+          'border-boldness/10 col-span-12 flex flex-col justify-center gap-3 rounded-2xl border bg-white/70 p-4 backdrop-blur-sm sm:gap-4 sm:rounded-[2rem] sm:p-6 md:col-span-5 md:gap-5 md:p-8',
           `bg-${primaryColor}`,
-          `border-${secondaryColor}/10`
+          `border-${secondaryColor}/10`,
         )}
       >
         <div className="inline-flex items-center gap-2">
           <span
             className={cn(
-              "rounded-md px-2 py-0.5 sm:px-2.5 sm:py-1 text-xs sm:text-sm font-semibold uppercase tracking-wider",
+              'rounded-md px-2 py-0.5 text-xs font-semibold tracking-wider uppercase sm:px-2.5 sm:py-1 sm:text-sm',
               `bg-${secondaryColor}`,
-              `text-${primaryColor}`
+              `text-${primaryColor}`,
             )}
           >
             {badgeText}
@@ -134,8 +134,8 @@ export default function SermonHighlight({
         <h2
           className={cn(
             // Mobile-first text sizing
-            "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight tracking-wide text-boldness",
-            `text-${secondaryColor}`
+            'text-boldness text-2xl leading-tight tracking-wide sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
+            `text-${secondaryColor}`,
           )}
         >
           {title}
@@ -143,19 +143,19 @@ export default function SermonHighlight({
         <div
           className={cn(
             // Mobile-optimized metadata layout
-            "flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 sm:gap-3 text-sm sm:text-base text-boldness/85",
-            `text-${secondaryColor}/85`
+            'text-boldness/85 flex flex-col items-start gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:text-base',
+            `text-${secondaryColor}/85`,
           )}
         >
           {speaker && (
             <div className="inline-flex items-center gap-1.5">
               <Mic2
                 className={cn(
-                  "h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0",
-                  `text-${secondaryColor}`
+                  'h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5',
+                  `text-${secondaryColor}`,
                 )}
               />
-              <span className={cn("", `text-${secondaryColor}`)}>
+              <span className={cn('', `text-${secondaryColor}`)}>
                 {speaker}
               </span>
             </div>
@@ -163,29 +163,29 @@ export default function SermonHighlight({
           <div className="inline-flex items-center gap-1.5">
             <CalendarDays
               className={cn(
-                "h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0",
-                `text-${secondaryColor}`
+                'h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5',
+                `text-${secondaryColor}`,
               )}
             />
-            <span className={cn("", `text-${secondaryColor}`)}>
+            <span className={cn('', `text-${secondaryColor}`)}>
               {formatDate(date)}
             </span>
           </div>
           {duration && (
             <>
               <span
-                className={cn("hidden sm:inline", `text-${secondaryColor}`)}
+                className={cn('hidden sm:inline', `text-${secondaryColor}`)}
               >
                 •
               </span>
               <div className="inline-flex items-center gap-1.5">
                 <Clock
                   className={cn(
-                    "h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0",
-                    `text-${secondaryColor}`
+                    'h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5',
+                    `text-${secondaryColor}`,
                   )}
                 />
-                <span className={cn("", `text-${secondaryColor}`)}>
+                <span className={cn('', `text-${secondaryColor}`)}>
                   {duration}
                 </span>
               </div>
@@ -195,8 +195,8 @@ export default function SermonHighlight({
         {series && (
           <div
             className={cn(
-              "text-xs uppercase text-boldness/60 tracking-wide",
-              `text-${secondaryColor} opacity-60`
+              'text-boldness/60 text-xs tracking-wide uppercase',
+              `text-${secondaryColor} opacity-60`,
             )}
           >
             {seriesLabel} {series}
@@ -204,16 +204,16 @@ export default function SermonHighlight({
         )}
         <div
           className={cn(
-            "flex flex-wrap items-center gap-2 text-xs",
-            `text-${secondaryColor} opacity-70`
+            'flex flex-wrap items-center gap-2 text-xs',
+            `text-${secondaryColor} opacity-70`,
           )}
         >
           {language && (
             <span
               className={cn(
-                "rounded-full border border-boldness/10 bg-white/80 px-2 py-0.5 sm:px-2.5 sm:py-1",
+                'border-boldness/10 rounded-full border bg-white/80 px-2 py-0.5 sm:px-2.5 sm:py-1',
                 `border-${secondaryColor}/10`,
-                `bg-${secondaryColor} bg-opacity-80`
+                `bg-${secondaryColor} bg-opacity-80`,
               )}
             >
               {languageLabel} {language}
@@ -222,10 +222,10 @@ export default function SermonHighlight({
           {translationAvailable !== undefined && (
             <span
               className={cn(
-                "rounded-full border border-boldness/10 px-2 py-0.5 sm:px-2.5 sm:py-1",
+                'border-boldness/10 rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1',
                 `border-${secondaryColor}/10`,
                 `bg-${secondaryColor}/5`,
-                `text-${secondaryColor}/70`
+                `text-${secondaryColor}/70`,
               )}
             >
               {translationAvailable
@@ -239,7 +239,7 @@ export default function SermonHighlight({
             href={youtubeUrl}
             target="_blank"
             rel="noreferrer"
-            className="group inline-flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-strategy-red px-4 py-3 sm:px-6 sm:py-4 text-sm sm:text-base md:text-lg font-semibold tracking-wide text-white shadow-lg sm:shadow-xl transition-transform hover:scale-[1.015] hover:shadow-2xl w-full sm:w-auto justify-center sm:justify-start"
+            className="group bg-strategy-red inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold tracking-wide text-white shadow-lg transition-transform hover:scale-[1.015] hover:shadow-2xl sm:w-auto sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-4 sm:text-base sm:shadow-xl md:text-lg"
           >
             <Youtube className="h-5 w-5 sm:h-6 sm:w-6" />
             <span>{watchButtonText}</span>
@@ -247,5 +247,5 @@ export default function SermonHighlight({
         </div>
       </motion.div>
     </div>
-  );
+  )
 }

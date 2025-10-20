@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import Button, { ButtonType } from "@/components/ui/atoms/Button";
+import Button, { ButtonType } from '@/components/ui/atoms/Button'
 import {
   FilloutFullScreenEmbed,
   FilloutPopupEmbed,
   FilloutSliderEmbed,
   FilloutStandardEmbed,
-} from "@fillout/react";
-import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
-import { SbFilloutForm } from "@storyblok/types/287435740670216/storyblok-components";
-import { useState } from "react";
+} from '@fillout/react'
+import { SbBlokData, storyblokEditable } from '@storyblok/react/rsc'
+import { SbFilloutForm } from '@storyblok/types/287435740670216/storyblok-components'
+import { useState } from 'react'
 
 export default function FilloutForm({ blok }: { blok: SbFilloutForm }) {
-  if (!blok.id) return null;
+  if (!blok.id) return null
 
-  if (blok.type === "standard") {
+  if (blok.type === 'standard') {
     return (
       <div
         {...storyblokEditable(blok as SbBlokData)}
-        className="w-full h-full min-h-[200px]"
+        className="h-full min-h-[200px] w-full"
       >
         <FilloutStandardEmbed
           dynamicResize
@@ -26,20 +26,20 @@ export default function FilloutForm({ blok }: { blok: SbFilloutForm }) {
           filloutId={blok.id}
         />
       </div>
-    );
+    )
   }
 
-  if (blok.type === "fullscreen") {
+  if (blok.type === 'fullscreen') {
     return (
       <div {...storyblokEditable(blok as SbBlokData)}>
         <FilloutFullScreenEmbed filloutId={blok.id} />
       </div>
-    );
+    )
   }
 
-  if (blok.type === "popup") {
+  if (blok.type === 'popup') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     return (
       <>
@@ -57,12 +57,12 @@ export default function FilloutForm({ blok }: { blok: SbFilloutForm }) {
           onClose={() => setOpen(false)}
         />
       </>
-    );
+    )
   }
 
-  if (blok.type === "slider") {
+  if (blok.type === 'slider') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     return (
       <>
@@ -80,8 +80,8 @@ export default function FilloutForm({ blok }: { blok: SbFilloutForm }) {
           onClose={() => setOpen(false)}
         />
       </>
-    );
+    )
   }
 
-  return null;
+  return null
 }

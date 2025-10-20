@@ -1,66 +1,66 @@
-"use client";
+'use client'
 
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
-import { AnimatePresence, motion } from "framer-motion";
-import { BookOpenText, Info } from "lucide-react";
-import { SbStatementScripture } from "@storyblok/types/287435740670216/storyblok-components";
-import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
+import { AnimatePresence, motion } from 'framer-motion'
+import { BookOpenText, Info } from 'lucide-react'
+import { SbStatementScripture } from '@storyblok/types/287435740670216/storyblok-components'
+import { SbBlokData, storyblokEditable } from '@storyblok/react/rsc'
 
 export default function StatementScripture({
   blok,
 }: {
-  blok: SbStatementScripture;
+  blok: SbStatementScripture
 }) {
-  const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [open, setOpen] = useState(false)
+  const [position, setPosition] = useState({ top: 0, left: 0 })
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (open && triggerRef.current) {
       const updatePosition = () => {
-        if (!triggerRef.current) return;
+        if (!triggerRef.current) return
 
-        const rect = triggerRef.current.getBoundingClientRect();
-        const tooltipWidth = 320; // w-80 = 20rem = 320px
-        const gap = 8;
+        const rect = triggerRef.current.getBoundingClientRect()
+        const tooltipWidth = 320 // w-80 = 20rem = 320px
+        const gap = 8
 
-        let left = rect.left;
-        let top = rect.bottom + gap;
+        let left = rect.left
+        let top = rect.bottom + gap
 
         // Check if tooltip would go off the right edge
         if (left + tooltipWidth > window.innerWidth) {
-          left = window.innerWidth - tooltipWidth - gap;
+          left = window.innerWidth - tooltipWidth - gap
         }
 
         // Check if tooltip would go off the bottom edge
         if (top + 200 > window.innerHeight) {
           // Approximate height
-          top = rect.top - 200 - gap; // Position above instead
+          top = rect.top - 200 - gap // Position above instead
         }
 
-        setPosition({ top, left });
-      };
+        setPosition({ top, left })
+      }
 
-      updatePosition();
+      updatePosition()
 
       // Update position on scroll or resize
-      window.addEventListener("scroll", updatePosition);
-      window.addEventListener("resize", updatePosition);
+      window.addEventListener('scroll', updatePosition)
+      window.addEventListener('resize', updatePosition)
 
       return () => {
-        window.removeEventListener("scroll", updatePosition);
-        window.removeEventListener("resize", updatePosition);
-      };
+        window.removeEventListener('scroll', updatePosition)
+        window.removeEventListener('resize', updatePosition)
+      }
     }
-  }, [open]);
+  }, [open])
 
   const tooltipContent = open && blok.content && mounted && (
     <AnimatePresence>
@@ -70,29 +70,29 @@ export default function StatementScripture({
         exit={{ opacity: 0, y: 6 }}
         transition={{ duration: 0.18 }}
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: position.top,
           left: position.left,
           zIndex: 9999,
         }}
-        className="w-80 rounded-xl border border-white/10 bg-boldness p-4 text-sm text-freedom shadow-2xl"
+        className="bg-boldness text-freedom w-80 rounded-xl border border-white/10 p-4 text-sm shadow-2xl"
         onMouseEnter={() => {
           if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
+            clearTimeout(timeoutRef.current)
           }
         }}
         onMouseLeave={() => {
-          timeoutRef.current = setTimeout(() => setOpen(false), 100);
+          timeoutRef.current = setTimeout(() => setOpen(false), 100)
         }}
       >
-        <div className="mb-1 flex items-center gap-2 text-xs uppercase tracking-wide text-freedom/60">
+        <div className="text-freedom/60 mb-1 flex items-center gap-2 text-xs tracking-wide uppercase">
           <Info className="h-3.5 w-3.5" />
           {blok.ref}
         </div>
         <p className="text-freedom/90">{blok.content}</p>
       </motion.div>
     </AnimatePresence>
-  );
+  )
 
   return (
     <>
@@ -102,20 +102,20 @@ export default function StatementScripture({
         className="group inline-flex items-center"
         onMouseEnter={() => {
           if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
+            clearTimeout(timeoutRef.current)
           }
-          setOpen(true);
+          setOpen(true)
         }}
         onMouseLeave={() => {
-          timeoutRef.current = setTimeout(() => setOpen(false), 100);
+          timeoutRef.current = setTimeout(() => setOpen(false), 100)
         }}
       >
-        <span className="inline-flex cursor-default items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-freedom hover:border-white/20">
-          <BookOpenText className="h-4 w-4 text-strategy-gold" />
+        <span className="text-freedom inline-flex cursor-default items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm hover:border-white/20">
+          <BookOpenText className="text-strategy-gold h-4 w-4" />
           {blok.ref}
         </span>
       </div>
       {mounted && createPortal(tooltipContent, document.body)}
     </>
-  );
+  )
 }

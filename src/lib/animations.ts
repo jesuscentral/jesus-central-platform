@@ -1,4 +1,4 @@
-import { Variants } from "framer-motion";
+import { Variants } from 'framer-motion'
 
 // Safe container variant - keeps container visible while children animate
 export const customContainerVariants: Variants = {
@@ -10,7 +10,7 @@ export const customContainerVariants: Variants = {
       delayChildren: 0.1,
     },
   },
-};
+}
 
 // Safe fade-up animation - works reliably on mobile
 export const fadeInUp: Variants = {
@@ -26,4 +26,4 @@ export const fadeInUp: Variants = {
       ease: [0.25, 0.1, 0.25, 1.0],
     },
   },
-};
+}

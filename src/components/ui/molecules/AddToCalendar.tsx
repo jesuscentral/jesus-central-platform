@@ -1,55 +1,55 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, ChevronDown, Download } from "lucide-react";
-import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
-import { generateAllCalendarLinks } from "@/lib/calendar";
-import { cn } from "@/utils/cn";
-import Button, { ButtonType } from "@/components/ui/atoms/Button";
-import AppleIcon from "@/components/ui/icons/apple";
-import OutlookIcon from "@/components/ui/icons/outlook";
-import GoogleIcon from "@/components/ui/icons/google";
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Calendar, ChevronDown } from 'lucide-react'
+import { SbEvent } from '@storyblok/types/287435740670216/storyblok-components'
+import { generateAllCalendarLinks } from '@/lib/calendar'
+import { cn } from '@/utils/cn'
+import Button, { ButtonType } from '@/components/ui/atoms/Button'
+import AppleIcon from '@/components/ui/icons/apple'
+import OutlookIcon from '@/components/ui/icons/outlook'
+import GoogleIcon from '@/components/ui/icons/google'
 interface AddToCalendarProps {
-  event: SbEvent;
-  baseUrl?: string;
-  className?: string;
-  buttonType?: ButtonType;
-  buttonVariant?: "primary" | "outline";
-  buttonSize?: "small" | "medium" | "large";
+  event: SbEvent
+  baseUrl?: string
+  className?: string
+  buttonType?: ButtonType
+  buttonVariant?: 'primary' | 'outline'
+  buttonSize?: 'small' | 'medium' | 'large'
 }
 
 export default function AddToCalendar({
   event,
   baseUrl,
   className,
-  buttonType = "strategy-red",
-  buttonVariant = "primary",
-  buttonSize = "large",
+  buttonType = 'strategy-red',
+  buttonVariant = 'primary',
+  buttonSize = 'large',
 }: AddToCalendarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const calendarLinks = generateAllCalendarLinks(event, baseUrl);
+  const [isOpen, setIsOpen] = useState(false)
+  const calendarLinks = generateAllCalendarLinks(event, baseUrl)
 
   const calendars = [
     {
-      name: "Google Calendar",
+      name: 'Google Calendar',
       icon: <GoogleIcon />,
-      action: () => window.open(calendarLinks.google, "_blank"),
+      action: () => window.open(calendarLinks.google, '_blank'),
     },
     {
-      name: "Outlook",
+      name: 'Outlook',
       icon: <OutlookIcon />,
-      action: () => window.open(calendarLinks.outlook, "_blank"),
+      action: () => window.open(calendarLinks.outlook, '_blank'),
     },
     {
-      name: "Apple Calendar / iCal",
+      name: 'Apple Calendar / iCal',
       icon: <AppleIcon />,
       action: () => calendarLinks.ics(),
     },
-  ];
+  ]
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn('relative', className)}>
       {/* Main Button using UI Button component */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
@@ -58,12 +58,12 @@ export default function AddToCalendar({
         size={buttonSize}
         className="relative"
       >
-        <Calendar className="w-5 h-5" />
+        <Calendar className="h-5 w-5" />
         <span>Toevoegen aan Agenda</span>
         <ChevronDown
           className={cn(
-            "w-4 h-4 transition-transform duration-300",
-            isOpen && "rotate-180"
+            'h-4 w-4 transition-transform duration-300',
+            isOpen && 'rotate-180',
           )}
         />
       </Button>
@@ -86,8 +86,8 @@ export default function AddToCalendar({
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 z-50 w-72 rounded-2xl bg-white shadow-2xl overflow-hidden border border-gray-200"
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="absolute bottom-full left-1/2 z-50 mb-4 w-72 -translate-x-1/2 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl"
             >
               <div className="p-2">
                 {calendars.map((calendar, index) => (
@@ -97,12 +97,12 @@ export default function AddToCalendar({
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
                     onClick={() => {
-                      calendar.action();
-                      setIsOpen(false);
+                      calendar.action()
+                      setIsOpen(false)
                     }}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors duration-200 text-left group cursor-pointer"
+                    className="group flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-left transition-colors duration-200 hover:bg-gray-100"
                   >
-                    <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+                    <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center">
                       {calendar.icon}
                     </div>
                     <span className="text-sm font-medium text-gray-800 group-hover:text-gray-900">
@@ -113,8 +113,8 @@ export default function AddToCalendar({
               </div>
 
               {/* Info footer */}
-              <div className="px-4 py-3 bg-gray-50 border-t border-gray-200">
-                <p className="text-xs text-gray-600 text-center">
+              <div className="border-t border-gray-200 bg-gray-50 px-4 py-3">
+                <p className="text-center text-xs text-gray-600">
                   Kies je favoriete agenda-app
                 </p>
               </div>
@@ -123,5 +123,5 @@ export default function AddToCalendar({
         )}
       </AnimatePresence>
     </div>
-  );
+  )
 }

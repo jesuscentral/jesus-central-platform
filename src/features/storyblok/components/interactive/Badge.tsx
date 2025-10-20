@@ -1,6 +1,6 @@
-import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
-import { SbBadge } from "@storyblok/types/287435740670216/storyblok-components";
-import UIBadge from "@/components/ui/atoms/Badge";
+import { storyblokEditable, SbBlokData } from '@storyblok/react/rsc'
+import { SbBadge } from '@storyblok/types/287435740670216/storyblok-components'
+import UIBadge from '@/components/ui/atoms/Badge'
 
 export default function Badge({ blok }: { blok: SbBadge }) {
   return (
@@ -11,5 +11,5 @@ export default function Badge({ blok }: { blok: SbBadge }) {
       backgroundColor={blok.backgroundColor}
       {...storyblokEditable(blok as SbBlokData)}
     />
-  );
+  )
 }

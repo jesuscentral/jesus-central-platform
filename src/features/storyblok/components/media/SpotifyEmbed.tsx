@@ -1,22 +1,23 @@
-import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
-import { SbSpotifyEmbed } from "@storyblok/types/287435740670216/storyblok-components";
+import { SbBlokData, storyblokEditable } from '@storyblok/react/rsc'
+import { SbSpotifyEmbed } from '@storyblok/types/287435740670216/storyblok-components'
 
 function toSpotifyEmbedUrl(url: string): string {
   const regex =
-    /^https?:\/\/(?:open|play)\.spotify\.com\/(track|album|playlist|artist|show|episode)\/([a-zA-Z0-9]+)/;
-  const match = url.match(regex);
-  if (!match) return "";
-  const [, type, id] = match;
-  return `https://open.spotify.com/embed/${type}/${id}`;
+    /^https?:\/\/(?:open|play)\.spotify\.com\/(track|album|playlist|artist|show|episode)\/([a-zA-Z0-9]+)/
+  const match = url.match(regex)
+  if (!match) return ''
+  const [, type, id] = match
+  return `https://open.spotify.com/embed/${type}/${id}`
 }
 
 export default function SpotifyEmbed({ blok }: { blok: SbSpotifyEmbed }) {
-  const embedUrl = toSpotifyEmbedUrl(blok.spotifyUrl);
+  const embedUrl = toSpotifyEmbedUrl(blok.spotifyUrl)
 
   return (
     <iframe
       {...storyblokEditable(blok as SbBlokData)}
-      className="w-full h-full"
+      title="Spotify Embed"
+      className="h-full w-full"
       src={embedUrl}
       width="100%"
       height="352"
@@ -25,5 +26,5 @@ export default function SpotifyEmbed({ blok }: { blok: SbSpotifyEmbed }) {
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
     />
-  );
+  )
 }

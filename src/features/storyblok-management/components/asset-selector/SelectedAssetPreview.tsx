@@ -1,7 +1,8 @@
-import type { StoryblokAsset } from "../../types";
+import type { StoryblokAsset } from '../../types'
+import Image from '@/components/ui/atoms/Image'
 
 interface SelectedAssetPreviewProps {
-  asset: StoryblokAsset;
+  asset: StoryblokAsset
 }
 
 /**
@@ -9,22 +10,24 @@ interface SelectedAssetPreviewProps {
  */
 export function SelectedAssetPreview({ asset }: SelectedAssetPreviewProps) {
   return (
-    <div className="mb-3 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-      <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 border border-green-300">
-        <img
+    <div className="animate-in fade-in slide-in-from-top-2 mb-3 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 p-3 duration-200">
+      <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-green-300">
+        <Image
           src={asset.filename}
           alt={asset.alt || asset.short_filename}
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
+          fill
+          loading="lazy"
         />
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-green-900 truncate">
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium text-green-900">
           {asset.short_filename}
         </p>
         <p className="text-xs text-green-700">Selected</p>
       </div>
       <svg
-        className="w-5 h-5 text-green-600 flex-shrink-0"
+        className="h-5 w-5 flex-shrink-0 text-green-600"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -37,5 +40,5 @@ export function SelectedAssetPreview({ asset }: SelectedAssetPreviewProps) {
         />
       </svg>
     </div>
-  );
+  )
 }

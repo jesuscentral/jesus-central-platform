@@ -1,6 +1,6 @@
-"use server";
+'use server'
 
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser } from '@clerk/nextjs/server'
 import {
   getPayments,
   getSubscriptions,
@@ -9,28 +9,24 @@ import {
   createSubscription as createMollieSubscription,
   getMandates,
   createPayment,
-} from "../api";
-import { revalidatePath } from "next/cache";
+} from '../api'
+import { revalidatePath } from 'next/cache'
 
 /**
  * Get current user's Mollie customer ID from Clerk
  */
 async function getCustomerId() {
-  const user = await currentUser();
+  const user = await currentUser()
   if (!user) {
-    throw new Error("User not authenticated");
+    throw new Error('User not authenticated')
   }
 
-  const customerId = user.publicMetadata?.mollieCustomerId as
-    | string
-    | undefined;
+  const customerId = user.publicMetadata?.mollieCustomerId as string | undefined
   if (!customerId) {
-    throw new Error(
-      "No Mollie customer ID found. Please make a payment first."
-    );
+    throw new Error('No Mollie customer ID found. Please make a payment first.')
   }
 
-  return customerId;
+  return customerId
 }
 
 /**
@@ -38,8 +34,8 @@ async function getCustomerId() {
  */
 export async function fetchPaymentHistory() {
   try {
-    const customerId = await getCustomerId();
-    const payments = await getPayments(customerId);
+    const customerId = await getCustomerId()
+    const payments = await getPayments(customerId)
 
     // Serialize Mollie Payment objects to plain JSON
     const serializedPayments = payments.map((payment) => ({
@@ -50,20 +46,20 @@ export async function fetchPaymentHistory() {
       createdAt: payment.createdAt,
       paidAt: payment.paidAt,
       method: payment.method,
-    }));
+    }))
 
     return {
       success: true,
       payments: serializedPayments,
-    };
+    }
   } catch (error) {
-    console.error("Failed to fetch payment history:", error);
+    console.error('Failed to fetch payment history:', error)
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "Failed to fetch payments",
+        error instanceof Error ? error.message : 'Failed to fetch payments',
       payments: [],
-    };
+    }
   }
 }
 
@@ -72,8 +68,8 @@ export async function fetchPaymentHistory() {
  */
 export async function fetchSubscriptions() {
   try {
-    const customerId = await getCustomerId();
-    const subscriptions = await getSubscriptions(customerId);
+    const customerId = await getCustomerId()
+    const subscriptions = await getSubscriptions(customerId)
 
     // Serialize Mollie Subscription objects to plain JSON
     const serializedSubscriptions = subscriptions.map((subscription) => ({
@@ -85,22 +81,22 @@ export async function fetchSubscriptions() {
       createdAt: subscription.createdAt,
       nextPaymentDate: subscription.nextPaymentDate,
       canceledAt: subscription.canceledAt,
-    }));
+    }))
 
     return {
       success: true,
       subscriptions: serializedSubscriptions,
-    };
+    }
   } catch (error) {
-    console.error("Failed to fetch subscriptions:", error);
+    console.error('Failed to fetch subscriptions:', error)
     return {
       success: false,
       error:
         error instanceof Error
           ? error.message
-          : "Failed to fetch subscriptions",
+          : 'Failed to fetch subscriptions',
       subscriptions: [],
-    };
+    }
   }
 }
 
@@ -109,24 +105,24 @@ export async function fetchSubscriptions() {
  */
 export async function cancelSubscription(subscriptionId: string) {
   try {
-    const customerId = await getCustomerId();
-    await cancelMollieSubscription(customerId, subscriptionId);
+    const customerId = await getCustomerId()
+    await cancelMollieSubscription(customerId, subscriptionId)
 
-    revalidatePath("/mijn-jesus-central/geven");
+    revalidatePath('/mijn-jesus-central/geven')
 
     return {
       success: true,
-      message: "Subscription cancelled successfully",
-    };
+      message: 'Subscription cancelled successfully',
+    }
   } catch (error) {
-    console.error("Failed to cancel subscription:", error);
+    console.error('Failed to cancel subscription:', error)
     return {
       success: false,
       error:
         error instanceof Error
           ? error.message
-          : "Failed to cancel subscription",
-    };
+          : 'Failed to cancel subscription',
+    }
   }
 }
 
@@ -136,39 +132,39 @@ export async function cancelSubscription(subscriptionId: string) {
 export async function updateSubscriptionAmount(
   subscriptionId: string,
   amount: string,
-  description?: string
+  description?: string,
 ) {
   try {
-    const customerId = await getCustomerId();
+    const customerId = await getCustomerId()
 
     // Format amount to 2 decimals
-    const formattedAmount = Number(amount).toFixed(2);
+    const formattedAmount = Number(amount).toFixed(2)
 
     await updateMollieSubscription(
       customerId,
       subscriptionId,
       {
-        currency: "EUR",
+        currency: 'EUR',
         value: formattedAmount,
       },
-      description
-    );
+      description,
+    )
 
-    revalidatePath("/mijn-jesus-central/geven");
+    revalidatePath('/mijn-jesus-central/geven')
 
     return {
       success: true,
-      message: "Subscription updated successfully",
-    };
+      message: 'Subscription updated successfully',
+    }
   } catch (error) {
-    console.error("Failed to update subscription:", error);
+    console.error('Failed to update subscription:', error)
     return {
       success: false,
       error:
         error instanceof Error
           ? error.message
-          : "Failed to update subscription",
-    };
+          : 'Failed to update subscription',
+    }
   }
 }
 
@@ -178,80 +174,80 @@ export async function updateSubscriptionAmount(
 export async function createNewSubscription(
   amount: string,
   interval: string,
-  description: string
+  description: string,
 ) {
   try {
-    const customerId = await getCustomerId();
-    const user = await currentUser();
+    const customerId = await getCustomerId()
+    const user = await currentUser()
 
     if (!user) {
-      throw new Error("User not authenticated");
+      throw new Error('User not authenticated')
     }
 
     // Get mandates
-    const mandates = await getMandates(customerId);
-    const validMandate = mandates.find((m) => m.status === "valid");
+    const mandates = await getMandates(customerId)
+    const validMandate = mandates.find((m) => m.status === 'valid')
 
     if (!validMandate) {
       // Need to create a first payment to set up mandate
-      const name = user.fullName || user.firstName || "Unknown";
-      const email = user.emailAddresses[0]?.emailAddress || "";
+      const name = user.fullName || user.firstName || 'Unknown'
+      const email = user.emailAddresses[0]?.emailAddress || ''
 
       const redirectUrl = await createPayment(
         amount,
         true, // recurring
         description,
         name,
-        email
-      );
+        email,
+      )
 
       return {
         success: true,
         requiresSetup: true,
         redirectUrl,
         message:
-          "Please complete the first payment to set up your subscription",
-      };
+          'Please complete the first payment to set up your subscription',
+      }
     }
 
     // Format amount
-    const formattedAmount = Number(amount).toFixed(2);
+    const formattedAmount = Number(amount).toFixed(2)
 
     // Calculate start date (tomorrow)
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() + 1);
+    const startDate = new Date()
+    startDate.setDate(startDate.getDate() + 1)
 
     await createMollieSubscription(
       customerId,
       {
-        currency: "EUR",
+        currency: 'EUR',
         value: formattedAmount,
       },
       interval,
       description,
-      startDate.toISOString().split("T")[0],
+      startDate.toISOString().split('T')[0],
       validMandate.id,
       {
-        email: user.emailAddresses[0]?.emailAddress || "",
-        name: user.fullName || user.firstName || "Unknown",
-      }
-    );
+        email: user.emailAddresses[0]?.emailAddress || '',
+        name: user.fullName || user.firstName || 'Unknown',
+      },
+    )
 
-    revalidatePath("/mijn-jesus-central/geven");
+    revalidatePath('/mijn-jesus-central/geven')
 
     return {
       success: true,
       requiresSetup: false,
-      message: "Subscription created successfully",
-    };
+      message: 'Subscription created successfully',
+    }
   } catch (error) {
-    console.error("Failed to create subscription:", error);
+    console.error('Failed to create subscription:', error)
     return {
       success: false,
       error:
         error instanceof Error
           ? error.message
-          : "Failed to create subscription",
-    };
+          : 'Failed to create subscription',
+    }
   }
 }

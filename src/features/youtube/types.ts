@@ -3,19 +3,19 @@
  */
 export interface RssVideo {
   /** YouTube video ID */
-  videoId: string;
+  videoId: string
   /** Video title */
-  title: string;
+  title: string
   /** Video description */
-  description: string;
+  description: string
   /** ISO timestamp of when video was published */
-  publishedAt: string;
+  publishedAt: string
   /** URL to video thumbnail image */
-  thumbnailUrl: string;
+  thumbnailUrl: string
   /** YouTube channel ID */
-  channelId: string;
+  channelId: string
   /** Full YouTube video URL */
-  url: string;
+  url: string
 }
 
 /**
@@ -23,20 +23,20 @@ export interface RssVideo {
  * @internal
  */
 export interface RssFeedEntry {
-  "yt:videoId"?: string;
-  id?: string;
-  title?: string;
-  published?: string;
-  link?: RssFeedLink | RssFeedLink[];
-  "media:group"?: {
-    "media:description"?: string;
-    "media:thumbnail"?: {
-      url?: string;
-    };
-  };
-  "media:thumbnail"?: {
-    url?: string;
-  };
+  'yt:videoId'?: string
+  id?: string
+  title?: string
+  published?: string
+  link?: RssFeedLink | RssFeedLink[]
+  'media:group'?: {
+    'media:description'?: string
+    'media:thumbnail'?: {
+      url?: string
+    }
+  }
+  'media:thumbnail'?: {
+    url?: string
+  }
 }
 
 /**
@@ -44,7 +44,7 @@ export interface RssFeedEntry {
  * @internal
  */
 export interface RssFeedLink {
-  href?: string;
+  href?: string
 }
 
 /**
@@ -53,7 +53,7 @@ export interface RssFeedLink {
  */
 export interface RssFeed {
   feed?: {
-    "yt:channelId"?: string;
-    entry?: RssFeedEntry | RssFeedEntry[];
-  };
+    'yt:channelId'?: string
+    entry?: RssFeedEntry | RssFeedEntry[]
+  }
 }

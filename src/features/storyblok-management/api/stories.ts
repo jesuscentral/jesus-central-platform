@@ -1,35 +1,35 @@
-"use server";
+'use server'
 
 import {
   STORYBLOK_SPACE_ID,
   STORYBLOK_MANAGEMENT_API_URL,
   getManagementToken,
   getBasePath,
-} from "./config";
+} from './config'
 import type {
   CreateStoryParams,
   UpdateStoryParams,
   StoryResponse,
-} from "../types";
+} from '../types'
 
 /**
  * Create a story in Storyblok
  */
 export async function createStory(
-  params: CreateStoryParams
+  params: CreateStoryParams,
 ): Promise<StoryResponse> {
-  const token = getManagementToken();
-  const basePath = getBasePath();
+  const token = getManagementToken()
+  const basePath = getBasePath()
 
   // Prepend base path to slug if it exists
-  const fullSlug = basePath ? `${basePath}/${params.slug}` : params.slug;
+  const fullSlug = basePath ? `${basePath}/${params.slug}` : params.slug
 
   const response = await fetch(
     `${STORYBLOK_MANAGEMENT_API_URL}/spaces/${STORYBLOK_SPACE_ID}/stories`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
       body: JSON.stringify({
@@ -42,17 +42,17 @@ export async function createStory(
         },
         publish: params.published ? 1 : 0,
       }),
-    }
-  );
+    },
+  )
 
   if (!response.ok) {
-    const errorText = await response.text();
+    const errorText = await response.text()
     throw new Error(
-      `Failed to create story: ${response.status} ${response.statusText} - ${errorText}`
-    );
+      `Failed to create story: ${response.status} ${response.statusText} - ${errorText}`,
+    )
   }
 
-  return response.json();
+  return response.json()
 }
 
 /**
@@ -60,16 +60,16 @@ export async function createStory(
  */
 export async function updateStory(
   storyId: number,
-  params: UpdateStoryParams
+  params: UpdateStoryParams,
 ): Promise<StoryResponse> {
-  const token = getManagementToken();
+  const token = getManagementToken()
 
   const response = await fetch(
     `${STORYBLOK_MANAGEMENT_API_URL}/spaces/${STORYBLOK_SPACE_ID}/stories/${storyId}`,
     {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
       body: JSON.stringify({
@@ -80,39 +80,39 @@ export async function updateStory(
         },
         publish: params.published ? 1 : 0,
       }),
-    }
-  );
+    },
+  )
 
   if (!response.ok) {
-    const errorText = await response.text();
+    const errorText = await response.text()
     throw new Error(
-      `Failed to update story: ${response.status} ${response.statusText} - ${errorText}`
-    );
+      `Failed to update story: ${response.status} ${response.statusText} - ${errorText}`,
+    )
   }
 
-  return response.json();
+  return response.json()
 }
 
 /**
  * Delete a story from Storyblok
  */
 export async function deleteStory(storyId: number): Promise<void> {
-  const token = getManagementToken();
+  const token = getManagementToken()
 
   const response = await fetch(
     `${STORYBLOK_MANAGEMENT_API_URL}/spaces/${STORYBLOK_SPACE_ID}/stories/${storyId}`,
     {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         Authorization: token,
       },
-    }
-  );
+    },
+  )
 
   if (!response.ok) {
-    const errorText = await response.text();
+    const errorText = await response.text()
     throw new Error(
-      `Failed to delete story: ${response.status} ${response.statusText} - ${errorText}`
-    );
+      `Failed to delete story: ${response.status} ${response.statusText} - ${errorText}`,
+    )
   }
 }

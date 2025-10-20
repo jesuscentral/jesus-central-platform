@@ -1,13 +1,12 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { createNewSubscription } from "../actions/subscriptions";
-import Button from "@/components/ui/atoms/Button";
-import { useRouter } from "next/navigation";
+import { useState } from 'react'
+import { createNewSubscription } from '../actions/subscriptions'
+import Button from '@/components/ui/atoms/Button'
 
 interface NewSubscriptionFormProps {
-  onSuccess: () => void;
-  onCancel: () => void;
+  onSuccess: () => void
+  onCancel: () => void
 }
 
 export function NewSubscriptionForm({
@@ -15,39 +14,39 @@ export function NewSubscriptionForm({
   onCancel,
 }: NewSubscriptionFormProps) {
   const [formData, setFormData] = useState({
-    amount: "10.00",
-    interval: "1 month",
-    description: "Maandelijkse gift",
-  });
-  const [isLoading, setIsLoading] = useState(false);
+    amount: '10.00',
+    interval: '1 month',
+    description: 'Maandelijkse gift',
+  })
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+    e.preventDefault()
+    setIsLoading(true)
 
     const result = await createNewSubscription(
       formData.amount,
       formData.interval,
-      formData.description
-    );
+      formData.description,
+    )
 
-    setIsLoading(false);
+    setIsLoading(false)
 
     if (result.success) {
       if (result.requiresSetup && result.redirectUrl) {
         // Redirect to Mollie for first payment setup
-        window.location.href = result.redirectUrl;
+        window.location.href = result.redirectUrl
       } else {
-        onSuccess();
+        onSuccess()
       }
     } else {
-      alert(result.error || "Failed to create subscription");
+      alert(result.error || 'Failed to create subscription')
     }
-  };
+  }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6">
-      <h3 className="text-lg font-bold mb-4">
+    <div className="rounded-lg border border-gray-200 bg-white p-6">
+      <h3 className="mb-4 text-lg font-bold">
         Nieuw maandelijkse gift aanmaken
       </h3>
 
@@ -56,7 +55,7 @@ export function NewSubscriptionForm({
         <div>
           <label
             htmlFor="amount"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block text-sm font-medium text-gray-700"
           >
             Bedrag (€)
           </label>
@@ -69,7 +68,7 @@ export function NewSubscriptionForm({
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, amount: e.target.value }))
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+            className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
             required
           />
         </div>
@@ -78,7 +77,7 @@ export function NewSubscriptionForm({
         <div>
           <label
             htmlFor="interval"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block text-sm font-medium text-gray-700"
           >
             Frequentie
           </label>
@@ -88,7 +87,7 @@ export function NewSubscriptionForm({
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, interval: e.target.value }))
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+            className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
             required
           >
             <option value="1 month">Maandelijks</option>
@@ -102,7 +101,7 @@ export function NewSubscriptionForm({
         <div>
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block text-sm font-medium text-gray-700"
           >
             Beschrijving
           </label>
@@ -113,13 +112,13 @@ export function NewSubscriptionForm({
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, description: e.target.value }))
             }
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+            className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
             required
           />
         </div>
 
         {/* Info Box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
           <p className="text-sm text-blue-900">
             <strong>Let op:</strong> Als je nog geen eerdere gift hebt gedaan,
             word je doorgestuurd naar Mollie om je eerste betaling te voltooien.
@@ -135,7 +134,7 @@ export function NewSubscriptionForm({
             size="medium"
             disabled={isLoading}
           >
-            {isLoading ? "Bezig..." : "Maandelijkse gift aanmaken"}
+            {isLoading ? 'Bezig...' : 'Maandelijkse gift aanmaken'}
           </Button>
           <Button
             type="strategy-red"
@@ -149,5 +148,5 @@ export function NewSubscriptionForm({
         </div>
       </form>
     </div>
-  );
+  )
 }

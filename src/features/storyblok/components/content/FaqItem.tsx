@@ -1,27 +1,27 @@
-"use client";
+'use client'
 
-import { SbFaqItem } from "@storyblok/types/287435740670216/storyblok-components";
-import { SbBlokData, storyblokEditable } from "@storyblok/react/rsc";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { RichTextRenderer } from "./RichTextRenderer";
-import { StoryblokRichtext } from "@storyblok/types/storyblok";
-import { cn } from "@/utils/cn";
+import { SbFaqItem } from '@storyblok/types/287435740670216/storyblok-components'
+import { SbBlokData, storyblokEditable } from '@storyblok/react/rsc'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+import { RichTextRenderer } from './RichTextRenderer'
+import { StoryblokRichtext } from '@storyblok/types/storyblok'
+import { cn } from '@/utils/cn'
 
 interface FaqItemProps {
-  blok: SbFaqItem;
-  index?: number;
+  blok: SbFaqItem
+  index?: number
 }
 
 export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <motion.div
       {...storyblokEditable(blok as SbBlokData)}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{
         duration: 0.5,
         delay: index * 0.1,
@@ -32,18 +32,18 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-full overflow-hidden rounded-2xl border transition-all duration-300 cursor-pointer",
+          'w-full cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300',
           isOpen
-            ? "border-strategy-red/20 bg-freedom"
-            : "border-boldness/10 bg-white/70 backdrop-blur-sm hover:border-boldness/20"
+            ? 'border-strategy-red/20 bg-freedom'
+            : 'border-boldness/10 hover:border-boldness/20 bg-white/70 backdrop-blur-sm',
         )}
       >
         {/* Question Header */}
         <div className="flex items-start justify-between gap-4 p-6 text-left md:p-8">
           <motion.h3
             className={cn(
-              "flex-1 font-heading text-xl uppercase tracking-wide transition-colors duration-300 md:text-2xl",
-              isOpen ? "text-strategy-red" : "text-boldness"
+              'font-heading flex-1 text-xl tracking-wide uppercase transition-colors duration-300 md:text-2xl',
+              isOpen ? 'text-strategy-red' : 'text-boldness',
             )}
             layout
           >
@@ -53,13 +53,13 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
           {/* Animated Icon */}
           <motion.div
             className={cn(
-              "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300 md:h-10 md:w-10",
+              'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300 md:h-10 md:w-10',
               isOpen
-                ? "border-strategy-red bg-strategy-red"
-                : "border-boldness/20 bg-white group-hover:border-boldness/40"
+                ? 'border-strategy-red bg-strategy-red'
+                : 'border-boldness/20 group-hover:border-boldness/40 bg-white',
             )}
             animate={{ rotate: isOpen ? 45 : 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
             <svg
               width="20"
@@ -70,8 +70,8 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
               strokeWidth="2.5"
               strokeLinecap="round"
               className={cn(
-                "transition-colors duration-300",
-                isOpen ? "text-white" : "text-boldness/60"
+                'transition-colors duration-300',
+                isOpen ? 'text-white' : 'text-boldness/60',
               )}
             >
               <line x1="12" y1="5" x2="12" y2="19" />
@@ -86,7 +86,7 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{
-                height: "auto",
+                height: 'auto',
                 opacity: 1,
                 transition: {
                   height: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1.0] },
@@ -108,9 +108,9 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
                 animate={{ y: 0 }}
                 exit={{ y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="border-t border-strategy-red/10 bg-gradient-to-b from-strategy-red/5 to-transparent px-6 pb-6 pt-4 md:px-8 md:pb-8 md:pt-6"
+                className="border-strategy-red/10 from-strategy-red/5 border-t bg-gradient-to-b to-transparent px-6 pt-4 pb-6 md:px-8 md:pt-6 md:pb-8"
               >
-                <div className="prose prose-lg max-w-none font-body text-base leading-relaxed text-boldness/85 md:text-lg">
+                <div className="prose prose-lg font-body text-boldness/85 max-w-none text-base leading-relaxed md:text-lg">
                   <RichTextRenderer
                     document={blok.answer as unknown as StoryblokRichtext}
                   />
@@ -121,5 +121,5 @@ export default function FaqItem({ blok, index = 0 }: FaqItemProps) {
         </AnimatePresence>
       </button>
     </motion.div>
-  );
+  )
 }

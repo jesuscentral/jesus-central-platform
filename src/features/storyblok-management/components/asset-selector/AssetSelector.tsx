@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { useCallback } from "react";
-import { useAssets, useAssetSearch, useKeyboardNavigation } from "../../hooks";
-import { SearchInput, LoadingSkeleton } from "../ui";
-import { AssetGrid } from "./AssetGrid";
-import { SelectedAssetPreview } from "./SelectedAssetPreview";
+import { useCallback } from 'react'
+import { useAssets, useAssetSearch, useKeyboardNavigation } from '../../hooks'
+import { SearchInput, LoadingSkeleton } from '../ui'
+import { AssetGrid } from './AssetGrid'
+import { SelectedAssetPreview } from './SelectedAssetPreview'
 
 interface AssetSelectorProps {
-  selectedAssetId?: number;
-  onSelect: (assetId: number) => void;
-  label?: string;
-  className?: string;
-  folderName?: string;
+  selectedAssetId?: number
+  onSelect: (assetId: number) => void
+  label?: string
+  className?: string
+  folderName?: string
 }
 
 /**
@@ -21,28 +21,19 @@ interface AssetSelectorProps {
 export function AssetSelector({
   selectedAssetId,
   onSelect,
-  label = "Select Image",
-  className = "",
-  folderName = "public_events",
+  label = 'Select Image',
+  className = '',
+  folderName = 'public_events',
 }: AssetSelectorProps) {
   // Load assets
-  const { assets, isLoading } = useAssets(folderName);
+  const { assets, isLoading } = useAssets(folderName)
 
   // Search functionality
   const { searchQuery, setSearchQuery, clearSearch, filteredAssets } =
-    useAssetSearch(assets);
+    useAssetSearch(assets)
 
   // Find selected asset
-  const selectedAsset = assets.find((a) => a.id === selectedAssetId);
-
-  // Handle asset selection
-  const handleAssetClick = useCallback(
-    (assetId: number, index: number) => {
-      onSelect(assetId);
-      setFocusedIndex(index);
-    },
-    [onSelect]
-  );
+  const selectedAsset = assets.find((a) => a.id === selectedAssetId)
 
   // Keyboard navigation
   const { focusedIndex, setFocusedIndex, gridRef, handleKeyDown } =
@@ -50,20 +41,29 @@ export function AssetSelector({
       totalItems: filteredAssets.length,
       columns: 4,
       onSelect: (index) => {
-        const asset = filteredAssets[index];
+        const asset = filteredAssets[index]
         if (asset) {
-          handleAssetClick(asset.id, index);
+          handleAssetClick(asset.id, index)
         }
       },
-    });
+    })
+
+  // Handle asset selection
+  const handleAssetClick = useCallback(
+    (assetId: number, index: number) => {
+      onSelect(assetId)
+      setFocusedIndex(index)
+    },
+    [onSelect, setFocusedIndex],
+  )
 
   return (
     <div className={className}>
       {/* Label */}
-      <label className="block text-sm font-medium text-gray-700 mb-2">
+      <label className="mb-2 block text-sm font-medium text-gray-700">
         {label}
         {folderName && (
-          <span className="ml-2 text-xs text-gray-500 font-normal">
+          <span className="ml-2 text-xs font-normal text-gray-500">
             (from {folderName})
           </span>
         )}
@@ -100,12 +100,13 @@ export function AssetSelector({
           />
 
           {/* Results Count */}
-          <p className="text-xs text-gray-500 mt-2">
-            {filteredAssets.length} image{filteredAssets.length !== 1 ? "s" : ""}{" "}
+          <p className="mt-2 text-xs text-gray-500">
+            {filteredAssets.length} image
+            {filteredAssets.length !== 1 ? 's' : ''}{' '}
             {searchQuery && `matching "${searchQuery}"`}
           </p>
         </>
       )}
     </div>
-  );
+  )
 }

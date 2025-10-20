@@ -1,25 +1,25 @@
-"use server";
+'use server'
 
-import { clerkClient, currentUser } from "@clerk/nextjs/server";
-import createMollieClient, { Locale, SequenceType } from "@mollie/api-client";
+import { clerkClient, currentUser } from '@clerk/nextjs/server'
+import createMollieClient, { Locale, SequenceType } from '@mollie/api-client'
 
-const apiKey = process.env.MOLLIE_API_KEY;
+const apiKey = process.env.MOLLIE_API_KEY
 // const domain = process.env.DOMAIN || "http://localhost:3000";
 // const webhookUrl = process.env.WEBHOOK_URL || "http://not.provided";
 
 if (!apiKey) {
-  throw new Error("MOLLIE_API_KEY is not defined");
+  throw new Error('MOLLIE_API_KEY is not defined')
 }
 
 const formatAmount = (amount: string) => {
-  const num = Number(amount);
-  if (isNaN(num)) throw new Error("Invalid amount");
+  const num = Number(amount)
+  if (isNaN(num)) throw new Error('Invalid amount')
   // toFixed(2) gives exactly 2 decimals as a string
-  return num.toFixed(2);
-};
+  return num.toFixed(2)
+}
 
 // Set up Mollie API client
-const mollieClient = createMollieClient({ apiKey: apiKey });
+const mollieClient = createMollieClient({ apiKey: apiKey })
 
 const countryToLocale: Record<string, Locale> = {
   DE: Locale.de_DE,
@@ -32,59 +32,59 @@ const countryToLocale: Record<string, Locale> = {
   IT: Locale.it_IT,
   CH: Locale.de_CH,
   ES: Locale.es_ES,
-};
+}
 
 export const upsertCustomer = async (name: string, email: string) => {
-  let customer = null;
-  let paginatedCustomers = await getMollieCustomers("", 50);
+  let customer = null
+  let paginatedCustomers = await getMollieCustomers('', 50)
   while (customer === null && paginatedCustomers.length > 0) {
-    customer = paginatedCustomers.find((customer) => customer.email === email);
+    customer = paginatedCustomers.find((customer) => customer.email === email)
     if (customer) {
-      return updateCustomer(customer.id, name, email);
+      return updateCustomer(customer.id, name, email)
     }
     paginatedCustomers = await getMollieCustomers(
       paginatedCustomers[paginatedCustomers.length - 1].id,
-      50
-    );
+      50,
+    )
   }
 
-  return createCustomer(name, email);
-};
+  return createCustomer(name, email)
+}
 
 export const updateCustomer = async (
   customerId: string,
   name: string,
-  email: string
+  email: string,
 ) => {
   const customer = await mollieClient.customers.update(customerId, {
     name,
     email,
     metadata: {
-      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? 'website',
     },
-  });
-  return customer;
-};
+  })
+  return customer
+}
 
 export const createCustomer = async (name: string, email: string) => {
   if (!name || !email) {
-    throw Error("No Customer created");
+    throw Error('No Customer created')
   }
   const customer = await mollieClient.customers.create({
     name,
     email,
     metadata: {
-      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? 'website',
     },
-  });
+  })
 
-  return customer;
-};
+  return customer
+}
 
 export const getCustomer = async (customerId: string) => {
-  const customer = await mollieClient.customers.get(customerId);
-  return customer;
-};
+  const customer = await mollieClient.customers.get(customerId)
+  return customer
+}
 
 export const createPayment = async (
   amount: string,
@@ -92,14 +92,14 @@ export const createPayment = async (
   note: string,
   name: string,
   email: string,
-  country: string = "NL"
+  country: string = 'NL',
 ) => {
-  const domain = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
-  const clerkUser = await currentUser();
+  const domain = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'
+  const clerkUser = await currentUser()
 
   const customer = clerkUser?.publicMetadata?.mollieCustomerId
     ? await getCustomer(clerkUser.publicMetadata.mollieCustomerId as string)
-    : await upsertCustomer(name, email);
+    : await upsertCustomer(name, email)
 
   if (clerkUser) {
     await (
@@ -108,14 +108,14 @@ export const createPayment = async (
       publicMetadata: {
         mollieCustomerId: customer.id,
       },
-    });
+    })
   }
 
   const payment = await mollieClient.customerPayments.create({
     customerId: customer.id,
     amount: {
       value: formatAmount(amount),
-      currency: "EUR",
+      currency: 'EUR',
     },
     locale: countryToLocale[country],
     description: `Jesus Central Church: ${note}`,
@@ -123,30 +123,30 @@ export const createPayment = async (
     redirectUrl: `${domain}/geven/bedankt`,
     // webhookUrl: `${domain}/api/webhooks/mollie`,
     metadata: {
-      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? 'website',
       email: email,
       name: name,
     },
-  });
+  })
 
-  const redirectUrl = payment.getCheckoutUrl();
+  const redirectUrl = payment.getCheckoutUrl()
 
   if (!redirectUrl) {
-    throw new Error("Failed to create payment");
+    throw new Error('Failed to create payment')
   }
 
-  return redirectUrl;
-};
+  return redirectUrl
+}
 
 export const getPayment = async (paymentId: string) => {
-  const payment = await mollieClient.payments.get(paymentId);
-  return payment;
-};
+  const payment = await mollieClient.payments.get(paymentId)
+  return payment
+}
 
 export const pageMandates = async (customerId: string) => {
-  const mandates = await mollieClient.customerMandates.page({ customerId });
-  return mandates;
-};
+  const mandates = await mollieClient.customerMandates.page({ customerId })
+  return mandates
+}
 
 export const createSubscription = async (
   customerId: string,
@@ -155,7 +155,7 @@ export const createSubscription = async (
   description: string,
   startDate: string,
   mandateId: string,
-  metadata: Record<string, string>
+  metadata: Record<string, string>,
 ) => {
   const subscription = await mollieClient.customerSubscriptions.create({
     customerId,
@@ -166,56 +166,56 @@ export const createSubscription = async (
     mandateId,
     metadata: {
       ...metadata,
-      source: process.env.NEXT_PUBLIC_BASE_URL ?? "website",
+      source: process.env.NEXT_PUBLIC_BASE_URL ?? 'website',
     },
-  });
+  })
 
-  return subscription;
-};
+  return subscription
+}
 
 export const getMollieCustomers = async (
-  from: string = "",
-  limit: number = 50
+  from: string = '',
+  limit: number = 50,
 ) => {
-  const customers = await mollieClient.customers.page({ from, limit });
-  return customers;
-};
+  const customers = await mollieClient.customers.page({ from, limit })
+  return customers
+}
 
 export const getMandates = async (customerId: string) => {
-  const mandates = await mollieClient.customerMandates.page({ customerId });
-  return mandates;
-};
+  const mandates = await mollieClient.customerMandates.page({ customerId })
+  return mandates
+}
 
 export const getSubscriptions = async (customerId: string) => {
   const subscriptions = await mollieClient.customerSubscriptions.page({
     customerId,
-  });
-  return subscriptions;
-};
+  })
+  return subscriptions
+}
 
 export const getPayments = async (customerId: string) => {
   const payments = await mollieClient.customerPayments.page({
     customerId,
-  });
-  return payments;
-};
+  })
+  return payments
+}
 
 export const cancelSubscription = async (
   customerId: string,
-  subscriptionId: string
+  subscriptionId: string,
 ) => {
   const subscription = await mollieClient.customerSubscriptions.cancel(
     subscriptionId,
-    { customerId }
-  );
-  return subscription;
-};
+    { customerId },
+  )
+  return subscription
+}
 
 export const updateSubscription = async (
   customerId: string,
   subscriptionId: string,
   amount: { currency: string; value: string },
-  description?: string
+  description?: string,
 ) => {
   const subscription = await mollieClient.customerSubscriptions.update(
     subscriptionId,
@@ -223,7 +223,7 @@ export const updateSubscription = async (
       customerId,
       amount,
       ...(description && { description }),
-    }
-  );
-  return subscription;
-};
+    },
+  )
+  return subscription
+}

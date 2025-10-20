@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from 'react'
 
 interface UseKeyboardNavigationProps {
-  totalItems: number;
-  columns: number;
-  onSelect: (index: number) => void;
+  totalItems: number
+  columns: number
+  onSelect: (index: number) => void
 }
 
 /**
@@ -16,63 +16,63 @@ export function useKeyboardNavigation({
   columns,
   onSelect,
 }: UseKeyboardNavigationProps) {
-  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent, index: number) => {
       switch (e.key) {
-        case "Enter":
-        case " ":
-          e.preventDefault();
-          onSelect(index);
-          setFocusedIndex(index);
-          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault()
+          onSelect(index)
+          setFocusedIndex(index)
+          break
 
-        case "ArrowRight":
-          e.preventDefault();
+        case 'ArrowRight':
+          e.preventDefault()
           if (index < totalItems - 1) {
-            setFocusedIndex(index + 1);
-            const nextButton = gridRef.current?.children[index + 1];
-            (nextButton as HTMLButtonElement)?.focus();
+            setFocusedIndex(index + 1)
+            const nextButton = gridRef.current?.children[index + 1]
+            ;(nextButton as HTMLButtonElement)?.focus()
           }
-          break;
+          break
 
-        case "ArrowLeft":
-          e.preventDefault();
+        case 'ArrowLeft':
+          e.preventDefault()
           if (index > 0) {
-            setFocusedIndex(index - 1);
-            const prevButton = gridRef.current?.children[index - 1];
-            (prevButton as HTMLButtonElement)?.focus();
+            setFocusedIndex(index - 1)
+            const prevButton = gridRef.current?.children[index - 1]
+            ;(prevButton as HTMLButtonElement)?.focus()
           }
-          break;
+          break
 
-        case "ArrowDown":
-          e.preventDefault();
+        case 'ArrowDown':
+          e.preventDefault()
           if (index + columns < totalItems) {
-            setFocusedIndex(index + columns);
-            const belowButton = gridRef.current?.children[index + columns];
-            (belowButton as HTMLButtonElement)?.focus();
+            setFocusedIndex(index + columns)
+            const belowButton = gridRef.current?.children[index + columns]
+            ;(belowButton as HTMLButtonElement)?.focus()
           }
-          break;
+          break
 
-        case "ArrowUp":
-          e.preventDefault();
+        case 'ArrowUp':
+          e.preventDefault()
           if (index - columns >= 0) {
-            setFocusedIndex(index - columns);
-            const aboveButton = gridRef.current?.children[index - columns];
-            (aboveButton as HTMLButtonElement)?.focus();
+            setFocusedIndex(index - columns)
+            const aboveButton = gridRef.current?.children[index - columns]
+            ;(aboveButton as HTMLButtonElement)?.focus()
           }
-          break;
+          break
       }
     },
-    [totalItems, columns, onSelect]
-  );
+    [totalItems, columns, onSelect],
+  )
 
   return {
     focusedIndex,
     setFocusedIndex,
     gridRef,
     handleKeyDown,
-  };
+  }
 }

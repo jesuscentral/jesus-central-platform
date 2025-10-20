@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
 import {
   storyblokEditable,
   StoryblokServerComponent,
-} from "@storyblok/react/rsc";
-import { SbSection } from "@storyblok/types/287435740670216/storyblok-components";
-import { SbBlokData } from "@storyblok/react";
-import { cn } from "@/utils/cn";
-import { motion } from "framer-motion";
-import { customContainerVariants, fadeInUp } from "@/lib/animations";
+} from '@storyblok/react/rsc'
+import { SbSection } from '@storyblok/types/287435740670216/storyblok-components'
+import { SbBlokData } from '@storyblok/react'
+import { cn } from '@/utils/cn'
+import { motion } from 'framer-motion'
+import { customContainerVariants, fadeInUp } from '@/lib/animations'
 
 export default function Section({ blok }: { blok: SbSection }) {
   return (
@@ -16,13 +16,13 @@ export default function Section({ blok }: { blok: SbSection }) {
       variants={customContainerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "0px", amount: 0.1 }}
+      viewport={{ once: true, margin: '0px', amount: 0.1 }}
       className={cn(
-        "relative overflow-hidden",
+        'relative overflow-hidden',
         `bg-${blok.backgroundColor}`,
         `text-${blok.color}`,
-        "py-12",
-        "space-y-6"
+        'py-12',
+        'space-y-6',
       )}
       {...storyblokEditable(blok as SbBlokData)}
     >
@@ -30,11 +30,11 @@ export default function Section({ blok }: { blok: SbSection }) {
         <motion.div
           key={nestedBlok._uid}
           variants={fadeInUp}
-          className="h-full container px-4 mx-auto"
+          className="container mx-auto h-full px-4"
         >
           <StoryblokServerComponent blok={nestedBlok} />
         </motion.div>
       ))}
     </motion.section>
-  );
+  )
 }

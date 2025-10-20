@@ -2,14 +2,14 @@ import {
   SbBlokData,
   storyblokEditable,
   StoryblokServerComponent,
-} from "@storyblok/react/rsc";
-import React from "react";
-import { SbPage } from "@storyblok/types/287435740670216/storyblok-components";
+} from '@storyblok/react/rsc'
+import React from 'react'
+import { SbPage } from '@storyblok/types/287435740670216/storyblok-components'
 
 interface PageProps {
   blok: SbPage & {
-    body: SbBlokData[];
-  };
+    body: SbBlokData[]
+  }
 }
 
 const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
@@ -21,7 +21,7 @@ const Page: React.FunctionComponent<PageProps> = ({ blok }) => {
         ))}
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

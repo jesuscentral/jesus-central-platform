@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { SbEvent } from "@storyblok/types/287435740670216/storyblok-components";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowLeft, Calendar, MapPin, User } from "lucide-react";
-import Button from "../ui/atoms/Button";
-import AddToCalendar from "../ui/molecules/AddToCalendar";
-import ShareButton from "../ui/molecules/ShareButton";
+import { SbEvent } from '@storyblok/types/287435740670216/storyblok-components'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { ArrowLeft, Calendar, MapPin, User } from 'lucide-react'
+import Button from '../ui/atoms/Button'
+import AddToCalendar from '../ui/molecules/AddToCalendar'
+import ShareButton from '../ui/molecules/ShareButton'
 
 interface Props {
-  event: SbEvent;
-  formattedDate: string;
+  event: SbEvent
+  formattedDate: string
 }
 
 export default function EventDetailPage({ event, formattedDate }: Props) {
@@ -28,8 +28,8 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
         transition={{
           duration: 10,
           repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
+          repeatType: 'reverse',
+          ease: 'easeInOut',
         }}
         className="absolute inset-0"
       >
@@ -41,11 +41,11 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
             loop
             playsInline
             className="h-full w-full object-cover brightness-90 saturate-110"
-            poster={event.thumbnail?.filename || "/og-image.png"}
+            poster={event.thumbnail?.filename || '/og-image.png'}
           />
         ) : (
           <Image
-            src={event.thumbnail?.filename || "/og-image.png"}
+            src={event.thumbnail?.filename || '/og-image.png'}
             alt={event.title}
             fill
             priority
@@ -67,7 +67,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
         transition={{
           duration: 4,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
         style={{ zIndex: 2 }}
       />
@@ -77,9 +77,9 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
         transition={{
           duration: 5,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
-        className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/70"
+        className="bg-gradient-radial absolute inset-0 from-transparent via-transparent to-black/70"
         style={{ zIndex: 3 }}
       />
 
@@ -88,7 +88,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3 }}
-        className="absolute top-20 left-4 z-20 sm:left-6 md:left-12 sm:top-24"
+        className="absolute top-20 left-4 z-20 sm:top-24 sm:left-6 md:left-12"
       >
         <Button
           type="strategy-gold"
@@ -96,7 +96,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
           href="/activiteiten"
           size="small"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="h-4 w-4" />
           <span className="hidden sm:inline">Terug</span>
         </Button>
       </motion.div>
@@ -105,11 +105,11 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
-        className="absolute top-[4.5rem] left-1/2 -translate-x-1/2 z-20 sm:top-20"
+        transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
+        className="absolute top-[4.5rem] left-1/2 z-20 -translate-x-1/2 sm:top-20"
       >
-        <div className="relative px-4 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl bg-boldness shadow-2xl">
-          <div className="relative w-32 h-12 sm:w-48 sm:h-16 md:w-64 md:h-20">
+        <div className="bg-boldness relative rounded-xl px-4 py-2 shadow-2xl sm:rounded-2xl sm:px-6 sm:py-3">
+          <div className="relative h-12 w-32 sm:h-16 sm:w-48 md:h-20 md:w-64">
             <Image
               src="/logo.svg"
               alt="Jesus Central Church"
@@ -125,15 +125,15 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.4, type: "spring", stiffness: 300 }}
-        className="absolute top-20 right-4 z-20 sm:right-6 md:right-12 sm:top-24"
+        transition={{ delay: 0.4, type: 'spring', stiffness: 300 }}
+        className="absolute top-20 right-4 z-20 sm:top-24 sm:right-6 md:right-12"
       >
         <div className="relative">
           {/* Glow effect behind badge */}
-          <div className="relative rounded-full bg-strategy-gold p-[2px] sm:p-[3px]">
-            <div className="rounded-full bg-strategy-gold backdrop-blur-md px-3 py-1.5 sm:px-6 sm:py-3">
-              <span className="text-xs sm:text-sm md:text-lg font-bold uppercase tracking-wider text-boldness drop-shadow-lg">
-                <h3>{event.type || "Event"}</h3>
+          <div className="bg-strategy-gold relative rounded-full p-[2px] sm:p-[3px]">
+            <div className="bg-strategy-gold rounded-full px-3 py-1.5 backdrop-blur-md sm:px-6 sm:py-3">
+              <span className="text-boldness text-xs font-bold tracking-wider uppercase drop-shadow-lg sm:text-sm md:text-lg">
+                <h3>{event.type || 'Event'}</h3>
               </span>
             </div>
           </div>
@@ -141,26 +141,26 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
       </motion.div>
 
       {/* Main Content - Bottom Center - Mobile Optimized */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 pb-6 px-4 sm:pb-12 sm:px-6 md:px-12">
-        <div className="max-w-4xl mx-auto">
+      <div className="absolute right-0 bottom-0 left-0 z-20 px-4 pb-6 sm:px-6 sm:pb-12 md:px-12">
+        <div className="mx-auto max-w-4xl">
           {/* Speaker Section - Mobile Responsive */}
           {event.speaker && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-              className="flex flex-col items-center mb-4 sm:mb-6"
+              transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+              className="mb-4 flex flex-col items-center sm:mb-6"
             >
               <div className="relative">
                 {/* Glow effect */}
-                <div className="absolute inset-0 blur-2xl bg-strategy-gold scale-150" />
-                <div className="relative flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-8 sm:py-4 rounded-full bg-strategy-gold">
-                  <User className="w-5 h-5 sm:w-6 sm:h-6 text-boldness flex-shrink-0" />
+                <div className="bg-strategy-gold absolute inset-0 scale-150 blur-2xl" />
+                <div className="bg-strategy-gold relative flex items-center gap-2 rounded-full px-4 py-2 sm:gap-3 sm:px-8 sm:py-4">
+                  <User className="text-boldness h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
                   <div className="text-left">
-                    <p className="text-[10px] sm:text-xs uppercase tracking-wider text-freedom font-semibold">
+                    <p className="text-freedom text-[10px] font-semibold tracking-wider uppercase sm:text-xs">
                       Spreker
                     </p>
-                    <p className="text-base sm:text-lg md:text-xl font-bold text-boldness drop-shadow-lg">
+                    <p className="text-boldness text-base font-bold drop-shadow-lg sm:text-lg md:text-xl">
                       {event.speaker}
                     </p>
                   </div>
@@ -173,22 +173,22 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, type: "spring" }}
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+            transition={{ delay: 0.6, type: 'spring' }}
+            className="mb-4 flex flex-wrap items-center justify-center gap-2 sm:mb-6 sm:gap-3"
           >
             {/* Date */}
-            <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/15 backdrop-blur-md border border-white/30 shadow-lg">
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-              <span className="text-xs sm:text-sm md:text-base text-white font-semibold whitespace-nowrap">
+            <div className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-2 shadow-lg backdrop-blur-md sm:gap-2 sm:px-5 sm:py-2.5">
+              <Calendar className="h-4 w-4 flex-shrink-0 text-white sm:h-5 sm:w-5" />
+              <span className="text-xs font-semibold whitespace-nowrap text-white sm:text-sm md:text-base">
                 {formattedDate}
               </span>
             </div>
 
             {/* Location */}
             {event.location && (
-              <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/15 backdrop-blur-md border border-white/30 shadow-lg">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
-                <span className="text-xs sm:text-sm md:text-base text-white font-semibold whitespace-nowrap">
+              <div className="flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-2 shadow-lg backdrop-blur-md sm:gap-2 sm:px-5 sm:py-2.5">
+                <MapPin className="h-4 w-4 flex-shrink-0 text-white sm:h-5 sm:w-5" />
+                <span className="text-xs font-semibold whitespace-nowrap text-white sm:text-sm md:text-base">
                   {event.location}
                 </span>
               </div>
@@ -199,8 +199,8 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white text-center mb-3 sm:mb-6 drop-shadow-2xl px-2"
+            transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
+            className="mb-3 px-2 text-center text-2xl leading-tight font-bold text-white drop-shadow-2xl sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl"
           >
             {event.title}
           </motion.h1>
@@ -211,7 +211,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="text-sm sm:text-base md:text-lg text-white/80 text-center leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto px-2"
+              className="mx-auto mb-6 max-w-2xl px-2 text-center text-sm leading-relaxed text-white/80 sm:mb-8 sm:text-base md:text-lg"
             >
               {event.description}
             </motion.p>
@@ -221,17 +221,17 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, type: "spring", stiffness: 300 }}
-            className="flex flex-col items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto px-2"
+            transition={{ delay: 0.8, type: 'spring', stiffness: 300 }}
+            className="mx-auto flex w-full max-w-2xl flex-col items-stretch justify-center gap-3 px-2 sm:items-center sm:gap-4"
           >
             {/* Primary Action - Add to Calendar (Full width on mobile) */}
             <div className="w-full sm:w-auto">
               <AddToCalendar
                 event={event}
                 baseUrl={
-                  typeof window !== "undefined"
+                  typeof window !== 'undefined'
                     ? window.location.origin
-                    : process.env.NEXT_PUBLIC_BASE_URL || ""
+                    : process.env.NEXT_PUBLIC_BASE_URL || ''
                 }
                 buttonType="strategy-gold"
                 buttonVariant="primary"
@@ -241,7 +241,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
             </div>
 
             {/* Secondary Actions Row - Side by side on mobile */}
-            <div className="flex flex-row items-center justify-center gap-3 w-full sm:w-auto">
+            <div className="flex w-full flex-row items-center justify-center gap-3 sm:w-auto">
               {/* YouTube Button */}
               {event.youtubeLink?.cached_url && (
                 <div className="flex-1 sm:flex-initial">
@@ -252,10 +252,10 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
                     size="large"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto whitespace-nowrap"
+                    className="w-full whitespace-nowrap sm:w-auto"
                   >
                     <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"
+                      className="h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
@@ -275,7 +275,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
                     event.description || `${event.title} - Jesus Central Church`
                   }
                   url={
-                    typeof window !== "undefined" ? window.location.href : ""
+                    typeof window !== 'undefined' ? window.location.href : ''
                   }
                   buttonType="strategy-red"
                   buttonVariant="primary"
@@ -290,18 +290,18 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
 
       {/* Shine effect */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
         animate={{
-          x: ["-100%", "200%"],
+          x: ['-100%', '200%'],
         }}
         transition={{
           duration: 3,
           repeat: Infinity,
           repeatDelay: 4,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
         style={{ zIndex: 25 }}
       />
     </motion.main>
-  );
+  )
 }

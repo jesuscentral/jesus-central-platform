@@ -1,89 +1,89 @@
-"use client";
+'use client'
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useRef } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import Image from "next/image";
-import { Heading } from "@/components/ui/atoms/Heading";
-import Button from "@/components/ui/atoms/Button";
-import AnimatedImage from "@/components/ui/molecules/AnimatedImage";
+import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
+import Image from 'next/image'
+import { Heading } from '@/components/ui/atoms/Heading'
+import Button from '@/components/ui/atoms/Button'
+import AnimatedImage from '@/components/ui/molecules/AnimatedImage'
 
 // Full Screen Section Component with stunning scroll animations
 const FullSection = ({
   children,
-  className = "",
+  className = '',
   bgImage,
   bgVideo,
-  overlay = "gradient",
+  overlay = 'gradient',
   nextSectionDark = true,
   id,
   nextSectionId,
 }: {
-  id?: string;
-  nextSectionId?: string;
-  children: React.ReactNode;
-  className?: string;
-  bgImage?: string;
-  bgVideo?: string;
-  overlay?: "gradient" | "dark" | "light" | "none";
-  nextSectionDark?: boolean;
+  id?: string
+  nextSectionId?: string
+  children: React.ReactNode
+  className?: string
+  bgImage?: string
+  bgVideo?: string
+  overlay?: 'gradient' | 'dark' | 'light' | 'none'
+  nextSectionDark?: boolean
 }) => {
-  const ref = useRef(null);
+  const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
-  });
+    offset: ['start end', 'end start'],
+  })
 
   // Enhanced parallax with more dramatic movement
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ['-20%', '20%'])
 
   // Content scroll away animations - fades and scales out dramatically
   const contentOpacity = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [0, 1, 1, 0]
-  );
+    [0, 1, 1, 0],
+  )
 
   const contentScale = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [0.8, 1, 1, 0.85]
-  );
+    [0.8, 1, 1, 0.85],
+  )
 
   const contentY = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [100, 0, 0, -80]
-  );
+    [100, 0, 0, -80],
+  )
 
   // Background zoom and blur effect when scrolling away
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.3]);
-  const bgBlur = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 0, 0, 8]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.3])
+  const bgBlur = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 0, 0, 8])
 
   const overlayClasses = {
-    gradient: "bg-gradient-to-b from-black/80 via-black/60 to-black/80",
-    dark: "bg-black/70",
-    light: "bg-black/40",
-    none: "",
-  };
+    gradient: 'bg-gradient-to-b from-black/80 via-black/60 to-black/80',
+    dark: 'bg-black/70',
+    light: 'bg-black/40',
+    none: '',
+  }
 
   const handleScrollToNext = () => {
     if (nextSectionId) {
-      const nextSection = document.getElementById(nextSectionId);
+      const nextSection = document.getElementById(nextSectionId)
       if (nextSection) {
         nextSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+          behavior: 'smooth',
+          block: 'start',
+        })
       }
     }
-  };
+  }
 
   return (
     <section
       ref={ref}
-      id={id || ""}
-      className={`relative h-screen min-h-[100dvh] flex items-center justify-center overflow-hidden ${className}`}
+      id={id || ''}
+      className={`relative flex h-screen min-h-[100dvh] items-center justify-center overflow-hidden ${className}`}
     >
       {/* Background with enhanced parallax and blur */}
       {(bgImage || bgVideo) && (
@@ -93,7 +93,7 @@ const FullSection = ({
             scale: bgScale,
             filter: `blur(${bgBlur}px)`,
           }}
-          className="absolute inset-0 w-full h-full will-change-transform"
+          className="absolute inset-0 h-full w-full will-change-transform"
         >
           {bgVideo ? (
             <video
@@ -101,7 +101,7 @@ const FullSection = ({
               loop
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
             >
               <source src={bgVideo} type="video/mp4" />
             </video>
@@ -110,7 +110,7 @@ const FullSection = ({
               src={bgImage}
               alt="Background Image"
               fill
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
               priority
             />
           ) : null}
@@ -118,10 +118,10 @@ const FullSection = ({
 
           {/* Smooth blend to next section */}
           <div
-            className={`absolute bottom-0 left-0 right-0 h-32 ${
+            className={`absolute right-0 bottom-0 left-0 h-32 ${
               nextSectionDark
-                ? "bg-gradient-to-b from-transparent to-black/50"
-                : "bg-gradient-to-b from-transparent to-white/20"
+                ? 'bg-gradient-to-b from-transparent to-black/50'
+                : 'bg-gradient-to-b from-transparent to-white/20'
             }`}
           />
         </motion.div>
@@ -134,7 +134,7 @@ const FullSection = ({
           scale: contentScale,
           y: contentY,
         }}
-        className="relative z-10 w-full px-4 sm:px-6 will-change-transform will-change-opacity"
+        className="will-change-opacity relative z-10 w-full px-4 will-change-transform sm:px-6"
       >
         {children}
       </motion.div>
@@ -143,7 +143,7 @@ const FullSection = ({
       {nextSectionId && (
         <motion.button
           onClick={handleScrollToNext}
-          className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 cursor-pointer group"
+          className="group absolute bottom-8 left-1/2 z-20 -translate-x-1/2 cursor-pointer md:bottom-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -157,7 +157,7 @@ const FullSection = ({
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
             className="relative"
           >
@@ -170,13 +170,13 @@ const FullSection = ({
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: 'easeInOut',
               }}
-              className="absolute inset-0 rounded-full border-2 border-freedom/50"
+              className="border-freedom/50 absolute inset-0 rounded-full border-2"
             />
-            <div className="relative bg-freedom/10 backdrop-blur-sm rounded-full p-3 md:p-4 border border-freedom/30 group-hover:bg-freedom/20 transition-colors">
+            <div className="bg-freedom/10 border-freedom/30 group-hover:bg-freedom/20 relative rounded-full border p-3 backdrop-blur-sm transition-colors md:p-4">
               <ChevronDown
-                className="w-6 h-6 md:w-8 md:h-8 text-freedom"
+                className="text-freedom h-6 w-6 md:h-8 md:w-8"
                 strokeWidth={2.5}
               />
             </div>
@@ -184,19 +184,19 @@ const FullSection = ({
         </motion.button>
       )}
     </section>
-  );
-};
+  )
+}
 
 // Animated Text Reveal with smooth stagger and scroll away
 const TextReveal = ({
   children,
   delay = 0,
 }: {
-  children: React.ReactNode;
-  delay?: number;
+  children: React.ReactNode
+  delay?: number
 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-15%" });
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: false, margin: '-15%' })
 
   return (
     <motion.div
@@ -211,51 +211,51 @@ const TextReveal = ({
     >
       {children}
     </motion.div>
-  );
-};
+  )
+}
 
 // Stunning Floating Image Component with 3D effects
 
 export default function NieuwBeginPage() {
   const handleScrollToJourney = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const journeySection = document.getElementById("journey");
+    e.preventDefault()
+    const journeySection = document.getElementById('journey')
     if (journeySection) {
       journeySection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+        behavior: 'smooth',
+        block: 'start',
+      })
     }
-  };
+  }
 
   return (
-    <div className="bg-black text-freedom overflow-x-hidden antialiased scroll-smooth">
+    <div className="text-freedom overflow-x-hidden scroll-smooth bg-black antialiased">
       {/* Hero Section */}
       <FullSection
         bgVideo="https://jesuscentral.nl/videoclip-short.mp4"
         overlay="gradient"
         nextSectionId="journey"
       >
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="mx-auto max-w-6xl text-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-8 md:mb-12 flex justify-center"
+            className="mb-8 flex justify-center md:mb-12"
           >
             <div className="relative">
               <motion.div
                 animate={{
                   boxShadow: [
-                    "0 0 20px rgba(116, 110, 6, 0.7)",
-                    "0 0 40px rgba(116, 110, 6, 0.5)",
-                    "0 0 20px rgba(116, 110, 6, 0.3)",
+                    '0 0 20px rgba(116, 110, 6, 0.7)',
+                    '0 0 40px rgba(116, 110, 6, 0.5)',
+                    '0 0 20px rgba(116, 110, 6, 0.3)',
                   ],
                 }}
                 transition={{
                   duration: 2,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                 }}
                 className="rounded-3xl"
               >
@@ -264,7 +264,7 @@ export default function NieuwBeginPage() {
                   alt="Jesus Central Church"
                   width={100}
                   height={100}
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-3xl"
+                  className="h-16 w-16 rounded-3xl md:h-20 md:w-20"
                   priority
                 />
               </motion.div>
@@ -274,7 +274,7 @@ export default function NieuwBeginPage() {
           <TextReveal delay={0.4}>
             <Heading
               variant="h1"
-              className="text-freedom mb-4 md:mb-6 text-5xl md:text-7xl lg:text-8xl"
+              className="text-freedom mb-4 text-5xl md:mb-6 md:text-7xl lg:text-8xl"
             >
               Een Nieuw
               <br />
@@ -283,7 +283,7 @@ export default function NieuwBeginPage() {
           </TextReveal>
 
           <TextReveal delay={0.6}>
-            <p className="text-lg md:text-2xl lg:text-3xl text-freedom/90 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-freedom/90 mx-auto mb-8 max-w-3xl text-lg leading-relaxed md:mb-12 md:text-2xl lg:text-3xl">
               Welkom in jouw nieuwe leven met Jezus
             </p>
           </TextReveal>
@@ -296,7 +296,7 @@ export default function NieuwBeginPage() {
                 size="large"
               >
                 Begin je reis
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="h-5 w-5" />
               </Button>
             </motion.div>
           </TextReveal>
@@ -310,11 +310,11 @@ export default function NieuwBeginPage() {
         overlay="dark"
         nextSectionId="baptism"
       >
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <TextReveal>
             <Heading
               variant="h1"
-              className="text-freedom mb-6 md:mb-8 text-4xl md:text-6xl lg:text-7xl"
+              className="text-freedom mb-6 text-4xl md:mb-8 md:text-6xl lg:text-7xl"
             >
               Jouw Reis
               <br />
@@ -323,7 +323,7 @@ export default function NieuwBeginPage() {
           </TextReveal>
 
           <TextReveal delay={0.2}>
-            <p className="text-base md:text-xl lg:text-2xl text-freedom/90 leading-relaxed font-body max-w-2xl mx-auto">
+            <p className="text-freedom/90 font-body mx-auto max-w-2xl text-base leading-relaxed md:text-xl lg:text-2xl">
               Het besluit om Jezus te volgen is het belangrijkste besluit van je
               leven. We zijn hier om je te helpen bij de volgende stappen in
               jouw geloofsreis.
@@ -339,15 +339,15 @@ export default function NieuwBeginPage() {
         overlay="gradient"
         nextSectionId="holy-spirit"
       >
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
             <TextReveal>
               <div className="space-y-4 md:space-y-6">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: "4rem" }}
+                  whileInView={{ width: '4rem' }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="h-1 bg-gradient-to-r from-brand-green to-transparent"
+                  className="from-brand-green h-1 bg-gradient-to-r to-transparent"
                 />
                 <Heading
                   variant="h2"
@@ -357,7 +357,7 @@ export default function NieuwBeginPage() {
                   <br />
                   Doop
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
+                <p className="text-freedom/90 font-body text-base leading-relaxed md:text-lg lg:text-xl">
                   De doop is een krachtig symbool van jouw nieuwe leven in
                   Christus. Het oude leven wordt begraven en je komt op uit het
                   water als een nieuw schepsel in Hem.
@@ -366,11 +366,11 @@ export default function NieuwBeginPage() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-freedom/80 font-body italic text-sm md:text-base lg:text-lg border-l-2 border-brand-green pl-4 py-2"
+                  className="text-freedom/80 font-body border-brand-green border-l-2 py-2 pl-4 text-sm italic md:text-base lg:text-lg"
                 >
                   &quot;Wie gelooft en gedoopt wordt, zal behouden worden.&quot;
                   <br />
-                  <span className="text-xs md:text-sm not-italic opacity-70">
+                  <span className="text-xs not-italic opacity-70 md:text-sm">
                     — Marcus 16:16
                   </span>
                 </motion.blockquote>
@@ -381,7 +381,7 @@ export default function NieuwBeginPage() {
                 >
                   <Button variant="outline" size="large">
                     Aanmelden voor Doop
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                    <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </motion.div>
               </div>
@@ -404,8 +404,8 @@ export default function NieuwBeginPage() {
         overlay="gradient"
         nextSectionId="alpha"
       >
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
             <div className="order-2 md:order-1">
               <AnimatedImage
                 src="/images/nieuw-begin/doop-in-geest.jpg"
@@ -416,12 +416,12 @@ export default function NieuwBeginPage() {
             </div>
 
             <TextReveal delay={0.2}>
-              <div className="order-1 md:order-2 space-y-4 md:space-y-6">
+              <div className="order-1 space-y-4 md:order-2 md:space-y-6">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: "4rem" }}
+                  whileInView={{ width: '4rem' }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="h-1 bg-gradient-to-r from-brand-green to-transparent"
+                  className="from-brand-green h-1 bg-gradient-to-r to-transparent"
                 />
                 <Heading
                   variant="h2"
@@ -431,7 +431,7 @@ export default function NieuwBeginPage() {
                   <br />
                   Heilige Geest
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
+                <p className="text-freedom/90 font-body text-base leading-relaxed md:text-lg lg:text-xl">
                   De doop in de Heilige Geest is Gods kracht die in je komt
                   wonen. Het geeft je de kracht om te leven zoals Jezus wil en
                   om Zijn liefde met anderen te delen.
@@ -440,12 +440,12 @@ export default function NieuwBeginPage() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="text-freedom/80 font-body italic text-sm md:text-base lg:text-lg border-l-2 border-brand-green pl-4 py-2"
+                  className="text-freedom/80 font-body border-brand-green border-l-2 py-2 pl-4 text-sm italic md:text-base lg:text-lg"
                 >
                   &quot;Jullie zullen kracht ontvangen wanneer de Heilige Geest
                   over jullie komt.&quot;
                   <br />
-                  <span className="text-xs md:text-sm not-italic opacity-70">
+                  <span className="text-xs not-italic opacity-70 md:text-sm">
                     — Handelingen 1:8
                   </span>
                 </motion.blockquote>
@@ -456,7 +456,7 @@ export default function NieuwBeginPage() {
                 >
                   <Button variant="outline" size="large">
                     Meer over de Heilige Geest
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                    <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </motion.div>
               </div>
@@ -472,12 +472,12 @@ export default function NieuwBeginPage() {
         overlay="gradient"
         nextSectionId="training"
       >
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <motion.div
             className="mb-8 md:mb-12"
             initial={{ opacity: 0, y: 60, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: false, margin: "-20%" }}
+            viewport={{ once: false, margin: '-20%' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             <AnimatedImage
@@ -491,9 +491,9 @@ export default function NieuwBeginPage() {
           <TextReveal delay={0.2}>
             <motion.div
               initial={{ width: 0 }}
-              whileInView={{ width: "4rem" }}
+              whileInView={{ width: '4rem' }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="h-1 bg-gradient-to-r from-brand-green to-transparent mx-auto mb-6"
+              className="from-brand-green mx-auto mb-6 h-1 bg-gradient-to-r to-transparent"
             />
             <Heading
               variant="h2"
@@ -501,14 +501,14 @@ export default function NieuwBeginPage() {
             >
               Alpha
             </Heading>
-            <p className="text-base md:text-xl lg:text-2xl text-freedom/90 mb-8 font-body leading-relaxed max-w-2xl mx-auto">
+            <p className="text-freedom/90 font-body mx-auto mb-8 max-w-2xl text-base leading-relaxed md:text-xl lg:text-2xl">
               Ontdek de basisprincipes van het christelijk geloof in een
               ontspannen sfeer met eten, discussie en vriendschap.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button variant="primary" size="large" className="shadow-2xl">
                 Schrijf je in voor Alpha
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </motion.div>
           </TextReveal>
@@ -522,15 +522,15 @@ export default function NieuwBeginPage() {
         overlay="gradient"
         nextSectionId="lifegroups"
       >
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
             <TextReveal>
               <div className="space-y-4 md:space-y-6">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: "4rem" }}
+                  whileInView={{ width: '4rem' }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="h-1 bg-gradient-to-r from-brand-green to-transparent"
+                  className="from-brand-green h-1 bg-gradient-to-r to-transparent"
                 />
                 <Heading
                   variant="h2"
@@ -540,11 +540,11 @@ export default function NieuwBeginPage() {
                   <br />
                   Training School
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
+                <p className="text-freedom/90 font-body text-base leading-relaxed md:text-lg lg:text-xl">
                   Verdiep je geloof en ontwikkel je gaven in onze training
                   school. Leer hoe je Gods stem kunt horen en Hem kunt dienen.
                 </p>
-                <p className="text-sm md:text-base text-freedom/70 font-body">
+                <p className="text-freedom/70 font-body text-sm md:text-base">
                   Een intensieve tijd van groei, training en toerusting voor je
                   dienst aan God.
                 </p>
@@ -555,7 +555,7 @@ export default function NieuwBeginPage() {
                 >
                   <Button variant="outline" size="large">
                     Ontdek de Training School
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                    <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </motion.div>
               </div>
@@ -578,8 +578,8 @@ export default function NieuwBeginPage() {
         overlay="gradient"
         nextSectionId="welcome"
       >
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
             <div className="order-2 md:order-1">
               <AnimatedImage
                 src="/og-image.png"
@@ -590,12 +590,12 @@ export default function NieuwBeginPage() {
             </div>
 
             <TextReveal delay={0.2}>
-              <div className="order-1 md:order-2 space-y-4 md:space-y-6">
+              <div className="order-1 space-y-4 md:order-2 md:space-y-6">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: "4rem" }}
+                  whileInView={{ width: '4rem' }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="h-1 bg-gradient-to-r from-brand-green to-transparent"
+                  className="from-brand-green h-1 bg-gradient-to-r to-transparent"
                 />
                 <Heading
                   variant="h2"
@@ -605,11 +605,11 @@ export default function NieuwBeginPage() {
                   <br />
                   Groups
                 </Heading>
-                <p className="text-base md:text-lg lg:text-xl text-freedom/90 font-body leading-relaxed">
+                <p className="text-freedom/90 font-body text-base leading-relaxed md:text-lg lg:text-xl">
                   Word onderdeel van een kleinere gemeenschap waar je diepere
                   vriendschappen bouwt en samen groeit in geloof.
                 </p>
-                <p className="text-sm md:text-base text-freedom/70 font-body">
+                <p className="text-freedom/70 font-body text-sm md:text-base">
                   Echte verbinding, authentieke gesprekken, en samen op weg naar
                   Jezus.
                 </p>
@@ -620,7 +620,7 @@ export default function NieuwBeginPage() {
                 >
                   <Button variant="outline" size="large">
                     Vind een Lifegroup
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                    <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
                   </Button>
                 </motion.div>
               </div>
@@ -631,17 +631,17 @@ export default function NieuwBeginPage() {
 
       {/* Final CTA */}
       <FullSection id="welcome" bgImage="/og-image.png" overlay="dark">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="mx-auto max-w-5xl text-center">
           <TextReveal>
             <motion.div
               initial={{ width: 0 }}
-              whileInView={{ width: "6rem" }}
+              whileInView={{ width: '6rem' }}
               transition={{ duration: 0.8 }}
-              className="h-1 bg-gradient-to-r from-brand-green via-brand-green to-transparent mx-auto mb-8"
+              className="from-brand-green via-brand-green mx-auto mb-8 h-1 bg-gradient-to-r to-transparent"
             />
             <Heading
               variant="h1"
-              className="text-freedom mb-6 md:mb-8 text-5xl md:text-7xl lg:text-8xl"
+              className="text-freedom mb-6 text-5xl md:mb-8 md:text-7xl lg:text-8xl"
             >
               Je Bent
               <br />
@@ -650,14 +650,14 @@ export default function NieuwBeginPage() {
           </TextReveal>
 
           <TextReveal delay={0.2}>
-            <p className="text-base md:text-2xl lg:text-3xl text-freedom/90 mb-10 md:mb-12 font-body leading-relaxed max-w-3xl mx-auto">
+            <p className="text-freedom/90 font-body mx-auto mb-10 max-w-3xl text-base leading-relaxed md:mb-12 md:text-2xl lg:text-3xl">
               We staan klaar om je te ondersteunen bij elke stap van je nieuwe
               reis. Je hoeft dit niet alleen te doen — we zijn hier voor jou.
             </p>
           </TextReveal>
 
           <TextReveal delay={0.4}>
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center">
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row md:gap-6">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -665,10 +665,10 @@ export default function NieuwBeginPage() {
                 <Button
                   variant="primary"
                   size="large"
-                  className="shadow-2xl w-full sm:w-auto"
+                  className="w-full shadow-2xl sm:w-auto"
                 >
                   Neem Contact Op
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                  <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
               </motion.div>
               <motion.div
@@ -681,7 +681,7 @@ export default function NieuwBeginPage() {
                   className="w-full sm:w-auto"
                 >
                   WhatsApp Ons
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                  <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
               </motion.div>
             </div>
@@ -689,7 +689,7 @@ export default function NieuwBeginPage() {
 
           <TextReveal delay={0.6}>
             <motion.div
-              className="mt-12 md:mt-16 pt-12 md:pt-16 border-t border-freedom/20"
+              className="border-freedom/20 mt-12 border-t pt-12 md:mt-16 md:pt-16"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
@@ -697,15 +697,15 @@ export default function NieuwBeginPage() {
               <motion.div
                 animate={{
                   boxShadow: [
-                    "0 0 20px rgba(116, 110, 6, 0.3)",
-                    "0 0 30px rgba(116, 110, 6, 0.5)",
-                    "0 0 20px rgba(116, 110, 6, 0.3)",
+                    '0 0 20px rgba(116, 110, 6, 0.3)',
+                    '0 0 30px rgba(116, 110, 6, 0.5)',
+                    '0 0 20px rgba(116, 110, 6, 0.3)',
                   ],
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                 }}
                 className="inline-block rounded-3xl"
               >
@@ -714,7 +714,7 @@ export default function NieuwBeginPage() {
                   alt="Jesus Central Church"
                   width={100}
                   height={100}
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-3xl"
+                  className="h-16 w-16 rounded-3xl md:h-20 md:w-20"
                 />
               </motion.div>
             </motion.div>
@@ -722,5 +722,5 @@ export default function NieuwBeginPage() {
         </div>
       </FullSection>
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import { SbSermonHighlight } from "@storyblok/types/287435740670216/storyblok-components";
-import { storyblokEditable, SbBlokData } from "@storyblok/react/rsc";
-import SermonHighlightUI from "@/components/ui/organisms/SermonHighlight";
+import { SbSermonHighlight } from '@storyblok/types/287435740670216/storyblok-components'
+import { storyblokEditable, SbBlokData } from '@storyblok/react/rsc'
+import SermonHighlightUI from '@/components/ui/organisms/SermonHighlight'
 
 export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
   return (
@@ -8,13 +8,13 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
       <SermonHighlightUI
         primaryColor={blok.primaryColor?.toString()}
         secondaryColor={blok.secondaryColor?.toString()}
-        youtubeUrl={blok.youtubeUrl?.url || ""}
+        youtubeUrl={blok.youtubeUrl?.url || ''}
         thumbnail={{
-          src: blok.thumbnail?.filename || "",
-          alt: blok.thumbnail?.alt || "",
+          src: blok.thumbnail?.filename || '',
+          alt: blok.thumbnail?.alt || '',
         }}
-        title={blok.title || ""}
-        speaker={blok.speaker || ""}
+        title={blok.title || ''}
+        speaker={blok.speaker || ''}
         date={blok.date || new Date()}
         duration={blok.duration}
         series={blok.series}
@@ -22,5 +22,5 @@ export default function SermonHighlight({ blok }: { blok: SbSermonHighlight }) {
         translationAvailable={blok.translationAvailable}
       />
     </div>
-  );
+  )
 }

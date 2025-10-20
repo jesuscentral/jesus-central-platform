@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { storyblokEditable, SbBlokData } from "@storyblok/react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
-import { SbImageHero } from "@storyblok/types/287435740670216/storyblok-components";
+import { storyblokEditable, SbBlokData } from '@storyblok/react'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { StoryblokServerComponent } from '@storyblok/react/rsc'
+import { SbImageHero } from '@storyblok/types/287435740670216/storyblok-components'
 
 // Define the ImageHero type based on VideoHero structure
 interface ImageHeroProps {
-  blok: SbImageHero & SbBlokData;
+  blok: SbImageHero & SbBlokData
 }
 
 export default function ImageHero({ blok }: ImageHeroProps) {
@@ -18,7 +18,7 @@ export default function ImageHero({ blok }: ImageHeroProps) {
       opacity: 1,
       y: 0,
     },
-  };
+  }
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
@@ -27,7 +27,7 @@ export default function ImageHero({ blok }: ImageHeroProps) {
       <div className="absolute inset-0">
         <Image
           src={blok.image.filename!}
-          alt={blok.image.alt || "Afbeelding Jesus Central"}
+          alt={blok.image.alt || 'Afbeelding Jesus Central'}
           fill
           className="object-cover"
           priority
@@ -37,14 +37,14 @@ export default function ImageHero({ blok }: ImageHeroProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-end">
+      <div className="relative z-10 flex h-full items-end">
         <div className="p-6 md:p-12">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="font-heading tracking-tight text-5xl md:text-7xl text-jcc-freedom"
-            style={{ letterSpacing: "0.02em" }}
+            className="font-heading text-jcc-freedom text-5xl tracking-tight md:text-7xl"
+            style={{ letterSpacing: '0.02em' }}
           >
             {blok.title}
           </motion.h1>
@@ -56,7 +56,7 @@ export default function ImageHero({ blok }: ImageHeroProps) {
               y: 0,
               transition: { delay: 0.15, duration: 0.6 },
             }}
-            className="mt-4 max-w-2xl text-jcc-freedom/90 text-lg md:text-xl font-body"
+            className="text-jcc-freedom/90 font-body mt-4 max-w-2xl text-lg md:text-xl"
           >
             {blok.subtitle}
           </motion.p>
@@ -86,5 +86,5 @@ export default function ImageHero({ blok }: ImageHeroProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

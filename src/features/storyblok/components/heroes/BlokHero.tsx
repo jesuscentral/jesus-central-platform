@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { storyblokEditable, SbBlokData } from "@storyblok/react";
-import { motion } from "framer-motion";
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
-import { SbBlokHero } from "@storyblok/types/287435740670216/storyblok-components";
-import Image from "next/image";
+import { storyblokEditable, SbBlokData } from '@storyblok/react'
+import { motion } from 'framer-motion'
+import { StoryblokServerComponent } from '@storyblok/react/rsc'
+import { SbBlokHero } from '@storyblok/types/287435740670216/storyblok-components'
+import Image from 'next/image'
 
 // Define the BlokHero type
 
@@ -15,7 +15,7 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
       opacity: 1,
       y: 0,
     },
-  };
+  }
 
   const fadeInRight = {
     hidden: { opacity: 0, x: 20 },
@@ -23,17 +23,17 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
       opacity: 1,
       x: 0,
     },
-  };
+  }
 
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className="relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-jcc-slate-900 to-jcc-slate-800"
+      className="from-jcc-slate-900 to-jcc-slate-800 relative w-full overflow-hidden rounded-2xl bg-gradient-to-br"
     >
       <div className="absolute inset-0">
         <Image
           src={blok.image.filename!}
-          alt={blok.image.alt || "Afbeelding Jesus Central"}
+          alt={blok.image.alt || 'Afbeelding Jesus Central'}
           fill
           className="object-cover"
           priority
@@ -41,15 +41,15 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
       </div>
-      <div className="relative z-10 grid min-h-[60vh] gap-6 px-4 pb-8 pt-20 sm:px-6 sm:pt-24 md:min-h-[70vh] md:grid-cols-2 md:gap-12 md:px-12 md:pb-12 md:pt-16 lg:gap-16">
+      <div className="relative z-10 grid min-h-[60vh] gap-6 px-4 pt-20 pb-8 sm:px-6 sm:pt-24 md:min-h-[70vh] md:grid-cols-2 md:gap-12 md:px-12 md:pt-16 md:pb-12 lg:gap-16">
         {/* Left Column - Text Content */}
         <div className="flex flex-col justify-center space-y-4 md:space-y-6">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="font-heading text-4xl tracking-tight text-jcc-freedom sm:text-5xl md:text-6xl lg:text-7xl"
-            style={{ letterSpacing: "0.02em" }}
+            className="font-heading text-jcc-freedom text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+            style={{ letterSpacing: '0.02em' }}
           >
             {blok.title}
           </motion.h1>
@@ -63,7 +63,7 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
                 y: 0,
                 transition: { delay: 0.15, duration: 0.6 },
               }}
-              className="max-w-2xl font-body text-base text-jcc-freedom/90 sm:text-lg md:text-xl"
+              className="font-body text-jcc-freedom/90 max-w-2xl text-base sm:text-lg md:text-xl"
             >
               {blok.subtitle}
             </motion.p>
@@ -111,5 +111,5 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
         )}
       </div>
     </div>
-  );
+  )
 }

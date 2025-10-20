@@ -1,112 +1,112 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { createEvent } from "../../actions";
+import { useState } from 'react'
+import { createEvent } from '../../actions'
 import type {
   CreateEventFormData,
   EventSelectedAssets,
-} from "../../types/events";
-import { AssetSelector } from "@/features/storyblok-management/components/asset-selector";
-import Button from "@/components/ui/atoms/Button";
-import { formatDateForInput } from "../../utils/formatters";
+} from '../../types/events'
+import { AssetSelector } from '@/features/storyblok-management/components/asset-selector'
+import Button from '@/components/ui/atoms/Button'
+import { formatDateForInput } from '../../utils/formatters'
 
 /**
  * Form for creating new events in Storyblok
  */
 export function CreateEventForm() {
   const [formData, setFormData] = useState<CreateEventFormData>({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     date: formatDateForInput(new Date()),
-    speaker: "",
-    location: "Rijsselseweg 1, 2803PZ Gouda",
-    type: "event",
-    language: "Nederlands",
+    speaker: '',
+    location: 'Rijsselseweg 1, 2803PZ Gouda',
+    type: 'event',
+    language: 'Nederlands',
     translationAvailable: false,
-    youtubeLink: "",
-  });
+    youtubeLink: '',
+  })
 
-  const [selectedAssets, setSelectedAssets] = useState<EventSelectedAssets>({});
+  const [selectedAssets, setSelectedAssets] = useState<EventSelectedAssets>({})
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitResult, setSubmitResult] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
+    success: boolean
+    message: string
+  } | null>(null)
 
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
-    const { name, value, type } = e.target;
+    const { name, value, type } = e.target
 
-    if (type === "checkbox") {
-      const checked = (e.target as HTMLInputElement).checked;
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked
       setFormData((prev) => ({
         ...prev,
         [name]: checked,
-      }));
+      }))
     } else {
       setFormData((prev) => ({
         ...prev,
         [name]: value,
-      }));
+      }))
     }
-  };
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitResult(null);
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitResult(null)
 
     try {
-      const result = await createEvent(formData, selectedAssets);
+      const result = await createEvent(formData, selectedAssets)
 
       if (result.success) {
         setSubmitResult({
           success: true,
           message: `Event created successfully! Story ID: ${result.storyId}`,
-        });
+        })
         // Reset form
         setFormData({
-          title: "",
-          description: "",
-          date: "",
-          speaker: "",
-          location: "",
-          type: "",
-          language: "",
+          title: '',
+          description: '',
+          date: '',
+          speaker: '',
+          location: '',
+          type: '',
+          language: '',
           translationAvailable: false,
-          youtubeLink: "",
-        });
-        setSelectedAssets({});
+          youtubeLink: '',
+        })
+        setSelectedAssets({})
         // Reset file inputs
-        const form = e.target as HTMLFormElement;
-        form.reset();
+        const form = e.target as HTMLFormElement
+        form.reset()
       } else {
         setSubmitResult({
           success: false,
           message: `Failed to create event: ${result.error}`,
-        });
+        })
       }
     } catch (error) {
       setSubmitResult({
         success: false,
-        message: `Error: ${error instanceof Error ? error.message : "Unknown error"}`,
-      });
+        message: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto p-6">
+    <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6 p-6">
       {/* Title */}
       <div>
         <label
           htmlFor="title"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Titel <span className="text-red-500">*</span>
         </label>
@@ -117,7 +117,7 @@ export function CreateEventForm() {
           required
           value={formData.title}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         />
       </div>
 
@@ -125,7 +125,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Omschrijving <span className="text-red-500">*</span>
         </label>
@@ -136,7 +136,7 @@ export function CreateEventForm() {
           value={formData.description}
           onChange={handleInputChange}
           rows={4}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         />
       </div>
 
@@ -144,7 +144,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="date"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Datum <span className="text-red-500">*</span>
         </label>
@@ -155,7 +155,7 @@ export function CreateEventForm() {
           required
           value={formData.date}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         />
       </div>
 
@@ -163,7 +163,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="speaker"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Spreker
         </label>
@@ -173,7 +173,7 @@ export function CreateEventForm() {
           name="speaker"
           value={formData.speaker}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         />
       </div>
 
@@ -181,7 +181,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="location"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Locatie
         </label>
@@ -191,7 +191,7 @@ export function CreateEventForm() {
           name="location"
           value={formData.location}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         />
       </div>
 
@@ -199,7 +199,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="type"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Soort
         </label>
@@ -208,7 +208,7 @@ export function CreateEventForm() {
           name="type"
           value={formData.type}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         >
           <option value="">Select type</option>
           <option value="service">Service</option>
@@ -220,7 +220,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="language"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           Taal
         </label>
@@ -229,7 +229,7 @@ export function CreateEventForm() {
           name="language"
           value={formData.language}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         >
           <option value="">Select language</option>
           <option value="Nederlands">Nederlands</option>
@@ -245,7 +245,7 @@ export function CreateEventForm() {
           name="translationAvailable"
           checked={formData.translationAvailable}
           onChange={handleInputChange}
-          className="h-4 w-4 text-brand-orange focus:ring-brand-orange border-gray-300 rounded"
+          className="text-brand-orange focus:ring-brand-orange h-4 w-4 rounded border-gray-300"
         />
         <label
           htmlFor="translationAvailable"
@@ -259,7 +259,7 @@ export function CreateEventForm() {
       <div>
         <label
           htmlFor="youtubeLink"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="mb-2 block text-sm font-medium text-gray-700"
         >
           YouTube Link
         </label>
@@ -270,7 +270,7 @@ export function CreateEventForm() {
           value={formData.youtubeLink}
           onChange={handleInputChange}
           placeholder="https://youtube.com/watch?v=..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-orange focus:border-transparent"
+          className="focus:ring-brand-orange w-full rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
         />
       </div>
 
@@ -287,10 +287,10 @@ export function CreateEventForm() {
       {/* Submit Result */}
       {submitResult && (
         <div
-          className={`p-4 rounded-md ${
+          className={`rounded-md p-4 ${
             submitResult.success
-              ? "bg-green-50 text-green-800"
-              : "bg-red-50 text-red-800"
+              ? 'bg-green-50 text-green-800'
+              : 'bg-red-50 text-red-800'
           }`}
         >
           {submitResult.message}
@@ -306,9 +306,9 @@ export function CreateEventForm() {
           disabled={isSubmitting}
           className="flex-1"
         >
-          {isSubmitting ? "Activiteit aanmaken..." : "Activiteit aanmaken"}
+          {isSubmitting ? 'Activiteit aanmaken...' : 'Activiteit aanmaken'}
         </Button>
       </div>
     </form>
-  );
+  )
 }

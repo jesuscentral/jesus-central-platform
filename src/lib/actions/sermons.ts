@@ -1,11 +1,11 @@
-"use server";
+'use server'
 
-import { fetchChannelRssFeed } from "@/features/youtube";
+import { fetchChannelRssFeed } from '@/features/youtube'
 
 export const getSermons = async () => {
   const videos = await fetchChannelRssFeed(
-    process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID ?? ""
-  );
+    process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID ?? '',
+  )
 
-  return videos;
-};
+  return videos
+}

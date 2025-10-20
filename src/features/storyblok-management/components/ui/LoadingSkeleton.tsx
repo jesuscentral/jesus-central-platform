@@ -3,14 +3,14 @@
  */
 export function LoadingSkeleton({ count = 8 }: { count?: number }) {
   return (
-    <div className="space-y-3 animate-pulse">
-      <div className="h-10 bg-gray-200 rounded-lg" />
-      <div className="border border-gray-200 rounded-lg p-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+    <div className="animate-pulse space-y-3">
+      <div className="h-10 rounded-lg bg-gray-200" />
+      <div className="rounded-lg border border-gray-200 p-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {Array.from({ length: count }).map((_, i) => (
             <div
               key={i}
-              className="aspect-square bg-gray-200 rounded-md"
+              className="aspect-square rounded-md bg-gray-200"
               style={{
                 animationDelay: `${i * 50}ms`,
               }}
@@ -19,5 +19,5 @@ export function LoadingSkeleton({ count = 8 }: { count?: number }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

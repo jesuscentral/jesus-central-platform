@@ -1,20 +1,20 @@
-import { XMLParser } from "fast-xml-parser";
-import type { RssFeed } from "../types";
+import { XMLParser } from 'fast-xml-parser'
+import type { RssFeed } from '../types'
 
 /**
  * XML Parser configuration for YouTube RSS feeds
  */
 const XML_PARSER_CONFIG = {
   ignoreAttributes: false,
-  attributeNamePrefix: "",
+  attributeNamePrefix: '',
   // RSS uses coloned names (media:group, yt:videoId). fast-xml-parser keeps them as-is.
-};
+}
 
 /**
  * Create and configure an XML parser for YouTube RSS feeds
  */
 export function createXmlParser(): XMLParser {
-  return new XMLParser(XML_PARSER_CONFIG);
+  return new XMLParser(XML_PARSER_CONFIG)
 }
 
 /**
@@ -23,8 +23,8 @@ export function createXmlParser(): XMLParser {
  * @returns Parsed RSS feed structure
  */
 export function parseRssXml(xml: string): RssFeed {
-  const parser = createXmlParser();
-  return parser.parse(xml);
+  const parser = createXmlParser()
+  return parser.parse(xml)
 }
 
 /**
@@ -34,20 +34,20 @@ export function parseRssXml(xml: string): RssFeed {
  * @returns Array of feed entries
  */
 export function normalizeEntries(feed: RssFeed) {
-  const feedData = feed?.feed;
-  if (!feedData) return [];
+  const feedData = feed?.feed
+  if (!feedData) return []
 
-  const entry = feedData.entry;
+  const entry = feedData.entry
 
   if (Array.isArray(entry)) {
-    return entry;
+    return entry
   }
 
   if (entry) {
-    return [entry];
+    return [entry]
   }
 
-  return [];
+  return []
 }
 
 /**
@@ -56,5 +56,5 @@ export function normalizeEntries(feed: RssFeed) {
  * @returns Channel ID or undefined
  */
 export function extractChannelId(feed: RssFeed): string | undefined {
-  return feed?.feed?.["yt:channelId"];
+  return feed?.feed?.['yt:channelId']
 }

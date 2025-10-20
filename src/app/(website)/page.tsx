@@ -1,32 +1,32 @@
-import { getStory, getStoryblokSeoParameters } from "@/features/storyblok/api";
-import { Metadata } from "next";
-import { StoryblokStory } from "@storyblok/react/rsc";
-import { notFound } from "next/navigation";
+import { getStory, getStoryblokSeoParameters } from '@/features/storyblok/api'
+import { Metadata } from 'next'
+import { StoryblokStory } from '@storyblok/react/rsc'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const slug = ["home"];
+  const slug = ['home']
 
-  const story = await getStory(slug);
+  const story = await getStory(slug)
 
   if (!story) {
-    return {};
+    return {}
   }
 
-  return getStoryblokSeoParameters(story);
+  return getStoryblokSeoParameters(story)
 }
 
 export default async function Index() {
-  const slug = ["home"];
+  const slug = ['home']
 
-  const story = await getStory(slug);
+  const story = await getStory(slug)
 
   if (!story) {
-    return notFound();
+    return notFound()
   }
 
   return (
     <>
       <StoryblokStory story={story} />
     </>
-  );
+  )
 }

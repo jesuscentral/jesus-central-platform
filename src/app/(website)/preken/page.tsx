@@ -1,27 +1,27 @@
-import { getStory } from "@/features/storyblok/api";
+import { getStory } from '@/features/storyblok/api'
 import {
   SbBlokData,
   storyblokEditable,
   StoryblokServerComponent,
-} from "@storyblok/react/rsc";
-import { notFound } from "next/navigation";
-import SermonList from "@/components/sermons/SermonList";
-import { getSermons } from "@/lib/actions/sermons";
-import { connection } from "next/server";
-import Section from "@/components/ui/atoms/Section";
+} from '@storyblok/react/rsc'
+import { notFound } from 'next/navigation'
+import SermonList from '@/components/sermons/SermonList'
+import { getSermons } from '@/lib/actions/sermons'
+import { connection } from 'next/server'
+import Section from '@/components/ui/atoms/Section'
 
 export default async function PrekenPage() {
   const [sermons, story] = await Promise.all([
     getSermons(),
-    getStory(["preken"]),
+    getStory(['preken']),
     connection(),
-  ]);
+  ])
 
   if (!story) {
-    notFound();
+    notFound()
   }
 
-  const blok = story.content;
+  const blok = story.content
 
   return (
     <div {...storyblokEditable(blok as SbBlokData)}>
@@ -34,5 +34,5 @@ export default async function PrekenPage() {
         <SermonList sermons={sermons} />
       </Section>
     </div>
-  );
+  )
 }

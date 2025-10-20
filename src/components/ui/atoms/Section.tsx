@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { cn } from "@/utils/cn";
+import { cn } from '@/utils/cn'
 
 export default function Section({
   backgroundColor,
@@ -8,23 +8,23 @@ export default function Section({
   children,
   ...additionalProps
 }: {
-  backgroundColor: string;
-  color: string;
+  backgroundColor: string
+  color: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-  children: React.ReactNode;
+  [key: string]: any
+  children: React.ReactNode
 }) {
   return (
     <section
       className={cn(
-        "relative overflow-hidden",
+        'relative overflow-hidden',
         `bg-${backgroundColor}`,
         `text-${color}`,
-        "py-12"
+        'py-12',
       )}
       {...additionalProps}
     >
-      <div className="container px-4 mx-auto space-y-24">{children}</div>
+      <div className="container mx-auto space-y-24 px-4">{children}</div>
     </section>
-  );
+  )
 }

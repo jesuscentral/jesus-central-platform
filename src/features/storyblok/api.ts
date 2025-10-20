@@ -1,11 +1,11 @@
-import { apiPlugin } from "@storyblok/react/rsc";
-import { storyblokInit } from "@storyblok/react/rsc";
-import { componentMap } from "@/features/storyblok/components";
+import { apiPlugin } from '@storyblok/react/rsc'
+import { storyblokInit } from '@storyblok/react/rsc'
+import { componentMap } from '@/features/storyblok/components'
 import {
   storyblokConfig,
   storyblokApiConfig,
-} from "@/features/storyblok/config";
-import { getLanguageConfig } from "./utils";
+} from '@/features/storyblok/config'
+import { getLanguageConfig } from './utils'
 
 export const getStoryblokApi = storyblokInit({
   accessToken: storyblokConfig.accessToken,
@@ -15,20 +15,20 @@ export const getStoryblokApi = storyblokInit({
     region: storyblokConfig.region,
   },
   components: componentMap,
-});
+})
 
-export { storyblokApiConfig };
+export { storyblokApiConfig }
 
 export const getStory = async (slug: string[]) => {
-  const storyblok = getStoryblokApi();
+  const storyblok = getStoryblokApi()
 
-  const language = await getLanguageConfig();
+  const language = await getLanguageConfig()
 
-  const joinedSlug = slug.join("/");
+  const joinedSlug = slug.join('/')
   const finalSlug =
-    joinedSlug === "/" || joinedSlug === "" || joinedSlug === undefined
-      ? "home"
-      : joinedSlug;
+    joinedSlug === '/' || joinedSlug === '' || joinedSlug === undefined
+      ? 'home'
+      : joinedSlug
 
   try {
     const { data } = await storyblok.get(
@@ -36,19 +36,19 @@ export const getStory = async (slug: string[]) => {
       {
         ...storyblokApiConfig,
         language: language,
-      }
-    );
+      },
+    )
 
     if (!data?.story) {
-      return null;
+      return null
     }
 
-    return data?.story;
+    return data?.story
   } catch {
-    return null;
+    return null
   }
-};
+}
 
 // Re-export utilities
-export { linkResolver } from "@/features/storyblok/utils";
-export { getStoryblokSeoParameters } from "@/features/storyblok/utils";
+export { linkResolver } from '@/features/storyblok/utils'
+export { getStoryblokSeoParameters } from '@/features/storyblok/utils'

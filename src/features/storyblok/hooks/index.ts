@@ -1,1 +1,1 @@
-export { useStoryblokLink } from "./useStoryblokLink";
+export { useStoryblokLink } from './useStoryblokLink'

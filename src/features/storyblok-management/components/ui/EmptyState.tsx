@@ -1,6 +1,6 @@
 interface EmptyStateProps {
-  message: string;
-  description?: string;
+  message: string
+  description?: string
 }
 
 /**
@@ -8,9 +8,9 @@ interface EmptyStateProps {
  */
 export function EmptyState({ message, description }: EmptyStateProps) {
   return (
-    <div className="col-span-full text-center text-gray-500 py-12">
+    <div className="col-span-full py-12 text-center text-gray-500">
       <svg
-        className="w-12 h-12 mx-auto mb-3 text-gray-400"
+        className="mx-auto mb-3 h-12 w-12 text-gray-400"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -24,8 +24,8 @@ export function EmptyState({ message, description }: EmptyStateProps) {
       </svg>
       <p className="font-medium">{message}</p>
       {description && (
-        <p className="text-sm text-gray-400 mt-1">{description}</p>
+        <p className="mt-1 text-sm text-gray-400">{description}</p>
       )}
     </div>
-  );
+  )
 }

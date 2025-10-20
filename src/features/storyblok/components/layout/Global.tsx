@@ -1,9 +1,9 @@
-import { SbGlobal } from "@storyblok/types/287435740670216/storyblok-components";
+import { SbGlobal } from '@storyblok/types/287435740670216/storyblok-components'
 import {
   SbBlokData,
   storyblokEditable,
   StoryblokServerComponent,
-} from "@storyblok/react/rsc";
+} from '@storyblok/react/rsc'
 
 export default function Global({ blok }: { blok: SbGlobal }) {
   return (
@@ -12,5 +12,5 @@ export default function Global({ blok }: { blok: SbGlobal }) {
         <StoryblokServerComponent blok={item} key={index} />
       ))}
     </div>
-  );
+  )
 }

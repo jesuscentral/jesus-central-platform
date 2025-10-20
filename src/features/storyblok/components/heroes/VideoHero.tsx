@@ -1,46 +1,46 @@
-"use client";
+'use client'
 
-import { storyblokEditable, SbBlokData } from "@storyblok/react";
-import { SbVideoHero } from "@storyblok/types/287435740670216/storyblok-components";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { StoryblokServerComponent } from "@storyblok/react/rsc";
+import { storyblokEditable, SbBlokData } from '@storyblok/react'
+import { SbVideoHero } from '@storyblok/types/287435740670216/storyblok-components'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { StoryblokServerComponent } from '@storyblok/react/rsc'
 
 interface VideoHeroProps {
-  blok: SbVideoHero & SbBlokData;
+  blok: SbVideoHero & SbBlokData
 }
 
 export default function VideoHero({ blok }: VideoHeroProps) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [videoError, setVideoError] = useState(false)
 
   useEffect(() => {
     // Attempt to autoplay muted background video on supported browsers
-    const v = videoRef.current;
-    if (!v) return;
+    const v = videoRef.current
+    if (!v) return
 
     // Set up intersection observer for lazy loading
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            v.load();
+            v.load()
             v.play().catch(() => {
               /* ignore autoplay blocks */
-            });
+            })
           }
-        });
+        })
       },
-      { threshold: 0.25 }
-    );
+      { threshold: 0.25 },
+    )
 
-    observer.observe(v);
+    observer.observe(v)
 
     return () => {
-      observer.disconnect();
-    };
-  }, []);
+      observer.disconnect()
+    }
+  }, [])
 
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -48,7 +48,7 @@ export default function VideoHero({ blok }: VideoHeroProps) {
       opacity: 1,
       y: 0,
     },
-  };
+  }
 
   return (
     <div
@@ -57,29 +57,31 @@ export default function VideoHero({ blok }: VideoHeroProps) {
     >
       <div className="absolute inset-0">
         {/* Background video with optimizations */}
-        {blok.background_video && blok.background_video.filename && !videoError && (
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover"
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={blok.fallback_image.filename!}
-            onError={() => setVideoError(true)}
-          >
-            <source
-              src={blok.background_video?.filename ?? "/videoclip-short.mp4"}
-              type="video/mp4"
-            />
-          </video>
-        )}
+        {blok.background_video &&
+          blok.background_video.filename &&
+          !videoError && (
+            <video
+              ref={videoRef}
+              className="h-full w-full object-cover"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={blok.fallback_image.filename!}
+              onError={() => setVideoError(true)}
+            >
+              <source
+                src={blok.background_video?.filename ?? '/videoclip-short.mp4'}
+                type="video/mp4"
+              />
+            </video>
+          )}
 
         {/* Fallback image if video fails */}
         {videoError && (
           <Image
             src={blok.fallback_image.filename!}
-            alt={blok.fallback_image.alt || "Video fallback"}
+            alt={blok.fallback_image.alt || 'Video fallback'}
             fill
             className="object-cover"
             priority
@@ -90,14 +92,14 @@ export default function VideoHero({ blok }: VideoHeroProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-end">
+      <div className="relative z-10 flex h-full items-end">
         <div className="p-6 md:p-12">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="font-heading tracking-tight text-5xl md:text-7xl text-jcc-freedom"
-            style={{ letterSpacing: "0.02em" }}
+            className="font-heading text-jcc-freedom text-5xl tracking-tight md:text-7xl"
+            style={{ letterSpacing: '0.02em' }}
           >
             {blok.title}
           </motion.h1>
@@ -109,7 +111,7 @@ export default function VideoHero({ blok }: VideoHeroProps) {
               y: 0,
               transition: { delay: 0.15, duration: 0.6 },
             }}
-            className="mt-4 max-w-2xl text-jcc-freedom/90 text-lg md:text-xl font-body"
+            className="text-jcc-freedom/90 font-body mt-4 max-w-2xl text-lg md:text-xl"
           >
             {blok.subtitle}
           </motion.p>
@@ -139,5 +141,5 @@ export default function VideoHero({ blok }: VideoHeroProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

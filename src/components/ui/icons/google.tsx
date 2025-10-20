@@ -31,5 +31,5 @@ export default function GoogleIcon() {
         ></path>
       </g>
     </svg>
-  );
+  )
 }

@@ -1,16 +1,16 @@
-import { storyblokEditable } from "@storyblok/react/rsc";
-import React from "react";
-import { SbButton } from "@storyblok/types/287435740670216/storyblok-components";
-import { SbBlokData } from "@storyblok/js";
-import { linkResolver } from "@/features/storyblok/api";
+import { storyblokEditable } from '@storyblok/react/rsc'
+import React from 'react'
+import { SbButton } from '@storyblok/types/287435740670216/storyblok-components'
+import { SbBlokData } from '@storyblok/js'
+import { linkResolver } from '@/features/storyblok/api'
 import UIButton, {
   ButtonType,
   ButtonVariant,
   ButtonSize,
-} from "@/components/ui/atoms/Button";
+} from '@/components/ui/atoms/Button'
 
 interface ButtonProps {
-  blok: SbButton;
+  blok: SbButton
 }
 
 export default function Button({ blok }: ButtonProps) {
@@ -26,5 +26,5 @@ export default function Button({ blok }: ButtonProps) {
     >
       {blok.text}
     </UIButton>
-  );
+  )
 }

@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { UserButton } from "@clerk/nextjs";
-import { ArrowLeft, Calendar, Heart, Home, MessageCircle } from "lucide-react";
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { UserButton } from '@clerk/nextjs'
+import { ArrowLeft, Calendar, Heart, Home, MessageCircle } from 'lucide-react'
 
 const baseNavItems = [
   {
-    href: "/mijn-jesus-central",
-    label: "Dashboard",
+    href: '/mijn-jesus-central',
+    label: 'Dashboard',
     icon: Home,
   },
   {
-    href: "/mijn-jesus-central/geven",
-    label: "Geven",
+    href: '/mijn-jesus-central/geven',
+    label: 'Geven',
     icon: Heart,
   },
-];
+]
 
 export function AdminNav({
   showAgenda = false,
   showAnnouncements = false,
 }: {
-  showAgenda: boolean;
-  showAnnouncements: boolean;
+  showAgenda: boolean
+  showAnnouncements: boolean
 }) {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const navItems = [
     ...baseNavItems,
     ...(showAgenda
       ? [
           {
-            href: "/mijn-jesus-central/agenda",
-            label: "Agenda",
+            href: '/mijn-jesus-central/agenda',
+            label: 'Agenda',
             icon: Calendar,
           },
         ]
@@ -41,47 +41,47 @@ export function AdminNav({
     ...(showAnnouncements
       ? [
           {
-            href: "/mijn-jesus-central/aanvraag",
-            label: "Mededelingen",
+            href: '/mijn-jesus-central/aanvraag',
+            label: 'Mededelingen',
             icon: MessageCircle,
           },
         ]
       : []),
-  ];
+  ]
 
   return (
-    <nav className="bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="border-b border-gray-200 bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
           {/* Navigation Links */}
           <div className="flex items-center gap-8">
             <Link
               href="/"
-              className="flex items-center gap-2 text-gray-600 hover:text-brand-orange transition-colors"
+              className="hover:text-brand-orange flex items-center gap-2 text-gray-600 transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="h-4 w-4" />
               <span className="text-sm font-medium">Terug naar website</span>
             </Link>
 
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden items-center gap-1 md:flex">
               {navItems.map((item) => {
-                const isActive = pathname === item.href;
-                const Icon = item.icon;
+                const isActive = pathname === item.href
+                const Icon = item.icon
 
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-brand-orange/10 text-brand-orange"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? 'bg-brand-orange/10 text-brand-orange'
+                        : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="h-4 w-4" />
                     {item.label}
                   </Link>
-                );
+                )
               })}
             </div>
           </div>
@@ -91,7 +91,7 @@ export function AdminNav({
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "w-10 h-10",
+                  avatarBox: 'w-10 h-10',
                 },
               }}
             />
@@ -99,28 +99,28 @@ export function AdminNav({
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden pb-3 flex items-center gap-2 overflow-x-auto">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 md:hidden">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            const Icon = item.icon;
+            const isActive = pathname === item.href
+            const Icon = item.icon
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
+                className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
                   isActive
-                    ? "bg-brand-orange/10 text-brand-orange"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? 'bg-brand-orange/10 text-brand-orange'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="h-4 w-4" />
                 {item.label}
               </Link>
-            );
+            )
           })}
         </div>
       </div>
     </nav>
-  );
+  )
 }

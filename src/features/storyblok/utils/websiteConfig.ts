@@ -1,7 +1,7 @@
-"use server";
+'use server'
 
-import { getStoryblokApi, storyblokApiConfig } from "@/features/storyblok/api";
-import { getLanguageConfig } from "./language";
+import { getStoryblokApi, storyblokApiConfig } from '@/features/storyblok/api'
+import { getLanguageConfig } from './language'
 
 /**
  * Get website config based on the current slug path
@@ -9,10 +9,10 @@ import { getLanguageConfig } from "./language";
  * Automatically uses language from cookie for translations
  */
 export async function getWebsiteConfig() {
-  const storyblok = getStoryblokApi();
-  const language = await getLanguageConfig();
+  const storyblok = getStoryblokApi()
+  const language = await getLanguageConfig()
 
-  const websiteFolder = process.env.NEXT_PUBLIC_BASE_PATH;
+  const websiteFolder = process.env.NEXT_PUBLIC_BASE_PATH
 
   try {
     const { data } = await storyblok.get(
@@ -20,15 +20,12 @@ export async function getWebsiteConfig() {
       {
         ...storyblokApiConfig,
         language: language,
-      }
-    );
+      },
+    )
 
-    return data?.story || null;
+    return data?.story || null
   } catch (error) {
-    console.error(
-      `Failed to fetch website config for ${websiteFolder}:`,
-      error
-    );
-    return null;
+    console.error(`Failed to fetch website config for ${websiteFolder}:`, error)
+    return null
   }
 }

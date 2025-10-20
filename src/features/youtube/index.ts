@@ -15,10 +15,10 @@
  */
 
 // Export main API
-export { fetchChannelRssFeed } from "./api";
+export { fetchChannelRssFeed } from './api'
 
 // Export types
-export type { RssVideo } from "./types";
+export type { RssVideo } from './types'
 
 // Export constants for advanced usage
 export {
@@ -27,4 +27,4 @@ export {
   YOUTUBE_THUMBNAIL_URL,
   CACHE_REVALIDATE_TIME,
   THUMBNAIL_QUALITY,
-} from "./constants";
+} from './constants'

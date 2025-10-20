@@ -1,10 +1,10 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache'
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
   await Promise.all([
-    revalidatePath("/", "page"),
-    revalidatePath("/[...slug]", "page"),
-    revalidatePath("/activiteiten/[slug]", "page"),
-  ]);
-  return new Response("Revalidated", { status: 200 });
-};
+    revalidatePath('/', 'page'),
+    revalidatePath('/[...slug]', 'page'),
+    revalidatePath('/activiteiten/[slug]', 'page'),
+  ])
+  return new Response('Revalidated', { status: 200 })
+}

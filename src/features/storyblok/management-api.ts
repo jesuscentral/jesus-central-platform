@@ -6,5 +6,5 @@
  */
 
 // Re-export everything from the new storyblok-management feature
-export * from "@/features/storyblok-management/api";
-export type * from "@/features/storyblok-management/types";
+export * from '@/features/storyblok-management/api'
+export type * from '@/features/storyblok-management/types'
