@@ -206,7 +206,9 @@ export const cancelSubscription = async (
 ) => {
   const subscription = await mollieClient.customerSubscriptions.cancel(
     subscriptionId,
-    { customerId },
+    {
+      customerId,
+    },
   )
   return subscription
 }

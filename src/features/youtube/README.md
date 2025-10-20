@@ -26,17 +26,17 @@ youtube/
 ### Basic Usage
 
 ```typescript
-import { fetchChannelRssFeed, type RssVideo } from "@/features/youtube";
+import { fetchChannelRssFeed, type RssVideo } from '@/features/youtube'
 
 // Fetch videos from a channel
-const videos = await fetchChannelRssFeed("UCxxxxxxxxxxxxx");
+const videos = await fetchChannelRssFeed('UCxxxxxxxxxxxxx')
 
 // Use the video data
 videos.forEach((video) => {
-  console.log(video.title);
-  console.log(video.publishedAt);
-  console.log(video.thumbnailUrl);
-});
+  console.log(video.title)
+  console.log(video.publishedAt)
+  console.log(video.thumbnailUrl)
+})
 ```
 
 ### In Server Components
@@ -65,15 +65,15 @@ export default async function SermonsPage() {
 ### In Server Actions
 
 ```typescript
-"use server";
+'use server'
 
-import { fetchChannelRssFeed } from "@/features/youtube";
+import { fetchChannelRssFeed } from '@/features/youtube'
 
 export async function getSermons() {
   const videos = await fetchChannelRssFeed(
-    process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID ?? ""
-  );
-  return videos;
+    process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID ?? '',
+  )
+  return videos
 }
 ```
 
@@ -105,13 +105,13 @@ Fetches and parses the RSS feed for a YouTube channel.
 
 ```typescript
 interface RssVideo {
-  videoId: string; // YouTube video ID
-  title: string; // Video title
-  description: string; // Video description
-  publishedAt: string; // ISO timestamp
-  thumbnailUrl: string; // URL to thumbnail image
-  channelId: string; // YouTube channel ID
-  url: string; // Full YouTube video URL
+  videoId: string // YouTube video ID
+  title: string // Video title
+  description: string // Video description
+  publishedAt: string // ISO timestamp
+  thumbnailUrl: string // URL to thumbnail image
+  channelId: string // YouTube channel ID
+  url: string // Full YouTube video URL
 }
 ```
 
@@ -134,7 +134,7 @@ import {
   YOUTUBE_THUMBNAIL_URL,
   CACHE_REVALIDATE_TIME,
   THUMBNAIL_QUALITY,
-} from "@/features/youtube";
+} from '@/features/youtube'
 ```
 
 - **CACHE_REVALIDATE_TIME**: 3600 seconds (1 hour)

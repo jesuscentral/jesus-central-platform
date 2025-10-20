@@ -24,6 +24,7 @@ storyblok/
 ## Component Categories
 
 ### Layout Components
+
 - **Page**: Main page wrapper component
 - **Section**: Content section wrapper
 - **Grid**: Responsive grid layout
@@ -32,11 +33,13 @@ storyblok/
 - **Global**: Global content wrapper
 
 ### Hero Components
+
 - **VideoHero**: Hero section with video background
 - **ImageHero**: Hero section with image background
 - **BlokHero**: Hero section with custom blok
 
 ### Content Components
+
 - **RichText**: Rich text content renderer
 - **Content**: Generic content block
 - **Scripture**: Scripture reference display
@@ -47,27 +50,32 @@ storyblok/
 - **SermonHighlight**: Sermon highlight display
 
 ### Card Components
+
 - **Card**: Generic card component
 - **ImageCard**: Card with image
 - **PersonCard**: Person profile card
 
 ### Navigation Components
+
 - **Footer**: Site footer
 - **Link**: Navigation link
 
 ### Interactive Components
+
 - **Button**: Call-to-action button
 - **Badge**: Label or badge
 - **Donation**: Donation form/button
 - **Map**: Interactive map
 
 ### Media Components
+
 - **Image**: Optimized image component
 - **SpotifyEmbed**: Spotify embed player
 
 ## Adding a New Component
 
 1. **Create the component file** in the appropriate category folder:
+
    ```typescript
    // src/features/storyblok/components/[category]/YourComponent.tsx
    'use client'; // Add if client component
@@ -89,21 +97,24 @@ storyblok/
    ```
 
 2. **Export from category index**:
+
    ```typescript
    // src/features/storyblok/components/[category]/index.ts
-   export { default as YourComponent } from './YourComponent';
+   export { default as YourComponent } from './YourComponent'
    ```
 
 3. **Add to component map**:
+
    ```typescript
    // src/features/storyblok/components/index.ts
    export const componentMap = {
      // ... existing components
      yourComponent: YourCategory.YourComponent,
-   } as const;
+   } as const
    ```
 
 4. **Generate types**:
+
    ```bash
    npm run storyblok:regenerate
    ```
@@ -111,7 +122,7 @@ storyblok/
 5. **Add type export** (if needed):
    ```typescript
    // src/features/storyblok/types/index.ts
-   export type { SbYourComponent } from '@storyblok/types/287435740670216/storyblok-components';
+   export type { SbYourComponent } from '@storyblok/types/287435740670216/storyblok-components'
    ```
 
 ## Configuration
@@ -119,31 +130,37 @@ storyblok/
 All Storyblok configuration is centralized in `config.ts`:
 
 ```typescript
-import { storyblokConfig, storyblokApiConfig } from '@/features/storyblok/config';
+import {
+  storyblokConfig,
+  storyblokApiConfig,
+} from '@/features/storyblok/config'
 
 // Access configuration
-const { accessToken, isPreview, basePath } = storyblokConfig;
+const { accessToken, isPreview, basePath } = storyblokConfig
 ```
 
 ## Utilities
 
 ### Link Resolver
-```typescript
-import { linkResolver } from '@/features/storyblok/utils';
 
-const url = linkResolver(blok.link);
+```typescript
+import { linkResolver } from '@/features/storyblok/utils'
+
+const url = linkResolver(blok.link)
 ```
 
 ### SEO Parameters
-```typescript
-import { getStoryblokSeoParameters } from '@/features/storyblok/utils';
 
-const seoParams = getStoryblokSeoParameters(story);
+```typescript
+import { getStoryblokSeoParameters } from '@/features/storyblok/utils'
+
+const seoParams = getStoryblokSeoParameters(story)
 ```
 
 ## Hooks
 
 ### useStoryblokLink
+
 ```typescript
 import { useStoryblokLink } from '@/features/storyblok/hooks';
 
@@ -158,7 +175,11 @@ function MyComponent({ blok }) {
 All Storyblok types are re-exported from the `types` module:
 
 ```typescript
-import type { SbPage, SbCard, BlokComponentProps } from '@/features/storyblok/types';
+import type {
+  SbPage,
+  SbCard,
+  BlokComponentProps,
+} from '@/features/storyblok/types'
 ```
 
 ## Scripts
@@ -180,24 +201,29 @@ import type { SbPage, SbCard, BlokComponentProps } from '@/features/storyblok/ty
 ## Troubleshooting
 
 ### Types Not Updating
+
 Run the regenerate script:
+
 ```bash
 npm run storyblok:regenerate
 ```
 
 ### Component Not Rendering
+
 1. Check if component is registered in `componentMap`
 2. Verify component name matches Storyblok schema
 3. Ensure component is properly exported from category index
 
 ### Import Errors After Refactor
+
 Update import paths to use category-based imports:
+
 ```typescript
 // Old
-import Page from '@/features/storyblok/components/Page';
+import Page from '@/features/storyblok/components/Page'
 
 // New
-import { Page } from '@/features/storyblok/components/layout';
+import { Page } from '@/features/storyblok/components/layout'
 // Or from main index
-import { Page } from '@/features/storyblok/components';
+import { Page } from '@/features/storyblok/components'
 ```

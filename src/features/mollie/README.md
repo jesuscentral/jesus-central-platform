@@ -46,37 +46,37 @@ import {
   createSubscription,
   updateSubscription,
   cancelSubscription,
-} from "@/features/mollie";
+} from '@/features/mollie'
 ```
 
 #### Create a One-off Payment
 
 ```typescript
 const redirectUrl = await createPayment(
-  "10.00", // amount
+  '10.00', // amount
   false, // recurring (false for one-off)
-  "Gift", // description
-  "John Doe", // name
-  "john@example.com" // email
-);
+  'Gift', // description
+  'John Doe', // name
+  'john@example.com', // email
+)
 
 // Redirect user to Mollie checkout
-window.location.href = redirectUrl;
+window.location.href = redirectUrl
 ```
 
 #### Create a Recurring Payment (First Payment)
 
 ```typescript
 const redirectUrl = await createPayment(
-  "25.00", // amount
+  '25.00', // amount
   true, // recurring (true to create mandate)
-  "Monthly gift", // description
-  "Jane Doe", // name
-  "jane@example.com" // email
-);
+  'Monthly gift', // description
+  'Jane Doe', // name
+  'jane@example.com', // email
+)
 
 // This creates a mandate for future subscriptions
-window.location.href = redirectUrl;
+window.location.href = redirectUrl
 ```
 
 ### Server Actions
@@ -90,15 +90,15 @@ import {
   cancelSubscriptionAction,
   updateSubscriptionAmount,
   createNewSubscription,
-} from "@/features/mollie/actions/subscriptions";
+} from '@/features/mollie/actions/subscriptions'
 ```
 
 #### Fetch User's Payment History
 
 ```typescript
-const result = await fetchPaymentHistory();
+const result = await fetchPaymentHistory()
 if (result.success) {
-  const payments = result.payments;
+  const payments = result.payments
   // Display payments
 }
 ```
@@ -106,9 +106,9 @@ if (result.success) {
 #### Fetch User's Subscriptions
 
 ```typescript
-const result = await fetchSubscriptions();
+const result = await fetchSubscriptions()
 if (result.success) {
-  const subscriptions = result.subscriptions;
+  const subscriptions = result.subscriptions
   // Display subscriptions
 }
 ```
@@ -117,18 +117,18 @@ if (result.success) {
 
 ```typescript
 const result = await createNewSubscription(
-  "15.00", // amount
-  "1 month", // interval (1 month, 3 months, 6 months, 12 months)
-  "Monthly gift" // description
-);
+  '15.00', // amount
+  '1 month', // interval (1 month, 3 months, 6 months, 12 months)
+  'Monthly gift', // description
+)
 
 if (result.success) {
   if (result.requiresSetup && result.redirectUrl) {
     // User needs to complete first payment
-    window.location.href = result.redirectUrl;
+    window.location.href = result.redirectUrl
   } else {
     // Subscription created successfully
-    console.log(result.message);
+    console.log(result.message)
   }
 }
 ```
@@ -137,10 +137,10 @@ if (result.success) {
 
 ```typescript
 const result = await updateSubscriptionAmount(
-  "sub_abc123", // subscriptionId
-  "20.00", // new amount
-  "Updated monthly gift" // optional: new description
-);
+  'sub_abc123', // subscriptionId
+  '20.00', // new amount
+  'Updated monthly gift', // optional: new description
+)
 
 if (result.success) {
   // Subscription updated
@@ -150,7 +150,7 @@ if (result.success) {
 #### Cancel a Subscription
 
 ```typescript
-const result = await cancelSubscriptionAction("sub_abc123");
+const result = await cancelSubscriptionAction('sub_abc123')
 if (result.success) {
   // Subscription canceled
 }
@@ -165,7 +165,7 @@ import {
   PaymentHistory,
   SubscriptionCard,
   NewSubscriptionForm,
-} from "@/features/mollie";
+} from '@/features/mollie'
 ```
 
 #### PaymentHistory Component
@@ -282,7 +282,7 @@ import type {
   PaymentHistoryProps,
   SubscriptionCardProps,
   NewSubscriptionFormProps,
-} from "@/features/mollie";
+} from '@/features/mollie'
 ```
 
 ## How It Works
@@ -344,7 +344,7 @@ NEXT_PUBLIC_BASE_URL=https://jesuscentral.church
 The feature uses Clerk for user authentication and stores the Mollie customer ID in user metadata:
 
 ```typescript
-user.publicMetadata.mollieCustomerId = "cst_xxxxxxxxxxxxx";
+user.publicMetadata.mollieCustomerId = 'cst_xxxxxxxxxxxxx'
 ```
 
 ## API Reference

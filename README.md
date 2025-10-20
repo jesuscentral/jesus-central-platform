@@ -288,9 +288,9 @@ Automatically fetches sermon videos from your YouTube channel:
 
 ```typescript
 // Location: src/features/youtube/
-import { fetchChannelRssFeed } from "@/features/youtube";
+import { fetchChannelRssFeed } from '@/features/youtube'
 
-const videos = await fetchChannelRssFeed(channelId);
+const videos = await fetchChannelRssFeed(channelId)
 ```
 
 - Caches for 1 hour
@@ -303,22 +303,23 @@ Complete payment integration with subscription management:
 
 ```typescript
 // Location: src/features/mollie/
-import { createPayment, getSubscriptions } from "@/features/mollie";
+import { createPayment, getSubscriptions } from '@/features/mollie'
 
 // Create one-time payment
 const redirectUrl = await createPayment(
-  "10.00",
+  '10.00',
   false, // not recurring
-  "Gift",
-  "John Doe",
-  "john@example.com"
-);
+  'Gift',
+  'John Doe',
+  'john@example.com',
+)
 
 // Get user's subscriptions
-const subscriptions = await getSubscriptions(customerId);
+const subscriptions = await getSubscriptions(customerId)
 ```
 
 **Features:**
+
 - Customer management with automatic upsert
 - One-time and recurring payments
 - Monthly subscription management dashboard
@@ -350,17 +351,18 @@ User authentication and member portal:
 
 ```typescript
 // Middleware: src/middleware.ts
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
 // Server-side auth
-import { currentUser } from "@clerk/nextjs/server";
-const user = await currentUser();
+import { currentUser } from '@clerk/nextjs/server'
+const user = await currentUser()
 
 // Client-side components
-import { UserButton, SignInButton } from "@clerk/nextjs";
+import { UserButton, SignInButton } from '@clerk/nextjs'
 ```
 
 **Features:**
+
 - Dutch localization (`nlNL`)
 - Protected routes for member portal (`/mijn-jesus-central/*`)
 - User metadata for permissions
@@ -376,21 +378,23 @@ Runtime configuration and feature flags:
 
 ```typescript
 // Location: src/lib/actions/config.ts
-import { getConfig } from "@/lib/actions/config";
+import { getConfig } from '@/lib/actions/config'
 
-const config = await getConfig();
+const config = await getConfig()
 if (config?.auth === false) {
   // Authentication disabled
 }
 ```
 
 **Configuration Options:**
+
 - `auth` (boolean) - Enable/disable authentication
   - `true` - Member portal accessible
   - `false` - Member portal returns 404
 - Easy runtime feature flag toggling without redeployment
 
 **Setup:**
+
 1. Create Edge Config in Vercel dashboard
 2. Add configuration JSON:
    ```json
@@ -417,6 +421,7 @@ import { AssetSelector } from "@/features/storyblok-management";
 ```
 
 **Features:**
+
 - Asset folder filtering
 - Real-time search
 - Lazy loading images
@@ -429,6 +434,7 @@ import { AssetSelector } from "@/features/storyblok-management";
 Authenticated user area at `/mijn-jesus-central`:
 
 **Pages:**
+
 - **Dashboard** (`/mijn-jesus-central`) - Welcome and overview
 - **Agenda** (`/mijn-jesus-central/agenda`) - Event management (authorized users)
   - Create new events
@@ -441,12 +447,14 @@ Authenticated user area at `/mijn-jesus-central`:
   - ANBI information
 
 **Navigation:**
+
 - Top navigation bar with links to all sections
 - "Terug naar website" button to return to main site
 - Clerk UserButton for account management
 - Responsive design with mobile menu
 
 **Permissions:**
+
 - Users with `@jesuscentral.nl` email automatically get:
   - `canEditEvents: true`
   - `canRequestAnnouncement: true`
@@ -474,19 +482,19 @@ Authenticated user area at `/mijn-jesus-central`:
 
    ```typescript
    // src/features/storyblok/components/content/index.ts
-   export { MyComponent } from "./MyComponent";
+   export { MyComponent } from './MyComponent'
    ```
 
 3. **Register in componentMap**:
 
    ```typescript
    // src/features/storyblok/components/index.ts
-   import { MyComponent } from "./content";
+   import { MyComponent } from './content'
 
    export const componentMap = {
      // ...
      my_component: MyComponent,
-   };
+   }
    ```
 
 4. **Create in Storyblok UI**:
@@ -503,7 +511,7 @@ Authenticated user area at `/mijn-jesus-central`:
 6. **Use generated types**:
 
    ```typescript
-   import type { MyComponentStoryblok } from "@storyblok/types/287435740670216/storyblok-components";
+   import type { MyComponentStoryblok } from '@storyblok/types/287435740670216/storyblok-components'
 
    export function MyComponent({ blok }: { blok: MyComponentStoryblok }) {
      // Component implementation
@@ -531,12 +539,14 @@ Authenticated user area at `/mijn-jesus-central`:
 Make sure these are set in your hosting platform:
 
 **Required:**
+
 - [ ] `NEXT_PUBLIC_STORYBLOK_TOKEN` - Storyblok Content Delivery API token
 - [ ] `NEXT_PUBLIC_STORYBLOK_IS_PREVIEW` - Set to `false` for production
 - [ ] `NEXT_PUBLIC_BASE_PATH` - Your site's folder name in Storyblok
 - [ ] `NEXT_PUBLIC_BASE_URL` - Your site's public URL
 
 **Optional (Feature-dependent):**
+
 - [ ] `STORYBLOK_MANAGEMENT_TOKEN` - For asset management in event creation
 - [ ] `NEXT_PUBLIC_YOUTUBE_CHANNEL_ID` - For sermon videos
 - [ ] `MOLLIE_API_KEY` - For payment processing
@@ -585,11 +595,12 @@ For runtime configuration without redeployment:
 
 4. **Usage in Code:**
    ```typescript
-   import { getConfig } from "@/lib/actions/config";
-   const config = await getConfig();
+   import { getConfig } from '@/lib/actions/config'
+   const config = await getConfig()
    ```
 
 **Available Configuration:**
+
 - `auth` (boolean) - Enable/disable member portal authentication
 
 ## Troubleshooting
@@ -621,6 +632,7 @@ Verify:
 ## Documentation
 
 ### External Documentation
+
 - [Storyblok Documentation](https://www.storyblok.com/docs)
 - [Next.js 15 Documentation](https://nextjs.org/docs)
 - [Clerk Authentication](https://clerk.com/docs)
@@ -628,11 +640,13 @@ Verify:
 - [Vercel Edge Config](https://vercel.com/docs/storage/edge-config)
 
 ### Feature Documentation
+
 - [YouTube Feature](src/features/youtube/README.md) - YouTube RSS integration
 - [Mollie Feature](src/features/mollie/README.md) - Payment and subscription management
 - [Storyblok Feature](src/features/storyblok/README.md) - CMS integration
 
 ### Architecture Documentation
+
 For detailed architecture information and AI assistant instructions, see [CLAUDE.md](CLAUDE.md).
 
 ## Tech Stack

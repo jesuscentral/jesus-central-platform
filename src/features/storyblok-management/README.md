@@ -64,16 +64,16 @@ import {
   createEvent,
   AssetSelector,
   fetchImageAssets,
-} from "@/features/storyblok-management";
+} from '@/features/storyblok-management'
 
 // Import specific modules
-import { createStory, updateStory } from "@/features/storyblok-management/api";
-import { createEvent } from "@/features/storyblok-management/actions";
-import { AssetSelector } from "@/features/storyblok-management/components";
+import { createStory, updateStory } from '@/features/storyblok-management/api'
+import { createEvent } from '@/features/storyblok-management/actions'
+import { AssetSelector } from '@/features/storyblok-management/components'
 import type {
   StoryblokAsset,
   CreateEventFormData,
-} from "@/features/storyblok-management";
+} from '@/features/storyblok-management'
 ```
 
 ### API Functions
@@ -85,28 +85,28 @@ import {
   createStory,
   updateStory,
   deleteStory,
-} from "@/features/storyblok-management";
+} from '@/features/storyblok-management'
 
 // Create a story
 const result = await createStory({
-  name: "My New Story",
-  slug: "my-new-story",
+  name: 'My New Story',
+  slug: 'my-new-story',
   content: {
-    component: "page",
-    title: "Page Title",
+    component: 'page',
+    title: 'Page Title',
     // ... other content fields
   },
   published: true,
-});
+})
 
 // Update a story
 await updateStory(storyId, {
-  name: "Updated Name",
+  name: 'Updated Name',
   published: true,
-});
+})
 
 // Delete a story
-await deleteStory(storyId);
+await deleteStory(storyId)
 ```
 
 #### Asset Management
@@ -196,40 +196,40 @@ export default function NewEventPage() {
 #### Creating Events
 
 ```typescript
-import { createEvent } from "@/features/storyblok-management";
+import { createEvent } from '@/features/storyblok-management'
 import type {
   CreateEventFormData,
   EventFiles,
   EventSelectedAssets,
-} from "@/features/storyblok-management";
+} from '@/features/storyblok-management'
 
 const formData: CreateEventFormData = {
-  title: "Sunday Service",
-  description: "Join us for worship",
-  date: "2025-10-19T10:00",
-  speaker: "John Doe",
-  location: "Main Auditorium",
-  type: "service",
-  language: "Nederlands",
+  title: 'Sunday Service',
+  description: 'Join us for worship',
+  date: '2025-10-19T10:00',
+  speaker: 'John Doe',
+  location: 'Main Auditorium',
+  type: 'service',
+  language: 'Nederlands',
   translationAvailable: true,
-  youtubeLink: "https://youtube.com/watch?v=...",
-};
+  youtubeLink: 'https://youtube.com/watch?v=...',
+}
 
 const selectedAssets: EventSelectedAssets = {
   thumbnailAssetId: 12345,
   preacherPictureAssetId: 67890,
-};
+}
 
 const files: EventFiles = {
   video: videoFile, // Optional
-};
+}
 
-const result = await createEvent(formData, files, selectedAssets);
+const result = await createEvent(formData, files, selectedAssets)
 
 if (result.success) {
-  console.log("Event created:", result.storyId);
+  console.log('Event created:', result.storyId)
 } else {
-  console.error("Error:", result.error);
+  console.error('Error:', result.error)
 }
 ```
 
@@ -273,23 +273,23 @@ interface CreateStoryParams {
 ```typescript
 // Event form data
 interface CreateEventFormData {
-  title: string;
-  description: string;
-  date: string;
-  speaker?: string;
-  location?: string;
-  type?: "service" | "event" | "";
-  language: "Nederlands" | "Engels" | "";
-  translationAvailable?: boolean;
-  youtubeLink?: string;
+  title: string
+  description: string
+  date: string
+  speaker?: string
+  location?: string
+  type?: 'service' | 'event' | ''
+  language: 'Nederlands' | 'Engels' | ''
+  translationAvailable?: boolean
+  youtubeLink?: string
 }
 
 // Event creation result
 interface CreateEventResult {
-  success: boolean;
-  error?: string;
-  storyId?: number;
-  storySlug?: string;
+  success: boolean
+  error?: string
+  storyId?: number
+  storySlug?: string
 }
 ```
 
@@ -301,16 +301,16 @@ All API functions are marked with `"use server"` and should only be called from 
 
 ```typescript
 // ✅ Good - Server action
-"use server";
+'use server'
 export async function myServerAction() {
-  const assets = await fetchAssets();
-  return assets;
+  const assets = await fetchAssets()
+  return assets
 }
 
 // ❌ Bad - Direct API call in client component
-("use client");
+;('use client')
 function MyComponent() {
-  const assets = await fetchAssets(); // Won't work!
+  const assets = await fetchAssets() // Won't work!
 }
 ```
 
@@ -332,10 +332,10 @@ Always handle errors when working with the Management API:
 
 ```typescript
 try {
-  const result = await createStory(params);
+  const result = await createStory(params)
   // Handle success
 } catch (error) {
-  console.error("Failed to create story:", error);
+  console.error('Failed to create story:', error)
   // Show user-friendly error message
 }
 ```
@@ -364,10 +364,10 @@ If you're migrating from the old `management-api.ts` file:
 
 ```typescript
 // Old
-import { createStory } from "@/features/storyblok/management-api";
+import { createStory } from '@/features/storyblok/management-api'
 
 // New
-import { createStory } from "@/features/storyblok-management";
+import { createStory } from '@/features/storyblok-management'
 ```
 
 The old file will continue to work (re-exports from the new location) but is marked as deprecated.
