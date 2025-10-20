@@ -1,7 +1,6 @@
 'use client'
 
 import { storyblokEditable, SbBlokData } from '@storyblok/react/rsc'
-import { cn } from '@/utils/cn'
 import { SbScripture } from '@storyblok/types/287435740670216/storyblok-components'
 import { motion, Variants } from 'framer-motion'
 
@@ -18,13 +17,13 @@ const fadeInVariants: Variants = {
 }
 
 export default function ScriptureSection({ blok }: { blok: SbScripture }) {
-  const getTextColor = () => {
-    return cn(`text-${blok.textColor}`)
-  }
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className={cn('mx-auto max-w-5xl px-4 text-center', getTextColor())}
+      className="mx-auto max-w-5xl px-4 text-center"
+      style={{
+        color: `var(--${blok.textColor})`,
+      }}
     >
       <motion.div
         variants={fadeInVariants}

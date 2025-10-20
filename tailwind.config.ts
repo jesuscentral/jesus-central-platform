@@ -42,6 +42,12 @@ const config = {
         warning: 'var(--warning)',
         error: 'var(--error)',
         info: 'var(--info)',
+
+        // Social media colors
+        'social-whatsapp': 'var(--social-whatsapp)',
+        'social-facebook': 'var(--social-facebook)',
+        'social-twitter': 'var(--social-twitter)',
+        'social-linkedin': 'var(--social-linkedin)',
       },
       // Note: We use the 'extend' key to ADD to Tailwind's default spacing scale
       // rather than replacing it. This means:
@@ -64,6 +70,7 @@ const config = {
         lg: 'var(--radius-lg)',
         xl: 'var(--radius-xl)',
         '2xl': 'var(--radius-2xl)',
+        '3xl': 'var(--radius-3xl)',
         full: 'var(--radius-full)',
       },
       borderWidth: {
@@ -78,6 +85,8 @@ const config = {
         lg: 'var(--shadow-lg)',
         xl: 'var(--shadow-xl)',
         '2xl': 'var(--shadow-2xl)',
+        'glow-red': 'var(--shadow-glow-red)',
+        'glow-gold': 'var(--shadow-glow-gold)',
       },
       fontSize: {
         xs: 'var(--font-size-xs)',
@@ -120,6 +129,12 @@ const config = {
         slow: 'var(--transition-slow)',
       },
       zIndex: {
+        base: 'var(--z-index-base)',
+        'overlay-1': 'var(--z-index-overlay-1)',
+        'overlay-2': 'var(--z-index-overlay-2)',
+        'overlay-3': 'var(--z-index-overlay-3)',
+        effect: 'var(--z-index-effect)',
+        navigation: 'var(--z-index-navigation)',
         dropdown: 'var(--z-index-dropdown)',
         sticky: 'var(--z-index-sticky)',
         fixed: 'var(--z-index-fixed)',
@@ -127,6 +142,10 @@ const config = {
         modal: 'var(--z-index-modal)',
         popover: 'var(--z-index-popover)',
         tooltip: 'var(--z-index-tooltip)',
+      },
+      height: {
+        nav: 'var(--height-nav)',
+        hero: 'var(--height-hero)',
       },
     },
   },
