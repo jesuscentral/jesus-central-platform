@@ -28,7 +28,7 @@ export default function BlokHero({ blok }: { blok: SbBlokHero }) {
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className="from-jcc-slate-900 to-jcc-slate-800 relative w-full overflow-hidden rounded-2xl bg-gradient-to-br"
+      className="from-jcc-slate-900 to-jcc-slate-800 relative w-full overflow-hidden rounded-b-2xl"
     >
       <div className="absolute inset-0">
         <Image

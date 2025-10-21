@@ -53,7 +53,7 @@ export default function VideoHero({ blok }: VideoHeroProps) {
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className="relative h-[80vh] w-full overflow-hidden rounded-2xl"
+      className="relative h-[80vh] w-full overflow-hidden rounded-b-2xl"
     >
       <div className="absolute inset-0">
         {/* Background video with optimizations */}
