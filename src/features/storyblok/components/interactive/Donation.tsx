@@ -9,6 +9,7 @@ import { cn } from '@/utils/cn'
 import { RichTextRenderer } from '../content/RichTextRenderer'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
+
 type Props = { blok: SbDonation }
 
 // ------ Helpers ------
@@ -85,21 +86,33 @@ export default function DonationComponent({ blok }: Props) {
     }
   }
 
-  const field = `block w-full rounded-xl border border-neutral-200 bg-white/90 px-4 py-3 text-[15px] leading-tight placeholder-neutral-400 focus:outline-none focus:ring-2  border-${blok.primaryColor} text-${blok.textColor} focus:ring-${blok.primaryColor} focus:border-${blok.primaryColor} `
+  // CSS custom properties for theming - works with JIT compiler
+  const themeStyles = {
+    '--donation-primary': `var(--${blok.primaryColor})`,
+    '--donation-text': `var(--${blok.textColor})`,
+    '--donation-bg': `var(--${blok.backgroundColor})`,
+  } as React.CSSProperties
 
-  const pillBase =
+  // Clean, static class names
+  const fieldClasses =
+    'block w-full rounded-xl border bg-white/90 px-4 py-3 text-[15px] leading-tight placeholder-neutral-400 focus:outline-none focus:ring-2'
+
+  const pillBaseClasses =
     'inline-flex items-center justify-center rounded-full border text-sm px-3 py-2 transition active:scale-[.98]'
 
-  const label = 'text-xs font-medium uppercase tracking-wide text-neutral-500'
+  const labelClasses = 'text-xs font-medium uppercase tracking-wide'
+
   return (
     <section
       {...storyblokEditable(blok as SbBlokData)}
       className="relative isolate"
       id="donation-form"
       aria-label="Donatieformulier"
+      style={themeStyles}
     >
       <div
-        className={`bg-freedom mx-auto w-full max-w-xl rounded-3xl border border-black/5 p-5 shadow-xl ring-1 ring-black/5 sm:p-6 bg-${blok.backgroundColor}`}
+        className="mx-auto w-full max-w-xl rounded-3xl border border-black/5 p-5 shadow-xl ring-1 ring-black/5 sm:p-6"
+        style={{ backgroundColor: 'var(--donation-bg)' }}
       >
         {/* Header */}
         <div className="mb-4 flex items-center justify-between space-x-8">
@@ -107,31 +120,34 @@ export default function DonationComponent({ blok }: Props) {
             <div className="hidden select-none sm:block">
               <div className="h-2 w-20 rounded-full bg-black/10">
                 <div
-                  className={`bg-strategy-red h-2 rounded-full transition-all bg-${blok.primaryColor}`}
-                  style={{ width: step === 1 ? '50%' : '100%' }}
+                  className="h-2 rounded-full transition-all"
+                  style={{
+                    width: step === 1 ? '50%' : '100%',
+                    backgroundColor: 'var(--donation-primary)',
+                  }}
                 />
               </div>
               <p
-                className={`mt-1 text-[10px] text-neutral-500 uppercase text-${blok.textColor}`}
+                className="mt-1 text-[10px] uppercase"
+                style={{ color: 'var(--donation-text)' }}
               >
                 Stap {step}/2
               </p>
             </div>
             <h2
-              className={`text-boldness text-2xl font-bold tracking-tight text-${blok.textColor}`}
+              className="text-2xl font-bold tracking-tight"
+              style={{ color: 'var(--donation-text)' }}
             >
               {blok.title ?? 'Help ons om levens te bereiken'}
             </h2>
-            <p
-              className={`mt-1 text-sm text-neutral-600 text-${blok.textColor}`}
+            <div
+              className="mt-1 text-sm"
+              style={{ color: 'var(--donation-text)' }}
             >
               {blok.description && (
-                <RichTextRenderer
-                  document={blok.description}
-                  className={cn(`text-${blok.textColor}`)}
-                />
+                <RichTextRenderer document={blok.description} />
               )}
-            </p>
+            </div>
           </div>
 
           <div className="hidden select-none sm:block">
@@ -159,18 +175,33 @@ export default function DonationComponent({ blok }: Props) {
               >
                 {/* Amount buttons */}
                 <div>
-                  <p className={label}>Kies bedrag</p>
+                  <p
+                    className={labelClasses}
+                    style={{ color: 'var(--donation-text)' }}
+                  >
+                    Kies bedrag
+                  </p>
                   <div className="mt-2 grid grid-cols-4 gap-2">
                     {amounts.map((v) => (
                       <button
                         key={v}
                         type="button"
                         onClick={() => setAmount(v)}
-                        className={`${pillBase} ${
+                        className={cn(
+                          pillBaseClasses,
                           amount === v
-                            ? `bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor} cursor-default`
-                            : 'border-black/10 bg-white text-black hover:cursor-pointer hover:border-black/20'
-                        }`}
+                            ? 'cursor-default'
+                            : 'border-black/10 bg-white text-black hover:cursor-pointer hover:border-black/20',
+                        )}
+                        style={
+                          amount === v
+                            ? {
+                                backgroundColor: 'var(--donation-primary)',
+                                borderColor: 'var(--donation-primary)',
+                                color: 'var(--donation-text)',
+                              }
+                            : undefined
+                        }
                         aria-pressed={amount === v}
                       >
                         € {v}
@@ -180,7 +211,8 @@ export default function DonationComponent({ blok }: Props) {
 
                   {/* Custom amount */}
                   <div
-                    className={`mt-3 flex items-center gap-2 text-${blok.textColor}`}
+                    className="mt-3 flex items-center gap-2"
+                    style={{ color: 'var(--donation-text)' }}
                   >
                     <span className="text-sm">of</span>
                     <label className="sr-only" htmlFor="custom-amount">
@@ -190,7 +222,11 @@ export default function DonationComponent({ blok }: Props) {
                       id="custom-amount"
                       inputMode="decimal"
                       pattern="[0-9]*"
-                      className={`${field} max-w-[180px]`}
+                      className={cn(fieldClasses, 'max-w-[180px]')}
+                      style={{
+                        borderColor: 'var(--donation-primary)',
+                        color: 'var(--donation-text)',
+                      }}
                       placeholder="Ander bedrag"
                       value={amount === '' ? '' : amount}
                       onChange={(e) => {
@@ -203,13 +239,22 @@ export default function DonationComponent({ blok }: Props) {
 
                 {/* Description presets */}
                 <div>
-                  <p className={label}>Bestemming (vul omschrijving in)</p>
+                  <p
+                    className={labelClasses}
+                    style={{ color: 'var(--donation-text)' }}
+                  >
+                    Bestemming (vul omschrijving in)
+                  </p>
                   <label className="sr-only" htmlFor="note">
                     Omschrijving
                   </label>
                   <input
                     id="note"
-                    className={`${field} mt-3`}
+                    className={cn(fieldClasses, 'mt-3')}
+                    style={{
+                      borderColor: 'var(--donation-primary)',
+                      color: 'var(--donation-text)',
+                    }}
                     placeholder="Omschrijving"
                     value={note}
                     onChange={(e) => {
@@ -220,27 +265,50 @@ export default function DonationComponent({ blok }: Props) {
 
                 {/* Recurring toggle */}
                 <div>
-                  <p className={label}>Frequentie</p>
+                  <p
+                    className={labelClasses}
+                    style={{ color: 'var(--donation-text)' }}
+                  >
+                    Frequentie
+                  </p>
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => setRecurring('oneTime')}
-                      className={`${pillBase} ${
+                      className={cn(
+                        pillBaseClasses,
                         recurring === 'oneTime'
-                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} cursor-default text-white`
-                          : 'border-black/10 bg-white text-black hover:cursor-pointer hover:border-black/20'
-                      }`}
+                          ? 'cursor-default text-white'
+                          : 'border-black/10 bg-white text-black hover:cursor-pointer hover:border-black/20',
+                      )}
+                      style={
+                        recurring === 'oneTime'
+                          ? {
+                              borderColor: 'var(--donation-primary)',
+                              backgroundColor: 'var(--donation-primary)',
+                            }
+                          : undefined
+                      }
                     >
                       Eenmalig
                     </button>
                     <button
                       type="button"
                       onClick={() => setRecurring('monthly')}
-                      className={`${pillBase} ${
+                      className={cn(
+                        pillBaseClasses,
                         recurring === 'monthly'
-                          ? `border-${blok.primaryColor} bg-${blok.primaryColor} cursor-default text-white`
-                          : 'border-black/10 bg-white text-black hover:cursor-pointer hover:border-black/20'
-                      }`}
+                          ? 'cursor-default text-white'
+                          : 'border-black/10 bg-white text-black hover:cursor-pointer hover:border-black/20',
+                      )}
+                      style={
+                        recurring === 'monthly'
+                          ? {
+                              borderColor: 'var(--donation-primary)',
+                              backgroundColor: 'var(--donation-primary)',
+                            }
+                          : undefined
+                      }
                     >
                       Maandelijks
                     </button>
@@ -252,7 +320,12 @@ export default function DonationComponent({ blok }: Props) {
                     type="button"
                     onClick={() => setStep(2)}
                     disabled={!isValidStep1()}
-                    className={`w-full rounded-2xl bg-${blok.primaryColor} cursor-pointer px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-${blok.primaryColor}/50`}
+                    className="w-full cursor-pointer rounded-2xl px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+                    style={{
+                      backgroundColor: isValidStep1()
+                        ? 'var(--donation-primary)'
+                        : 'color-mix(in srgb, var(--donation-primary) 50%, transparent)',
+                    }}
                   >
                     Volgende stap
                   </button>
@@ -269,25 +342,41 @@ export default function DonationComponent({ blok }: Props) {
               >
                 <div className="space-y-3">
                   <div>
-                    <label className={label} htmlFor="name">
+                    <label
+                      className={labelClasses}
+                      style={{ color: 'var(--donation-text)' }}
+                      htmlFor="name"
+                    >
                       Naam
                     </label>
                     <input
                       id="name"
-                      className={field}
+                      className={fieldClasses}
+                      style={{
+                        borderColor: 'var(--donation-primary)',
+                        color: 'var(--donation-text)',
+                      }}
                       autoComplete="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div>
-                    <label className={label} htmlFor="email">
+                    <label
+                      className={labelClasses}
+                      style={{ color: 'var(--donation-text)' }}
+                      htmlFor="email"
+                    >
                       Email
                     </label>
                     <input
                       id="email"
                       type="email"
-                      className={field}
+                      className={fieldClasses}
+                      style={{
+                        borderColor: 'var(--donation-primary)',
+                        color: 'var(--donation-text)',
+                      }}
                       autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -305,14 +394,22 @@ export default function DonationComponent({ blok }: Props) {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className={`w-1/3 cursor-pointer rounded-2xl border border-black/10 bg-white px-4 py-3 text-base font-medium text-black hover:bg-neutral-50 bg-${blok.primaryColor} border-${blok.primaryColor} text-${blok.textColor} w-full`}
+                    className="w-full cursor-pointer rounded-2xl border px-4 py-3 text-base font-medium hover:bg-neutral-50"
+                    style={{
+                      backgroundColor: 'var(--donation-primary)',
+                      borderColor: 'var(--donation-primary)',
+                      color: 'var(--donation-text)',
+                    }}
                   >
                     Terug
                   </button>
                   <button
                     type="submit"
                     disabled={!isValidStep2() || loading}
-                    className={`w-2/3 cursor-pointer rounded-2xl bg-${blok.primaryColor} w-full px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50`}
+                    className="w-full cursor-pointer rounded-2xl px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+                    style={{
+                      backgroundColor: 'var(--donation-primary)',
+                    }}
                   >
                     {loading
                       ? 'Bezig…'
@@ -322,7 +419,8 @@ export default function DonationComponent({ blok }: Props) {
 
                 {/* Legal hint */}
                 <p
-                  className={`pt-1 text-[11px] text-neutral-500 text-${blok.textColor}`}
+                  className="pt-1 text-[11px]"
+                  style={{ color: 'var(--donation-text)' }}
                 >
                   Door te geven ga je akkoord met verwerking van je gegevens
                   t.b.v. de betaling via Mollie.

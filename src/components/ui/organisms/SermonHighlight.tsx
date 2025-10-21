@@ -62,13 +62,22 @@ export default function SermonHighlight({
   translationNotAvailableText = 'Geen vertaling',
   className,
 }: SermonHighlightProps) {
+  // CSS custom properties for dynamic theming
+  // This approach works with Tailwind's JIT compiler
+  const themeStyles = {
+    '--sermon-primary': `var(--${primaryColor})`,
+    '--sermon-secondary': `var(--${secondaryColor})`,
+  } as React.CSSProperties
+
   return (
     <div
       className={cn(
         'grid items-stretch gap-4 sm:gap-6 md:grid-cols-12 md:gap-8',
         className,
       )}
+      style={themeStyles}
     >
+      {/* Thumbnail with Play Button */}
       <motion.a
         href={youtubeUrl}
         target="_blank"
@@ -109,124 +118,136 @@ export default function SermonHighlight({
         </div>
       </motion.a>
 
+      {/* Sermon Details Card */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.05 }}
-        className={cn(
-          // Mobile-first padding and spacing
-          'border-boldness/10 col-span-12 flex flex-col justify-center gap-3 rounded-2xl border bg-white/70 p-4 backdrop-blur-sm sm:gap-4 sm:rounded-[2rem] sm:p-6 md:col-span-5 md:gap-5 md:p-8',
-          `bg-${primaryColor}`,
-          `border-${secondaryColor}/10`,
-        )}
+        className="col-span-12 flex flex-col justify-center gap-3 rounded-2xl border bg-white/70 p-4 backdrop-blur-sm sm:gap-4 sm:rounded-[2rem] sm:p-6 md:col-span-5 md:gap-5 md:p-8"
+        style={{
+          backgroundColor: 'var(--sermon-primary)',
+          borderColor:
+            'color-mix(in srgb, var(--sermon-secondary) 10%, transparent)',
+        }}
       >
+        {/* Badge */}
         <div className="inline-flex items-center gap-2">
           <span
-            className={cn(
-              'rounded-md px-2 py-0.5 text-xs font-semibold tracking-wider uppercase sm:px-2.5 sm:py-1 sm:text-sm',
-              `bg-${secondaryColor}`,
-              `text-${primaryColor}`,
-            )}
+            className="rounded-md px-2 py-0.5 text-xs font-semibold tracking-wider uppercase sm:px-2.5 sm:py-1 sm:text-sm"
+            style={{
+              backgroundColor: 'var(--sermon-secondary)',
+              color: 'var(--sermon-primary)',
+            }}
           >
             {badgeText}
           </span>
         </div>
+
+        {/* Title */}
         <h2
-          className={cn(
-            // Mobile-first text sizing
-            'text-boldness text-2xl leading-tight tracking-wide sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
-            `text-${secondaryColor}`,
-          )}
+          className="text-2xl leading-tight tracking-wide sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+          style={{ color: 'var(--sermon-secondary)' }}
         >
           {title}
         </h2>
+
+        {/* Metadata (Speaker, Date, Duration) */}
         <div
-          className={cn(
-            // Mobile-optimized metadata layout
-            'text-boldness/85 flex flex-col items-start gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:text-base',
-            `text-${secondaryColor}/85`,
-          )}
+          className="flex flex-col items-start gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:text-base"
+          style={{
+            color:
+              'color-mix(in srgb, var(--sermon-secondary) 85%, transparent)',
+          }}
         >
           {speaker && (
             <div className="inline-flex items-center gap-1.5">
               <Mic2
-                className={cn(
-                  'h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5',
-                  `text-${secondaryColor}`,
-                )}
+                className="h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5"
+                style={{ color: 'var(--sermon-secondary)' }}
               />
-              <span className={cn('', `text-${secondaryColor}`)}>
+              <span style={{ color: 'var(--sermon-secondary)' }}>
                 {speaker}
               </span>
             </div>
           )}
+
           <div className="inline-flex items-center gap-1.5">
             <CalendarDays
-              className={cn(
-                'h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5',
-                `text-${secondaryColor}`,
-              )}
+              className="h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5"
+              style={{ color: 'var(--sermon-secondary)' }}
             />
-            <span className={cn('', `text-${secondaryColor}`)}>
+            <span style={{ color: 'var(--sermon-secondary)' }}>
               {formatDate(date)}
             </span>
           </div>
+
           {duration && (
             <>
               <span
-                className={cn('hidden sm:inline', `text-${secondaryColor}`)}
+                className="hidden sm:inline"
+                style={{ color: 'var(--sermon-secondary)' }}
               >
                 •
               </span>
               <div className="inline-flex items-center gap-1.5">
                 <Clock
-                  className={cn(
-                    'h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5',
-                    `text-${secondaryColor}`,
-                  )}
+                  className="h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5"
+                  style={{ color: 'var(--sermon-secondary)' }}
                 />
-                <span className={cn('', `text-${secondaryColor}`)}>
+                <span style={{ color: 'var(--sermon-secondary)' }}>
                   {duration}
                 </span>
               </div>
             </>
           )}
         </div>
+
+        {/* Series */}
         {series && (
           <div
-            className={cn(
-              'text-boldness/60 text-xs tracking-wide uppercase',
-              `text-${secondaryColor} opacity-60`,
-            )}
+            className="text-xs tracking-wide uppercase"
+            style={{
+              color:
+                'color-mix(in srgb, var(--sermon-secondary) 60%, transparent)',
+            }}
           >
             {seriesLabel} {series}
           </div>
         )}
+
+        {/* Language & Translation Tags */}
         <div
-          className={cn(
-            'flex flex-wrap items-center gap-2 text-xs',
-            `text-${secondaryColor} opacity-70`,
-          )}
+          className="flex flex-wrap items-center gap-2 text-xs"
+          style={{
+            color:
+              'color-mix(in srgb, var(--sermon-secondary) 70%, transparent)',
+          }}
         >
           {language && (
             <span
-              className={cn(
-                'border-boldness/10 rounded-full border bg-white/80 px-2 py-0.5 sm:px-2.5 sm:py-1',
-                `border-${secondaryColor}/10`,
-                `bg-${secondaryColor} bg-opacity-80`,
-              )}
+              className="rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1"
+              style={{
+                borderColor:
+                  'color-mix(in srgb, var(--sermon-secondary) 10%, transparent)',
+                backgroundColor:
+                  'color-mix(in srgb, var(--sermon-secondary) 80%, transparent)',
+              }}
             >
               {languageLabel} {language}
             </span>
           )}
+
           {translationAvailable !== undefined && (
             <span
-              className={cn(
-                'border-boldness/10 rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1',
-                `border-${secondaryColor}/10`,
-                `bg-${secondaryColor}/5`,
-                `text-${secondaryColor}/70`,
-              )}
+              className="rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1"
+              style={{
+                borderColor:
+                  'color-mix(in srgb, var(--sermon-secondary) 10%, transparent)',
+                backgroundColor:
+                  'color-mix(in srgb, var(--sermon-secondary) 5%, transparent)',
+                color:
+                  'color-mix(in srgb, var(--sermon-secondary) 70%, transparent)',
+              }}
             >
               {translationAvailable
                 ? translationAvailableText
@@ -234,6 +255,8 @@ export default function SermonHighlight({
             </span>
           )}
         </div>
+
+        {/* YouTube Button */}
         <div className="pt-2">
           <Link
             href={youtubeUrl}

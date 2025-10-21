@@ -18,15 +18,22 @@ export default function Badge({
   backgroundColor = colors.freedom,
   ...additionalProps
 }: BadgeProps) {
+  const baseClasses = cn(
+    'rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase',
+  )
+
+  // Use inline styles for dynamic colors to work with Tailwind JIT
+  const dynamicStyles = {
+    color: `var(--${textColor})`,
+    backgroundColor: `var(--${backgroundColor})`,
+  }
+
   if (link) {
     return (
       <Link
         href={link}
-        className={cn(
-          'rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase',
-          `text-${textColor}`,
-          `bg-${backgroundColor}`,
-        )}
+        className={baseClasses}
+        style={dynamicStyles}
         {...additionalProps}
       >
         {text}
@@ -34,14 +41,7 @@ export default function Badge({
     )
   }
   return (
-    <span
-      className={cn(
-        'rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase',
-        `text-${textColor}`,
-        `bg-${backgroundColor}`,
-      )}
-      {...additionalProps}
-    >
+    <span className={baseClasses} style={dynamicStyles} {...additionalProps}>
       {text}
     </span>
   )
