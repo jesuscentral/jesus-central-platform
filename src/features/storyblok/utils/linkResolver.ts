@@ -1,7 +1,13 @@
-import { StoryblokMultilink } from '@storyblok/types/storyblok'
+import {
+  StoryblokMultilink,
+  StoryblokMultilinkStory,
+} from '@storyblok/types/storyblok'
 
 export const linkResolver = (
-  link: StoryblokMultilink | string | undefined,
+  link:
+    | (StoryblokMultilink & { story?: StoryblokMultilinkStory })
+    | string
+    | undefined,
 ): string => {
   if (!link) return ''
 
@@ -11,14 +17,16 @@ export const linkResolver = (
     return link.replace(`${basePath}/`, '')
   }
 
+  console.log(link)
+
   if (!basePath) {
     return '/'
-      .concat(link?.story?.slug || link.cached_url || link.url || '')
+      .concat(link?.story?.full_slug || link.cached_url || link.url || '')
       .replaceAll('//', '/')
   }
 
   let correctUrl = '/'
-    .concat(link?.story?.slug || link.cached_url || link.url || '')
+    .concat(link?.story?.full_slug || link.cached_url || link.url || '')
     .replaceAll('//', '/')
 
   // Remove base path if link is to the homepage
