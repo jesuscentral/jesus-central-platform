@@ -31,7 +31,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -119,7 +121,9 @@
         "pos": 2,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["button"],
+        "component_whitelist": [
+          "button"
+        ],
         "id": "jwWGLWQ9T2umZ8P-LCLAHQ",
         "maximum": 2,
         "minimum": 0
@@ -135,7 +139,9 @@
       "image": {
         "type": "asset",
         "pos": 4,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "required": true,
         "id": "kgKW2vQsQme9bxbjuwc1BQ"
       }
@@ -161,7 +167,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -170,7 +179,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-09-27T11:53:54.350Z",
-    "updated_at": "2025-10-10T09:34:43.842Z",
+    "updated_at": "2025-10-20T12:42:04.164Z",
     "id": 95373043105621,
     "schema": {
       "text": {
@@ -178,11 +187,14 @@
         "pos": 0,
         "required": true,
         "id": "xXHElM_cSXyGN64SwqiMEA",
-        "translatable": true
+        "translatable": true,
+        "default_value": "Button"
       },
       "tab-cd9b8431-a695-4ee8-9932-3a3628e15abb": {
         "display_name": "expert",
-        "keys": ["tailwindClasses"],
+        "keys": [
+          "tailwindClasses"
+        ],
         "pos": 0,
         "type": "tab",
         "id": "zZuEMaaVTuiZMjo2KOFauw"
@@ -190,7 +202,8 @@
       "link": {
         "type": "multilink",
         "pos": 1,
-        "id": "9RXfJu1sSHmz9yyDZ6GTNA"
+        "id": "9RXfJu1sSHmz9yyDZ6GTNA",
+        "asset_link_type": true
       },
       "type": {
         "type": "option",
@@ -311,7 +324,7 @@
     "display_name": null,
     "description": "A card block",
     "created_at": "2025-09-27T11:53:54.728Z",
-    "updated_at": "2025-10-04T11:43:12.103Z",
+    "updated_at": "2025-10-14T08:06:44.470Z",
     "id": 95373044653915,
     "schema": {
       "title": {
@@ -333,7 +346,7 @@
         "pos": 2,
         "use_uuid": true,
         "required": true,
-        "default_value": "brand-orange",
+        "default_value": "freedom",
         "source": "internal",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
@@ -345,7 +358,7 @@
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "colors",
-        "default_value": "bold-dark",
+        "default_value": "boldness",
         "id": "tQHqFKrwRXO8AfQNlAJXGQ"
       },
       "textColor": {
@@ -355,7 +368,7 @@
         "id": "hxnV8iv3RfKFg1DUbQVThg",
         "source": "internal",
         "datasource_slug": "colors",
-        "default_value": "bold-dark"
+        "default_value": "boldness"
       }
     },
     "image": null,
@@ -375,7 +388,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -560,7 +575,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -607,14 +624,18 @@
       "thumbnail": {
         "type": "asset",
         "pos": 5,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "required": false,
         "id": "hElxfv6lSHqJjZ7-Pk-ddQ"
       },
       "video": {
         "type": "asset",
         "pos": 6,
-        "filetypes": ["videos"],
+        "filetypes": [
+          "videos"
+        ],
         "id": "9pYKmrKlTFu2-jx_dcSnSg"
       },
       "type": {
@@ -665,7 +686,9 @@
       "preacherPicture": {
         "type": "asset",
         "pos": 10,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "display_name": "Image of preacher",
         "id": "tHfGc7SgSeK_lOgnNn3ylQ"
       },
@@ -735,7 +758,9 @@
       },
       "tab-188ee0b2-7a3d-4b2b-a99e-5bf79d4f3af2": {
         "display_name": "Story Scroll",
-        "keys": ["showStoryScroll"],
+        "keys": [
+          "showStoryScroll"
+        ],
         "pos": 4,
         "type": "tab",
         "id": "GI7gsno9Syupnlv3nU868g"
@@ -762,7 +787,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -795,7 +823,9 @@
         "pos": 2,
         "required": true,
         "restrict_components": true,
-        "component_whitelist": ["faqItem"],
+        "component_whitelist": [
+          "faqItem"
+        ],
         "display_name": "FAQ Items",
         "minimum": 1,
         "id": "OuqhBGSWToKdI6CxBOnEEw"
@@ -832,7 +862,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -878,7 +911,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -994,7 +1029,10 @@
         "name": "form"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "98611638731104"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "98611638731104"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1021,12 +1059,17 @@
         "maximum": 5,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["informationItem", "button"]
+        "component_whitelist": [
+          "informationItem",
+          "button"
+        ]
       },
       "image": {
         "type": "asset",
         "pos": 2,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "required": true,
         "id": "-ZsC_9t4TN6c8S5vss0SCg"
       },
@@ -1045,7 +1088,9 @@
         "maximum": 3,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["link"]
+        "component_whitelist": [
+          "link"
+        ]
       }
     },
     "image": null,
@@ -1110,7 +1155,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1131,7 +1179,9 @@
         "restrict_type": "",
         "restrict_components": true,
         "id": "bsb0g9NSQfWl4KFRo6j1Vg",
-        "component_whitelist": ["footer"]
+        "component_whitelist": [
+          "footer"
+        ]
       }
     },
     "image": null,
@@ -1151,7 +1201,9 @@
         "name": "global"
       }
     ],
-    "internal_tag_ids": ["95373044465503"],
+    "internal_tag_ids": [
+      "95373044465503"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1201,7 +1253,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1216,14 +1271,19 @@
       "image": {
         "type": "asset",
         "pos": 0,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "required": true,
         "id": "8XJjXl_cSMqPgBIPHNdyHw",
         "allow_external_url": true
       },
       "tab-53c2f6b0-7dac-438e-aed4-73ec249a2536": {
         "display_name": "loading",
-        "keys": ["priority", "loading"],
+        "keys": [
+          "priority",
+          "loading"
+        ],
         "pos": 0,
         "type": "tab",
         "id": "U8L2sH2sQ46u1HPsJJolNg"
@@ -1269,7 +1329,11 @@
       },
       "tab-8629311a-74cb-45c3-9b1e-8672a6bc07b4": {
         "display_name": "Animation",
-        "keys": ["animated", "side", "delay"],
+        "keys": [
+          "animated",
+          "side",
+          "delay"
+        ],
         "pos": 4,
         "type": "tab",
         "id": "hikxGnTLRcObHoZyprwHtA"
@@ -1343,7 +1407,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1374,7 +1440,9 @@
       "image": {
         "type": "asset",
         "pos": 2,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "allow_external_url": true,
         "id": "h3Jq0kUpTFCUoSrYCD_04A"
       },
@@ -1385,7 +1453,10 @@
         "minimum": 0,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["button", "link"],
+        "component_whitelist": [
+          "button",
+          "link"
+        ],
         "id": "-KVXyEuMQbO7kZfcNO2vBg"
       },
       "textColor": {
@@ -1427,7 +1498,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1458,7 +1531,10 @@
         "pos": 2,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["button", "filloutForm"],
+        "component_whitelist": [
+          "button",
+          "filloutForm"
+        ],
         "id": "jwWGLWQ9T2umZ8P-LCLAHQ",
         "maximum": 2,
         "minimum": 0
@@ -1467,7 +1543,9 @@
         "type": "asset",
         "pos": 3,
         "required": true,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "tooltip": true,
         "description": "Fallback image for when video cant be loaded",
         "id": "bWguCvYHRkSHfIQzWHZUIQ",
@@ -1495,7 +1573,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1588,67 +1669,6 @@
     "metadata": {}
   },
   {
-    "name": "livestreamCard",
-    "display_name": null,
-    "description": "A Card showing when live on youtube",
-    "created_at": "2025-10-10T15:23:10.476Z",
-    "updated_at": "2025-10-10T15:36:55.973Z",
-    "id": 100025100195743,
-    "schema": {
-      "title": {
-        "type": "text",
-        "pos": 0,
-        "required": true,
-        "id": "yMnqYOatTAWObnnhJnTliA",
-        "default_value": "We zijn nu Live"
-      },
-      "description": {
-        "type": "text",
-        "pos": 1,
-        "id": "cXf13dQfQfi1Bg0xS42K1g"
-      },
-      "backgroundColor": {
-        "type": "option",
-        "pos": 3,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "colors",
-        "exclude_empty_option": true,
-        "default_value": "freedom",
-        "id": "BKfF1lgLTWuD4yyhJ726HQ"
-      },
-      "show_when_offline": {
-        "type": "boolean",
-        "pos": 3,
-        "id": "Ke7YT1BqSLi6sJ2hzVC4hQ"
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "livestreamCard",
-    "component_group_uuid": null,
-    "color": null,
-    "icon": null,
-    "internal_tags_list": [
-      {
-        "id": 95373044408158,
-        "name": "components"
-      },
-      {
-        "id": 99675468743185,
-        "name": "wrapper"
-      }
-    ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
     "name": "map",
     "display_name": null,
     "description": "A Map for showing one or multiple locations",
@@ -1707,7 +1727,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1780,7 +1802,9 @@
         "pos": 1,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["menuItem"],
+        "component_whitelist": [
+          "menuItem"
+        ],
         "required": true,
         "minimum": 1,
         "description": "Menu items in this section",
@@ -1828,11 +1852,18 @@
         "restrict_components": true,
         "component_group_whitelist": [],
         "component_whitelist": [],
-        "component_tag_whitelist": [99675468743185]
+        "component_tag_whitelist": [
+          99675468743185
+        ]
       },
       "tab-1a3fea7f-e8f9-4155-963d-e8eb5105b8b2": {
         "display_name": "seo",
-        "keys": ["metadata", "index", "follow", "seo"],
+        "keys": [
+          "metadata",
+          "index",
+          "follow",
+          "seo"
+        ],
         "pos": 5,
         "type": "tab",
         "id": "Gj_qf-j5QVWWPejrUQW4sg"
@@ -1877,7 +1908,9 @@
       "image": {
         "type": "asset",
         "pos": 0,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "allow_external_url": true,
         "required": true,
         "id": "rxJMYrF5TqGonFw89YsCeg"
@@ -1939,7 +1972,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -1948,7 +1983,7 @@
     "display_name": null,
     "description": "richText block",
     "created_at": "2025-09-29T12:59:39.024Z",
-    "updated_at": "2025-10-09T18:23:43.332Z",
+    "updated_at": "2025-10-14T08:26:45.356Z",
     "id": 96096989307996,
     "schema": {
       "content": {
@@ -1963,7 +1998,7 @@
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "colors",
-        "default_value": "bold-dark",
+        "default_value": "boldness",
         "exclude_empty_option": true,
         "id": "o-ApXdEPRVGmdyxGM3AIzg"
       }
@@ -1985,7 +2020,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2045,7 +2082,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2062,7 +2101,9 @@
         "pos": 0,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["statementScripture"],
+        "component_whitelist": [
+          "statementScripture"
+        ],
         "required": true,
         "minimum": 0,
         "maximum": 20,
@@ -2141,7 +2182,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2150,7 +2194,7 @@
     "display_name": null,
     "description": "A section block that can contain another blok",
     "created_at": "2025-10-01T21:00:41.141Z",
-    "updated_at": "2025-10-09T15:41:13.596Z",
+    "updated_at": "2025-10-14T08:29:22.009Z",
     "id": 96922997321290,
     "schema": {
       "block": {
@@ -2158,7 +2202,7 @@
         "pos": 0,
         "minimum": 0,
         "id": "p04J-zJbSsm033llYHh-RA",
-        "required": true
+        "required": false
       },
       "backgroundColor": {
         "type": "option",
@@ -2167,7 +2211,7 @@
         "source": "internal",
         "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "default_value": "cream",
+        "default_value": "freedom",
         "id": "EYMpYUidS7az3GWjiXx5Mw"
       }
     },
@@ -2192,7 +2236,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2232,7 +2279,9 @@
         "type": "asset",
         "pos": 4,
         "required": true,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "id": "2shMCoiMSoyk9TNhukJMKA"
       },
       "youtubeUrl": {
@@ -2290,7 +2339,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2330,7 +2381,9 @@
         "type": "asset",
         "pos": 5,
         "required": true,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "id": "2shMCoiMSoyk9TNhukJMKA"
       },
       "youtubeUrl": {
@@ -2408,7 +2461,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2486,7 +2541,9 @@
         "name": "integration"
       }
     ],
-    "internal_tag_ids": ["96125363539856"],
+    "internal_tag_ids": [
+      "96125363539856"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2527,7 +2584,9 @@
         "minimum": 0,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["scriptureReferences"],
+        "component_whitelist": [
+          "scriptureReferences"
+        ],
         "id": "DVXij2foSemzI6zxIPSEHA"
       }
     },
@@ -2548,7 +2607,9 @@
         "name": "components"
       }
     ],
-    "internal_tag_ids": ["95373044408158"],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2620,7 +2681,131 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["99675468743185"],
+    "internal_tag_ids": [
+      "99675468743185"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "testimony",
+    "display_name": "Testimony",
+    "description": "A Testimony Object which can be used in testimonies",
+    "created_at": "2025-10-21T08:38:58.960Z",
+    "updated_at": "2025-10-21T08:40:37.763Z",
+    "id": 103818604388046,
+    "schema": {
+      "name": {
+        "type": "text",
+        "pos": 0,
+        "id": "8rlpgwPGQWuCgyxsobEN0g",
+        "required": true
+      },
+      "designation": {
+        "type": "text",
+        "pos": 1,
+        "id": "w8AYiOOeQPSHnfJ9-D2LBw",
+        "description": "",
+        "required": true,
+        "default_value": "Volger van Jezus"
+      },
+      "quote": {
+        "type": "text",
+        "pos": 2,
+        "id": "L_LXi_niT6WuY4W68X9eeA",
+        "required": true
+      },
+      "image": {
+        "type": "asset",
+        "pos": 3,
+        "filetypes": [
+          "images"
+        ],
+        "allow_external_url": true,
+        "required": true,
+        "id": "XnZRidMEQ76VbDFujhsAbw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Testimony",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "testimonyCarousel",
+    "display_name": null,
+    "description": "Testimony blok with multiple testimonies",
+    "created_at": "2025-10-21T08:38:12.310Z",
+    "updated_at": "2025-10-21T08:59:56.132Z",
+    "id": 103818413309645,
+    "schema": {
+      "testimonials": {
+        "type": "bloks",
+        "pos": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "testimony"
+        ],
+        "id": "y57hpN6dRdeqYnH6jEfuGg",
+        "required": true,
+        "minimum": 1,
+        "display_name": "Testimonials"
+      },
+      "autplay": {
+        "type": "boolean",
+        "pos": 1,
+        "id": "xbcSBarQTIeKNzYbK1Vj8w"
+      },
+      "textColor": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "boldness",
+        "id": "dSjpAFoHSuKlRZ6lg12mrQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "testimonyCarousel",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2651,7 +2836,9 @@
         "pos": 2,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["button"],
+        "component_whitelist": [
+          "button"
+        ],
         "id": "jwWGLWQ9T2umZ8P-LCLAHQ",
         "maximum": 2,
         "minimum": 0
@@ -2659,7 +2846,9 @@
       "background_video": {
         "type": "asset",
         "pos": 3,
-        "filetypes": ["videos"],
+        "filetypes": [
+          "videos"
+        ],
         "allow_external_url": true,
         "required": false,
         "id": "ioqT9CUST82NAjsZRWAFDA"
@@ -2668,7 +2857,9 @@
         "type": "asset",
         "pos": 4,
         "required": true,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "tooltip": true,
         "description": "Fallback image for when video cant be loaded",
         "id": "bWguCvYHRkSHfIQzWHZUIQ"
@@ -2695,7 +2886,10 @@
         "name": "wrapper"
       }
     ],
-    "internal_tag_ids": ["95373044408158", "99675468743185"],
+    "internal_tag_ids": [
+      "95373044408158",
+      "99675468743185"
+    ],
     "content_type_asset_preview": null,
     "metadata": {}
   },
@@ -2726,7 +2920,9 @@
         "maximum": 4,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["menuSection"],
+        "component_whitelist": [
+          "menuSection"
+        ],
         "id": "oySG07gWRYCWz0FPZ2gTgg"
       },
       "footer_tagline": {
@@ -2747,7 +2943,9 @@
       "logo": {
         "type": "asset",
         "pos": 5,
-        "filetypes": ["images"],
+        "filetypes": [
+          "images"
+        ],
         "translatable": false,
         "required": true,
         "description": "Website logo",
@@ -2772,7 +2970,9 @@
         "pos": 8,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["button"],
+        "component_whitelist": [
+          "button"
+        ],
         "description": "CTA buttons shown in header (desktop only)",
         "id": "3NhD6FumQMywPVXNHaJmcQ"
       },
@@ -2781,7 +2981,9 @@
         "pos": 9,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["menuSection"],
+        "component_whitelist": [
+          "menuSection"
+        ],
         "required": false,
         "minimum": 0,
         "description": "Menu sections for the cinematic menu",
@@ -2792,7 +2994,9 @@
         "pos": 10,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": ["socialLink"],
+        "component_whitelist": [
+          "socialLink"
+        ],
         "description": "Social media links shown in menu footer",
         "id": "eseuJ97KTLKI9_bhRzyaKw"
       },
