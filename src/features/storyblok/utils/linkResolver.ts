@@ -13,12 +13,12 @@ export const linkResolver = (
 
   if (!basePath) {
     return '/'
-      .concat(link?.story?.full_slug || link.cached_url || link.url || '')
+      .concat(link?.story?.slug || link.cached_url || link.url || '')
       .replaceAll('//', '/')
   }
 
   let correctUrl = '/'
-    .concat(link?.story?.full_slug || link.cached_url || link.url || '')
+    .concat(link?.story?.slug || link.cached_url || link.url || '')
     .replaceAll('//', '/')
 
   // Remove base path if link is to the homepage
