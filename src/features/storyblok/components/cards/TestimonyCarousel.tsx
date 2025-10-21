@@ -1,6 +1,7 @@
 import { SbTestimonyCarousel } from '@storyblok/types/287435740670216/storyblok-components'
 import UITestimonyCarousel from '@/components/ui/molecules/TestimonyCarousel'
 import { cn } from '@/utils/cn'
+import { SbBlokData, storyblokEditable } from '@storyblok/react'
 export default function TestimonyCarousel({
   blok,
 }: {
@@ -17,6 +18,7 @@ export default function TestimonyCarousel({
 
   return (
     <UITestimonyCarousel
+      {...storyblokEditable(blok as SbBlokData)}
       testimonials={mappedTestimonials}
       autoplay={blok?.autplay ?? false}
       textColorClasses={cn(`text-${blok.textColor as string}`)}

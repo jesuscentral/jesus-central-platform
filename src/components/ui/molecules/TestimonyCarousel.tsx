@@ -19,6 +19,7 @@ export default function TestimonyCarousel({
   testimonials,
   autoplay = false,
   textColorClasses,
+  ...additionalProps
 }: {
   testimonials: Testimonial[]
   autoplay?: boolean
@@ -51,6 +52,7 @@ export default function TestimonyCarousel({
 
   return (
     <div
+      {...additionalProps}
       className={cn(
         'mx-auto max-w-sm px-4 py-20 md:max-w-4xl md:px-8 lg:px-12',
         textColorClasses,
