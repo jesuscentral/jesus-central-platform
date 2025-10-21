@@ -11,8 +11,6 @@ export const linkResolver = (
     return link.replace(`${basePath}/`, '')
   }
 
-  console.log(link)
-
   if (!basePath) {
     return '/'.concat(link.cached_url || link.url || '').replaceAll('//', '/')
   }
