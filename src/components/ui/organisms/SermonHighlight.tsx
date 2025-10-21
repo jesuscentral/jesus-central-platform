@@ -7,8 +7,6 @@ import { cn } from '@/utils/cn'
 import Image from 'next/image'
 
 interface SermonHighlightProps {
-  primaryColor?: string
-  secondaryColor?: string
   youtubeUrl: string
   thumbnail: {
     src: string
@@ -42,8 +40,6 @@ function formatDate(d: string | Date) {
 }
 
 export default function SermonHighlight({
-  primaryColor = 'white',
-  secondaryColor = 'boldness',
   youtubeUrl,
   thumbnail,
   title,

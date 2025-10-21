@@ -3,7 +3,7 @@
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { linkResolver } from '@/features/storyblok/api'
+import { linkResolver } from '@/features/storyblok/utils/linkResolver'
 import { colors } from '@/lib/colors'
 import { StoryblokMultilink } from '@storyblok/types/storyblok'
 
@@ -56,7 +56,7 @@ export default function CinematicMenu({
         items:
           section.items?.map((item) => ({
             label: item.label || '',
-            href: linkResolver(item.link as StoryblokMultilink) || '#',
+            href: linkResolver(item.link) || '#',
           })) || [],
       }))
     : []
