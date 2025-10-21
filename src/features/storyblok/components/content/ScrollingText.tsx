@@ -22,7 +22,7 @@ export default function ScrollingText({ blok }: { blok: SbScrollingText }) {
           whileInView={{ x: '-50%' }}
           viewport={{ once: true }}
           transition={{ duration: 18, ease: 'linear' }}
-          className="whitespace-nowrap"
+          className="font-heading whitespace-nowrap"
         >
           <span className="text-jcc-freedom/80 mx-8 text-xl tracking-wider uppercase md:text-2xl">
             {blok.text}
