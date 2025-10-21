@@ -62,20 +62,12 @@ export default function SermonHighlight({
   translationNotAvailableText = 'Geen vertaling',
   className,
 }: SermonHighlightProps) {
-  // CSS custom properties for dynamic theming
-  // This approach works with Tailwind's JIT compiler
-  const themeStyles = {
-    '--sermon-primary': `var(--${primaryColor})`,
-    '--sermon-secondary': `var(--${secondaryColor})`,
-  } as React.CSSProperties
-
   return (
     <div
       className={cn(
         'grid items-stretch gap-4 sm:gap-6 md:grid-cols-12 md:gap-8',
         className,
       )}
-      style={themeStyles}
     >
       {/* Thumbnail with Play Button */}
       <motion.a
@@ -125,18 +117,17 @@ export default function SermonHighlight({
         transition={{ duration: 0.7, delay: 0.05 }}
         className="col-span-12 flex flex-col justify-center gap-3 rounded-2xl border bg-white/70 p-4 backdrop-blur-sm sm:gap-4 sm:rounded-[2rem] sm:p-6 md:col-span-5 md:gap-5 md:p-8"
         style={{
-          backgroundColor: 'var(--sermon-primary)',
-          borderColor:
-            'color-mix(in srgb, var(--sermon-secondary) 10%, transparent)',
+          backgroundColor: 'var(--freedom)',
+          borderColor: 'color-mix(in srgb, var(--boldness) 10%, transparent)',
         }}
       >
         {/* Badge */}
         <div className="inline-flex items-center gap-2">
           <span
-            className="rounded-md px-2 py-0.5 text-xs font-semibold tracking-wider uppercase sm:px-2.5 sm:py-1 sm:text-sm"
+            className="text-freedom rounded-md px-2 py-0.5 text-xs font-semibold tracking-wider uppercase sm:px-2.5 sm:py-1 sm:text-sm"
             style={{
-              backgroundColor: 'var(--sermon-secondary)',
-              color: 'var(--sermon-primary)',
+              backgroundColor: 'var(--strategy-red)',
+              color: 'var(--freedom)',
             }}
           >
             {badgeText}
@@ -146,7 +137,7 @@ export default function SermonHighlight({
         {/* Title */}
         <h2
           className="text-2xl leading-tight tracking-wide sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-          style={{ color: 'var(--sermon-secondary)' }}
+          style={{ color: 'var(--boldness)' }}
         >
           {title}
         </h2>
@@ -155,48 +146,41 @@ export default function SermonHighlight({
         <div
           className="flex flex-col items-start gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:text-base"
           style={{
-            color:
-              'color-mix(in srgb, var(--sermon-secondary) 85%, transparent)',
+            color: 'color-mix(in srgb, var(--boldness) 85%, transparent)',
           }}
         >
           {speaker && (
             <div className="inline-flex items-center gap-1.5">
               <Mic2
                 className="h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5"
-                style={{ color: 'var(--sermon-secondary)' }}
+                style={{ color: 'var(--boldness)' }}
               />
-              <span style={{ color: 'var(--sermon-secondary)' }}>
-                {speaker}
-              </span>
+              <span style={{ color: 'var(--boldness)' }}>{speaker}</span>
             </div>
           )}
 
           <div className="inline-flex items-center gap-1.5">
             <CalendarDays
               className="h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5"
-              style={{ color: 'var(--sermon-secondary)' }}
+              style={{ color: 'var(--boldness)' }}
             />
-            <span style={{ color: 'var(--sermon-secondary)' }}>
-              {formatDate(date)}
-            </span>
+            <span style={{ color: 'var(--boldness)' }}>{formatDate(date)}</span>
           </div>
 
           {duration && (
             <>
               <span
                 className="hidden sm:inline"
-                style={{ color: 'var(--sermon-secondary)' }}
+                style={{ color: 'var(--boldness)' }}
               >
                 •
               </span>
               <div className="inline-flex items-center gap-1.5">
                 <Clock
                   className="h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5"
-                  style={{ color: 'var(--sermon-secondary)' }}
+                  style={{ color: 'var(--boldness)' }}
                 />
-                <span style={{ color: 'var(--sermon-secondary)' }}>
-                  {duration}
-                </span>
+                <span style={{ color: 'var(--boldness)' }}>{duration}</span>
               </div>
             </>
           )}
@@ -207,8 +191,7 @@ export default function SermonHighlight({
           <div
             className="text-xs tracking-wide uppercase"
             style={{
-              color:
-                'color-mix(in srgb, var(--sermon-secondary) 60%, transparent)',
+              color: 'color-mix(in srgb, var(--boldness) 60%, transparent)',
             }}
           >
             {seriesLabel} {series}
@@ -219,8 +202,7 @@ export default function SermonHighlight({
         <div
           className="flex flex-wrap items-center gap-2 text-xs"
           style={{
-            color:
-              'color-mix(in srgb, var(--sermon-secondary) 70%, transparent)',
+            color: 'color-mix(in srgb, var(--boldness) 70%, transparent)',
           }}
         >
           {language && (
@@ -228,9 +210,9 @@ export default function SermonHighlight({
               className="rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1"
               style={{
                 borderColor:
-                  'color-mix(in srgb, var(--sermon-secondary) 10%, transparent)',
+                  'color-mix(in srgb, var(--boldness) 10%, transparent)',
                 backgroundColor:
-                  'color-mix(in srgb, var(--sermon-secondary) 80%, transparent)',
+                  'color-mix(in srgb, var(--boldness) 80%, transparent)',
               }}
             >
               {languageLabel} {language}
@@ -242,11 +224,10 @@ export default function SermonHighlight({
               className="rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1"
               style={{
                 borderColor:
-                  'color-mix(in srgb, var(--sermon-secondary) 10%, transparent)',
+                  'color-mix(in srgb, var(--boldness) 10%, transparent)',
                 backgroundColor:
-                  'color-mix(in srgb, var(--sermon-secondary) 5%, transparent)',
-                color:
-                  'color-mix(in srgb, var(--sermon-secondary) 70%, transparent)',
+                  'color-mix(in srgb, var(--boldness) 5%, transparent)',
+                color: 'color-mix(in srgb, var(--boldness) 70%, transparent)',
               }}
             >
               {translationAvailable
@@ -262,7 +243,7 @@ export default function SermonHighlight({
             href={youtubeUrl}
             target="_blank"
             rel="noreferrer"
-            className="group bg-strategy-red inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold tracking-wide text-white shadow-lg transition-transform hover:scale-[1.015] hover:shadow-2xl sm:w-auto sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-4 sm:text-base sm:shadow-xl md:text-lg"
+            className="group bg-strategy-red text-freedom inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold tracking-wide shadow-lg transition-transform hover:scale-[1.015] hover:shadow-2xl sm:w-auto sm:justify-start sm:gap-3 sm:rounded-2xl sm:px-6 sm:py-4 sm:text-base sm:shadow-xl md:text-lg"
           >
             <Youtube className="h-5 w-5 sm:h-6 sm:w-6" />
             <span>{watchButtonText}</span>
