@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { StoryblokServerComponent } from '@storyblok/react/rsc'
 import { SbImageHero } from '@storyblok/types/287435740670216/storyblok-components'
+import { cn } from '@/utils/cn'
 
 // Define the ImageHero type based on VideoHero structure
 interface ImageHeroProps {
@@ -19,10 +20,11 @@ export default function ImageHero({ blok }: ImageHeroProps) {
       y: 0,
     },
   }
+
   return (
     <div
       {...storyblokEditable(blok as SbBlokData)}
-      className="relative h-[80vh] w-full overflow-hidden rounded-2xl"
+      className={cn('relative h-[80vh] w-full overflow-hidden rounded-b-2xl')}
     >
       <div className="absolute inset-0">
         <Image

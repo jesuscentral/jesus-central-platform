@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { cn } from '@/utils/cn'
 import { useCallback } from 'react'
+import { Heading } from '../atoms/Heading'
 
 type Testimonial = {
   name: string
@@ -16,11 +17,13 @@ type Testimonial = {
 }
 
 export default function TestimonyCarousel({
+  title,
   testimonials,
   autoplay = false,
   textColorClasses,
   ...additionalProps
 }: {
+  title: string | undefined
   testimonials: Testimonial[]
   autoplay?: boolean
   textColorClasses?: string
@@ -54,10 +57,15 @@ export default function TestimonyCarousel({
     <div
       {...additionalProps}
       className={cn(
-        'mx-auto max-w-sm px-4 py-20 md:max-w-4xl md:px-8 lg:px-12',
+        'mx-auto max-w-sm px-4 md:max-w-4xl md:px-8 lg:px-12',
         textColorClasses,
       )}
     >
+      {title && (
+        <Heading variant="h2" className="mb-8 text-left">
+          {title}
+        </Heading>
+      )}
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
         <div>
           <div className="relative h-80 w-full">

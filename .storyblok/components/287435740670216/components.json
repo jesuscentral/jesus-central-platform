@@ -1509,7 +1509,7 @@
     "display_name": "Hero with image",
     "description": "Hero with image background ",
     "created_at": "2025-09-27T11:53:55.299Z",
-    "updated_at": "2025-10-09T15:41:33.152Z",
+    "updated_at": "2025-10-21T12:49:51.005Z",
     "id": 95373046992738,
     "schema": {
       "title": {
@@ -1832,7 +1832,7 @@
     "display_name": null,
     "description": null,
     "created_at": "2025-09-27T11:50:34.235Z",
-    "updated_at": "2025-10-11T11:56:02.592Z",
+    "updated_at": "2025-10-21T12:49:42.572Z",
     "id": 95372223434575,
     "schema": {
       "seo": {
@@ -1879,6 +1879,16 @@
         "pos": 7,
         "default_value": true,
         "id": "Ej45N3vXS2SgAPAJzoNWgQ"
+      },
+      "backgroundColor": {
+        "type": "option",
+        "pos": 5,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "colors",
+        "exclude_empty_option": true,
+        "default_value": "freedom",
+        "id": "_RVYywUPQSaM_rK_xNx5FA"
       }
     },
     "image": null,
@@ -2754,12 +2764,17 @@
     "display_name": null,
     "description": "Testimony blok with multiple testimonies",
     "created_at": "2025-10-21T08:38:12.310Z",
-    "updated_at": "2025-10-21T08:59:56.132Z",
+    "updated_at": "2025-10-21T11:48:46.379Z",
     "id": 103818413309645,
     "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "ZjanVTrpSHO0K1Z0JeXNbw"
+      },
       "testimonials": {
         "type": "bloks",
-        "pos": 0,
+        "pos": 1,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2772,12 +2787,12 @@
       },
       "autplay": {
         "type": "boolean",
-        "pos": 1,
+        "pos": 2,
         "id": "xbcSBarQTIeKNzYbK1Vj8w"
       },
       "textColor": {
         "type": "option",
-        "pos": 2,
+        "pos": 3,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "colors",

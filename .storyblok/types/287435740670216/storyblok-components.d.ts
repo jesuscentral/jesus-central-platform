@@ -389,6 +389,7 @@ export interface SbPage {
   )[];
   index?: boolean;
   follow?: boolean;
+  backgroundColor?: number | string;
   component: "page";
   _uid: string;
   [k: string]: unknown;
@@ -574,6 +575,7 @@ export interface SbTestimony {
 }
 
 export interface SbTestimonyCarousel {
+  title?: string;
   testimonials: SbTestimony[];
   autplay?: boolean;
   textColor?: number | string;

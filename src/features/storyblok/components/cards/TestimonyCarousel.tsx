@@ -19,6 +19,7 @@ export default function TestimonyCarousel({
   return (
     <UITestimonyCarousel
       {...storyblokEditable(blok as SbBlokData)}
+      title={blok.title}
       testimonials={mappedTestimonials}
       autoplay={blok?.autplay ?? false}
       textColorClasses={cn(`text-${blok.textColor as string}`)}
