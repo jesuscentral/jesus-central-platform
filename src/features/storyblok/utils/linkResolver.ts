@@ -11,6 +11,10 @@ export const linkResolver = (
     return link.replace(`${basePath}/`, '')
   }
 
+  if (link.cached_url.includes('http') || link.url.includes('http')) {
+    return link.cached_url || link.url || ''
+  }
+
   if (!basePath) {
     return '/'.concat(link.cached_url || link.url || '').replaceAll('//', '/')
   }
