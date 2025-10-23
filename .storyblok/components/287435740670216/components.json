@@ -95,6 +95,68 @@
     "metadata": {}
   },
   {
+    "name": "bigCard",
+    "display_name": null,
+    "description": "A Big card with image and link when clicked on",
+    "created_at": "2025-10-23T12:02:48.113Z",
+    "updated_at": "2025-10-23T12:09:59.800Z",
+    "id": 104576483800630,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "Q9eqlDViQe-lO70lIpzk6w",
+        "regex": "",
+        "default_value": "Grote kaart"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "default_value": "Met beschrijving",
+        "id": "uw8AyBc-R7iosw9bZTIugg"
+      },
+      "image": {
+        "type": "asset",
+        "pos": 2,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "allow_external_url": true,
+        "id": "rwVkTYmXT1u2cpJ_99ZSrA"
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 3,
+        "id": "geIOHpdTRy-8DHh6gHkhOg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "bigCard",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "blokHero",
     "display_name": "Hero with custom blok",
     "description": "Hero with image background ",
@@ -379,6 +441,157 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "card",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 95373044408158,
+        "name": "components"
+      }
+    ],
+    "internal_tag_ids": [
+      "95373044408158"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "carousel",
+    "display_name": null,
+    "description": "A carousel of big cards",
+    "created_at": "2025-10-23T12:05:09.682Z",
+    "updated_at": "2025-10-23T12:24:02.745Z",
+    "id": 104577063667256,
+    "schema": {
+      "dots": {
+        "type": "boolean",
+        "pos": 0,
+        "id": "By7AlSOJTJyLdZ-xUxSwPg",
+        "default_value": true
+      },
+      "infinite": {
+        "type": "boolean",
+        "pos": 1,
+        "default_value": true,
+        "id": "ExMxI5X2R9W_5bGOS8e7QA"
+      },
+      "navigation": {
+        "type": "boolean",
+        "pos": 2,
+        "default_value": true,
+        "id": "laxw6lY3QEy2T8QWdiY_XA"
+      },
+      "speed": {
+        "type": "number",
+        "pos": 3,
+        "steps": 100,
+        "default_value": "500",
+        "min_value": 100,
+        "max_value": 5000,
+        "decimals": 0,
+        "id": "aFaxbeFZTWO03NjMj8Zn-A"
+      },
+      "slidesToShow": {
+        "type": "number",
+        "pos": 4,
+        "default_value": "1",
+        "min_value": 0,
+        "max_value": 3,
+        "decimals": 0,
+        "id": "NP6dqm5bTR-Ue-Y0Wjo3wA"
+      },
+      "slidesToScroll": {
+        "type": "number",
+        "pos": 5,
+        "min_value": 0,
+        "max_value": 2,
+        "display_name": "",
+        "id": "hLY7dXuDQ12UlXqMKMNPBQ",
+        "default_value": "1"
+      },
+      "centerMode": {
+        "type": "boolean",
+        "pos": 6,
+        "default_value": true,
+        "id": "MfD5E0zBTuGCWc7tFkSCXQ"
+      },
+      "swipeToSlide": {
+        "type": "boolean",
+        "pos": 7,
+        "default_value": true,
+        "id": "7GA5YwZEQqOeWagZ5wDnsA"
+      },
+      "draggable": {
+        "type": "boolean",
+        "pos": 8,
+        "default_value": true,
+        "id": "4BM-YMsCQt6UBVedX3xWng"
+      },
+      "arrows": {
+        "type": "boolean",
+        "pos": 9,
+        "id": "h1pnCWOmTR-fGKtvSII4pA"
+      },
+      "bloks": {
+        "type": "bloks",
+        "pos": 10,
+        "minimum": 1,
+        "maximum": 10,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "bigCard",
+          "card",
+          "image",
+          "imageCard",
+          "personCard"
+        ],
+        "id": "1uU7a4aiSo-wXey5usabtQ"
+      },
+      "tab-e36cc74e-c575-4db0-b481-625ee8c9e170": {
+        "display_name": "geavanceerd",
+        "keys": [
+          "infinite",
+          "navigation",
+          "speed",
+          "slidesToShow",
+          "slidesToScroll",
+          "centerMode",
+          "swipeToSlide",
+          "draggable",
+          "arrows",
+          "dots"
+        ],
+        "pos": 11,
+        "type": "tab",
+        "id": "42zHTsV1TbC0gWJe6MnhcA"
+      },
+      "autplay": {
+        "type": "boolean",
+        "pos": 12,
+        "default_value": true,
+        "id": "XZM_-9lYTWutsMOnYI4u-Q"
+      },
+      "autoplayInterval": {
+        "type": "number",
+        "pos": 13,
+        "id": "5JzRMfUdSxK2LvMarPcM2g",
+        "default_value": "5000",
+        "steps": 500,
+        "decimals": 0,
+        "min_value": 1000,
+        "max_value": 20000
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "carousel",
     "component_group_uuid": null,
     "color": null,
     "icon": null,

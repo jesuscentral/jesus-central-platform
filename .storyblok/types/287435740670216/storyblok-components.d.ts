@@ -18,6 +18,16 @@ export interface SbBadge {
   [k: string]: unknown;
 }
 
+export interface SbBigCard {
+  title: string;
+  description: string;
+  image: StoryblokAsset;
+  link?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
+  component: "bigCard";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface SbBlokHero {
   title: string;
   subtitle: string;
@@ -25,9 +35,11 @@ export interface SbBlokHero {
   block?: (
     | SbAnimatedMap
     | SbBadge
+    | SbBigCard
     | SbBlokHero
     | SbButton
     | SbCard
+    | SbCarousel
     | SbDonation
     | SbEvent
     | SbEventList
@@ -92,6 +104,25 @@ export interface SbCard {
   titleColor?: number | string;
   textColor?: number | string;
   component: "card";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface SbCarousel {
+  dots?: boolean;
+  infinite?: boolean;
+  navigation?: boolean;
+  speed?: string;
+  slidesToShow?: string;
+  slidesToScroll?: string;
+  centerMode?: boolean;
+  swipeToSlide?: boolean;
+  draggable?: boolean;
+  arrows?: boolean;
+  bloks?: (SbBigCard | SbCard | SbImage | SbImageCard | SbPersonCard)[];
+  autplay?: boolean;
+  autoplayInterval?: string;
+  component: "carousel";
   _uid: string;
   [k: string]: unknown;
 }
@@ -189,9 +220,11 @@ export interface SbFullGrid {
   columns?: (
     | SbAnimatedMap
     | SbBadge
+    | SbBigCard
     | SbBlokHero
     | SbButton
     | SbCard
+    | SbCarousel
     | SbDonation
     | SbEvent
     | SbEventList
@@ -247,9 +280,11 @@ export interface SbGrid {
   columns?: (
     | SbAnimatedMap
     | SbBadge
+    | SbBigCard
     | SbBlokHero
     | SbButton
     | SbCard
+    | SbCarousel
     | SbDonation
     | SbEvent
     | SbEventList
@@ -445,9 +480,11 @@ export interface SbSection {
   block?: (
     | SbAnimatedMap
     | SbBadge
+    | SbBigCard
     | SbBlokHero
     | SbButton
     | SbCard
+    | SbCarousel
     | SbDonation
     | SbEvent
     | SbEventList

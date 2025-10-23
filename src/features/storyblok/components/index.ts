@@ -49,6 +49,8 @@ export const componentMap = {
   imageCard: Cards.ImageCard,
   personCard: Cards.PersonCard,
   testimonyCarousel: Cards.TestimonyCarousel,
+  bigCard: Cards.BigCard,
+  carousel: Cards.Carousel,
 
   // Navigation
   footer: Navigation.Footer,
