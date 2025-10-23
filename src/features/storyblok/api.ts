@@ -6,6 +6,14 @@ import {
   storyblokApiConfig,
 } from '@/features/storyblok/config'
 import { getLanguageConfig } from './utils'
+import { unstable_cache } from 'next/cache'
+
+// Cache durations (in seconds)
+const STORYBLOK_CACHE = {
+  PUBLISHED: 60 * 60, // 1 hour for published content
+  DRAFT: 0, // No cache for draft/preview
+  STORIES: 60 * 30, // 30 minutes for story lists
+}
 
 export const getStoryblokApi = storyblokInit({
   accessToken: storyblokConfig.accessToken,
@@ -30,12 +38,23 @@ export const getStory = async (slug: string[]) => {
       ? 'home'
       : joinedSlug
 
+  const revalidate = storyblokConfig.isPreview
+    ? STORYBLOK_CACHE.DRAFT
+    : STORYBLOK_CACHE.PUBLISHED
+
   try {
     const { data } = await storyblok.get(
       `cdn/stories/${storyblokConfig.basePath}/${finalSlug}`,
       {
         ...storyblokApiConfig,
         language: language,
+      },
+      {
+        cache: storyblokConfig.isPreview ? 'no-store' : 'force-cache',
+        next: {
+          revalidate,
+          tags: [`story-${finalSlug}`, 'storyblok-stories'],
+        },
       },
     )
 
@@ -51,12 +70,23 @@ export const getStory = async (slug: string[]) => {
 export const getStoriesByUuids = async (uuids: string[]) => {
   const language = await getLanguageConfig()
   const storyblok = getStoryblokApi()
-  const { data } = await storyblok.get('cdn/stories/', {
-    ...storyblokApiConfig,
-    per_page: 25,
-    by_uuids: uuids.join(','),
-    language: language,
-  })
+  const revalidate = storyblokConfig.isPreview ? 0 : STORYBLOK_CACHE.STORIES
+  const { data } = await storyblok.get(
+    'cdn/stories/',
+    {
+      ...storyblokApiConfig,
+      per_page: 25,
+      by_uuids: uuids.join(','),
+      language: language,
+    },
+    {
+      cache: storyblokConfig.isPreview ? 'no-store' : 'force-cache',
+      next: {
+        revalidate,
+        tags: ['storyblok-stories'],
+      },
+    },
+  )
 
   return data?.stories
 }

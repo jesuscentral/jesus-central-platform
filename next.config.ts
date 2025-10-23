@@ -1,6 +1,14 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  experimental: {
+    ppr: true,
+    optimizePackageImports: [
+      '@storyblok/react',
+      'lucide-react',
+      'framer-motion',
+    ],
+  },
   env: {
     stroyblokPrefix: process.env.NEXT_PUBLIC_STORYBLOK_PREFIX,
   },
