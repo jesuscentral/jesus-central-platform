@@ -13,7 +13,7 @@ export const revalidate = 3600
 export async function generateStaticParams() {
   // Add your main pages here for static generation at build time
   return [
-    { slug: [] }, // home
+    { slug: ['home'] }, // home
     { slug: ['wie-zijn-we'] },
     { slug: ['leiderschap'] },
     { slug: ['activiteiten'] },
