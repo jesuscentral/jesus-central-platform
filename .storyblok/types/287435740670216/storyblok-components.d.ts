@@ -168,6 +168,8 @@ export interface SbEventHighlight {
   button?: SbButton[];
   events?: (ISbStoryData<sbEvent> | string)[];
   showThisWeek?: boolean;
+  backgroundColor: number | string;
+  textColor: number | string;
   component: "eventHighlight";
   _uid: string;
   [k: string]: unknown;
