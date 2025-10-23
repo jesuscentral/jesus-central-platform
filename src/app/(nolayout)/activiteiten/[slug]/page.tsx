@@ -107,7 +107,7 @@ export default async function EventPage({
     image: [event.thumbnail?.filename, event.preacherPicture?.filename],
     eventStatus: 'https://schema.org/EventScheduled',
     location: event.location,
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}/activiteiten/${event.slug}`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/activiteiten/${story.slug}`,
     performer: {
       '@type': 'Person',
       name: event.speaker,
@@ -122,6 +122,7 @@ export default async function EventPage({
   return (
     <>
       <EventDetailPage event={event} formattedDate={formattedDate} />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

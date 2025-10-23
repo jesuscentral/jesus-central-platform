@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import {
   storyblokEditable,
@@ -65,7 +64,6 @@ async function fetchThisWeekEvents(): Promise<ISbStoryData<SbEvent>[]> {
 // Event Card Component (extracted for readability)
 function EventCard({ event }: { event: ISbStoryData<SbEvent> }) {
   const { day, month, time } = formatEventDate(event.content.date)
-  const thumbnailSrc = event.content.thumbnail?.filename ?? '/og-image.png'
 
   return (
     <Link

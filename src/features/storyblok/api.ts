@@ -6,7 +6,6 @@ import {
   storyblokApiConfig,
 } from '@/features/storyblok/config'
 import { getLanguageConfig } from './utils'
-import { unstable_cache } from 'next/cache'
 
 // Cache durations (in seconds)
 const STORYBLOK_CACHE = {
