@@ -1,4 +1,4 @@
-import { getStory } from '@/features/storyblok/api'
+import { getStory, getStoryblokSeoParameters } from '@/features/storyblok/api'
 import {
   SbBlokData,
   storyblokEditable,
@@ -9,6 +9,15 @@ import SermonList from '@/components/sermons/SermonList'
 import { getSermons } from '@/lib/actions/sermons'
 import { connection } from 'next/server'
 import Section from '@/components/ui/atoms/Section'
+import { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const story = await getStory(['preken'])
+  if (!story) {
+    return {}
+  }
+  return getStoryblokSeoParameters(story)
+}
 
 export default async function PrekenPage() {
   const [sermons, story] = await Promise.all([
