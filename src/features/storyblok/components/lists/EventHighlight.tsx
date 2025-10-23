@@ -31,29 +31,32 @@ const formatEventDate = (dateString: string) => {
 }
 
 // Helper function to get date filters for this week
-const getThisWeekDateFilters = () => {
+const getAfterTodayDateFilters = () => {
   const today = new Date()
-  const nextWeek = new Date(today)
-  nextWeek.setDate(today.getDate() + 7)
-
   return {
     gt_date: today.toISOString().split('T')[0],
-    lt_date: nextWeek.toISOString().split('T')[0],
   }
 }
 
-// Fetch events for this week
-async function fetchThisWeekEvents(): Promise<ISbStoryData<SbEvent>[]> {
+async function fetchUpcomingEvents(
+  filterByType: string | undefined,
+): Promise<ISbStoryData<SbEvent>[]> {
   const storyblok = getStoryblokApi()
   const language = await getLanguageConfig()
-  const dateFilters = getThisWeekDateFilters()
+  const dateFilters = getAfterTodayDateFilters()
 
   const { data } = await storyblok.get('cdn/stories/', {
     ...storyblokApiConfig,
     content_type: 'event',
     language,
+    per_page: 4,
     filter_query: {
       date: dateFilters,
+      type: filterByType
+        ? {
+            in: filterByType,
+          }
+        : undefined,
     },
     sort_by: 'content.date:asc',
   })
@@ -105,15 +108,11 @@ function EventCard({ event }: { event: ISbStoryData<SbEvent> }) {
 }
 
 export default async function EventHighlight({ blok }: EventHighlightProps) {
-  // Early return if no events configured
-  if (!blok.showThisWeek && (!blok.events || blok.events.length === 0)) {
-    return null
-  }
-
   // Fetch events based on configuration
-  const events = blok.showThisWeek
-    ? await fetchThisWeekEvents()
-    : await getStoriesByUuids(blok.events as string[])
+  const events =
+    !blok.events || blok.events.length === 0
+      ? await fetchUpcomingEvents(blok.filterByType?.toString())
+      : await getStoriesByUuids(blok.events as string[])
 
   // Don't render if no events found
   if (events.length === 0) return null

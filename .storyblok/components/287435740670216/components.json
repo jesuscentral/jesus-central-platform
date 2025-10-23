@@ -799,7 +799,7 @@
     "display_name": null,
     "description": "A content type for events",
     "created_at": "2025-09-27T11:53:54.872Z",
-    "updated_at": "2025-10-09T23:24:34.363Z",
+    "updated_at": "2025-10-23T20:46:15.100Z",
     "id": 95373045243741,
     "schema": {
       "title": {
@@ -865,10 +865,33 @@
             "_uid": "6b4773c8-9319-481e-a89e-a928a57f7563",
             "value": "event",
             "name": "Event"
+          },
+          {
+            "_uid": "2ba16d3c-4894-4289-aab6-5e42b3763d0c",
+            "value": "youth",
+            "name": "Youth"
+          },
+          {
+            "_uid": "b67f41a3-63ca-492e-a006-d9ba3de50be1",
+            "value": "teens",
+            "name": "Teens"
+          },
+          {
+            "_uid": "fe57467e-f6c6-438d-965e-42fa18ccdb86",
+            "value": "disciples",
+            "name": "Disciples"
+          },
+          {
+            "_uid": "615537d5-28d0-48ca-953a-abb54d78b768",
+            "value": "prayer",
+            "name": "Prayer"
           }
         ],
         "default_value": "service",
-        "id": "YL1ajxoqSSy90taGmsMjgA"
+        "id": "YL1ajxoqSSy90taGmsMjgA",
+        "exclude_empty_option": true,
+        "source": "internal",
+        "datasource_slug": "eventtypes"
       },
       "language": {
         "type": "option",
@@ -932,7 +955,7 @@
     "display_name": null,
     "description": "Highlights some events with title and description",
     "created_at": "2025-10-23T14:41:21.070Z",
-    "updated_at": "2025-10-23T15:33:33.826Z",
+    "updated_at": "2025-10-23T20:46:32.854Z",
     "id": 104615448869803,
     "schema": {
       "title": {
@@ -945,7 +968,7 @@
       "tab-eb8ccb5c-fb45-4ded-a1a7-748b105bdfb4": {
         "display_name": "Geavanceerd",
         "keys": [
-          "showThisWeek"
+          "filterByType"
         ],
         "pos": 0,
         "type": "tab",
@@ -984,32 +1007,14 @@
         "id": "kya1mjcnRcmW7BzovXPkFw",
         "required": false
       },
-      "showThisWeek": {
-        "type": "boolean",
-        "pos": 5,
-        "id": "4hmxF7xnQJWQqv9fNF1FRQ"
-      },
-      "backgroundColor": {
+      "filterByType": {
         "type": "option",
         "pos": 6,
         "use_uuid": true,
-        "default_value": "freedom",
+        "id": "D5P2vrxHQeKv9YRyzj0oyw",
         "source": "internal",
-        "datasource_slug": "colors",
         "exclude_empty_option": true,
-        "required": true,
-        "id": "E1DD4HnUR8yWt27eWHXmqg"
-      },
-      "textColor": {
-        "type": "option",
-        "pos": 7,
-        "use_uuid": true,
-        "default_value": "boldness",
-        "source": "internal",
-        "datasource_slug": "colors",
-        "exclude_empty_option": true,
-        "id": "ECmk4erMQ6SBzieHS9D07g",
-        "required": true
+        "datasource_slug": "eventtypes"
       }
     },
     "image": null,

@@ -152,7 +152,7 @@ export interface SbEvent {
   location?: string;
   thumbnail?: StoryblokAsset;
   video?: StoryblokAsset;
-  type?: "" | "service" | "event";
+  type?: "service" | "event" | "youth" | "teens" | "disciples" | "prayer";
   language: "" | "Nederlands" | "Engels";
   translationAvailable?: boolean;
   preacherPicture?: StoryblokAsset;
@@ -167,9 +167,7 @@ export interface SbEventHighlight {
   description?: string;
   button?: SbButton[];
   events?: (ISbStoryData<sbEvent> | string)[];
-  showThisWeek?: boolean;
-  backgroundColor: number | string;
-  textColor: number | string;
+  filterByType?: number | string;
   component: "eventHighlight";
   _uid: string;
   [k: string]: unknown;
