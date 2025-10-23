@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 interface EventBackgroundProps {
-  videoUrl?: string
-  imageUrl?: string
+  videoUrl?: string | null
+  imageUrl?: string | null
   title: string
 }
 
@@ -44,8 +44,8 @@ export default function EventBackground({
       </motion.div>
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-boldness/70 via-boldness/50 to-boldness/90" />
-      <div className="absolute inset-0 bg-gradient-to-r from-boldness/60 via-transparent to-boldness/60" />
+      <div className="from-boldness/70 via-boldness/50 to-boldness/90 absolute inset-0 bg-gradient-to-b" />
+      <div className="from-boldness/60 to-boldness/60 absolute inset-0 bg-gradient-to-r via-transparent" />
     </div>
   )
 }
