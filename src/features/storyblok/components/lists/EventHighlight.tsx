@@ -84,27 +84,18 @@ function EventCard({ event }: { event: ISbStoryData<SbEvent> }) {
       </div>
 
       {/* Event Details */}
-      <div className="flex flex-1 flex-row justify-between gap-2 border-b pb-6">
-        <div className="flex flex-col gap-2">
-          <span className="font-heading text-xs tracking-widest uppercase opacity-60 md:text-sm">
-            {event.content.type}
-          </span>
-          <h4 className="font-heading text-xl leading-tight md:text-2xl lg:text-3xl">
-            {event.content.title}
-          </h4>
-          {event.content.speaker && (
-            <small className="font-body text-xs tracking-widest opacity-60">
-              Spreker: {event.content.speaker}
-            </small>
-          )}
-        </div>
-        <Image
-          src={thumbnailSrc}
-          alt={event.content.title ?? ''}
-          width={120}
-          height={70}
-          className="aspect-[16/9] rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+      <div className="flex flex-1 flex-col gap-2 border-b pb-6">
+        <span className="font-heading text-xs tracking-widest uppercase opacity-60 md:text-sm">
+          {event.content.type}
+        </span>
+        <h4 className="font-heading text-xl leading-tight md:text-2xl lg:text-3xl">
+          {event.content.title}
+        </h4>
+        {event.content.speaker && (
+          <small className="font-body text-xs tracking-widest opacity-60">
+            Spreker: {event.content.speaker}
+          </small>
+        )}
       </div>
 
       {/* Arrow */}
