@@ -18,8 +18,6 @@
     "storyblok:regenerate": "npm run storyblok:pull && npm run storyblok:generate-types"
   },
   "dependencies": {
-    "@clerk/localizations": "^3.26.1",
-    "@clerk/nextjs": "^6.33.6",
     "@fillout/react": "^3.0.0",
     "@mollie/api-client": "^4.3.3",
     "@storyblok/react": "^5.4.12",

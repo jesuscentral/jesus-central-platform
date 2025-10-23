@@ -1,4 +1,3 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {
@@ -6,23 +5,7 @@ import {
   defaultLanguage,
 } from '@/features/storyblok/utils/languageConstants'
 
-// Define protected routes (customize based on your needs)
-const isProtectedRoute = createRouteMatcher([
-  '/mijn-jesus-central(.*)',
-  // Add other routes you want to protect
-])
-
-export default clerkMiddleware(async (auth, request: NextRequest) => {
-  // Protect routes if needed
-  if (isProtectedRoute(request)) {
-    if (
-      !request.nextUrl.pathname.includes('/inloggen') ||
-      !request.nextUrl.pathname.includes('/registreren')
-    ) {
-      await auth.protect()
-    }
-  }
-
+export function middleware(request: NextRequest) {
   // Language handling logic
   const { pathname } = request.nextUrl
 
@@ -68,7 +51,7 @@ export default clerkMiddleware(async (auth, request: NextRequest) => {
   })
 
   return response
-})
+}
 
 export const config = {
   matcher: [

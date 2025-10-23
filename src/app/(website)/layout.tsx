@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '@/app/globals.css'
-import { ClerkProvider } from '@clerk/nextjs'
 import StoryblokProvider from '@/components/StoryblokProvider'
 import { getWebsiteConfig } from '@/features/storyblok/utils'
 import Footer from '@/features/storyblok/components/navigation/Footer'
 import { Navigation } from '@/features/storyblok/components'
-import { nlNL } from '@clerk/localizations'
 
 const headingFont = localFont({
   src: './../../assets/fonts/TGSPerfectCondensed.otf',
@@ -61,25 +59,20 @@ export default async function RootLayout({
   const websiteConfig = await getWebsiteConfig()
 
   return (
-    <ClerkProvider localization={nlNL}>
-      <StoryblokProvider>
-        <html lang="nl">
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <body
-            className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
-          >
-            <Navigation config={websiteConfig?.content} />
+    <StoryblokProvider>
+      <html lang="nl">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <body
+          className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
+        >
+          <Navigation config={websiteConfig?.content} />
 
-            <div className="relative z-10 flex h-full flex-col">
-              <div className="min-h-screen bg-black text-white">{children}</div>
-            </div>
-            <Footer config={websiteConfig?.content} />
-          </body>
-        </html>
-      </StoryblokProvider>
-    </ClerkProvider>
+          <div className="relative z-10 flex h-full flex-col">
+            <div className="min-h-screen bg-black text-white">{children}</div>
+          </div>
+          <Footer config={websiteConfig?.content} />
+        </body>
+      </html>
+    </StoryblokProvider>
   )
 }

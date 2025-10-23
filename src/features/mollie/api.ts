@@ -1,6 +1,5 @@
 'use server'
 
-import { clerkClient, currentUser } from '@clerk/nextjs/server'
 import createMollieClient, { Locale, SequenceType } from '@mollie/api-client'
 
 const apiKey = process.env.MOLLIE_API_KEY
@@ -95,21 +94,9 @@ export const createPayment = async (
   country: string = 'NL',
 ) => {
   const domain = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000'
-  const clerkUser = await currentUser()
 
-  const customer = clerkUser?.publicMetadata?.mollieCustomerId
-    ? await getCustomer(clerkUser.publicMetadata.mollieCustomerId as string)
-    : await upsertCustomer(name, email)
-
-  if (clerkUser) {
-    await (
-      await clerkClient()
-    ).users.updateUserMetadata(clerkUser.id, {
-      publicMetadata: {
-        mollieCustomerId: customer.id,
-      },
-    })
-  }
+  // Always create/update customer for the payment
+  const customer = await upsertCustomer(name, email)
 
   const payment = await mollieClient.customerPayments.create({
     customerId: customer.id,
