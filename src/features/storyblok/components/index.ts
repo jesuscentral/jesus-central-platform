@@ -70,4 +70,5 @@ export const componentMap = {
 
   // Lists
   eventList: Lists.EventList,
+  eventHighlight: Lists.EventHighlight,
 } as const

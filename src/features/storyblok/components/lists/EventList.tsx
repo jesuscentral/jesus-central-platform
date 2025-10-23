@@ -22,7 +22,7 @@ export default async function EventList({ blok }: { blok: SbEventList }) {
     language,
     filter_query: {
       date: {
-        gte: new Date().toISOString(), // only events todday or later
+        gt_date: new Date().toISOString().split('T')[0], // only events todday or later
       },
     },
     sort_by: 'content.date:asc',

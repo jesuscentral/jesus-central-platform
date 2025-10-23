@@ -928,6 +928,92 @@
     "metadata": {}
   },
   {
+    "name": "eventHighlight",
+    "display_name": null,
+    "description": "Highlights some events with title and description",
+    "created_at": "2025-10-23T14:41:21.070Z",
+    "updated_at": "2025-10-23T15:05:21.840Z",
+    "id": 104615448869803,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "Ggs9uMFUQ_mkWaE0AbVaTA",
+        "default_value": "Komende Events"
+      },
+      "tab-eb8ccb5c-fb45-4ded-a1a7-748b105bdfb4": {
+        "display_name": "Geavanceerd",
+        "keys": [
+          "showThisWeek"
+        ],
+        "pos": 0,
+        "type": "tab",
+        "id": "64zLXPtFTe2hp3SLEFvftA"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "id": "9FcFmo37QwOBRC3TKMzpdA",
+        "description": "",
+        "default_value": "Welke events vinden deze week plaats"
+      },
+      "button": {
+        "type": "bloks",
+        "pos": 2,
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "button"
+        ],
+        "id": "6hYUC-e-SVG-Wa9ir0rnYQ"
+      },
+      "events": {
+        "type": "options",
+        "pos": 3,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "filter_content_type": [
+          "event"
+        ],
+        "min_options": "0",
+        "max_options": "10",
+        "id": "kya1mjcnRcmW7BzovXPkFw",
+        "required": false
+      },
+      "showThisWeek": {
+        "type": "boolean",
+        "pos": 5,
+        "id": "4hmxF7xnQJWQqv9fNF1FRQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "eventHighlight",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [
+      {
+        "id": 99675468743185,
+        "name": "wrapper"
+      }
+    ],
+    "internal_tag_ids": [
+      "99675468743185"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "eventList",
     "display_name": null,
     "description": "A list of the events in Storyblok",

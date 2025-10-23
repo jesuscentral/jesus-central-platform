@@ -11,7 +11,6 @@ type BigCardProps = {
 }
 
 export default function BigCard({ blok }: BigCardProps) {
-  console.log(blok.link)
   if (blok.link === null || blok.link?.cached_url === '') {
     return (
       <div {...storyblokEditable(blok as SbBlokData)} className="group block">

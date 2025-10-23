@@ -48,6 +48,18 @@ export const getStory = async (slug: string[]) => {
     return null
   }
 }
+export const getStoriesByUuids = async (uuids: string[]) => {
+  const language = await getLanguageConfig()
+  const storyblok = getStoryblokApi()
+  const { data } = await storyblok.get('cdn/stories/', {
+    ...storyblokApiConfig,
+    per_page: 25,
+    by_uuids: uuids.join(','),
+    language: language,
+  })
+
+  return data?.stories
+}
 
 // Re-export utilities
 export { linkResolver } from '@/features/storyblok/utils'
