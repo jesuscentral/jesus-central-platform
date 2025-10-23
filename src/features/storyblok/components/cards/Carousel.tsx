@@ -5,7 +5,12 @@ import Slider, { Settings } from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { SbCarousel } from '@storyblok/types/287435740670216/storyblok-components'
-import { StoryblokServerComponent } from '@storyblok/react/rsc'
+import {
+  SbBlokData,
+  storyblokEditable,
+  StoryblokServerComponent,
+} from '@storyblok/react/rsc'
+import { cn } from '@/utils/cn'
 // Removed unused imports
 
 interface CarouselProps {
@@ -65,7 +70,10 @@ export default function Carousel({ blok }: CarouselProps) {
   }
 
   return (
-    <section className="w-full py-20">
+    <section
+      {...storyblokEditable(blok as SbBlokData)}
+      className={cn('w-full')}
+    >
       <div className="mx-auto max-w-7xl px-4">
         {/* Carousel */}
         <div className="carousel-wrapper">
