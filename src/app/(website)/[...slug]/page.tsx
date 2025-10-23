@@ -14,11 +14,15 @@ export async function generateStaticParams() {
   // Add your main pages here for static generation at build time
   return [
     { slug: [] }, // home
-    { slug: ['over-ons'] },
-    { slug: ['agenda'] },
+    { slug: ['wie-zijn-we'] },
+    { slug: ['leiderschap'] },
+    { slug: ['activiteiten'] },
     { slug: ['preken'] },
     { slug: ['geven'] },
     { slug: ['contact'] },
+    { slug: ['bezoek-ons'] },
+    { slug: ['privacy'] },
+    { slug: ['anbi'] },
   ]
 }
 
