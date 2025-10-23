@@ -12,5 +12,10 @@ export const GET = async () => {
   // Add cache headers for browser caching
   return new Response(JSON.stringify(videos), {
     status: 200,
+    headers: {
+      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      'CDN-Cache-Control': 'public, s-maxage=3600',
+      'Vercel-CDN-Cache-Control': 'public, s-maxage=3600',
+    },
   })
 }
