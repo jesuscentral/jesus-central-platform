@@ -131,7 +131,7 @@ export default function Navigation({ config }: NavigationProps) {
             </div>
 
             {/* Spacer for hamburger menu on mobile/tablet - increased width to prevent overlap */}
-            <div className="w-14 sm:w-16 lg:w-20 md:w-0" />
+            <div className="w-14 sm:w-16 md:w-0 lg:w-20" />
           </div>
         </div>
       </motion.nav>
