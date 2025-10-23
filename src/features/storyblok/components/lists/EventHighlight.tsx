@@ -101,9 +101,9 @@ function EventCard({ event }: { event: ISbStoryData<SbEvent> }) {
         <Image
           src={thumbnailSrc}
           alt={event.content.title ?? ''}
-          width={100}
-          height={100}
-          className="rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+          width={120}
+          height={70}
+          className="aspect-[16/9] rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
