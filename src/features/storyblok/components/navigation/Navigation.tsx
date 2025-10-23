@@ -51,7 +51,7 @@ export default function Navigation({ config }: NavigationProps) {
       <motion.nav
         {...storyblokEditable(config as SbBlokData)}
         className={cn(
-          'fixed inset-x-0 top-0 z-[9999] transition-shadow duration-300',
+          'fixed inset-x-0 top-0 z-[80] transition-shadow duration-300',
         )}
       >
         {/* Animated background that slides down */}
@@ -111,13 +111,13 @@ export default function Navigation({ config }: NavigationProps) {
 
           {/* CTA Buttons - visible on all screens */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            {/* Geven button - responsive sizing with space for hamburger menu */}
+            {/* Geven button - responsive sizing */}
             <Button
               href="/geven"
               type="strategy-red"
               variant="primary"
               size="small"
-              className="xs:text-xs xs:px-5 xs:py-2.5 mr-12 px-4 py-2 text-[10px] whitespace-nowrap shadow-md hover:shadow-lg sm:mr-14 sm:px-6 sm:py-3 sm:text-sm md:mr-0 md:px-8 md:py-3 md:text-sm"
+              className="xs:text-xs xs:px-5 xs:py-2.5 relative z-[85] px-4 py-2 text-[10px] whitespace-nowrap shadow-md hover:shadow-lg sm:px-6 sm:py-3 sm:text-sm md:px-8 md:py-3 md:text-sm"
             >
               Geven
             </Button>
@@ -129,13 +129,16 @@ export default function Navigation({ config }: NavigationProps) {
                   <StoryblokServerComponent key={cta._uid} blok={cta} />
                 ))}
             </div>
+
+            {/* Spacer for hamburger menu on mobile/tablet - increased width to prevent overlap */}
+            <div className="w-14 sm:w-16 lg:w-20 md:w-0" />
           </div>
         </div>
       </motion.nav>
 
       {/* Menu rendered outside nav to avoid z-index stacking context issues */}
       {config.show_menu && (
-        <div className="fixed top-4 right-4 z-[10000] sm:top-6 sm:right-6">
+        <div className="fixed top-4 right-4 z-[110] sm:top-6 sm:right-6 md:top-6 md:right-6">
           <CinematicMenu
             menu_data={config.menu_data}
             social_links={config.social_links}
