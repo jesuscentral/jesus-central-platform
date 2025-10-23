@@ -11,6 +11,7 @@ import EventDescription from './EventDescription'
 import AddToCalendarLink from './AddToCalendarLink'
 import ShareDropdown from './ShareDropdown'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Props {
   event: SbEvent
@@ -68,17 +69,19 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
         transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
         className="absolute top-[4.5rem] left-1/2 z-20 -translate-x-1/2 sm:top-20"
       >
-        <div className="bg-boldness relative rounded-xl px-4 py-2 shadow-2xl sm:rounded-2xl sm:px-6 sm:py-3">
-          <div className="relative h-12 w-32 sm:h-16 sm:w-48 md:h-20 md:w-64">
-            <Image
-              src="/logo.svg"
-              alt="Jesus Central Church"
-              fill
-              className="object-contain"
-              priority
-            />
+        <Link href="/">
+          <div className="bg-boldness relative rounded-xl px-4 py-2 shadow-2xl sm:rounded-2xl sm:px-6 sm:py-3">
+            <div className="relative h-12 w-32 sm:h-16 sm:w-48 md:h-20 md:w-64">
+              <Image
+                src="/logo.svg"
+                alt="Jesus Central Church"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
-        </div>
+        </Link>
       </motion.div>
 
       {/* Action Buttons - Fixed Top Right */}
@@ -94,7 +97,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
           url={typeof window !== 'undefined' ? window.location.href : ''}
         />
         {event.youtubeLink?.cached_url && (
-          <a
+          <Link
             href={event.youtubeLink.cached_url}
             target="_blank"
             rel="noopener noreferrer"
@@ -102,7 +105,7 @@ export default function EventDetailPage({ event, formattedDate }: Props) {
             aria-label="Bekijk video"
           >
             <Youtube className="h-4 w-4" />
-          </a>
+          </Link>
         )}
       </motion.div>
 

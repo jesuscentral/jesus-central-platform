@@ -97,5 +97,37 @@ export default async function EventPage({
     minute: '2-digit',
   })
 
-  return <EventDetailPage event={event} formattedDate={formattedDate} />
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    startDate: event.date,
+    endDate: event.date,
+    description: event.description,
+    image: [event.thumbnail?.filename, event.preacherPicture?.filename],
+    eventStatus: 'https://schema.org/EventScheduled',
+    location: event.location,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/activiteiten/${event.slug}`,
+    performer: {
+      '@type': 'Person',
+      name: event.speaker,
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'Jesus Central Church',
+      url: 'https://jesuscentral.church',
+    },
+  }
+
+  return (
+    <>
+      <EventDetailPage event={event} formattedDate={formattedDate} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+    </>
+  )
 }
