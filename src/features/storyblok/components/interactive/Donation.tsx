@@ -27,7 +27,7 @@ export default function DonationComponent({ blok }: Props) {
   // Initialize from URL params or defaults
   const urlAmount = searchParams.get('amount')
   const urlPurpose = searchParams.get('purpose')
-  const urlNote = searchParams.get('note') || searchParams.get('description')
+  const urlNote = searchParams.get('description')
   const urlRecurring = searchParams.get('recurring')
 
   const [step, setStep] = React.useState<1 | 2>(1)
@@ -80,14 +80,14 @@ export default function DonationComponent({ blok }: Props) {
       params.delete('purpose')
     }
 
-    // Update note (use 'note' as primary, 'description' for backward compatibility)
+    // Update description (personal message)
     if (note) {
-      params.set('note', note)
-      params.set('description', note) // Keep for backward compatibility
+      params.set('description', note)
     } else {
-      params.delete('note')
       params.delete('description')
     }
+    // Remove 'note' param if it exists (cleanup from old implementation)
+    params.delete('note')
 
     // Update recurring (only if not default 'oneTime')
     if (recurring && recurring !== 'oneTime') {
