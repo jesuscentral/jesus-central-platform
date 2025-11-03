@@ -136,6 +136,7 @@ export interface SbDonation {
   options: ("" | "5" | "10" | "25" | "50" | "100" | "150" | "200" | "250" | "300" | "350" | "400" | "450" | "500")[];
   preselected: string;
   defaultFrequency: "" | "oneTime" | "monthly";
+  purposes?: string[];
   backgroundColor?: number | string;
   primaryColor?: number | string;
   textColor?: number | string;

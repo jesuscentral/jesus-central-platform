@@ -27,6 +27,7 @@ export default function DonationComponent({ blok }: Props) {
 
   // step 1
   const [amount, setAmount] = React.useState<number | ''>(25)
+  const [purpose, setPurpose] = React.useState<string>('')
   const [note, setNote] = React.useState<string>(description ?? '')
   const [recurring, setRecurring] = React.useState<'oneTime' | 'monthly'>(
     blok.defaultFrequency as 'oneTime' | 'monthly',
@@ -43,8 +44,13 @@ export default function DonationComponent({ blok }: Props) {
     ? blok.options?.map(Number)
     : [10, 25, 50, 100]
 
+  // Default purposes or use from Storyblok config
+  const purposes = blok.purposes?.length
+    ? blok.purposes
+    : ['Herstel', 'Training', 'Zending', 'Algemeen']
+
   function isValidStep1() {
-    return typeof amount === 'number' && amount > 0
+    return typeof amount === 'number' && amount > 0 && purpose !== ''
   }
 
   function isValidStep2() {
@@ -60,10 +66,13 @@ export default function DonationComponent({ blok }: Props) {
       setLoading(true)
       setError(null)
 
+      // Combine purpose with optional note for the payment description
+      const description = note ? `${purpose} - ${note}` : purpose
+
       const redirectUrl: string = await createPayment(
         amount.toString(),
         recurring === 'monthly',
-        note,
+        description,
         name,
         email,
         'NL',
@@ -237,29 +246,59 @@ export default function DonationComponent({ blok }: Props) {
                   </div>
                 </div>
 
-                {/* Description presets */}
+                {/* Purpose selection */}
                 <div>
                   <p
                     className={labelClasses}
                     style={{ color: 'var(--donation-text)' }}
                   >
-                    Bestemming (vul omschrijving in)
+                    Bestemming *
                   </p>
-                  <label className="sr-only" htmlFor="note">
-                    Omschrijving
+                  <label className="sr-only" htmlFor="purpose">
+                    Bestemming
                   </label>
-                  <input
-                    id="note"
-                    className={cn(fieldClasses, 'mt-3')}
+                  <select
+                    id="purpose"
+                    className={cn(fieldClasses, 'mt-2')}
                     style={{
                       borderColor: 'var(--donation-primary)',
                       color: 'var(--donation-text)',
                     }}
-                    placeholder="Omschrijving"
-                    value={note}
-                    onChange={(e) => {
-                      setNote(e.target.value)
+                    value={purpose}
+                    onChange={(e) => setPurpose(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Kies een bestemming
+                    </option>
+                    {purposes.map((p) => (
+                      <option key={p} value={p}>
+                        {p}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Optional note */}
+                <div>
+                  <p
+                    className={labelClasses}
+                    style={{ color: 'var(--donation-text)' }}
+                  >
+                    Persoonlijk bericht (optioneel)
+                  </p>
+                  <label className="sr-only" htmlFor="note">
+                    Persoonlijk bericht
+                  </label>
+                  <input
+                    id="note"
+                    className={cn(fieldClasses, 'mt-2')}
+                    style={{
+                      borderColor: 'var(--donation-primary)',
+                      color: 'var(--donation-text)',
                     }}
+                    placeholder="Bijv. 'voor mijn verjaardag'"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
                   />
                 </div>
 
@@ -382,6 +421,14 @@ export default function DonationComponent({ blok }: Props) {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
+
+                  {/* Info text about personal/business gifts */}
+                  <p
+                    className="text-sm italic"
+                    style={{ color: 'var(--donation-text)' }}
+                  >
+                    Je gift kan persoonlijk of zakelijk zijn.
+                  </p>
                 </div>
 
                 {error && (

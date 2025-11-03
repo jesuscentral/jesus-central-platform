@@ -1,6 +1,6 @@
-# CLAUDE.md
+# Agents.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI agents when working with code in this repository.
 
 ## Project Overview
 
@@ -68,7 +68,7 @@ The application uses a centralized component registration system in `src/feature
 src/
 ├── app/                      # Next.js App Router pages
 │   ├── [...slug]/           # Dynamic Storyblok pages
-│   ├── agenda/              # Events page (Storyblok + data)
+│   ├── activiteiten/        # Events page (Storyblok + data)
 │   ├── preken/              # Sermons page (Storyblok + YouTube)
 │   ├── api/                 # API routes (webhooks, YouTube RSS proxy)
 │   └── layout.tsx           # Root layout with fonts and StoryblokProvider
