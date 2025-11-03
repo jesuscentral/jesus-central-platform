@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '@/app/globals.css'
 import StoryblokProvider from '@/components/StoryblokProvider'
+import { MotionProvider } from '@/components/MotionProvider'
 
 const headingFont = localFont({
   src: './../../assets/fonts/TGSPerfectCondensed.otf',
@@ -60,9 +61,11 @@ export default async function NoLayout({
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
-          <div className="relative z-10 flex h-full flex-col">
-            <div className="min-h-screen bg-black text-white">{children}</div>
-          </div>
+          <MotionProvider>
+            <div className="relative z-10 flex h-full flex-col">
+              <div className="min-h-screen bg-black text-white">{children}</div>
+            </div>
+          </MotionProvider>
         </body>
       </html>
     </StoryblokProvider>

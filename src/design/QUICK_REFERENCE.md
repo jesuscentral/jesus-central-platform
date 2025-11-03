@@ -5,35 +5,38 @@ Quick lookup for design tokens. Copy-paste ready!
 ## Colors
 
 ### Brand Colors
+
 ```tsx
-bg-strategy-gold    // #c89657 - Primary brand (gold)
-bg-strategy-green   // #746e06 - Secondary brand (green)
-bg-strategy-red     // #eb3700 - Accent brand (red)
-bg-boldness         // #161615 - Dark (almost black)
-bg-freedom          // #edf2e9 - Light (cream)
+bg - strategy - gold // #c89657 - Primary brand (gold)
+bg - strategy - green // #746e06 - Secondary brand (green)
+bg - strategy - red // #eb3700 - Accent brand (red)
+bg - boldness // #161615 - Dark (almost black)
+bg - freedom // #edf2e9 - Light (cream)
 ```
 
 ### Semantic Colors
+
 ```tsx
-bg-primary          // Gold (#c89657)
-bg-primary-hover    // Darker gold
-bg-secondary        // Green (#746e06)
-bg-secondary-hover  // Darker green
-bg-accent           // Red (#eb3700)
-bg-accent-hover     // Darker red
-bg-background       // Page background
-bg-foreground       // Text color (as bg)
-bg-muted            // Muted background
-text-muted-foreground // Muted text
-border-border       // Standard border color
+bg - primary // Gold (#c89657)
+bg - primary - hover // Darker gold
+bg - secondary // Green (#746e06)
+bg - secondary - hover // Darker green
+bg - accent // Red (#eb3700)
+bg - accent - hover // Darker red
+bg - background // Page background
+bg - foreground // Text color (as bg)
+bg - muted // Muted background
+text - muted - foreground // Muted text
+border - border // Standard border color
 ```
 
 ### Status Colors
+
 ```tsx
-text-success  // Green (#22c55e)
-text-warning  // Orange (#f59e0b)
-text-error    // Red (#ef4444)
-text-info     // Blue (#3b82f6)
+text - success // Green (#22c55e)
+text - warning // Orange (#f59e0b)
+text - error // Red (#ef4444)
+text - info // Blue (#3b82f6)
 ```
 
 ## Spacing
@@ -44,13 +47,13 @@ Use semantic names to avoid conflicts with Tailwind's sizing scales:
 
 ```tsx
 // Content spacing (16px) - for text content
-p-content | m-content | gap-content
+;(p - content) | (m - content) | (gap - content)
 
 // Card spacing (24px) - for card internals
-p-card | m-card | gap-card
+;(p - card) | (m - card) | (gap - card)
 
 // Section spacing (48px) - for major sections
-p-section | m-section | gap-section
+;(p - section) | (m - section) | (gap - section)
 ```
 
 ### Standard Tailwind Spacing (Also Available)
@@ -76,12 +79,14 @@ max-w-7xl   // 80rem
 ## Typography
 
 ### Font Families
+
 ```tsx
-font-heading  // TGS Perfect Condensed
-font-body     // Fira Sans
+font - heading // TGS Perfect Condensed
+font - body // Fira Sans
 ```
 
 ### Font Sizes
+
 ```tsx
 text-xs    // 12px
 text-sm    // 14px
@@ -96,26 +101,29 @@ text-6xl   // 60px
 ```
 
 ### Font Weights
+
 ```tsx
-font-normal    // 400
-font-medium    // 500
-font-semibold  // 600
-font-bold      // 700
-font-extrabold // 800
+font - normal // 400
+font - medium // 500
+font - semibold // 600
+font - bold // 700
+font - extrabold // 800
 ```
 
 ### Line Heights
+
 ```tsx
-leading-tight    // 1.25
-leading-snug     // 1.375
-leading-normal   // 1.5    ⭐ Default
-leading-relaxed  // 1.625
-leading-loose    // 2
+leading - tight // 1.25
+leading - snug // 1.375
+leading - normal // 1.5    ⭐ Default
+leading - relaxed // 1.625
+leading - loose // 2
 ```
 
 ## Borders
 
 ### Border Radius
+
 ```tsx
 rounded-xs   // 2px
 rounded-sm   // 4px
@@ -127,10 +135,11 @@ rounded-full // 9999px (pill/circle)
 ```
 
 ### Border Width
+
 ```tsx
-border-thin  // 1px
-border       // 2px  ⭐ Default (use border-2 to apply)
-border-thick // 3px
+border - thin // 1px
+border // 2px  ⭐ Default (use border-2 to apply)
+border - thick // 3px
 ```
 
 ## Shadows
@@ -147,74 +156,79 @@ shadow-2xl // Maximum shadow
 ## Transitions
 
 ```tsx
-duration-fast // 150ms  ⭐ For hover effects
-duration-base // 200ms  ⭐ Default
-duration-slow // 300ms  ⭐ For modals/complex animations
+duration - fast // 150ms  ⭐ For hover effects
+duration - base // 200ms  ⭐ Default
+duration - slow // 300ms  ⭐ For modals/complex animations
 
-transition-all        // Transition all properties
-transition-colors     // Only colors
-transition-transform  // Only transforms
+transition - all // Transition all properties
+transition - colors // Only colors
+transition - transform // Only transforms
 ```
 
 ## Z-Index
 
 ```tsx
-z-dropdown       // 1000
-z-sticky         // 1020
-z-fixed          // 1030
-z-modal-backdrop // 1040
-z-modal          // 1050
-z-popover        // 1060
-z-tooltip        // 1070
+z - dropdown // 1000
+z - sticky // 1020
+z - fixed // 1030
+z - modal - backdrop // 1040
+z - modal // 1050
+z - popover // 1060
+z - tooltip // 1070
 ```
 
 ## Common Patterns
 
 ### Button Styles
+
 ```tsx
 // Primary button
-"bg-primary hover:bg-primary-hover text-white"
+'bg-primary hover:bg-primary-hover text-white'
 
 // Outline button
-"border-2 border-primary text-primary hover:bg-primary hover:text-white"
+'border-2 border-primary text-primary hover:bg-primary hover:text-white'
 
 // Ghost button
-"hover:bg-muted"
+'hover:bg-muted'
 ```
 
 ### Card Styles
+
 ```tsx
 // Basic card
-"rounded-lg border-2 border-border bg-background p-card shadow-md"
+'rounded-lg border-2 border-border bg-background p-card shadow-md'
 
 // Elevated card
-"rounded-lg border-2 border-border bg-background p-card shadow-lg hover:shadow-xl transition-shadow"
+'rounded-lg border-2 border-border bg-background p-card shadow-lg hover:shadow-xl transition-shadow'
 ```
 
 ### Input Styles
+
 ```tsx
-"rounded-md border-2 border-input bg-background px-3 py-2 focus:ring-2 focus:ring-ring"
+'rounded-md border-2 border-input bg-background px-3 py-2 focus:ring-2 focus:ring-ring'
 ```
 
 ### Section Padding
+
 ```tsx
 // Mobile-first responsive padding
-"py-section px-content md:px-8"
+'py-section px-content md:px-8'
 ```
 
 ### Status Messages
+
 ```tsx
 // Success
-"bg-success/10 text-success border-success"
+'bg-success/10 text-success border-success'
 
 // Error
-"bg-error/10 text-error border-error"
+'bg-error/10 text-error border-error'
 
 // Warning
-"bg-warning/10 text-warning border-warning"
+'bg-warning/10 text-warning border-warning'
 
 // Info
-"bg-info/10 text-info border-info"
+'bg-info/10 text-info border-info'
 ```
 
 ## Responsive Prefixes
@@ -253,54 +267,58 @@ All color tokens automatically adapt to dark mode via `prefers-color-scheme: dar
 
 ```tsx
 // These automatically adjust in dark mode
-"bg-background text-foreground border-border"
+'bg-background text-foreground border-border'
 ```
 
 ## Copy-Paste Components
 
 ### Button
+
 ```tsx
-<button className="bg-primary hover:bg-primary-hover text-white rounded-full px-8 py-3 font-semibold uppercase transition-all duration-base shadow-lg">
+<button className="rounded-full bg-primary px-8 py-3 font-semibold uppercase text-white shadow-lg transition-all duration-base hover:bg-primary-hover">
   Click Me
 </button>
 ```
 
 ### Card
+
 ```tsx
-<div className="rounded-lg border-2 border-border bg-background p-card shadow-md hover:shadow-lg transition-shadow">
+<div className="rounded-lg border-2 border-border bg-background p-card shadow-md transition-shadow hover:shadow-lg">
   Card Content
 </div>
 ```
 
 ### Alert
+
 ```tsx
-<div className="rounded-md border-2 border-success bg-success/10 text-success p-content">
+<div className="bg-success/10 rounded-md border-2 border-success p-content text-success">
   Success message here
 </div>
 ```
 
 ### Input
+
 ```tsx
 <input
   type="text"
-  className="rounded-md border-2 border-input bg-background px-3 py-2 w-full focus:ring-2 focus:ring-ring focus:border-ring outline-none transition-all"
+  className="w-full rounded-md border-2 border-input bg-background px-3 py-2 outline-none transition-all focus:border-ring focus:ring-2 focus:ring-ring"
   placeholder="Enter text..."
 />
 ```
 
 ### Badge
+
 ```tsx
-<span className="inline-flex items-center rounded-full bg-primary text-white px-3 py-1 text-xs font-semibold uppercase">
+<span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase text-white">
   Badge
 </span>
 ```
 
 ### Section
+
 ```tsx
-<section className="py-section px-content md:px-8">
-  <div className="max-w-7xl mx-auto">
-    Section Content
-  </div>
+<section className="px-content py-section md:px-8">
+  <div className="mx-auto max-w-7xl">Section Content</div>
 </section>
 ```
 

@@ -8,15 +8,32 @@ import {
 } from '@storyblok/react/rsc'
 import { SbFullGrid } from '@storyblok/types/287435740670216/storyblok-components'
 import { Variants, motion } from 'framer-motion'
+import { DURATIONS, EASING } from '@/lib/motionConfig'
+import { useMotionPreference } from '@/components/MotionProvider'
 
 export default function FullGrid({ blok }: { blok: SbFullGrid }) {
+  const { shouldReduceMotion } = useMotionPreference()
+
   const fadeInVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: {
       opacity: 1,
       y: 0,
+      transition: {
+        duration: DURATIONS.lg,
+        ease: EASING.standard,
+      },
     },
   }
+
+  const columnMotionProps = shouldReduceMotion
+    ? { initial: false }
+    : {
+        variants: fadeInVariants,
+        initial: 'hidden' as const,
+        whileInView: 'show' as const,
+        viewport: { once: true },
+      }
   // Background color handling - for Tailwind classes to work, they need to be complete strings
   const getBackgroundClass = () => {
     if (!blok.backgroundColor) return ''
@@ -67,10 +84,7 @@ export default function FullGrid({ blok }: { blok: SbFullGrid }) {
 
             return (
               <motion.div
-                variants={fadeInVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
+                {...columnMotionProps}
                 key={nestedBlok._uid}
                 className={cn(
                   'min-h-[200px]',
