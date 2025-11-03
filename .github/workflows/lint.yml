@@ -1,0 +1,32 @@
+name: ESLint & Prettier
+
+on:
+  push:
+    branches: ['**']
+
+jobs:
+  lint:
+    name: ESLint & Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint Action
+        uses: wearerequired/lint-action@v2.3.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          eslint: true
+          eslint_extensions: 'js,jsx,ts,tsx'
+          prettier: true
+          prettier_extensions: 'js,jsx,ts,tsx,css,md,json'
+          continue_on_error: false

@@ -1,6 +1,7 @@
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
+import storyblokPlugin from './.eslint/eslint-plugin-storyblok.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -54,6 +55,15 @@ const eslintConfig = [
       'next-env.d.ts',
       '.storyblok/**',
     ],
+  },
+  {
+    files: ['src/features/storyblok/components/**/*.tsx'],
+    plugins: {
+      storyblok: storyblokPlugin,
+    },
+    rules: {
+      'storyblok/storyblok-component-registered': 'error',
+    },
   },
 ]
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '@/app/globals.css'
 import StoryblokProvider from '@/components/StoryblokProvider'
+import { MotionProvider } from '@/components/MotionProvider'
 import { getWebsiteConfig } from '@/features/storyblok/utils'
 import Footer from '@/features/storyblok/components/navigation/Footer'
 import { Navigation } from '@/features/storyblok/components'
@@ -65,12 +66,14 @@ export default async function RootLayout({
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
-          <Navigation config={websiteConfig?.content} />
+          <MotionProvider>
+            <Navigation config={websiteConfig?.content} />
 
-          <div className="relative z-10 flex h-full flex-col">
-            <div className="min-h-screen bg-black text-white">{children}</div>
-          </div>
-          <Footer config={websiteConfig?.content} />
+            <div className="relative z-10 flex h-full flex-col">
+              <div className="min-h-screen bg-black text-white">{children}</div>
+            </div>
+            <Footer config={websiteConfig?.content} />
+          </MotionProvider>
         </body>
       </html>
     </StoryblokProvider>

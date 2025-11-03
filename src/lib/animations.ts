@@ -1,4 +1,5 @@
 import { Variants } from 'framer-motion'
+import { DEFAULT_TRANSITION, DURATIONS, EASING, STAGGERS } from './motionConfig'
 
 // Safe container variant - keeps container visible while children animate
 export const customContainerVariants: Variants = {
@@ -6,8 +7,9 @@ export const customContainerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      ...DEFAULT_TRANSITION,
+      staggerChildren: STAGGERS.container,
+      delayChildren: STAGGERS.containerDelay,
     },
   },
 }
@@ -16,14 +18,14 @@ export const customContainerVariants: Variants = {
 export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    y: 24,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1.0],
+      duration: DURATIONS.lg,
+      ease: EASING.standard,
     },
   },
 }
