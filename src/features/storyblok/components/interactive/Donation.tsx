@@ -7,7 +7,7 @@ import { createPayment } from '@/features/mollie'
 import { SbDonation } from '@storyblok/types/287435740670216/storyblok-components'
 import { cn } from '@/utils/cn'
 import { RichTextRenderer } from '../content/RichTextRenderer'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 
 type Props = { blok: SbDonation }
@@ -20,20 +20,33 @@ const stepVariants = {
 }
 
 export default function DonationComponent({ blok }: Props) {
+  const router = useRouter()
+  const pathname = usePathname()
   const searchParams = useSearchParams()
-  const description = searchParams.get('description')
+
+  // Initialize from URL params or defaults
+  const urlAmount = searchParams.get('amount')
+  const urlPurpose = searchParams.get('purpose')
+  const urlNote = searchParams.get('note') || searchParams.get('description')
+  const urlRecurring = searchParams.get('recurring')
 
   const [step, setStep] = React.useState<1 | 2>(1)
 
-  // step 1
-  const [amount, setAmount] = React.useState<number | ''>(25)
-  const [purpose, setPurpose] = React.useState<string>('')
-  const [note, setNote] = React.useState<string>(description ?? '')
+  // step 1 - initialize from URL or defaults
+  const [amount, setAmount] = React.useState<number | ''>(
+    urlAmount ? Number(urlAmount) || 25 : 25,
+  )
+  const [purpose, setPurpose] = React.useState<string>(
+    urlPurpose || blok.purposes?.[0] || '',
+  )
+  const [note, setNote] = React.useState<string>(urlNote || '')
   const [recurring, setRecurring] = React.useState<'oneTime' | 'monthly'>(
-    blok.defaultFrequency as 'oneTime' | 'monthly',
+    (urlRecurring as 'oneTime' | 'monthly') ||
+      (blok.defaultFrequency as 'oneTime' | 'monthly') ||
+      'oneTime',
   )
 
-  // step 2 (billingAddress)
+  // step 2 (billingAddress) - never saved to URL
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
 
@@ -47,7 +60,52 @@ export default function DonationComponent({ blok }: Props) {
   // Default purposes or use from Storyblok config
   const purposes = blok.purposes?.length
     ? blok.purposes
-    : ['Herstel', 'Training', 'Zending', 'Algemeen']
+    : ['Algemeen', 'Herstel', 'Training', 'Zending']
+
+  // Update URL params when form values change (excluding personal details)
+  React.useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    // Update amount
+    if (typeof amount === 'number' && amount > 0) {
+      params.set('amount', amount.toString())
+    } else {
+      params.delete('amount')
+    }
+
+    // Update purpose
+    if (purpose) {
+      params.set('purpose', purpose)
+    } else {
+      params.delete('purpose')
+    }
+
+    // Update note (use 'note' as primary, 'description' for backward compatibility)
+    if (note) {
+      params.set('note', note)
+      params.set('description', note) // Keep for backward compatibility
+    } else {
+      params.delete('note')
+      params.delete('description')
+    }
+
+    // Update recurring (only if not default 'oneTime')
+    if (recurring && recurring !== 'oneTime') {
+      params.set('recurring', recurring)
+    } else {
+      params.delete('recurring')
+    }
+
+    // Build new URL and update if changed
+    const newSearch = params.toString()
+    const currentSearch = searchParams.toString()
+
+    // Only update if URL actually changed to avoid unnecessary navigation
+    if (newSearch !== currentSearch) {
+      const newUrl = `${pathname}${newSearch ? `?${newSearch}` : ''}`
+      router.replace(newUrl, { scroll: false })
+    }
+  }, [amount, purpose, note, recurring, pathname, router, searchParams])
 
   function isValidStep1() {
     return typeof amount === 'number' && amount > 0 && purpose !== ''
@@ -247,37 +305,38 @@ export default function DonationComponent({ blok }: Props) {
                 </div>
 
                 {/* Purpose selection */}
-                <div>
-                  <p
-                    className={labelClasses}
-                    style={{ color: 'var(--donation-text)' }}
-                  >
-                    Bestemming *
-                  </p>
-                  <label className="sr-only" htmlFor="purpose">
-                    Bestemming
-                  </label>
-                  <select
-                    id="purpose"
-                    className={cn(fieldClasses, 'mt-2')}
-                    style={{
-                      borderColor: 'var(--donation-primary)',
-                      color: 'var(--donation-text)',
-                    }}
-                    value={purpose}
-                    onChange={(e) => setPurpose(e.target.value)}
-                  >
-                    <option value="" disabled>
-                      Kies een bestemming
-                    </option>
-                    {purposes.map((p) => (
-                      <option key={p} value={p}>
-                        {p}
+                {purposes.length > 1 && (
+                  <div>
+                    <p
+                      className={labelClasses}
+                      style={{ color: 'var(--donation-text)' }}
+                    >
+                      Bestemming *
+                    </p>
+                    <label className="sr-only" htmlFor="purpose">
+                      Bestemming
+                    </label>
+                    <select
+                      id="purpose"
+                      className={cn(fieldClasses, 'mt-2')}
+                      style={{
+                        borderColor: 'var(--donation-primary)',
+                        color: 'var(--donation-text)',
+                      }}
+                      value={purpose}
+                      onChange={(e) => setPurpose(e.target.value)}
+                    >
+                      <option value="" disabled>
+                        Kies een bestemming
                       </option>
-                    ))}
-                  </select>
-                </div>
-
+                      {purposes.map((p) => (
+                        <option key={p} value={p}>
+                          {p}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 {/* Optional note */}
                 <div>
                   <p
@@ -296,7 +355,7 @@ export default function DonationComponent({ blok }: Props) {
                       borderColor: 'var(--donation-primary)',
                       color: 'var(--donation-text)',
                     }}
-                    placeholder="Bijv. 'voor mijn verjaardag'"
+                    placeholder="Bijv. 'voor een specifiek doel'"
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                   />
