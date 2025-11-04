@@ -92,6 +92,7 @@ The search dialog uses Tailwind CSS classes. Key styling files:
 - `search-result-item.tsx` - Individual result cards
 
 Colors use the brand color system:
+
 - `strategy-red` - Accent color
 - `freedom` - Text color
 - `boldness` - Background color
@@ -202,4 +203,3 @@ Potential improvements:
 - Filter by content type
 - Search analytics
 - Voice search support
-
