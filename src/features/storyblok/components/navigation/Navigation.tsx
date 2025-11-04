@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import CinematicMenu from '@/components/ui/organisms/CinematicMenu'
 import {
@@ -13,6 +14,12 @@ import {
 import { SbWebsiteConfig } from '@storyblok/types/287435740670216/storyblok-components'
 import { cn } from '@/utils/cn'
 import Button from '@/components/ui/atoms/Button'
+import { SearchButton, useSearchShortcuts } from '@/features/search'
+
+// Dynamically import SearchDialog to avoid SSR issues and reduce initial bundle
+const SearchDialog = dynamic(() => import('@/features/search/search-dialog'), {
+  ssr: false,
+})
 
 interface NavigationProps {
   config: SbWebsiteConfig
@@ -20,7 +27,11 @@ interface NavigationProps {
 
 export default function Navigation({ config }: NavigationProps) {
   const [scrolled, setScrolled] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { scrollY } = useScroll()
+
+  // Global keyboard shortcuts for search
+  useSearchShortcuts(() => setIsSearchOpen(true), isSearchOpen)
 
   // Check initial scroll position on mount
   useEffect(() => {
@@ -130,6 +141,9 @@ export default function Navigation({ config }: NavigationProps) {
                 ))}
             </div>
 
+            {/* Search Button */}
+            <SearchButton onOpen={() => setIsSearchOpen(true)} />
+
             {/* Spacer for hamburger menu on mobile/tablet - increased width to prevent overlap */}
             <div className="w-14 sm:w-16 md:w-0 lg:w-20" />
           </div>
@@ -145,6 +159,12 @@ export default function Navigation({ config }: NavigationProps) {
           />
         </div>
       )}
+
+      {/* Search Dialog */}
+      <SearchDialog
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
     </>
   )
 }
