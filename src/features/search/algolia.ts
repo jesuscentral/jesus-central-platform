@@ -40,8 +40,8 @@ function transformResult(hit: AlgoliaSearchResult): SearchResult {
   const highlightedTitle =
     hit._highlightResult?.title?.value || hit.title || 'Untitled'
   const highlightedSnippet = hit._highlightResult?.content?.value
-  const content = hit.content || ''
-  const snippet = highlightedSnippet || content.slice(0, 200)
+  const description = hit.description || ''
+  const snippet = highlightedSnippet || description.slice(0, 200)
 
   // Build breadcrumb from hierarchy if available
   const breadcrumb = hit.hierarchy
@@ -54,9 +54,9 @@ function transformResult(hit: AlgoliaSearchResult): SearchResult {
     url: hit.url || '#',
     type: hit.type,
     breadcrumb,
-    snippet: content.slice(0, 200),
+    snippet: description.slice(0, 200),
     highlightedTitle,
-    highlightedSnippet: highlightedSnippet || undefined,
+    highlightedSnippet: snippet || undefined,
   }
 }
 
@@ -90,10 +90,10 @@ export async function performSearch(query: string): Promise<SearchResult[]> {
             'title',
             'url',
             'type',
-            'content',
+            'description',
             'hierarchy',
           ],
-          attributesToHighlight: ['title', 'content'],
+          attributesToHighlight: ['title', 'description'],
         },
       })
 

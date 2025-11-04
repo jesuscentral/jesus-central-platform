@@ -9,7 +9,7 @@ export interface AlgoliaSearchResult {
   url: string
   type?: string
   hierarchy?: string[]
-  content?: string
+  description?: string
   _highlightResult?: {
     title?: {
       value: string
