@@ -71,7 +71,7 @@ export const getStoriesByUuids = async (uuids: string[]) => {
   const storyblok = getStoryblokApi()
   const revalidate = storyblokConfig.isPreview ? 0 : STORYBLOK_CACHE.STORIES
   const { data } = await storyblok.get(
-    'cdn/stories/',
+    `cdn/stories/${storyblokConfig.basePath}`,
     {
       ...storyblokApiConfig,
       per_page: 25,
@@ -88,6 +88,16 @@ export const getStoriesByUuids = async (uuids: string[]) => {
   )
 
   return data?.stories
+}
+
+export const getSitemapEntries = async () => {
+  const storyblok = getStoryblokApi()
+  const links = await storyblok.getAll('cdn/links', {
+    ...storyblokApiConfig,
+    starts_with: `${storyblokConfig.basePath}/`,
+  })
+
+  return links
 }
 
 // Re-export utilities

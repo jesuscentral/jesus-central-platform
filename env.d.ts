@@ -9,5 +9,8 @@ namespace NodeJS {
     NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: string
     EDGE_CONFIG: string
     VERCEL_URL: string | undefined
+    NEXT_PUBLIC_ALGOLIA_APP_ID: string
+    NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY: string
+    NEXT_PUBLIC_ALGOLIA_INDEX_NAME: string
   }
 }
