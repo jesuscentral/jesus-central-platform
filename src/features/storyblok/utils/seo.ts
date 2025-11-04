@@ -16,7 +16,7 @@ export const getStoryblokSeoParameters = (story: ISbStoryData<any>) => {
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? ''),
-    title: `${title} · Jesus Central Church`,
+    title: `${title} · Jesus Central Church Gouda`,
     description: description,
     robots: {
       index: true,
