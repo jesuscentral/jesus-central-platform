@@ -53,5 +53,9 @@ export const stringLinkResolver = (link: string) => {
     correctUrl = correctUrl.replace(basePath, '')
   }
 
+  if (correctUrl === '/home') {
+    return '/'
+  }
+
   return correctUrl
 }
