@@ -90,7 +90,7 @@ export default function CinematicMenu({
         key={colorScheme.name}
         onClick={handleToggle}
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
-        className="group bg-freedom/10 border-freedom/20 relative z-[110] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border backdrop-blur-md transition-all duration-500 hover:scale-110 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16"
+        className="group bg-freedom/10 border-freedom/20 relative z-[110] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border backdrop-blur-md transition-all duration-500 hover:scale-110 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-14 lg:w-14"
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = colorScheme.accentColor
           e.currentTarget.style.boxShadow = `0 0 30px ${colorScheme.hoverShadow}`
@@ -100,16 +100,16 @@ export default function CinematicMenu({
           e.currentTarget.style.boxShadow = ''
         }}
       >
-        <div className="relative h-5 w-5 sm:h-6 sm:w-6">
+        <div className="relative h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7">
           <Menu
-            className={`text-freedom absolute inset-0 h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 ${
+            className={`text-freedom absolute inset-0 h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 md:h-7 md:w-7 ${
               isOpen
                 ? 'scale-0 rotate-90 opacity-0'
                 : 'scale-100 rotate-0 opacity-100'
             }`}
           />
           <X
-            className={`text-freedom absolute inset-0 h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 ${
+            className={`text-freedom absolute inset-0 h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 md:h-7 md:w-7 ${
               isOpen
                 ? 'scale-100 rotate-0 opacity-100'
                 : 'scale-0 -rotate-90 opacity-0'

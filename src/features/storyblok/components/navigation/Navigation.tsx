@@ -105,8 +105,9 @@ export default function Navigation({ config }: NavigationProps) {
         </motion.div>
 
         {/* Content layer (above background) */}
-        <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:py-6">
-          <div className="flex items-center">
+        <div className="xs:gap-3 xs:px-4 xs:py-4 relative mx-auto flex w-full max-w-7xl items-center justify-between gap-2 overflow-hidden px-3 py-3 sm:gap-4 sm:px-6 sm:py-6 md:gap-6">
+          {/* Logo - allows logo to shrink slightly on very small screens */}
+          <div className="flex min-w-0 shrink items-center">
             <Link href={'/'} className="block">
               <Image
                 src={logo?.filename ?? ''}
@@ -114,51 +115,49 @@ export default function Navigation({ config }: NavigationProps) {
                 width={logo?.width ?? 200}
                 height={logo?.height ?? 60}
                 priority
-                className="xs:h-12 xs:max-w-[200px] h-10 w-auto max-w-[160px] transition-all sm:h-14 sm:max-w-[250px] md:h-16 md:max-w-[280px] lg:h-[60px] lg:max-w-[360px]"
-                sizes="(max-width: 640px) 160px, (max-width: 768px) 180px, (max-width: 1024px) 200px, 240px"
+                className="xs:h-10 xs:max-w-[160px] h-9 w-auto max-w-[140px] transition-all sm:h-14 sm:max-w-[250px] md:h-16 md:max-w-[280px] lg:h-[60px] lg:max-w-[360px]"
+                sizes="(max-width: 640px) 140px, (max-width: 768px) 180px, (max-width: 1024px) 200px, 240px"
               />
             </Link>
           </div>
 
-          {/* CTA Buttons - visible on all screens */}
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            {/* Geven button - responsive sizing */}
+          {/* Right side - CTA Buttons, Search, and Menu */}
+          <div className="xs:gap-2 flex flex-shrink-0 items-center gap-1.5 sm:gap-3 md:gap-4">
+            {/* Geven button - matches circular button heights */}
             <Button
               href="/geven"
               type="strategy-red"
               variant="primary"
               size="small"
-              className="xs:text-xs xs:px-5 xs:py-2.5 relative z-[85] px-4 py-2 text-[10px] whitespace-nowrap shadow-md hover:shadow-lg sm:px-6 sm:py-3 sm:text-sm md:px-8 md:py-3 md:text-sm"
+              className="xs:h-10 xs:px-4 xs:text-xs xs:min-w-[140px] relative z-[85] flex h-10 min-w-[90px] items-center justify-center px-3 text-[10px] whitespace-nowrap shadow-md transition-all hover:shadow-lg sm:h-12 sm:px-5 sm:text-sm md:h-14 md:px-6 md:text-sm"
             >
               Geven
             </Button>
 
             {/* Desktop additional CTA buttons */}
-            <div className="hidden items-center gap-4 md:flex">
-              {header_cta_buttons &&
-                header_cta_buttons.map((cta) => (
+            {header_cta_buttons && header_cta_buttons.length > 0 && (
+              <div className="hidden items-center gap-3 md:flex lg:gap-4">
+                {header_cta_buttons.map((cta) => (
                   <StoryblokServerComponent key={cta._uid} blok={cta} />
                 ))}
-            </div>
+              </div>
+            )}
 
             {/* Search Button */}
             <SearchButton onOpen={() => setIsSearchOpen(true)} />
 
-            {/* Spacer for hamburger menu on mobile/tablet - increased width to prevent overlap */}
-            <div className="w-14 sm:w-16 md:w-0 lg:w-20" />
+            {/* Menu Button - integrated into flex container */}
+            {config.show_menu && (
+              <div className="relative z-[110]">
+                <CinematicMenu
+                  menu_data={config.menu_data}
+                  social_links={config.social_links}
+                />
+              </div>
+            )}
           </div>
         </div>
       </motion.nav>
-
-      {/* Menu rendered outside nav to avoid z-index stacking context issues */}
-      {config.show_menu && (
-        <div className="fixed top-4 right-4 z-[110] sm:top-6 sm:right-6 md:top-6 md:right-6">
-          <CinematicMenu
-            menu_data={config.menu_data}
-            social_links={config.social_links}
-          />
-        </div>
-      )}
 
       {/* Search Dialog */}
       <SearchDialog

@@ -23,7 +23,7 @@ export default function SearchButton({ onOpen }: SearchButtonProps) {
     <button
       onClick={onOpen}
       aria-label="Open search"
-      className="group bg-freedom/10 border-freedom/20 relative z-[85] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border backdrop-blur-md transition-all duration-500 hover:scale-110 sm:h-12 sm:w-12"
+      className="group bg-freedom/10 border-freedom/20 relative z-[85] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border backdrop-blur-md transition-all duration-500 hover:scale-110 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-14 lg:w-14"
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = colorScheme.accentColor
         e.currentTarget.style.boxShadow = `0 0 30px ${colorScheme.hoverShadow}`
@@ -34,7 +34,7 @@ export default function SearchButton({ onOpen }: SearchButtonProps) {
       }}
     >
       <Search
-        className="text-freedom h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6"
+        className="text-freedom h-5 w-5 transition-all duration-300 sm:h-6 sm:w-6 md:h-7 md:w-7"
         aria-hidden="true"
       />
     </button>
