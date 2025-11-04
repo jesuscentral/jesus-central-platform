@@ -63,6 +63,7 @@ export default async function RootLayout({
     <StoryblokProvider>
       <html lang="nl">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="algolia-site-verification" content="90A9E69D7E6567F6" />
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
         >
