@@ -82,6 +82,7 @@ export default async function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
         />
+        <Script src="/newrelic-client.js" type="text/javascript" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="algolia-site-verification" content="90A9E69D7E6567F6" />
         <body

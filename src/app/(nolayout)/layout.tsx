@@ -76,6 +76,8 @@ export default async function NoLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
         />
+        <Script src="/newrelic-client.js" type="text/javascript" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}
