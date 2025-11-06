@@ -1,3 +1,5 @@
+import Script from 'next/script'
+import newrelic from 'newrelic'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '@/app/globals.css'
@@ -57,11 +59,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // @ts-expect-error - newrelic is not typed
+  if (newrelic.agent.collector.isConnected() === false) {
+    await new Promise((resolve) => {
+      // @ts-expect-error - newrelic is not typed
+      newrelic.agent.on('connected', resolve)
+    })
+  }
+
+  const browserTimingHeader = newrelic.getBrowserTimingHeader({
+    hasToRemoveScriptWrapper: true,
+    allowTransactionlessInjection: true,
+  })
+
   const websiteConfig = await getWebsiteConfig()
 
   return (
     <StoryblokProvider>
       <html lang="nl">
+        <Script
+          id="nr-browser-agent"
+          dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="algolia-site-verification" content="90A9E69D7E6567F6" />
         <body
