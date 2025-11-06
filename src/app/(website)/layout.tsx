@@ -79,6 +79,7 @@ export default async function RootLayout({
       <html lang="nl">
         <Script
           id="nr-browser-agent"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
