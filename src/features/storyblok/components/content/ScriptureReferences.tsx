@@ -8,22 +8,22 @@ export default function ScriptureReferences({
 }) {
   return (
     <div className="md:col-span-7">
-      <div className="bg-boldness rounded-3xl border border-white/10 p-5 sm:p-6">
-        <div className="text-freedom/70 mb-3 text-xs tracking-wide uppercase">
+      <div className="bg-foreground border-background/10 p-card duration-base rounded-3xl border shadow-lg transition-shadow hover:shadow-xl">
+        <div className="text-boldness mb-4 text-xs font-semibold tracking-wide uppercase sm:mb-5">
           Bijbelverwijzingen
         </div>
         {blok.scriptures?.length > 0 ? (
-          <div className="flex flex-wrap gap-2">
+          <div className="gap-content flex flex-wrap">
             {blok.scriptures.map((blok) => (
               <StoryblokServerComponent key={blok._uid} blok={blok} />
             ))}
           </div>
         ) : (
-          <div className="text-freedom/70 text-sm">
+          <div className="text-boldness text-sm">
             Geen verwijzingen beschikbaar.
           </div>
         )}
-        <div className="text-freedom/60 mt-4 text-xs">
+        <div className="text-boldness/90 mt-6 text-xs leading-relaxed sm:mt-8">
           Beweeg over een verwijzing om de tekst te lezen.
         </div>
       </div>
