@@ -74,7 +74,6 @@ export default function Statement({ blok }: { blok: SbStatement }) {
             >
               <div className="relative">
                 <div className="bg-foreground text-background duration-base inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wider uppercase shadow-md transition-all hover:shadow-lg">
-                  <Sparkles className="h-3.5 w-3.5" />
                   <span>Wat wij geloven</span>
                 </div>
                 <motion.div
