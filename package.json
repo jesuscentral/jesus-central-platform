@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_OPTIONS='--require=dotenv/config  --require=newrelic --import=newrelic/esm-loader.mjs' next dev",
-    "dev:https": "NODE_OPTIONS='--require @newrelic/next' next dev --turbopack --experimental-https",
+    "dev:https": "NODE_OPTIONS='--require=dotenv/config  --require=newrelic --import=newrelic/esm-loader.mjs' next dev --turbopack --experimental-https",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "NODE_OPTIONS='--require=dotenv/config  --require=newrelic --import=newrelic/esm-loader.mjs' next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "prettier --check './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
