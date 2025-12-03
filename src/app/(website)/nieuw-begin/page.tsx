@@ -412,6 +412,7 @@ export default function NieuwBeginPage() {
                 alt="Holy Spirit"
                 side="left"
                 delay={0.1}
+                loading="lazy"
               />
             </div>
 
@@ -485,6 +486,7 @@ export default function NieuwBeginPage() {
               alt="Alpha Course"
               side="right"
               delay={0}
+              loading="lazy"
             />
           </motion.div>
 
@@ -586,6 +588,7 @@ export default function NieuwBeginPage() {
                 alt="Lifegroups"
                 side="left"
                 delay={0.1}
+                loading="lazy"
               />
             </div>
 
@@ -715,6 +718,7 @@ export default function NieuwBeginPage() {
                   width={100}
                   height={100}
                   className="h-16 w-16 rounded-3xl md:h-20 md:w-20"
+                  loading="lazy"
                 />
               </motion.div>
             </motion.div>
