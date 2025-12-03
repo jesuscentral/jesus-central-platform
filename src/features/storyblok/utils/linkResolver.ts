@@ -8,7 +8,7 @@ export const linkResolver = (
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH!
 
   if (typeof link === 'string') {
-    return link.replace(`${basePath}/`, '')
+    return '/'.concat(link).replace(`${basePath}/`, '')
   }
 
   if (link.cached_url.includes('http')) {

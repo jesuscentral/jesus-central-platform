@@ -1,5 +1,3 @@
-import Script from 'next/script'
-import newrelic from 'newrelic'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '@/app/globals.css'
@@ -56,28 +54,9 @@ export default async function NoLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // @ts-expect-error - newrelic is not typed
-  if (newrelic.agent.collector.isConnected() === false) {
-    await new Promise((resolve) => {
-      // @ts-expect-error - newrelic is not typed
-      newrelic.agent.on('connected', resolve)
-    })
-  }
-
-  const browserTimingHeader = newrelic.getBrowserTimingHeader({
-    hasToRemoveScriptWrapper: true,
-    allowTransactionlessInjection: true,
-  })
   return (
     <StoryblokProvider>
       <html lang="nl">
-        <Script
-          id="nr-browser-agent"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: browserTimingHeader }}
-        />
-        <Script src="/newrelic-client.js" type="text/javascript" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <body
           className={`antialiased ${bodyFont.variable} ${headingFont.variable}`}

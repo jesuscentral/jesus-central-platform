@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   env: {
     stroyblokPrefix: process.env.NEXT_PUBLIC_STORYBLOK_PREFIX,
   },
-  serverExternalPackages: ['newrelic'],
   async redirects() {
     return [
       {
@@ -64,6 +63,7 @@ const nextConfig: NextConfig = {
 
   // Optimize images
   images: {
+    qualities: [100, 90, 80, 75, 70],
     remotePatterns: [
       {
         protocol: 'https',
