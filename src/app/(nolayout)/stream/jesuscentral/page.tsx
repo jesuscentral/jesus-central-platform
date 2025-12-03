@@ -3,7 +3,6 @@ import { getSermons } from '@/lib/actions/sermons'
 export default async function JesusCentralStream() {
   const sermons = await getSermons()
 
-  console.log(sermons)
   const randomSermon = sermons[Math.floor(Math.random() * sermons.length)]
   return (
     <iframe

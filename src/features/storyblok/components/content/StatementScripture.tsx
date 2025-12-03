@@ -116,7 +116,6 @@ export default function StatementScripture({
         exit={{ opacity: 0, y: 8, scale: 0.96 }}
         transition={{ duration: DURATIONS.sm, ease: EASING.standard }}
         style={{
-          // @ts-expect-error - position is not a valid style property
           position: 'fixed',
           top: position.top,
           left: position.left,

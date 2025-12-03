@@ -68,8 +68,6 @@ async function fetchUpcomingEvents(
 function EventCard({ event }: { event: ISbStoryData<SbEvent> }) {
   const { day, month, time } = formatEventDate(event.content.date)
 
-  console.log('event', linkResolver(event.full_slug))
-
   return (
     <Link
       key={event.uuid}
