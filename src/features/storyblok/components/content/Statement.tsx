@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Quote, Sparkles } from 'lucide-react'
+import { Quote } from 'lucide-react'
 import { SbStatement } from '@storyblok/types/287435740670216/storyblok-components'
 import {
   SbBlokData,

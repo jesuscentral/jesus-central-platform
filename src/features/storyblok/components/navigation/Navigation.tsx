@@ -36,9 +36,10 @@ export default function Navigation({ config }: NavigationProps) {
   // Check initial scroll position on mount
   useEffect(() => {
     // Check if already scrolled on initial load
-    const initialScrollY = window.scrollY
-    if (initialScrollY > 50) {
-      setScrolled(true)
+    // Avoid calling setState synchronously in the effect body.
+    // Instead, use requestAnimationFrame to defer to the next tick.
+    if (window.scrollY > 50) {
+      requestAnimationFrame(() => setScrolled(true))
     }
 
     const unsubscribe = scrollY.on('change', (latest) => {

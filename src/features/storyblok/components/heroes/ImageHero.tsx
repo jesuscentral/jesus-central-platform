@@ -33,6 +33,7 @@ export default function ImageHero({ blok }: ImageHeroProps) {
           fill
           className="object-cover"
           priority
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />

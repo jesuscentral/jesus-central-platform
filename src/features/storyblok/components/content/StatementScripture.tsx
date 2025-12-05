@@ -23,7 +23,9 @@ export default function StatementScripture({
   const tooltipRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMounted(true)
+    requestAnimationFrame(() => {
+      setMounted(true)
+    })
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
