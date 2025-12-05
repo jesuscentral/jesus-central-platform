@@ -21,12 +21,12 @@ export async function POST(request: NextRequest) {
       console.log(`Revalidated: /${storySlug}`)
     }
 
-    // Revalidate by tags
-    await revalidateTag('storyblok-stories')
+    // Revalidate by tags (Next.js 16 requires profile parameter)
+    await revalidateTag('storyblok-stories', 'max')
 
     // If it's an event, revalidate events tag
     if (body.story?.content_type === 'event') {
-      await revalidateTag('events')
+      await revalidateTag('events', 'max')
     }
 
     return NextResponse.json({
