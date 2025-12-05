@@ -1,26 +1,22 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettier from 'eslint-config-prettier/flat'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import prettierPlugin from 'eslint-plugin-prettier'
 import storyblokPlugin from './.eslint/eslint-plugin-storyblok.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-const eslintConfig = [
-  ...compat.config({
-    extends: [
-      'next',
-      'next/core-web-vitals',
-      'next/typescript',
-      'plugin:prettier/recommended',
-      'plugin:jsx-a11y/recommended',
-    ],
-    plugins: ['jsx-a11y', 'prettier'],
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettier,
+  {
+    plugins: {
+      prettier: prettierPlugin,
+    },
     rules: {
+      // jsx-a11y rules (plugin is already included in nextVitals)
+      ...jsxA11y.configs.recommended.rules,
       'prettier/prettier': [
         'error',
         {
@@ -45,16 +41,6 @@ const eslintConfig = [
       'jsx-a11y/role-has-required-aria-props': 'warn',
       'jsx-a11y/role-supports-aria-props': 'warn',
     },
-  }),
-  {
-    ignores: [
-      'node_modules/**',
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
-      '.storyblok/**',
-    ],
   },
   {
     files: ['src/features/storyblok/components/**/*.tsx'],
@@ -65,6 +51,17 @@ const eslintConfig = [
       'storyblok/storyblok-component-registered': 'error',
     },
   },
-]
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    // Additional ignores
+    'node_modules/**',
+    '.storyblok/**',
+  ]),
+])
 
 export default eslintConfig

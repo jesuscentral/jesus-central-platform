@@ -2,7 +2,7 @@ import { getWebsiteConfig } from '@/features/storyblok'
 import { linkResolver } from '@/features/storyblok/api'
 import { NextResponse } from 'next/server'
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
   const websiteConfig = await getWebsiteConfig()
   if (!websiteConfig) {
     return NextResponse.json(

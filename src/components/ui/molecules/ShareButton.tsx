@@ -119,7 +119,7 @@ export default function ShareButton({
       color: 'text-gray-600',
       action: () => {
         const mailtoUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${text}\n\n${url}`)}`
-        window.location.href = mailtoUrl
+        window.open(mailtoUrl, '_self')
         setIsOpen(false)
       },
     },

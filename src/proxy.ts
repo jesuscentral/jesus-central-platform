@@ -5,7 +5,7 @@ import {
   defaultLanguage,
 } from '@/features/storyblok/utils/languageConstants'
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Language handling logic
   const { pathname } = request.nextUrl
 
